@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hakkımda · Samet Duhan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="../css/tema.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <canvas id="arkaplan" aria-hidden="true"></canvas>
+  <main>
+    <a class="geri" href="../">← ~/samet</a>
+    <p class="komut">~/samet $ <b>cat hakkimda.md</b></p>
+    <h1>Hakkımda</h1>
+    <p class="kimlik">&gt; AI ile sistem kuran geliştirici<span class="imlec" aria-hidden="true"></span></p>
+    <p class="tanitim">
+      AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak için kullanıyorum: kodu birlikte yazdığım
+      ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan uygulamalar.
+    </p>
+    <p class="tanitim">
+      Yaptıklarımı <a href="../projeler/">projelerde</a>, nasıl yaptığımı <a href="../slaytlar/">slaytlarda</a>
+      anlatıyorum. AI'a yeni başlıyorsan slaytlar senin için. Birlikte bir şey kurmak istersen
+      <a href="../iletisim/">yaz</a>.
+    </p>
+  </main>
+
+  <script type="module">
+    import { baslat } from '../js/arkaplan.js';
+    baslat(document.getElementById('arkaplan'));
+  </script>
+</body>
+</html>

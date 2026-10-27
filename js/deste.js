@@ -112,6 +112,8 @@ export function bagla(kok) {
     if (yeni === konum) return;
     const eski = slaytlar[konum];
     if (eski) {
+      // Gizlenen slayttaki düğme odakta kalırsa Boşluk tuşu onu tıklamaya devam eder.
+      if (eski.contains(document.activeElement)) document.activeElement.blur();
       eski.hidden = true;
       eski.dispatchEvent(new CustomEvent('gizle'));
     }

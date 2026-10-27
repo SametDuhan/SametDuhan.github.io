@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>İletişim · Samet Duhan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="../css/tema.css">
+  <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+  <canvas id="arkaplan" aria-hidden="true"></canvas>
+  <main>
+    <a class="geri" href="../">← ~/samet</a>
+    <p class="komut">~/samet $ <b>./iletisim</b></p>
+    <h1>İletişim</h1>
+    <p class="tanitim">İş teklifi, ortak proje ya da bir soru: en hızlı mail ile ulaşırsın.</p>
+    <div class="iletisim">
+      <a class="dugme" id="mail" data-k="16sametduhan16" data-a="gmail.com" hidden>mail</a>
+      <noscript><span class="dugme">16sametduhan16 [at] gmail [dot] com</span></noscript>
+      <a class="dugme" href="https://github.com/SametDuhan">GitHub</a>
+      <a class="dugme" href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a>
+    </div>
+  </main>
+
+  <script type="module">
+    import { baslat } from '../js/arkaplan.js';
+    import { bagla } from '../js/iletisim.js';
+    baslat(document.getElementById('arkaplan'));
+    const mail = document.getElementById('mail');
+    bagla(mail);
+    mail.hidden = false;
+  </script>
+</body>
+</html>

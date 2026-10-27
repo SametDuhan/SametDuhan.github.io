@@ -20,10 +20,54 @@ h1 {
   font-size: 17px;
 }
 
-.bolum { margin-top: clamp(48px, 8vw, 80px); }
-.bolum > .komut { margin: 0 0 16px; }
+/* Giriş: dört kare */
+
+.giris { min-height: calc(100svh - 60px); display: flex; flex-direction: column; justify-content: center; }
+
+.kareler {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2.4vw, 22px);
+  margin-top: clamp(32px, 6vw, 56px);
+  max-width: 760px;
+}
+
+.kare {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: clamp(14px, 3vw, 24px);
+  background: var(--panel-cam);
+  border: 1px solid var(--kenar);
+  border-radius: var(--r);
+  color: inherit;
+  text-decoration: none;
+  backdrop-filter: blur(2px);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.kare:hover, .kare:focus-visible {
+  border-color: var(--vurgu);
+  box-shadow: 0 0 28px rgba(var(--vurgu-rgb), 0.18);
+  transform: translateY(-3px);
+}
+
+.kare-komut { font-family: var(--mono); font-size: clamp(12px, 1.8vw, 14px); color: var(--vurgu); margin-bottom: auto; }
+.kare-ad { font-size: clamp(22px, 4.4vw, 34px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }
+.kare-alt { font-size: clamp(12px, 1.8vw, 14px); color: var(--soluk); }
+
+@media (max-width: 420px) {
+  .kare { aspect-ratio: 1 / 1; }
+}
+
+.geri { display: inline-block; margin-bottom: 18px; }
+
+.not { color: var(--soluk); font-size: 13px; margin-top: 24px; }
 
 .projeler {
+  margin-top: 28px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 18px;
@@ -59,8 +103,6 @@ h1 {
 .kart-govde p { margin: 0; color: #c3ccd6; font-size: 15px; flex: 1; }
 
 .linkler { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-
-.slayt-cagri p { color: #c3ccd6; max-width: 560px; margin: 0 0 18px; }
 
 .iletisim { display: flex; flex-wrap: wrap; gap: 10px; }
 
@@ -115,6 +157,6 @@ footer {
 .deste-karti .alt { font-family: var(--mono); font-size: 12px; color: var(--soluk); }
 
 @media (prefers-reduced-motion: reduce) {
-  .kart, .deste-karti { transition: none; }
-  .kart:hover, .deste-karti:hover { transform: none; }
+  .kart, .deste-karti, .kare { transition: none; }
+  .kart:hover, .deste-karti:hover, .kare:hover, .kare:focus-visible { transform: none; }
 }
