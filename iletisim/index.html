@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>İletişim · Samet Duhan</title>
+  <meta name="description" content="Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.">
+  <meta property="og:title" content="İletişim · Samet Duhan">
+  <meta property="og:description" content="Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sametduhan.github.io/iletisim/">
+  <meta property="og:image" content="https://sametduhan.github.io/img/skytrack.jpg">
+  <meta name="theme-color" content="#070b12">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b12'/%3E%3Cpath d='M8 10l6 6-6 6' stroke='%235ccfff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='16' y='20' width='9' height='3' rx='1.5' fill='%235ccfff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
@@ -11,24 +19,72 @@
   <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
-  <main>
-    <a class="geri" href="../">← ~/samet</a>
+  <a class="atla" href="#icerik">İçeriğe geç</a>
+  <nav class="ust-menu" aria-label="Site">
+    <a class="logo" href="../">~/samet</a>
+    <div class="menu-linkler">
+      <a href="../hakkimda/">hakkımda</a>
+      <a href="../projeler/">projeler</a>
+      <a href="../slaytlar/">slaytlar</a>
+      <a href="../iletisim/" aria-current="page">iletişim</a>
+    </div>
+  </nav>
+  <main id="icerik">
     <p class="komut">~/samet $ <b>./iletisim</b></p>
     <h1>İletişim</h1>
-    <p class="tanitim">İş teklifi, ortak proje ya da bir soru: en hızlı mail ile ulaşırsın.</p>
-    <div class="iletisim">
-      <a class="dugme" id="mail" data-k="16sametduhan16" data-a="gmail.com" hidden>mail</a>
-      <noscript><span class="dugme">16sametduhan16 [at] gmail [dot] com</span></noscript>
-      <a class="dugme" href="https://github.com/SametDuhan">GitHub</a>
-      <a class="dugme" href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a>
+    <p class="tanitim">En hızlı mail ile ulaşırsın. Ne için yazdığını seç; konu satırı hazır gelsin.</p>
+
+    <div class="uclu" id="konular">
+      <a class="kutu" data-konu="İş teklifi" href="#icerik">
+        <span class="kutu-komut">./is-teklifi</span>
+        <strong>İş teklifi</strong>
+        <span>Staj, yarı zamanlı ya da proje bazlı iş.</span>
+      </a>
+      <a class="kutu" data-konu="Ortak proje" href="#icerik">
+        <span class="kutu-komut">./ortak-proje</span>
+        <strong>Ortak proje</strong>
+        <span>Birlikte bir şey kurmak, katkı vermek ya da almak.</span>
+      </a>
+      <a class="kutu" data-konu="Soru" href="#icerik">
+        <span class="kutu-komut">./soru</span>
+        <strong>Soru ya da öneri</strong>
+        <span>Slaytlar, projeler ya da AI hakkında.</span>
+      </a>
     </div>
+
+    <section class="bolum" aria-labelledby="dogrudan-baslik">
+      <h2 id="dogrudan-baslik" class="bolum-baslik">Doğrudan</h2>
+      <ul class="kanallar">
+        <li>
+          <span class="kanal-ad">mail</span>
+          <a id="mail" data-k="16sametduhan16" data-a="gmail.com" hidden>mail</a>
+          <noscript><span>16sametduhan16 [at] gmail [dot] com</span></noscript>
+          <button type="button" class="dugme" id="kopyala" hidden>adresi kopyala</button>
+        </li>
+        <li><span class="kanal-ad">GitHub</span><a href="https://github.com/SametDuhan">github.com/SametDuhan</a><span class="kanal-not">kodlar ve projeler</span></li>
+        <li><span class="kanal-ad">LinkedIn</span><a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">Samet Duhan Şahin</a><span class="kanal-not">iş ve kariyer</span></li>
+      </ul>
+    </section>
   </main>
+  <footer class="alt-bilgi">
+    <span>samet duhan · 2026</span>
+    <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../iletisim/">iletişim</a></span>
+  </footer>
 
   <script type="module">
-    import { bagla } from '../js/iletisim.js';
+    import { mailAdresi, mailtoLinki, bagla } from '../js/iletisim.js';
     const mail = document.getElementById('mail');
+    const adres = mailAdresi(mail.dataset.k, mail.dataset.a);
     bagla(mail);
     mail.hidden = false;
+    for (const k of document.querySelectorAll('[data-konu]')) k.href = mailtoLinki(adres, k.dataset.konu);
+    const kopyala = document.getElementById('kopyala');
+    kopyala.hidden = false;
+    kopyala.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(adres); kopyala.textContent = 'kopyalandı ✓'; }
+      catch { kopyala.textContent = 'seçip kopyala'; }
+      setTimeout(() => { kopyala.textContent = 'adresi kopyala'; }, 2000);
+    });
   </script>
 </body>
 </html>

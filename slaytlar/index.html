@@ -4,7 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Slaytlar · Samet Duhan</title>
-  <meta name="description" content="AI'ı sıfırdan öğreten, Samet Duhan'ın projelerinden örnek veren interaktif sunumlar.">
+  <meta name="description" content="AI'ı sıfırdan öğreten, Samet Duhan'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.">
+  <meta property="og:title" content="Slaytlar · Samet Duhan">
+  <meta property="og:description" content="AI'ı sıfırdan öğreten, Samet Duhan'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sametduhan.github.io/slaytlar/">
+  <meta property="og:image" content="https://sametduhan.github.io/img/skytrack.jpg">
+  <meta name="theme-color" content="#070b12">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b12'/%3E%3Cpath d='M8 10l6 6-6 6' stroke='%235ccfff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='16' y='20' width='9' height='3' rx='1.5' fill='%235ccfff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
@@ -12,11 +19,31 @@
   <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
-  <main>
-    <a class="geri" href="../">← ~/samet</a>
+  <a class="atla" href="#icerik">İçeriğe geç</a>
+  <nav class="ust-menu" aria-label="Site">
+    <a class="logo" href="../">~/samet</a>
+    <div class="menu-linkler">
+      <a href="../hakkimda/">hakkımda</a>
+      <a href="../projeler/">projeler</a>
+      <a href="../slaytlar/" aria-current="page">slaytlar</a>
+      <a href="../iletisim/">iletişim</a>
+    </div>
+  </nav>
+  <main id="icerik">
+    <p class="komut">~/samet $ <b>ls ./slaytlar</b></p>
     <h1>Slaytlar</h1>
-    <p class="tanitim">Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir.</p>
-    <p class="ipucu">→ ve ← ile gez · F tam ekran · telefonda kaydır</p>
+    <p class="tanitim">Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.</p>
+    <p class="ipucu">→ ve ← ile gez · F tam ekran · telefonda kaydır · kaldığın yer bu tarayıcıda hatırlanır</p>
+    <div class="filtre" role="search">
+      <label class="arama"><span class="gizli">Sunumlarda ara</span><input type="search" id="ara" placeholder="ara: hook, ajan, SkyTrack…" autocomplete="off"></label>
+      <div class="cipler" role="group" aria-label="Konu">
+        <button type="button" data-etiket="hepsi" aria-pressed="true">hepsi</button>
+        <button type="button" data-etiket="Başlangıç" aria-pressed="false">başlangıç</button>
+        <button type="button" data-etiket="Claude Code" aria-pressed="false">Claude Code</button>
+        <button type="button" data-etiket="Proje" aria-pressed="false">proje</button>
+      </div>
+      <span class="sayac-yazi" id="deste-sayac" aria-live="polite"></span>
+    </div>
     <div class="desteler" id="desteler">
       <noscript>
         <a class="deste-karti" href="./ai-ajani-nedir/"><h2>AI ajanı nedir?</h2></a>
@@ -24,11 +51,32 @@
         <a class="deste-karti" href="./skytrack-nasil-kurdum/"><h2>SkyTrack'i AI ile nasıl kurdum</h2></a>
       </noscript>
     </div>
+    <p class="bos" id="bos" hidden>Bu aramayla eşleşen sunum yok. <button type="button" class="dugme" id="temizle">aramayı temizle</button></p>
   </main>
+  <footer class="alt-bilgi">
+    <span>samet duhan · 2026</span>
+    <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../iletisim/">iletişim</a></span>
+  </footer>
 
   <script type="module">
-    import { DESTELER, kartHTML } from '../js/desteler.js';
-    document.getElementById('desteler').innerHTML = DESTELER.map(kartHTML).join('');
+    import { DESTELER, kartHTML, desteAra } from '../js/desteler.js';
+    import { ilerlemeOku } from '../js/ilerleme.js';
+    let depo = null;
+    try { depo = localStorage; } catch {}
+    const kutu = document.getElementById('desteler'), ara = document.getElementById('ara'), sayac = document.getElementById('deste-sayac'), bos = document.getElementById('bos');
+    const cipler = [...document.querySelectorAll('.cipler button')];
+    let etiket = 'hepsi';
+    function goster() {
+      const liste = desteAra(DESTELER, ara.value, etiket);
+      kutu.innerHTML = liste.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
+      cipler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
+      sayac.textContent = `${liste.length} sunum`;
+      bos.hidden = liste.length > 0;
+    }
+    ara.addEventListener('input', goster);
+    cipler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; goster(); }));
+    document.getElementById('temizle').addEventListener('click', () => { ara.value = ''; etiket = 'hepsi'; goster(); ara.focus(); });
+    goster();
   </script>
 </body>
 </html>

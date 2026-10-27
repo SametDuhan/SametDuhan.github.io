@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hakkımda · Samet Duhan</title>
+  <meta name="description" content="Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.">
+  <meta property="og:title" content="Hakkımda · Samet Duhan">
+  <meta property="og:description" content="Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sametduhan.github.io/hakkimda/">
+  <meta property="og:image" content="https://sametduhan.github.io/img/skytrack.jpg">
+  <meta name="theme-color" content="#070b12">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b12'/%3E%3Cpath d='M8 10l6 6-6 6' stroke='%235ccfff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='16' y='20' width='9' height='3' rx='1.5' fill='%235ccfff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
@@ -11,20 +19,76 @@
   <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
-  <main>
-    <a class="geri" href="../">← ~/samet</a>
+  <a class="atla" href="#icerik">İçeriğe geç</a>
+  <nav class="ust-menu" aria-label="Site">
+    <a class="logo" href="../">~/samet</a>
+    <div class="menu-linkler">
+      <a href="../hakkimda/" aria-current="page">hakkımda</a>
+      <a href="../projeler/">projeler</a>
+      <a href="../slaytlar/">slaytlar</a>
+      <a href="../iletisim/">iletişim</a>
+    </div>
+  </nav>
+  <main id="icerik">
     <p class="komut">~/samet $ <b>cat hakkimda.md</b></p>
     <h1>Hakkımda</h1>
     <p class="kimlik">&gt; AI ile sistem kuran geliştirici<span class="imlec" aria-hidden="true"></span></p>
     <p class="tanitim">
-      AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak için kullanıyorum: kodu birlikte yazdığım
-      ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan uygulamalar.
+      Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak
+      için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan
+      uygulamalar. Siber güvenlik de ilgi alanım.
     </p>
-    <p class="tanitim">
-      Yaptıklarımı <a href="../projeler/">projelerde</a>, nasıl yaptığımı <a href="../slaytlar/">slaytlarda</a>
-      anlatıyorum. AI'a yeni başlıyorsan slaytlar senin için. Birlikte bir şey kurmak istersen
-      <a href="../iletisim/">yaz</a>.
-    </p>
+
+    <section class="bolum" aria-labelledby="ne-baslik">
+      <h2 id="ne-baslik" class="bolum-baslik">Ne yapıyorum</h2>
+      <div class="uclu">
+        <a class="kutu" href="../projeler/">
+          <span class="kutu-komut">./uygulamalar</span>
+          <strong>Açık veriyle uygulamalar</strong>
+          <span>SkyTrack: canlı uçak takibi, türbülans uyarısı, 15 dil. Windows, macOS ve Linux.</span>
+        </a>
+        <a class="kutu" href="../slaytlar/claude-code-hook/">
+          <span class="kutu-komut">./otomasyon</span>
+          <strong>AI ajanlarına araç ve otomasyon</strong>
+          <span>Claude Code ve Codex için hook'lar: ajan işini bitirince bilgisayar kendiliğinden haber verir.</span>
+        </a>
+        <a class="kutu" href="../slaytlar/">
+          <span class="kutu-komut">./ogretmek</span>
+          <strong>Öğretmek</strong>
+          <span>AI'ı sıfırdan anlatan, projelerimden örnek veren interaktif sunumlar.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="bolum" aria-labelledby="nasil-baslik">
+      <h2 id="nasil-baslik" class="bolum-baslik">Nasıl çalışıyorum</h2>
+      <ol class="ilkeler">
+        <li><strong>AI hızlandırır, kararı ben veririm.</strong> Neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.</li>
+        <li><strong>Test yazdırırım.</strong> AI'ın yaptığı bir hata bir kez düzelir; test sayesinde bir daha gelmez.</li>
+        <li><strong>Kaynağa dayanırım.</strong> Bu sitedeki her sayı ve iddia bir README'ye ya da commit geçmişine dayanıyor.</li>
+      </ol>
+    </section>
+
+    <section class="bolum" aria-labelledby="arac-baslik">
+      <h2 id="arac-baslik" class="bolum-baslik">Araçlar</h2>
+      <ul class="rozetler">
+        <li>Claude Code</li><li>Codex</li><li>JavaScript</li><li>Node.js</li><li>Electron</li><li>Python</li>
+        <li>PowerShell</li><li>Go</li><li>C</li><li>Bash</li><li>Git</li><li>GitHub Actions</li>
+      </ul>
+    </section>
+
+    <section class="bolum cagri">
+      <h2 class="bolum-baslik">Birlikte bir şey kuralım</h2>
+      <p>İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım.</p>
+      <div class="linkler">
+        <a class="dugme ana" href="../iletisim/">./iletisim →</a>
+        <a class="dugme" href="../projeler/">projelere bak</a>
+      </div>
+    </section>
   </main>
+  <footer class="alt-bilgi">
+    <span>samet duhan · 2026</span>
+    <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../iletisim/">iletişim</a></span>
+  </footer>
 </body>
 </html>

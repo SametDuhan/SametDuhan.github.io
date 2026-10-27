@@ -4,6 +4,10 @@ export function mailAdresi(kullanici, alan) {
   return `${kullanici}@${alan}`;
 }
 
+export function mailtoLinki(adres, konu) {
+  return konu ? `mailto:${adres}?subject=${encodeURIComponent(konu)}` : `mailto:${adres}`;
+}
+
 export function bagla(el) {
   const adres = mailAdresi(el.dataset.k, el.dataset.a);
   el.href = `mailto:${adres}`;

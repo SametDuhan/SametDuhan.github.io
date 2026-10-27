@@ -1,6 +1,8 @@
 // Deste motoru: section.slayt'ları tek tek gösterir; klavye, kaydırma, hash ve slayt içi bileşenler.
 // Saf fonksiyonlar Node'da sınanır; bagla() tarayıcıya bağlar.
 
+import { ilerlemeKaydet } from './ilerleme.js';
+
 export function sikistir(i, n) {
   return Math.min(n - 1, Math.max(0, i));
 }
@@ -88,6 +90,9 @@ export function bagla(kok) {
   const slaytlar = [...kok.querySelectorAll('section.slayt')];
   const n = slaytlar.length;
   let konum = -1;
+  const slug = location.pathname.split('/').filter(Boolean).pop() || '';
+  let depo = null;
+  try { depo = localStorage; } catch { /* engelli depo: ilerleme hatırlanmaz */ }
 
   const sayac = kok.querySelector('.sayac');
   const alt = document.createElement('nav');
@@ -126,6 +131,7 @@ export function bagla(kok) {
     geri.disabled = konum === 0;
     ileri.disabled = konum === n - 1;
     history.replaceState(null, '', `#${konum + 1}`);
+    ilerlemeKaydet(depo, slug, konum, n);
   }
 
   const eylem = {
