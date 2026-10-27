@@ -331,3 +331,10 @@ footer {
 
 .kart:target { border-color: var(--vurgu); box-shadow: 0 0 24px rgba(var(--vurgu-rgb), 0.2); }
 .kart { scroll-margin-top: 80px; }
+
+/* Telefonda menü linkleri rahat dokunulsun (en az ~44 px) */
+@media (hover: none), (max-width: 520px) {
+  .ust-menu { padding-top: 6px; padding-bottom: 0; row-gap: 0; }
+  .ust-menu .logo, .menu-linkler a { display: inline-flex; align-items: center; min-height: 44px; }
+  .menu-linkler { gap: 4px 14px; }
+}
