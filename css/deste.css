@@ -178,3 +178,27 @@
   .deste-ust { padding-top: 10px; padding-bottom: 6px; }
   .deste-alt { padding-top: 8px; padding-bottom: 10px; }
 }
+
+.devam-bildirim {
+  position: fixed;
+  left: 50%;
+  bottom: 76px;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 10px 14px;
+  background: var(--panel);
+  border: 1px solid var(--vurgu);
+  border-radius: var(--r);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+}
+.devam-bildirim[hidden] { display: none; }
+.devam-bildirim b { color: var(--vurgu); }
+.devam-bildirim .dugme { font: inherit; font-family: var(--mono); font-size: 13px; }

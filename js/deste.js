@@ -1,7 +1,7 @@
 // Deste motoru: section.slayt'ları tek tek gösterir; klavye, kaydırma, hash ve slayt içi bileşenler.
 // Saf fonksiyonlar Node'da sınanır; bagla() tarayıcıya bağlar.
 
-import { ilerlemeKaydet } from './ilerleme.js';
+import { ilerlemeKaydet, ilerlemeOku } from './ilerleme.js';
 
 export function sikistir(i, n) {
   return Math.min(n - 1, Math.max(0, i));
@@ -169,7 +169,9 @@ export function bagla(kok) {
     if (odak === ileri && ileri.disabled) geri.focus();
     if (odak === geri && geri.disabled) ileri.focus();
     history.replaceState(null, '', `#${konum + 1}`);
-    ilerlemeKaydet(depo, slug, konum, n);
+    if (kaydet) ilerlemeKaydet(depo, slug, konum, n);
+    kaydet = true;
+    if (bildirim && konum !== 0) bildirim.hidden = true;
   }
 
   const eylem = {
@@ -209,6 +211,22 @@ export function bagla(kok) {
   sorulariBagla(kok);
   adimKodlariBagla(kok);
   deneKutulariBagla(kok);
+
+  // Doğrudan açılan sunumda kaldığın yer varsa öner; açılış kendisi kayıtlı ilerlemeyi ezmesin.
+  const onceki = ilerlemeOku(depo, slug);
+  let kaydet = Boolean(location.hash);
+  let bildirim = null;
+  if (!location.hash && onceki && !onceki.bitti && onceki.konum > 0) {
+    bildirim = document.createElement('div');
+    bildirim.className = 'devam-bildirim';
+    bildirim.setAttribute('role', 'status');
+    bildirim.innerHTML = `<span>Kaldığın yer: <b>${onceki.konum + 1}/${onceki.n}</b></span>
+<button type="button" class="dugme" data-devam>devam et →</button>
+<button type="button" class="dugme" data-bastan>baştan başla</button>`;
+    bildirim.querySelector('[data-devam]').addEventListener('click', () => { bildirim.hidden = true; git(onceki.konum); });
+    bildirim.querySelector('[data-bastan]').addEventListener('click', () => { bildirim.hidden = true; kaydet = true; ilerlemeKaydet(depo, slug, 0, n); });
+    kok.append(bildirim);
+  }
 
   slaytlar.forEach((s) => { s.hidden = true; });
   git(hashtenKonum(location.hash, n));
