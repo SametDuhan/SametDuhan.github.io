@@ -24,6 +24,7 @@
     .zaman-ayrinti { min-height: 7.5em; }
     .zaman-ayrinti code { white-space: normal; }
     .olcum { font-family: var(--mono); font-size: 12px !important; color: var(--soluk) !important; }
+    @media (max-width: 520px) { .sayilar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .sayilar .panel { padding: 10px 6px; } .sayilar b { font-size: 24px; } .sayilar span { font-size: 12px; } }
   </style>
 </head>
 <body>
@@ -44,7 +45,7 @@
     <section class="slayt">
       <p class="kucuk-baslik">1 · Ne yapıyor?</p>
       <h2>Haritada canlı uçaklar</h2>
-      <img src="../../img/skytrack.jpg" alt="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası" width="2880" height="1620" loading="lazy">
+      <img src="../../img/skytrack-960.jpg" srcset="../../img/skytrack-960.jpg 960w, ../../img/skytrack-1440.jpg 1440w" sizes="(max-width: 900px) 100vw, 860px" alt="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası" width="2880" height="1620" loading="lazy">
       <p>SkyTrack, dünyadaki uçakları haritada canlı gösteren ücretsiz bir masaüstü uygulaması. Windows, macOS ve Linux'ta çalışır; hesap ya da API anahtarı istemez.</p>
       <div class="terim"><p><strong>ADS-B:</strong> Uçakların konumlarını, irtifalarını ve hızlarını saniyede birkaç kez yayınladığı açık sinyal. Gönüllülerin alıcıları bu sinyali toplar; SkyTrack bu açık veriyi kullanır.</p></div>
     </section>

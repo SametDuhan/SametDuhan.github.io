@@ -4,7 +4,8 @@ export const PROJELER = [
     ad: 'SkyTrack',
     komut: './skytrack',
     ozet: 'Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.',
-    gorsel: 'img/skytrack.jpg',
+    gorsel: 'img/skytrack-960.jpg',
+    srcset: 'img/skytrack-960.jpg 960w, img/skytrack-1440.jpg 1440w, img/skytrack.jpg 2880w',
     alt: 'SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası',
     piksel: false,
     etiketler: ['Uygulama', 'Açık veri'],
@@ -64,7 +65,7 @@ export function projeKartiHTML(p, kok = '') {
     p.deste ? `<a class="dugme" href="${kacis(kok + p.deste)}">nasıl yaptım →</a>` : '',
   ].join('');
   return `<article class="kart">
-  <img${p.piksel ? ' class="piksel"' : ''} src="${kacis(kok + p.gorsel)}" alt="${kacis(p.alt)}" loading="lazy">
+  <img${p.piksel ? ' class="piksel"' : ''} src="${kacis(kok + p.gorsel)}"${p.srcset ? ` srcset="${kacis(p.srcset.split(', ').map((g) => kok + g).join(', '))}" sizes="(max-width: 700px) 100vw, 340px"` : ''} alt="${kacis(p.alt)}" loading="lazy">
   <div class="kart-govde">
     <p class="kart-komut">${kacis(p.komut)}</p>
     <h2>${kacis(p.ad)}</h2>

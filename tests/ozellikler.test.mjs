@@ -23,6 +23,12 @@ test('projeKartiHTML metni kaçışlar, GitHub linkini ve bilgi maddelerini veri
   assert.equal((html.match(/<li>/g) || []).length, 2);
 });
 
+test('projeKartiHTML verilirse srcset ile ekrana uygun görseli sunar', () => {
+  const html = projeKartiHTML({ ad: 'x', komut: './x', ozet: '', gorsel: 'img/a-960.jpg', srcset: 'img/a-960.jpg 960w, img/a-1440.jpg 1440w', alt: 'a', github: 'g', etiketler: [], bilgiler: [] }, '../');
+  assert.ok(html.includes('srcset="../img/a-960.jpg 960w, ../img/a-1440.jpg 1440w"'));
+  assert.ok(html.includes('sizes="'));
+});
+
 test('desteAra başlık, açıklama ve etikette büyük/küçük harf ve Türkçe karakter duyarsız arar', () => {
   assert.deepEqual(desteAra(DESTELER, 'HOOK', 'hepsi').map((d) => d.slug), ['claude-code-hook']);
   assert.deepEqual(desteAra(DESTELER, 'ajanı', 'hepsi').map((d) => d.slug), ['ai-ajani-nedir']);

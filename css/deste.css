@@ -67,7 +67,7 @@
 .iki-sutun h3 { margin: 0 0 6px; font-family: var(--mono); font-size: 15px; color: var(--vurgu); font-weight: 400; }
 .iki-sutun p { font-size: 16px; margin: 0; }
 
-.slayt img { max-width: 100%; height: auto; border-radius: var(--r); border: 1px solid var(--kenar); }
+.slayt img { max-width: 100%; height: auto; max-height: 44svh; width: auto; align-self: flex-start; border-radius: var(--r); border: 1px solid var(--kenar); }
 
 .slayt pre {
   background: rgba(0, 0, 0, 0.45);
@@ -162,3 +162,19 @@
 .yardim p { color: var(--soluk); font-size: 14px; }
 
 @media (prefers-reduced-motion: reduce) { .deste-ilerleme i { transition: none; } }
+
+/* Uzun slaytlarda gezinme hep görünür kalsın; alçak ekranlarda yazı ve boşluk sıkışsın */
+.deste-alt { position: sticky; bottom: 0; z-index: 4; background: linear-gradient(to top, rgba(7, 11, 18, 0.96) 70%, rgba(7, 11, 18, 0)); }
+
+@media (max-height: 820px), (max-width: 520px) {
+  .slayt { justify-content: flex-start; padding-top: clamp(8px, 2.5vh, 24px); padding-bottom: 8px; }
+  .slayt h1 { font-size: clamp(28px, 5vw, 44px); margin: 4px 0 8px; }
+  .slayt h2 { font-size: clamp(22px, 3.6vw, 32px); margin: 4px 0 6px; }
+  .slayt p, .slayt li { font-size: clamp(15px, 1.9vw, 17px); }
+  .slayt p { margin: 6px 0; }
+  .slayt img { max-height: 36svh; }
+  .slayt pre { margin: 8px 0 6px; padding: 10px 12px; }
+  .terim, .panel { margin: 8px 0; padding: 8px 12px; }
+  .deste-ust { padding-top: 10px; padding-bottom: 6px; }
+  .deste-alt { padding-top: 8px; padding-bottom: 10px; }
+}
