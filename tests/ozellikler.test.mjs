@@ -87,3 +87,11 @@ test('her sayfada açıklama ve paylaşım önizlemesi etiketleri var', () => {
     assert.match(s, /<link rel="icon"/, `${yol}: ikon yok`);
   }
 });
+
+test('site haritası her sayfayı listeler, robots.txt haritayı gösterir', () => {
+  const harita = oku('sitemap.xml');
+  for (const yol of ['', 'hakkimda/', 'projeler/', 'slaytlar/', 'iletisim/', ...DESTELER.map((d) => `slaytlar/${d.slug}/`)]) {
+    assert.ok(harita.includes(`<loc>https://sametduhan.github.io/${yol}</loc>`), `haritada yok: /${yol}`);
+  }
+  assert.match(oku('robots.txt'), /Sitemap: https:\/\/sametduhan\.github\.io\/sitemap\.xml/);
+});

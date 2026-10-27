@@ -86,14 +86,21 @@
     const kartlar = [...document.querySelectorAll('#projeler .kart')];
     const sayac = document.getElementById('proje-sayac');
     const dugmeler = [...document.querySelectorAll('.filtre button')];
-    function suz(etiket) {
+    // Filtre adreste durur: ?etiket=… ile paylaşılabilir.
+    function suz(etiket, adresiGuncelle = true) {
+      if (adresiGuncelle) {
+        const u = new URL(location.href);
+        if (etiket === 'hepsi') u.searchParams.delete('etiket'); else u.searchParams.set('etiket', etiket);
+        history.replaceState(null, '', u);
+      }
       const gorunur = new Set(projeleriSuz(PROJELER, etiket).map((p) => p.ad));
       kartlar.forEach((k, i) => { k.hidden = !gorunur.has(PROJELER[i].ad); });
       dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
       sayac.textContent = `${gorunur.size} proje`;
     }
     dugmeler.forEach((b) => b.addEventListener('click', () => suz(b.dataset.etiket)));
-    suz('hepsi');
+    const istenen = new URLSearchParams(location.search).get('etiket');
+    suz(dugmeler.some((b) => b.dataset.etiket === istenen) ? istenen : 'hepsi', false);
   </script>
 </body>
 </html>
