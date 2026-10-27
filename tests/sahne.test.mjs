@@ -47,6 +47,19 @@ test('monitör sahneleri sabit sıraya bağlı değildir ve aynı sahne tekrarla
   }
 });
 
+test('logolar seyrek, kod ve robot sahneleri daha sık seçilir', () => {
+  for (const onceki of EKRAN_SAHNELERI) {
+    let logo = 0, asil = 0;
+    for (let i = 0; i < 10000; i++) {
+      const sahne = sonrakiSahne(onceki, i / 10000);
+      if (['anthropic', 'openai', 'gemini'].includes(sahne)) logo++;
+      if (['kod', 'robot'].includes(sahne)) asil++;
+    }
+    assert.ok(logo / 10000 < 0.12, onceki);
+    assert.ok(asil / 10000 > 0.70, onceki);
+  }
+});
+
 test('piksel karakter çizimi dışa açık', () => {
   assert.equal(typeof pikselKarakter, 'function');
 });

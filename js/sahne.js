@@ -86,10 +86,17 @@ export function yazilanSatirlar(satirlar, yazilan) {
 }
 
 export const EKRAN_SAHNELERI = ['kod', 'robot', 'anthropic', 'openai', 'gemini', 'piksel'];
+// Kod ve robot baskın; üç şirket logosu birlikte küçük bir ağırlık taşır.
+const SAHNE_AGIRLIKLARI = { kod: 44, robot: 40, piksel: 10, anthropic: 2, openai: 2, gemini: 2 };
 export function sonrakiSahne(onceki, r) {
-  const i = Math.min(EKRAN_SAHNELERI.length - 2, Math.floor(r * (EKRAN_SAHNELERI.length - 1)));
   const secenekler = EKRAN_SAHNELERI.filter(s => s !== onceki);
-  return secenekler[i];
+  const toplam = secenekler.reduce((n, s) => n + SAHNE_AGIRLIKLARI[s], 0);
+  let secim = Math.max(0, Math.min(1, r)) * toplam;
+  for (const s of secenekler) {
+    secim -= SAHNE_AGIRLIKLARI[s];
+    if (secim < 0) return s;
+  }
+  return secenekler.at(-1);
 }
 const VURGU = '92,207,255';
 export function baslatSahne(kok) {
