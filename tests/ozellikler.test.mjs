@@ -107,3 +107,15 @@ test('hakkımda sayfası işverenin aradığı linkleri en üstte verir', () => 
 test('giriş ekranı 1–4 kısayolunu anlatır', () => {
   assert.match(oku('index.html'), /class="kisayol-ipucu"/);
 });
+
+test('giriş ekranı üç ziyaretçi tipine nereden başlayacağını söyler', () => {
+  const s = oku('index.html');
+  assert.match(s, /class="yonlendirme"/);
+  for (const h of ['projeler/', 'slaytlar/ai-ajani-nedir/', 'iletisim/']) assert.ok(s.includes(`href="${h}"`), h);
+});
+
+test('slaytlar sayfası yeni başlayana önerilen sırayı verir', () => {
+  const s = oku('slaytlar/index.html');
+  const sira = s.slice(s.indexOf('class="onerilen-sira"'));
+  assert.ok(sira.indexOf('./ai-ajani-nedir/') < sira.indexOf('./claude-code-hook/') && sira.indexOf('./claude-code-hook/') < sira.indexOf('./skytrack-nasil-kurdum/'));
+});

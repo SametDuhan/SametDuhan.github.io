@@ -322,3 +322,9 @@ footer {
 .kisayol-ipucu kbd { font-family: var(--mono); border: 1px solid var(--kenar); border-radius: 4px; padding: 0 5px; color: var(--yazi); }
 @media (hover: none) { .kisayol-ipucu { display: none; } }
 .hizli { margin-top: 18px; }
+
+.yonlendirme { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 22px 0 0; font-family: var(--mono); font-size: 13px; color: var(--soluk); }
+.onerilen-sira { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 10px 0 6px; padding: 0; list-style: none; counter-reset: sira; font-family: var(--mono); font-size: 13px; }
+.onerilen-sira li { counter-increment: sira; color: var(--soluk); }
+.onerilen-sira li::before { content: counter(sira) '. '; color: var(--vurgu); }
+.onerilen-sira li:not(:last-child)::after { content: '  →'; color: var(--soluk); }
