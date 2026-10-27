@@ -14,13 +14,14 @@ if (deck) {
   slides.forEach((s, i) => {
     s.dataset.sira = String(i + 1);
     const a = document.createElement('a'); a.href = `#${i + 1}`; a.textContent = `${String(i + 1).padStart(2, '0')} / ${s.querySelector('h1,h2')?.textContent || 'Bölüm'}`;
-    a.addEventListener('click', () => { contents.open = false; if (deck.classList.contains('okuma')) s.scrollIntoView({ block: 'start' }); });
+    a.addEventListener('click', () => { contents.open = false; });
     contents.append(a);
   });
   let reading = new URLSearchParams(location.search).get('gorunum') === 'oku';
   function mode() {
-    deck.classList.toggle('okuma', reading); read.textContent = reading ? 'Slayt görünümüne dön' : 'Tek sayfada oku'; read.setAttribute('aria-pressed', String(reading));
+    deck.classList.toggle('anlatim', reading); read.textContent = reading ? 'Sunum görünümü' : 'Okuma görünümü'; read.setAttribute('aria-pressed', String(reading));
     const u = new URL(location.href); reading ? u.searchParams.set('gorunum', 'oku') : u.searchParams.delete('gorunum'); history.replaceState(null, '', u);
+    deck.dispatchEvent(new CustomEvent('gorunum-degisti'));
   }
   read.addEventListener('click', () => { reading = !reading; mode(); });
   share.addEventListener('click', async () => {

@@ -23,7 +23,7 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 | `js/projeler.js` | Proje verisi ve kart HTML'i |
 | `js/desteler.js` | Deste listesi, arama |
 | `js/ilerleme.js` | "Kaldığın yer" (yalnız ziyaretçinin tarayıcısında) |
-| `js/sahne.js` | Giriş sahnesi: tüplü monitör, akan senaryolar, kablo, mini karakterler |
+| `js/sahne.js` | Giriş sahnesi: tüplü monitör, rastgele kod/robot/logo/piksel sahneleri |
 | `js/piksel.js` | claude-done-pixel karakteri (`claude-done.ps1`'in birebir aktarımı) |
 | `js/fener.js` | Nokta ızgarasında imleci izleyen fener (ızgara `css/tema.css`'te) |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |
@@ -55,8 +55,12 @@ claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anth
 - `npm run sayfalar` ortak bölüm sayfalarını ve üç proje detayını birlikte üretir.
 - Proje hikâyeleri: `araclar/proje_sayfalari.mjs`. Kartlar: `js/projeler.js`.
 - `css/atolye.css` sunumların ve detay sayfalarının görsel tasarımıdır; ana sayfaya yüklenmez.
-- `js/atolye.js` ajan/hook/alarm deneylerini, paylaşımı ve tek sayfa okuma görünümünü bağlar.
-- `?gorunum=oku` sunumu tek sayfada açar; `#3` gibi bağlantılar bir slaydı paylaşır.
+- `js/atolye.js` ajan/hook/alarm deneylerini, paylaşımı ve sayfalı okuma görünümünü bağlar.
+- `?gorunum=oku` sunumu dar okuma görünümünde açar; `#3` gibi bağlantılar bir slaydı paylaşır.
 - Paylaşım kapaklarının kaynakları ve 1200×630 PNG çıktıları `img/paylasim/` içindedir.
 - Deneyler tarayıcıda simülasyon olarak çalışır. Gerçek bir ajan ya da PowerShell komutu çalıştırmaz.
 - Yeni proje için detay hikâyesini de ekle; bilgileri README/commit kayıtlarıyla doğrula.
+
+## Tek ekran gezinme
+
+`css/ekran.css` görünümü pencereye sığdırır; `js/ekrana-sigdir.js` uzun içeriği yatay sayfalara böler. İçerik silinmez; önceki/sonraki düğmeleriyle tamamına ulaşılır. Sunumda sayaçtaki ikinci sayı aynı slaydın devam sayfasıdır. Kaydırma yerine ok tuşları da kullanılabilir. JavaScript kapalıyken ve yazdırırken doğal belge akışı korunur.

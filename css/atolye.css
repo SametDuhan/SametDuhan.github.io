@@ -38,11 +38,6 @@
 .radar-etiket { position:absolute; bottom:10px; left:12px; font:11px var(--mono); color:#a4bdc9; }
 .alarm-aktif .radar-halka { border-color:#ff7b72; background:#ff7b7215; }
 .alarm-aktif .ucak,.alarm-aktif .alarm-sonuc { color:#ff9c8e; }
-.okuma .slayt[hidden],.okuma .slayt { display:flex!important; min-height:0; border-bottom:1px solid #23415a; scroll-margin-top:20px; animation:none!important; }
-.okuma .slayt { margin-top:35px; padding-bottom:50px; }
-.okuma .deste-alt,.okuma .deste-ilerleme,.okuma .devam-bildirim { display:none; }
-.okuma .adim-kod .satir { opacity:1!important; }
-.okuma .soru .aciklama { display:block; }
 .proje-kapak { display:grid; grid-template-columns:1.1fr 1fr; gap:30px; align-items:center; }
 .proje-kapak h1 { font-size:clamp(32px,5.5vw,68px); overflow-wrap:anywhere; }
 .proje-kapak img { max-width:100%; border-radius:16px; border:1px solid var(--kenar); }

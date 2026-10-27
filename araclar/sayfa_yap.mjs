@@ -31,6 +31,7 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '', kapak = y
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
   <link rel="stylesheet" href="${onek}css/tema.css">
   <link rel="stylesheet" href="${onek}css/site.css">${ekCss}
+  <link rel="stylesheet" href="${onek}css/ekran.css">
 </head>
 <body>
   <a class="atla" href="#icerik">İçeriğe geç</a>`;
@@ -51,6 +52,8 @@ export const son = (onek = '../') => `
   </footer>
   <script type="module">
     import { baslatFener } from '${onek}js/fener.js';
+    import { baslatSayfa } from '${onek}js/ekrana-sigdir.js';
+    baslatSayfa();
     baslatFener();
   </script>`;
 

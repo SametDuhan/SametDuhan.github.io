@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { SENARYOLAR, turSuresi, sonrakiSenaryo, yazilanSatirlar, rotalar } from '../js/sahne.js';
+import { SENARYOLAR, turSuresi, sonrakiSenaryo, yazilanSatirlar, sonrakiSahne, EKRAN_SAHNELERI } from '../js/sahne.js';
 import { pikselKarakter } from '../js/piksel.js';
 
 test('altı senaryo var, hepsi "✓ Claude bitti" ile biter', () => {
@@ -34,27 +34,29 @@ test('yazilanSatirlar karakter sayısına göre satırları keser (satır sonu d
   assert.deepEqual(yazilanSatirlar(['ab', 'cd'], 99), ['ab', 'cd']);
 });
 
-test('rotalar: kablo soketten başlar; üst kareler dış kenardan, alt kareler alttan girilir', () => {
-  const r = rotalar({ soket: { x: 100, y: 300 }, kareler: { x: 400, y: 100, w: 420, h: 220 }, bosluk: 20, zemin: 500 });
-  assert.ok(r.kablo.startsWith('M103 300'));
-  const satH = (220 - 20) / 2, sutW = (420 - 20) / 2;
-  assert.deepEqual(r.uclar[0], { x: 400, y: 100 + satH / 2 });
-  assert.deepEqual(r.uclar[1], { x: 820, y: 100 + satH / 2 });
-  assert.deepEqual(r.uclar[2], { x: 400 + sutW / 2, y: 320 });
-  assert.deepEqual(r.uclar[3], { x: 820 - sutW / 2, y: 320 });
-  assert.equal(r.hatlar.length, 4);
-  assert.equal(r.bar.y, 336);
+test('monitör sahneleri sabit sıraya bağlı değildir ve aynı sahne tekrarlanmaz', () => {
+  for (const onceki of EKRAN_SAHNELERI) {
+    const secimler = new Set();
+    for (let i = 0; i < 100; i++) {
+      const s = sonrakiSahne(onceki, i / 100);
+      assert.notEqual(s, onceki);
+      assert.ok(EKRAN_SAHNELERI.includes(s));
+      secimler.add(s);
+    }
+    assert.equal(secimler.size, EKRAN_SAHNELERI.length - 1);
+  }
 });
 
 test('piksel karakter çizimi dışa açık', () => {
   assert.equal(typeof pikselKarakter, 'function');
 });
 
-test('giriş sayfasında monitör, ekran, kablo ve dört kare var', () => {
+test('giriş sayfasında monitör, ekran ve dört kare var; kablo yok', () => {
   const s = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   assert.match(s, /class="crt"/);
   assert.match(s, /<canvas id="ekran"/);
-  assert.match(s, /<svg class="kablo"/);
+  assert.doesNotMatch(s, /<svg class="kablo"/);
+  assert.doesNotMatch(s, /<canvas class="mini"/);
   assert.equal((s.match(/<a class="kare"/g) || []).length, 4);
   assert.doesNotMatch(s, /kare-efekt/);
 });
