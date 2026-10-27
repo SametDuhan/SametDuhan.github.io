@@ -20,7 +20,7 @@ export const DESTELER = [
     baslik: 'SkyTrack\'i AI ile nasıl kurdum',
     etiket: 'Proje',
     aciklama: 'Canlı uçak takip uygulaması, commit commit: AI neyi hızlandırdı, kararları kim verdi.',
-    slaytSayisi: 1,
+    slaytSayisi: 9,
     ornek: 'SkyTrack',
   },
 ];

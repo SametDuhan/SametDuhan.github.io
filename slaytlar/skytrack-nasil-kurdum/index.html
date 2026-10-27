@@ -3,11 +3,176 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hazırlanıyor · Samet Duhan</title>
+  <title>SkyTrack'i AI ile nasıl kurdum · Samet Duhan</title>
+  <meta name="description" content="Canlı uçak takip uygulaması SkyTrack'in AI ile yazılışı, commit geçmişinden.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
   <link rel="stylesheet" href="../../css/tema.css">
+  <link rel="stylesheet" href="../../css/deste.css">
+  <style>
+    .sayilar { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 12px; margin: 14px 0; }
+    .sayilar .panel { margin: 0; text-align: center; }
+    .sayilar b { display: block; font-family: var(--mono); font-size: clamp(30px, 5vw, 44px); color: var(--vurgu); line-height: 1.1; }
+    .sayilar span { font-size: 14px; color: var(--soluk); }
+    .cubuk { height: 14px; border-radius: 7px; background: var(--kenar); overflow: hidden; margin: 6px 0 2px; }
+    .cubuk i { display: block; height: 100%; background: var(--vurgu); }
+    .zaman { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .zaman button { font-family: var(--mono); font-size: 13px; color: var(--yazi); background: var(--panel-cam); border: 1px solid var(--kenar); border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+    .zaman button[aria-pressed="true"] { border-color: var(--vurgu); color: var(--vurgu); background: rgba(92, 207, 255, 0.1); }
+    .zaman-ayrinti { min-height: 7.5em; }
+    .zaman-ayrinti code { white-space: normal; }
+    .olcum { font-family: var(--mono); font-size: 12px !important; color: var(--soluk) !important; }
+  </style>
 </head>
 <body>
   <canvas id="arkaplan" aria-hidden="true"></canvas>
-  <section class="slayt"><h1>Hazırlanıyor</h1><p><a href="../">← slaytlar</a></p></section>
+  <div class="deste" id="deste">
+    <header class="deste-ust">
+      <a class="geri" href="../">← slaytlar</a>
+      <span class="deste-adi">SkyTrack'i AI ile nasıl kurdum</span>
+      <span class="sayac"></span>
+    </header>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Proje · ~10 dakika</p>
+      <h1>SkyTrack'i AI ile nasıl kurdum</h1>
+      <p>Bir masaüstü uygulamasının dokuz günde nasıl büyüdüğünü, uydurmadan, <strong>commit geçmişinden</strong> anlatıyorum: AI neyi hızlandırdı, hangi kararları ben verdim, AI nerede yanıldı.</p>
+      <div class="terim"><p><strong>Commit:</strong> Kodda yapılan bir değişikliğin kaydı. Her commit'in bir mesajı, tarihi ve yazarı vardır; projenin günlüğü gibi okunur.</p></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">1 · Ne yapıyor?</p>
+      <h2>Haritada canlı uçaklar</h2>
+      <img src="../../img/skytrack.jpg" alt="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası" width="2880" height="1620" loading="lazy">
+      <p>SkyTrack, dünyadaki uçakları haritada canlı gösteren ücretsiz bir masaüstü uygulaması. Windows, macOS ve Linux'ta çalışır; hesap ya da API anahtarı istemez.</p>
+      <div class="terim"><p><strong>ADS-B:</strong> Uçakların konumlarını, irtifalarını ve hızlarını saniyede birkaç kez yayınladığı açık sinyal. Gönüllülerin alıcıları bu sinyali toplar; SkyTrack bu açık veriyi kullanır.</p></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">2 · Sayılarla</p>
+      <h2>Ne kadarını AI ile yazdım?</h2>
+      <div class="sayilar">
+        <div class="panel"><b>208</b><span>toplam commit</span></div>
+        <div class="panel"><b>191</b><span>Claude ile ortak yazılmış</span></div>
+        <div class="panel"><b>9 gün</b><span>ilk dosyadan v0.7.9'a</span></div>
+      </div>
+      <div class="cubuk" role="img" aria-label="208 commit'in 191'i, yüzde 92'si, Claude ile ortak"><i style="width:91.8%"></i></div>
+      <p>Geri kalan 17 commit: projenin ilk günlerinde elle yaptığım 7 değişiklik ve 10 birleştirme (merge) kaydı.</p>
+      <p>Claude ile yazılan commit'lerin sonunda <code>Co-Authored-By: Claude</code> satırı var; saydığım şey bu satır.</p>
+      <p class="olcum">Ölçüm: github.com/SametDuhan/airock commit geçmişi, 27 Ekim 2026.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">3 · Zaman çizelgesi</p>
+      <h2>Dokuz günde ne oldu?</h2>
+      <p>Bir durağa tıkla:</p>
+      <div class="zaman" id="zaman" role="group" aria-label="Zaman çizelgesi"></div>
+      <div class="panel zaman-ayrinti" id="zaman-ayrinti" aria-live="polite"></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">4 · Bir kararı yakından</p>
+      <h2>Sahte acil durum alarmları</h2>
+      <p>Uçaklar acil durumu bir kodla bildirir: <code>7500</code> kaçırılma, <code>7600</code> telsiz arızası, <code>7700</code> genel acil durum. SkyTrack bu kodları kırmızı halkayla gösterir ve bildirim gönderir. Sorunu commit'ler üzerinden satır satır izle:</p>
+      <pre class="adim-kod"><code><span class="satir" data-not="İlk sürüm: kodu gören her uçak acil durum sayıldı. Basit ama yanlış alarm üretmeye açık.">6 Eki  Explain squawk emergency codes (7500/7600/7700) in an in-app dialog</span><span class="satir" data-not="İlk düzeltme: yalnız gerçek acil durum kodları ya da uçağın kendi ADS-B acil durum bilgisi sayılıyor.">6 Eki  0.7.3: only real emergencies (7500/7600/7700 or matching ADS-B status) are shown as emergencies</span><span class="satir" data-not="Asıl çözüm: pilot kodu değiştirirken düğmeyi çevirdiği an 7700'den bir saniyeliğine geçebiliyor. Artık kod 45 saniye kesintisiz sürmedikçe alarm yok.">8 Eki  Emergencies: a squawk 7500/7600/7700 counts only after 45 s without a break (knob transit no longer fires alerts)</span></code></pre>
+      <p>Kodu Claude yazdı. Ama "bu alarm neden yanlış?" diye sormak, sebebi bulmak ve 45 saniye gibi bir kurala karar vermek <strong>insanın işi</strong>.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">5 · AI de yanılır</p>
+      <h2>Bir yorum satırı, bütün açılışı bozdu</h2>
+      <p>7 Ekim'de fotoğraf görüntüleyicide bir açılış hatası çıktı. Commit mesajı şöyle diyor:</p>
+      <pre><code>Fix start-up error in the photo viewer (a comment swallowed the rest of a line); test that every script parses</code></pre>
+      <p>Yani yanlış yere konmuş bir yorum, satırın geri kalanını "yorum" hâline getirmiş ve kod çalışmamış. Düzeltmenin ikinci yarısı daha önemli: <strong>bütün betiklerin hatasız okunabildiğini sınayan bir test</strong> eklendi. Aynı tür hata bir daha sessizce geçemez.</p>
+      <p>Ders: AI ile hızlı yazınca hata da hızlı gelir. Cevap AI'ı bırakmak değil, <strong>test</strong> yazdırmak. SkyTrack'in testleri her değişiklikte GitHub'da kendiliğinden çalışıyor.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">6 · Kontrol</p>
+      <h2>Sence hangisi?</h2>
+      <div class="soru" data-dogru="a">
+        <p>AI kodda bir hata yaptı ve sen fark ettin. En iyi sonraki adım hangisi?</p>
+        <div class="secenekler">
+          <button type="button" data-secenek="a">Hatayı düzelttirip aynı hatayı yakalayacak bir test de yazdırmak</button>
+          <button type="button" data-secenek="b">O kısmı bir daha AI'a yazdırmamak</button>
+          <button type="button" data-secenek="c">Hatayı düzelttirmek ve devam etmek</button>
+        </div>
+        <p class="sonuc" aria-live="polite"></p>
+        <p class="aciklama">Düzeltmek bugünkü sorunu çözer; test, aynı sorunun yarın sessizce geri gelmesini engeller. SkyTrack'teki "test that every script parses" commit'i tam olarak bu.</p>
+      </div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">7 · Sen de dene</p>
+      <h2>Kurmadan dene, istersen kodu çalıştır</h2>
+      <p>Tarayıcı demosu, simüle edilmiş uçuşlar ve türbülans alanlarıyla çalışır:</p>
+      <p><a class="dugme" href="https://sametduhan.github.io/airock/app/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;border:1px solid var(--vurgu);border-radius:8px;padding:10px 16px">▶ web demoyu yeni sekmede aç</a></p>
+      <p>Kodu kendi bilgisayarında çalıştırmak için Node.js 18 ya da daha yenisi gerekir:</p>
+      <div class="dene">
+        <code>git clone https://github.com/SametDuhan/airock.git
+cd airock
+npm install
+npm start</code>
+        <button type="button">kopyala</button>
+      </div>
+      <p>Testleri görmek için: <code>npm test</code></p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Bitti</p>
+      <h2>Bu projeden kalan</h2>
+      <ul>
+        <li><strong>AI hızlandırır:</strong> 208 commit'in 191'i dokuz günde Claude ile yazıldı.</li>
+        <li><strong>Kararları sen verirsin:</strong> neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.</li>
+        <li><strong>Testler seni korur:</strong> AI'ın hatası bir kere düzelir, test sayesinde bir daha gelmez.</li>
+      </ul>
+      <p><a href="https://github.com/SametDuhan/airock">SkyTrack GitHub</a> · <a href="../">Tüm slaytlar</a> · <a href="../../">Ana sayfa</a></p>
+    </section>
+  </div>
+
+  <script type="module">
+    import { baslat } from '../../js/arkaplan.js';
+    import { bagla } from '../../js/deste.js';
+    baslat(document.getElementById('arkaplan'));
+
+    // Duraklar commit geçmişinden; mesajlar birebir alıntı.
+    const DURAKLAR = [
+      ['30 Eyl', 'İlk dosyalar', 'Proje elle başladı: ilk dosyalar yüklendi; ertesi gün harita OpenStreetMap ve Leaflet\'e bağlandı.', 'Add files via upload'],
+      ['2 Eki', 'İlk AI commit\'i', 'Claude ile ortak yazılan ilk commit: uçuşların nereden nereye gittiği ve v0.2 özellikleri.', 'Uçuş rotası (nereden → nereye) ve v0.2 özellikleri'],
+      ['6 Eki', 'Türbülans', 'Uçak kartına "önünde türbülans var mı" satırı, rüzgar, yakıt/CO₂ tahmini ve harita katmanları.', 'Add wind component, ETA clock, fuel/CO2 estimate, turbulence, wind and night map layers'],
+      ['6 Eki', 'v0.6.0', 'Bir günde büyük sürüm: beş dil, uçuş günlüğü, macOS ve Linux paketleri.', '0.6.0: five languages, flight diary, share image, altitude profile, airport board status, tray + notifications, mac/linux builds'],
+      ['7 Eki', 'Web demo', 'Uygulamayı kurmadan denemek için tarayıcı demosu eklendi.', 'Landing page leads with turbulence; add browser demo (site/app)'],
+      ['7 Eki', 'Arapça (sağdan sola)', 'Arapça, Çince, Japonca, Korece; sağdan sola yazılan dil için arayüz düzeltmeleri.', 'Languages: Arabic (RTL), Chinese, Japanese, Korean'],
+      ['8 Eki', 'v0.7.9', 'Son sürüm: havalimanı servis araçları uçaktan ayrıldı, acil durum alarmı 45 saniye kuralına bağlandı.', 'v0.7.9'],
+    ];
+    const kutu = document.getElementById('zaman');
+    const ayrinti = document.getElementById('zaman-ayrinti');
+    const dugmeler = DURAKLAR.map(([tarih, ad], i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = `${tarih} · ${ad}`;
+      b.addEventListener('click', () => sec(i));
+      kutu.append(b);
+      return b;
+    });
+    function sec(i) {
+      const [tarih, ad, anlatim, mesaj] = DURAKLAR[i];
+      dugmeler.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+      ayrinti.replaceChildren();
+      const h = document.createElement('p');
+      h.innerHTML = '<strong></strong>';
+      h.firstChild.textContent = `${tarih} — ${ad}`;
+      const p = document.createElement('p');
+      p.textContent = anlatim;
+      const c = document.createElement('p');
+      c.className = 'olcum';
+      c.textContent = `commit: "${mesaj}"`;
+      ayrinti.append(h, p, c);
+    }
+    sec(0);
+
+    bagla(document.getElementById('deste'));
+  </script>
 </body>
 </html>
