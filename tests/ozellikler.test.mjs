@@ -158,3 +158,11 @@ test('her proje kartının doğrudan linklenebilir bir kimliği var', () => {
   for (const id of ['skytrack', 'claude-done-pixel', 'chatgpt-done-pixel']) assert.ok(s.includes(`id="${id}"`), id);
   assert.ok(oku('hakkimda/index.html').includes('href="../projeler/#skytrack"'));
 });
+
+test('destelerin son slaytı projelere ve iletişime doğrudan gider', () => {
+  for (const d of DESTELER) {
+    const s = oku(`slaytlar/${d.slug}/index.html`);
+    const son = s.slice(s.lastIndexOf('<section class="slayt'));
+    assert.ok(son.includes('href="../../projeler/"') && son.includes('href="../../iletisim/"'), d.slug);
+  }
+});
