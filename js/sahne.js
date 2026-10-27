@@ -1,71 +1,155 @@
-// Monitör: kod, robot, logolar ve piksel karakter birbirinden bağımsız karışık gelir.
+// Kod, robot ve logolar karışık gelir; piksel karakter yalnız kod tamamlanınca kutlar.
 import { ekranSanati } from './ekran-sanat.js';
 import { kareDurumu, pikselKarakter, SURE as PIKSEL_SURE } from './piksel.js';
 
 export const SENARYOLAR = [
-`export function bagla(kok) {
-  const slaytlar = [...kok.querySelectorAll('section.slayt')];
-  let konum = -1;
+`$ claude "sunum motorunu geliştir"
+# proje dosyaları okunuyor...
+export function bagla(kok) {
+  const slaytlar = [...kok.children];
+  let konum = 0;
   function git(i) {
-    const yeni = sikistir(i, slaytlar.length);
-    if (yeni === konum) return;
-    konum = yeni;
+    const son = slaytlar.length - 1;
+    konum = Math.max(0, Math.min(i, son));
+    slaytlar.forEach((s, j) => {
+      s.hidden = j !== konum;
+    });
   }
+  kok.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') {
+      git(konum + 1);
+    }
+  });
+  git(0);
 }
 $ npm test
+✓ klavye gezinmesi çalışıyor
+✓ slaytlar ekrana sığıyor
 ✓ testler geçti
 ✓ Claude bitti`,
-`$ claude "sayfadaki kırık linki düzelt"
+`$ claude "kırık bağlantıyı düzelt"
 # ajan görevi aldı
-→ bak: sayfada 4 link var
-→ bak: /projelr adresi açılmıyor
-→ karar ver: doğrusu /projeler olmalı
-→ yap: index.html düzenlendi
-→ kontrol et: link açılıyor
+→ bak: index.html okunuyor
+→ bak: bağlantılar çıkarılıyor
+const linkler = [...document.links];
+for (const link of linkler) {
+  const url = new URL(link.href);
+  if (url.origin !== location.origin) {
+    continue;
+  }
+  const sonuc = await fetch(url);
+  console.log(url.pathname, sonuc.status);
+}
+# /projelr adresi bulunamadı
+→ karar: doğru adres /projeler/
+→ yap: bağlantı güncellendi
+→ kontrol: sayfa yeniden açıldı
+$ npm test
+✓ iç bağlantılar çözüldü
+✓ klavye odağı korundu
+✓ mobil görünüm kontrol edildi
 ✓ görev tamam, rapor yazıldı
 ✓ Claude bitti`,
-`# ROBOT-7 açılıyor...
+`$ python robot.py
+# ROBOT-7 başlatılıyor...
+class Robot:
+    def __init__(self):
+        self.batarya = 100
+        self.hazir = False
+
+    def baslat(self):
+        self.sensorleri_kontrol_et()
+        self.hazir = True
+
+    def ilerle(self, mesafe):
+        if self.hazir and mesafe > 20:
+            return "yol açık"
+        return "dur ve yeniden bak"
+
 → kamera ............ hazır
 → mesafe sensörü .... hazır
 → sol motor ......... hazır
 → sağ motor ......... hazır
 → batarya ........... %100
-
-     [o_o]
-    /|___|\\
-     d   b
 > merhaba insan.
+✓ sensör kontrolleri geçti
 ✓ Claude bitti`,
-`$ claude "robot nedir?"
-# Robot: çevresini algılayan,
-# karar veren ve hareket eden makine.
-$ claude "AI ajanı nedir?"
-# Aynı şeyi yazılımda yapar:
-# bak → karar ver → yap → kontrol et.
-# Araçları: dosya, komut, arama.
+`$ claude "ajan döngüsü oluştur"
+# hedef: bak, planla, yap, kontrol et
+async function calistir(gorev) {
+  const plan = await planla(gorev);
+  for (const adim of plan) {
+    const gozlem = await oku(adim);
+    const karar = await degerlendir(gozlem);
+    if (karar.duzeltmeGerekli) {
+      await duzenle(karar);
+    }
+    const test = await kontrolEt(adim);
+    if (!test.basarili) {
+      await yenidenDene(adim);
+    }
+  }
+  return raporla(gorev);
+}
+→ dosyalar incelendi
+→ plan hazırlandı
+→ değişiklikler uygulandı
+→ testler çalıştırıldı
+✓ görev kontrol edildi
+✓ sonuç raporu hazır
 ✓ Claude bitti`,
-`# Asimov'un Üç Robot Yasası (1942)
-1. Robot bir insana zarar veremez,
-   hareketsiz kalıp zarar görmesine
-   de izin veremez.
-2. Robot, 1. yasayla çelişmedikçe
-   insanların emirlerine uyar.
-3. Robot, ilk iki yasayla çelişmedikçe
-   kendi varlığını korur.
+`$ claude "harita verisini işle"
+# uçuş verisi alınıyor...
+const ucuslar = await veriAl();
+const harita = new Map();
+for (const ucus of ucuslar) {
+  if (!ucus.konum) continue;
+  harita.set(ucus.id, {
+    enlem: ucus.konum.enlem,
+    boylam: ucus.konum.boylam,
+    irtifa: ucus.irtifa,
+  });
+}
+function guncelle(ucus) {
+  const isaret = harita.get(ucus.id);
+  if (!isaret) return;
+  isaret.irtifa = ucus.irtifa;
+  rotayiCiz(ucus.rota);
+}
+→ geçersiz konumlar ayıklandı
+→ harita işaretleri güncellendi
+→ rota katmanı hazır
+$ npm test
+✓ veri dönüşümü kontrol edildi
 ✓ Claude bitti`,
 `$ python egit.py
-# model eğitiliyor...
+# örnek eğitim akışı başlıyor
+veri = veriyi_oku("ornekler.json")
+egitim, kontrol = ayir(veri)
+model = Model(katmanlar=[32, 16, 8])
+for tur in range(1, 6):
+    kayip = model.egit(egitim)
+    sonuc = model.degerlendir(kontrol)
+    print(tur, kayip, sonuc)
+    if sonuc.iyilesti:
+        model.kaydet("model.pt")
+
+→ veriler okundu
+→ eğitim ve kontrol ayrıldı
 tur 1  [██░░░░░░░░]
 tur 2  [████░░░░░░]
 tur 3  [██████░░░░]
 tur 4  [████████░░]
 tur 5  [██████████]
 # model kaydedildi: model.pt
-✓ Claude bitti`,
+→ örnek tahminler kontrol ediliyor
+✓ kontrol tamamlandı
+✓ rapor oluşturuldu
+✓ Claude bitti`
 ].map((m) => m.split('\n'));
 
 export function turSuresi(r) {
-  return 4000 + r * 6000;
+  return 14000 + r * 8000;
 }
 
 export function sonrakiSenaryo(onceki, r, n) {
@@ -85,9 +169,9 @@ export function yazilanSatirlar(satirlar, yazilan) {
   return sonuc;
 }
 
-export const EKRAN_SAHNELERI = ['kod', 'robot', 'anthropic', 'openai', 'gemini', 'piksel'];
+export const EKRAN_SAHNELERI = ['kod', 'robot', 'anthropic', 'openai', 'gemini'];
 // Kod ve robot baskın; üç şirket logosu birlikte küçük bir ağırlık taşır.
-const SAHNE_AGIRLIKLARI = { kod: 44, robot: 40, piksel: 10, anthropic: 2, openai: 2, gemini: 2 };
+const SAHNE_AGIRLIKLARI = { kod: 48, robot: 46, anthropic: 2, openai: 2, gemini: 2 };
 export function sonrakiSahne(onceki, r) {
   const secenekler = EKRAN_SAHNELERI.filter(s => s !== onceki);
   const toplam = secenekler.reduce((n, s) => n + SAHNE_AGIRLIKLARI[s], 0);
@@ -112,10 +196,9 @@ export function baslatSahne(kok) {
   }
   function sec(simdi) {
     sahne = sonrakiSahne(sahne, Math.random()); fazBas = simdi;
-    faz = sahne === 'kod' || sahne === 'piksel' ? sahne : 'sanat';
+    faz = sahne === 'kod' ? 'kod' : 'sanat';
     sanatIndeksi = ['robot', 'anthropic', 'openai', 'gemini'].indexOf(sahne);
     if (faz === 'kod') yeniTur();
-    if (faz === 'piksel') yazilan = 0;
     ekran.dataset.sahne = sahne;
   }
   function boyutla() {
@@ -159,7 +242,10 @@ export function baslatSahne(kok) {
     const dt = Math.min(64, simdi - son); son = simdi;
     if (faz === 'kod') {
       yazilan += dt * hiz;
-      if (yazilan >= satirlar.join('\n').length && simdi - fazBas > 5000) sec(simdi);
+      if (yazilan >= satirlar.join('\n').length) {
+        faz = 'piksel'; fazBas = simdi;
+        ekran.dataset.sahne = 'piksel';
+      }
     } else if (simdi - fazBas > (faz === 'piksel' ? PIKSEL_SURE + 300 : 4600)) sec(simdi);
     ekranCiz(simdi); kare = requestAnimationFrame(adim);
   }

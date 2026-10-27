@@ -23,7 +23,7 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 | `js/projeler.js` | Proje verisi ve kart HTML'i |
 | `js/desteler.js` | Deste listesi, arama |
 | `js/ilerleme.js` | "Kaldığın yer" (yalnız ziyaretçinin tarayıcısında) |
-| `js/sahne.js` | Giriş sahnesi: tüplü monitör, rastgele kod/robot/logo/piksel sahneleri |
+| `js/sahne.js` | Giriş sahnesi: tüplü monitör, rastgele kod/robot/logo sahneleri; kod bitiminde piksel kutlaması |
 | `js/piksel.js` | claude-done-pixel karakteri (`claude-done.ps1`'in birebir aktarımı) |
 | `js/fener.js` | Nokta ızgarasında imleci izleyen fener (ızgara `css/tema.css`'te) |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |

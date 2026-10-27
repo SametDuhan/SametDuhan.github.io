@@ -7,15 +7,15 @@ import { pikselKarakter } from '../js/piksel.js';
 test('altı senaryo var, hepsi "✓ Claude bitti" ile biter', () => {
   assert.equal(SENARYOLAR.length, 6);
   for (const s of SENARYOLAR) {
-    assert.ok(Array.isArray(s) && s.length > 3);
+    assert.ok(Array.isArray(s) && s.length >= 20);
     assert.equal(s.at(-1), '✓ Claude bitti');
   }
 });
 
-test('tur süresi 4–10 sn arasında', () => {
-  assert.equal(turSuresi(0), 4000);
-  assert.equal(turSuresi(0.5), 7000);
-  assert.ok(turSuresi(0.999) < 10000);
+test('kod akışı 14–22 saniye sürer', () => {
+  assert.equal(turSuresi(0), 14000);
+  assert.equal(turSuresi(0.5), 18000);
+  assert.ok(turSuresi(0.999) < 22000);
 });
 
 test('aynı senaryo arka arkaya gelmez', () => {
@@ -72,4 +72,9 @@ test('giriş sayfasında monitör, ekran ve dört kare var; kablo yok', () => {
   assert.doesNotMatch(s, /<canvas class="mini"/);
   assert.equal((s.match(/<a class="kare"/g) || []).length, 4);
   assert.doesNotMatch(s, /kare-efekt/);
+});
+
+test('piksel kutlaması bağımsız bir rastgele sahne olarak seçilemez', () => {
+  assert.ok(!EKRAN_SAHNELERI.includes('piksel'));
+  for (let i = 0; i < 1000; i++) assert.notEqual(sonrakiSahne('robot', i / 1000), 'piksel');
 });
