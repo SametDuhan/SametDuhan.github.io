@@ -144,3 +144,5 @@
 @media (prefers-reduced-motion: reduce) {
   .adim-kod .satir { transition: none; }
 }
+
+.ipucu { font-family: var(--mono); font-size: 13px; color: var(--soluk); }

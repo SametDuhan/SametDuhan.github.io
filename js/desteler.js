@@ -12,7 +12,7 @@ export const DESTELER = [
     baslik: 'Claude Code hook\'u ile otomasyon',
     etiket: 'Claude Code',
     aciklama: '"Şu olunca şunu çalıştır": AI işini bitirince ekranda zıplayan bir karakter nasıl yapılır.',
-    slaytSayisi: 1,
+    slaytSayisi: 9,
     ornek: 'claude-done-pixel',
   },
   {
