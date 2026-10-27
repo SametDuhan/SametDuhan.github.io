@@ -221,7 +221,7 @@ export function bagla(kok) {
     bildirim = document.createElement('div');
     bildirim.className = 'devam-bildirim';
     bildirim.setAttribute('role', 'status');
-    bildirim.innerHTML = `<span>Kaldığın yer: <b>${onceki.konum + 1}/${onceki.n}</b></span>
+    bildirim.innerHTML = `<span>Kaldığın yer: <b>${Math.min(onceki.konum, n - 1) + 1}/${n}</b></span>
 <button type="button" class="dugme" data-devam>devam et →</button>
 <button type="button" class="dugme" data-bastan>baştan başla</button>`;
     bildirim.querySelector('[data-devam]').addEventListener('click', () => { git(onceki.konum); ileri.focus(); });

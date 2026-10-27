@@ -40,7 +40,7 @@
       <span class="sayac-yazi" id="proje-sayac" aria-live="polite"></span>
     </div>
     <div class="projeler" id="projeler">
-<article class="kart">
+<article class="kart" data-ad="SkyTrack">
   <img src="../img/skytrack-960.jpg" srcset="../img/skytrack-960.jpg 960w, ../img/skytrack-1440.jpg 1440w, ../img/skytrack.jpg 2880w" sizes="(max-width: 700px) 100vw, 340px" alt="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası" loading="lazy">
   <div class="kart-govde">
     <p class="kart-komut">./skytrack</p>
@@ -51,7 +51,7 @@
     <div class="linkler"><a class="dugme" href="https://sametduhan.github.io/airock/app/">▶ canlı demo</a><a class="dugme" href="https://github.com/SametDuhan/airock">GitHub</a><a class="dugme" href="../slaytlar/skytrack-nasil-kurdum/">nasıl yaptım →</a></div>
   </div>
 </article>
-<article class="kart">
+<article class="kart" data-ad="claude-done-pixel">
   <img class="piksel" src="../img/claude-done.png" alt="Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler" loading="lazy">
   <div class="kart-govde">
     <p class="kart-komut">./claude-done-pixel</p>
@@ -62,7 +62,7 @@
     <div class="linkler"><a class="dugme" href="https://github.com/SametDuhan/claude-done-pixel">GitHub</a><a class="dugme" href="../slaytlar/claude-code-hook/">nasıl yaptım →</a></div>
   </div>
 </article>
-<article class="kart">
+<article class="kart" data-ad="chatgpt-done-pixel">
   <img class="piksel" src="../img/chatgpt-done.png" alt="Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama" loading="lazy">
   <div class="kart-govde">
     <p class="kart-komut">./chatgpt-done-pixel</p>
@@ -94,13 +94,14 @@
         history.replaceState(null, '', u);
       }
       const gorunur = new Set(projeleriSuz(PROJELER, etiket).map((p) => p.ad));
-      kartlar.forEach((k, i) => { k.hidden = !gorunur.has(PROJELER[i].ad); });
+      kartlar.forEach((k) => { k.hidden = !gorunur.has(k.dataset.ad); });
       dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
       sayac.textContent = `${gorunur.size} proje`;
     }
     dugmeler.forEach((b) => b.addEventListener('click', () => suz(b.dataset.etiket)));
     const istenen = new URLSearchParams(location.search).get('etiket');
-    suz(dugmeler.some((b) => b.dataset.etiket === istenen) ? istenen : 'hepsi', false);
+    // Kartta görünen her etiket adresle süzülebilir (ör. ?etiket=Codex); bilinmeyen etiket → hepsi.
+    suz(PROJELER.some((p) => p.etiketler.includes(istenen)) ? istenen : 'hepsi', false);
   </script>
 </body>
 </html>

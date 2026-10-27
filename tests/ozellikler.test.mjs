@@ -21,6 +21,7 @@ test('projeKartiHTML metni kaçışlar, GitHub linkini ve bilgi maddelerini veri
   assert.ok(html.includes('a &amp; b'));
   assert.ok(html.includes('href="https://github.com/SametDuhan/x"'));
   assert.equal((html.match(/<li>/g) || []).length, 2);
+  assert.ok(html.includes('data-ad="&lt;x&gt;"'), 'kart adıyla eşleşmeli');
 });
 
 test('projeKartiHTML verilirse srcset ile ekrana uygun görseli sunar', () => {
@@ -138,4 +139,9 @@ test('JS kapalıyken deste içeriği gizlenmez ya da soluk kalmaz', () => {
     assert.ok(satir.startsWith('.js-hazir '), `JS'e bağlı olmalı: ${satir}`);
   }
   assert.match(oku('js/deste.js'), /classList\.add\('js-hazir'\)/);
+});
+
+test('iletişim kutuları JS kapalıyken doğrudan iletişim bölümüne gider', () => {
+  const s = oku('iletisim/index.html');
+  assert.equal((s.match(/data-konu="[^"]+" href="#dogrudan-baslik"/g) || []).length, 3);
 });
