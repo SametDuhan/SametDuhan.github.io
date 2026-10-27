@@ -328,3 +328,6 @@ footer {
 .onerilen-sira li { counter-increment: sira; color: var(--soluk); }
 .onerilen-sira li::before { content: counter(sira) '. '; color: var(--vurgu); }
 .onerilen-sira li:not(:last-child)::after { content: '  →'; color: var(--soluk); }
+
+.kart:target { border-color: var(--vurgu); box-shadow: 0 0 24px rgba(var(--vurgu-rgb), 0.2); }
+.kart { scroll-margin-top: 80px; }

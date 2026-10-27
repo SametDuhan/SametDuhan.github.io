@@ -64,7 +64,7 @@ export function projeKartiHTML(p, kok = '') {
     `<a class="dugme" href="${kacis(p.github)}">GitHub</a>`,
     p.deste ? `<a class="dugme" href="${kacis(kok + p.deste)}">nasıl yaptım →</a>` : '',
   ].join('');
-  return `<article class="kart" data-ad="${kacis(p.ad)}">
+  return `<article class="kart" id="${kacis(p.ad.toLowerCase())}" data-ad="${kacis(p.ad)}">
   <img${p.piksel ? ' class="piksel"' : ''} src="${kacis(kok + p.gorsel)}"${p.srcset ? ` srcset="${kacis(p.srcset.split(', ').map((g) => kok + g).join(', '))}" sizes="(max-width: 700px) 100vw, 340px"` : ''} alt="${kacis(p.alt)}" loading="lazy">
   <div class="kart-govde">
     <p class="kart-komut">${kacis(p.komut)}</p>

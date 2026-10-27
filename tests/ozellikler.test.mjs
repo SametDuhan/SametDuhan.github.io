@@ -151,3 +151,9 @@ test('alt sayfalar üreticiyle güncel (elle düzenleme yok; değişiklik aracla
   const cikti = execFileSync(process.execPath, [new URL('../araclar/sayfa_yap.mjs', import.meta.url).pathname, '--kontrol'], { encoding: 'utf8' });
   assert.match(cikti, /güncel/);
 });
+
+test('her proje kartının doğrudan linklenebilir bir kimliği var', () => {
+  const s = oku('projeler/index.html');
+  for (const id of ['skytrack', 'claude-done-pixel', 'chatgpt-done-pixel']) assert.ok(s.includes(`id="${id}"`), id);
+  assert.ok(oku('hakkimda/index.html').includes('href="../projeler/#skytrack"'));
+});

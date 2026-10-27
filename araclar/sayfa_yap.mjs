@@ -74,7 +74,7 @@ yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama
     <section class="bolum" aria-labelledby="ne-baslik">
       <h2 id="ne-baslik" class="bolum-baslik">Ne yapıyorum</h2>
       <div class="uclu">
-        <a class="kutu" href="../projeler/">
+        <a class="kutu" href="../projeler/#skytrack">
           <span class="kutu-komut">./uygulamalar</span>
           <strong>Açık veriyle uygulamalar</strong>
           <span>SkyTrack: canlı uçak takibi, türbülans uyarısı, 15 dil. Windows, macOS ve Linux.</span>
