@@ -338,3 +338,15 @@ footer {
   .ust-menu .logo, .menu-linkler a { display: inline-flex; align-items: center; min-height: 44px; }
   .menu-linkler { gap: 4px 14px; }
 }
+
+/* Yazdırma / PDF: işveren Hakkımda'yı kâğıda dökebilsin */
+@media print {
+  .ust-menu, .alt-bilgi, .atla, .filtre, .kisayol-ipucu, .imlec, .kare-efekt, .cagri .linkler { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  main { padding: 0; max-width: none; }
+  .tanitim, .kutu span:last-child, .ilkeler li, .rozetler li, .bilgiler, .kart-govde p { color: #222 !important; }
+  .kutu, .kart, .kanallar li, .rozetler li { background: #fff !important; border-color: #999 !important; break-inside: avoid; }
+  main * { color: #111 !important; background: transparent !important; box-shadow: none !important; }
+  .komut, .komut b, .kimlik, .kutu-komut, .kart-komut, .bolum-baslik::before { color: #555 !important; }
+  .dugme { border-color: #999 !important; }
+}

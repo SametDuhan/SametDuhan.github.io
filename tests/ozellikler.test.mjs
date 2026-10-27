@@ -166,3 +166,12 @@ test('destelerin son slaytı projelere ve iletişime doğrudan gider', () => {
     assert.ok(son.includes('href="../../projeler/"') && son.includes('href="../../iletisim/"'), d.slug);
   }
 });
+
+test('yazdırma görünümü menüleri gizler, beyaz zemine siyah yazı basar', () => {
+  const css = oku('css/site.css');
+  const i = css.indexOf('@media print');
+  assert.ok(i >= 0, '@media print yok');
+  const blok = css.slice(i);
+  assert.match(blok, /\.ust-menu/);
+  assert.match(blok, /background: #fff/);
+});
