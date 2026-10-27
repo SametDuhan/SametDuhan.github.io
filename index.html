@@ -50,12 +50,20 @@
         <span class="kare-alt">mail · GitHub · LinkedIn</span>
       </a>
     </nav>
+    <p class="kisayol-ipucu">ipucu: <kbd>1</kbd>–<kbd>4</kbd> tuşlarıyla da açabilirsin</p>
   </main>
   <footer>samet duhan · 2026</footer>
 
   <script type="module">
     import { baslat } from './js/arkaplan.js';
     for (const tuval of document.querySelectorAll('.kare-efekt')) baslat(tuval, { min: 10, max: 24 });
+    // 1–4: kareleri klavyeyle aç
+    const kareler = [...document.querySelectorAll('.kare')];
+    addEventListener('keydown', (e) => {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.target.closest('input, textarea')) return;
+      const i = '1234'.indexOf(e.key);
+      if (i >= 0) location.href = kareler[i].href;
+    });
   </script>
 </body>
 </html>

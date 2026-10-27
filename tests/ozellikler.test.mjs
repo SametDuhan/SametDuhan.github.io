@@ -95,3 +95,15 @@ test('site haritası her sayfayı listeler, robots.txt haritayı gösterir', () 
   }
   assert.match(oku('robots.txt'), /Sitemap: https:\/\/sametduhan\.github\.io\/sitemap\.xml/);
 });
+
+test('hakkımda sayfası işverenin aradığı linkleri en üstte verir', () => {
+  const s = oku('hakkimda/index.html');
+  const ust = s.slice(0, s.indexOf('id="ne-baslik"'));
+  for (const url of ['https://github.com/SametDuhan"', 'https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/', 'href="../iletisim/"']) {
+    assert.ok(ust.includes(url), `üstte yok: ${url}`);
+  }
+});
+
+test('giriş ekranı 1–4 kısayolunu anlatır', () => {
+  assert.match(oku('index.html'), /class="kisayol-ipucu"/);
+});
