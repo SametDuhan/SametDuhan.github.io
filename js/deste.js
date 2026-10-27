@@ -17,6 +17,7 @@ const TUSLAR = {
   ArrowLeft: 'geri', PageUp: 'geri',
   Home: 'basa', End: 'sona',
   f: 'tamekran', F: 'tamekran',
+  '?': 'yardim', Escape: 'kapat',
 };
 
 export function tusEylemi(key) {
@@ -112,6 +113,38 @@ export function bagla(kok) {
   alt.append(geri, noktalar, ileri);
   kok.append(alt);
 
+  const cubuk = document.createElement('div');
+  cubuk.className = 'deste-ilerleme';
+  cubuk.setAttribute('aria-hidden', 'true');
+  cubuk.append(document.createElement('i'));
+  kok.prepend(cubuk);
+  if (sayac) sayac.setAttribute('aria-live', 'polite');
+
+  const yardim = document.createElement('dialog');
+  yardim.className = 'yardim';
+  yardim.setAttribute('aria-label', 'Klavye kısayolları');
+  yardim.innerHTML = `<h2>Kısayollar</h2>
+<dl>
+  <dt>→ · Boşluk · PageDown</dt><dd>sonraki slayt</dd>
+  <dt>← · PageUp</dt><dd>önceki slayt</dd>
+  <dt>Home · End</dt><dd>ilk · son slayt</dd>
+  <dt>F</dt><dd>tam ekran</dd>
+  <dt>?</dt><dd>bu yardım</dd>
+  <dt>telefonda</dt><dd>sola / sağa kaydır</dd>
+</dl>
+<p>Kaldığın yer bu tarayıcıda hatırlanır.</p>
+<button type="button" class="dugme">kapat (Esc)</button>`;
+  yardim.querySelector('button').addEventListener('click', () => yardim.close());
+  yardim.addEventListener('click', (e) => { if (e.target === yardim) yardim.close(); });
+  kok.append(yardim);
+  const ust = kok.querySelector('.deste-ust');
+  if (ust) {
+    const soru = Object.assign(document.createElement('button'), { type: 'button', className: 'yardim-dugme', textContent: '?' });
+    soru.setAttribute('aria-label', 'Klavye kısayolları');
+    soru.addEventListener('click', () => yardim.showModal());
+    ust.append(soru);
+  }
+
   function git(i) {
     const yeni = sikistir(i, n);
     if (yeni === konum) return;
@@ -126,10 +159,15 @@ export function bagla(kok) {
     const s = slaytlar[konum];
     s.hidden = false;
     s.dispatchEvent(new CustomEvent('goster'));
-    noktaDugmeleri.forEach((b, j) => b.toggleAttribute('aria-current', j === konum));
+    noktaDugmeleri.forEach((b, j) => (j === konum ? b.setAttribute('aria-current', 'step') : b.removeAttribute('aria-current')));
+    cubuk.firstChild.style.width = `${((konum + 1) / n) * 100}%`;
     if (sayac) sayac.textContent = `${konum + 1} / ${n}`;
+    // Devre dışı kalan düğmede odak kaybolmasın: karşıdaki düğmeye geç.
+    const odak = document.activeElement;
     geri.disabled = konum === 0;
     ileri.disabled = konum === n - 1;
+    if (odak === ileri && ileri.disabled) geri.focus();
+    if (odak === geri && geri.disabled) ileri.focus();
     history.replaceState(null, '', `#${konum + 1}`);
     ilerlemeKaydet(depo, slug, konum, n);
   }
@@ -139,6 +177,8 @@ export function bagla(kok) {
     geri: () => git(konum - 1),
     basa: () => git(0),
     sona: () => git(n - 1),
+    yardim: () => (yardim.open ? yardim.close() : yardim.showModal()),
+    kapat: () => yardim.open && yardim.close(),
     tamekran: () => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.())?.catch?.(() => {}),
   };
 
@@ -149,7 +189,7 @@ export function bagla(kok) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.target.closest?.('button, a, input, textarea, select') && (e.key === ' ' || e.key === 'Enter')) return;
     const ad = tusEylemi(e.key);
-    if (!ad) return;
+    if (!ad || (yardim.open && ad !== 'yardim' && ad !== 'kapat')) return;
     e.preventDefault();
     eylem[ad]();
   });

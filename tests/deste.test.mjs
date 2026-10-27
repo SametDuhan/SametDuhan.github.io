@@ -26,6 +26,8 @@ test('tusEylemi klavye tuşlarını eyleme çevirir', () => {
   assert.equal(tusEylemi('End'), 'sona');
   assert.equal(tusEylemi('f'), 'tamekran');
   assert.equal(tusEylemi('F'), 'tamekran');
+  assert.equal(tusEylemi('?'), 'yardim');
+  assert.equal(tusEylemi('Escape'), 'kapat');
   assert.equal(tusEylemi('x'), null);
 });
 

@@ -146,3 +146,19 @@
 }
 
 .ipucu { font-family: var(--mono); font-size: 13px; color: var(--soluk); }
+
+.deste-ilerleme { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: rgba(35, 65, 90, 0.5); z-index: 5; }
+.deste-ilerleme i { display: block; height: 100%; width: 0; background: var(--vurgu); transition: width 0.25s; }
+
+.yardim-dugme { font-family: var(--mono); font-size: 13px; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--kenar); background: transparent; color: var(--soluk); cursor: pointer; }
+.yardim-dugme:hover { color: var(--vurgu); border-color: var(--vurgu); }
+
+.yardim { max-width: min(92vw, 440px); background: var(--panel); color: var(--yazi); border: 1px solid var(--kenar); border-radius: var(--r); padding: 22px 24px; }
+.yardim::backdrop { background: rgba(0, 0, 0, 0.6); }
+.yardim h2 { margin: 0 0 12px; font-size: 20px; }
+.yardim dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0 0 12px; font-size: 15px; }
+.yardim dt { font-family: var(--mono); font-size: 13px; color: var(--vurgu); }
+.yardim dd { margin: 0; color: #c3ccd6; }
+.yardim p { color: var(--soluk); font-size: 14px; }
+
+@media (prefers-reduced-motion: reduce) { .deste-ilerleme i { transition: none; } }
