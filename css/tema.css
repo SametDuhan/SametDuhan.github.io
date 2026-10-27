@@ -1,0 +1,64 @@
+:root {
+  --zemin: #070b12;
+  --panel: #0d1420;
+  --panel-cam: rgba(13, 20, 32, 0.78);
+  --kenar: #23415a;
+  --yazi: #e6edf3;
+  --soluk: #7d8590;
+  --vurgu: #5ccfff;
+  --vurgu-rgb: 92, 207, 255;
+  --iyi: #7ee787;
+  --kotu: #ff7b72;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --r: 10px;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--zemin); -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--zemin);
+  color: var(--yazi);
+  font-family: var(--sans);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+#arkaplan {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+a { color: var(--vurgu); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
+
+code, pre, .mono { font-family: var(--mono); }
+
+.komut { font-family: var(--mono); color: var(--soluk); font-size: 14px; }
+.komut b { color: var(--vurgu); font-weight: 400; }
+
+.imlec {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: 4px;
+  vertical-align: -0.15em;
+  background: var(--vurgu);
+  animation: imlec 1s steps(1) infinite;
+}
+
+@keyframes imlec { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .imlec { animation: none; }
+  html { scroll-behavior: auto; }
+}
