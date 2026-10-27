@@ -2,6 +2,7 @@
 // karelerin altındaki şeride gider, mini karakterler bu yoldan karelere yürür.
 // Saf fonksiyonlar Node'da sınanır; baslatSahne() tarayıcıya bağlar.
 
+import { ekranSanati, EKRAN_KARTLARI } from './ekran-sanat.js';
 import { kareDurumu, pikselKarakter, SURE as PIKSEL_SURE } from './piksel.js';
 
 export const SENARYOLAR = [
@@ -116,6 +117,8 @@ const VURGU = '92,207,255';
 const NS = 'http://www.w3.org/2000/svg';
 
 export function baslatSahne(kok) {
+  const sanatCiz = ekranSanati();
+  let sanatIndeksi = 0;
   const az = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ekran = kok.querySelector('#ekran'), ec = ekran.getContext('2d');
   const mini = kok.querySelector('.mini'), mc = mini.getContext('2d');
@@ -126,7 +129,7 @@ export function baslatSahne(kok) {
   const yan = (e, ms) => { e.classList.add('yan'); setTimeout(() => e.classList.remove('yan'), ms); };
 
   let EW = 0, EH = 0, SW = 0, SH = 0, ROTA = [], L_ROTA = [], SOKETCIK = [], kabloAcik = false;
-  let senaryo = 0, satirlar = SENARYOLAR[0], hiz = 0, yazilan = 0, faz = 'kod', fazBas = 0, miniCikti = false;
+  let senaryo = 0, satirlar = SENARYOLAR[0], hiz = 0, yazilan = 0, faz = 'sanat', fazBas = performance.now(), miniCikti = false;
   let minis = [], akim = [], sonrakiAkim = 0, son = performance.now(), kare = 0;
 
   function yeniTur(r = Math.random()) {
@@ -146,6 +149,7 @@ export function baslatSahne(kok) {
     mini.width = SW * o; mini.height = SH * o; mc.setTransform(o, 0, 0, o, 0, 0);
     kabloAcik = getComputedStyle(svg).display !== 'none';
     if (kabloAcik) kabloKur(s);
+    if (az) ekranCiz(0);
   }
 
   function kabloKur(s) {
@@ -173,6 +177,7 @@ export function baslatSahne(kok) {
   function ekranCiz(simdi) {
     ec.fillStyle = '#04070b';
     ec.fillRect(0, 0, EW, EH);
+    if (faz === 'sanat') { sanatCiz(ec, EW, EH, sanatIndeksi, simdi - fazBas, az); return; }
     const fs = Math.max(8, EW / 36), sat = fs * 1.45;
     const u = Math.max(2, Math.floor((EH * 0.52) / 31));
     const sigan = Math.max(1, Math.floor((EH - 31 * u - fs * 0.6) / sat));
@@ -239,13 +244,15 @@ export function baslatSahne(kok) {
   function adim(simdi) {
     const dt = Math.min(64, simdi - son);
     son = simdi;
-    if (faz === 'kod') {
+    if (faz === 'sanat') {
+      if (simdi - fazBas > 4600) { faz = 'kod'; yeniTur(); }
+    } else if (faz === 'kod') {
       yazilan += dt * hiz;
       if (yazilan >= satirlar.join('\n').length) { faz = 'piksel'; fazBas = simdi; }
     } else {
       const t = simdi - fazBas;
       if (!miniCikti && t > PIKSEL_SURE - 900) { miniCikti = true; miniGonder(); }
-      if (t > PIKSEL_SURE + 600) { faz = 'kod'; miniCikti = false; yeniTur(); }
+      if (t > PIKSEL_SURE + 600) { faz = 'sanat'; fazBas = simdi; sanatIndeksi = (sanatIndeksi + 1) % EKRAN_KARTLARI.length; miniCikti = false; }
     }
     ekranCiz(simdi);
     if (kabloAcik) { miniAdim(dt, simdi); akimAdim(dt, simdi); }

@@ -377,3 +377,67 @@ footer {
   .dugme { border-color: #999 !important; }
 }
 .sahne h1 { font-size: clamp(40px, 6vw, 80px); }
+
+/* Ana sahne: ekran kenarına yakın monitör ve daha geniş bölüm kartları. */
+@media (min-width: 900px) {
+  .sahne {
+    max-width: none;
+    justify-content: start;
+    grid-template-columns: minmax(270px, 32vw) minmax(0, 840px);
+    gap: clamp(36px, 6vw, 112px);
+    padding-left: clamp(18px, 2vw, 36px);
+    padding-right: clamp(24px, 4vw, 72px);
+  }
+  .sahne .crt { width: min(100%, 440px); margin-left: 0; margin-right: 0; }
+}
+.sahne .kareler { max-width: none; gap: clamp(14px, 1.8vw, 28px); }
+.sahne .kare { min-height: clamp(160px, 14vw, 206px); padding: clamp(18px, 2.2vw, 30px); background: #0b1420; }
+.sahne .kare > span { z-index: 2; }
+.sahne .kare-alt { color: #a7b5c5; }
+.sahne .kare::before, .sahne .kare::after { content: ''; position: absolute; pointer-events: none; inset: 0; }
+.sahne .kare::before {
+  z-index: 0;
+  opacity: .28;
+  background-image: linear-gradient(90deg, transparent 96%, #5ccfff 97%, transparent 99%), linear-gradient(0deg, transparent 96%, #5ccfff 97%, transparent 99%);
+  background-size: 36px 36px;
+  transform-origin: top right;
+  animation: devre-akisi 16s linear infinite;
+}
+.sahne .kare::after {
+  z-index: 1;
+  background: linear-gradient(105deg, #0b1420e8 0%, #0b1420d9 40%, #0b14204d 100%), linear-gradient(0deg, #0b1420e6, transparent 90%);
+}
+.sahne .kare:nth-child(1)::before {
+  background-image: radial-gradient(circle, #7ee787 0 2px, transparent 3px), linear-gradient(45deg, transparent 48%, #5ccfff70 49% 50%, transparent 51%);
+  background-size: 42px 42px, 84px 84px;
+  animation-duration: 22s;
+}
+.sahne .kare:nth-child(2)::before {
+  background-image: linear-gradient(90deg, transparent 46%, #5ccfff 48% 50%, transparent 52%), linear-gradient(0deg, transparent 46%, #5ccfff 48% 50%, transparent 52%);
+  background-size: 54px 54px;
+  animation-direction: reverse;
+}
+.sahne .kare:nth-child(3)::before {
+  background-image: repeating-linear-gradient(0deg, transparent 0 18px, #a5a2ff 19px 20px, transparent 21px 35px), repeating-linear-gradient(90deg, transparent 0 48px, #5ccfff70 49px 50px, transparent 51px 76px);
+  background-size: 100% 70px, 152px 100%;
+  transform: skewY(-12deg) scale(1.2);
+  animation-name: veri-akisi;
+}
+.sahne .kare:nth-child(4)::before {
+  background-image: repeating-radial-gradient(circle at 90% 10%, transparent 0 23px, #5ccfff 24px 25px, transparent 26px 46px);
+  background-size: 180% 180%;
+  animation-name: sinyal-akisi;
+  animation-duration: 18s;
+}
+@keyframes devre-akisi { to { background-position: 84px 84px, 84px 84px; } }
+@keyframes veri-akisi { to { background-position: 0 70px, 152px 0; } }
+@keyframes sinyal-akisi { 50% { background-position: 28px -18px; opacity: .42; } }
+@media (max-width: 520px) {
+  .sahne .kare { min-height: 160px; padding: 17px; }
+  .sahne .kare-ad { font-size: clamp(23px, 6vw, 30px); }
+  .sahne .kare-alt { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sahne .kare::before { animation: none; }
+}
+@media print { .sahne .kare::before, .sahne .kare::after { display: none; } }
