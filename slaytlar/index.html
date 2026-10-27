@@ -4,10 +4,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Slaytlar · Samet Duhan</title>
+  <meta name="description" content="AI'ı sıfırdan öğreten, Samet Duhan'ın projelerinden örnek veren interaktif sunumlar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
   <link rel="stylesheet" href="../css/tema.css">
+  <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
   <canvas id="arkaplan" aria-hidden="true"></canvas>
-  <main><h1>Slaytlar</h1><p>Hazırlanıyor.</p></main>
+  <main>
+    <a class="geri" href="../">← ~/samet</a>
+    <h1>Slaytlar</h1>
+    <p class="tanitim">Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir.</p>
+    <p class="ipucu">→ ve ← ile gez · F tam ekran · telefonda kaydır</p>
+    <div class="desteler" id="desteler">
+      <noscript>
+        <a class="deste-karti" href="./ai-ajani-nedir/"><h2>AI ajanı nedir?</h2></a>
+        <a class="deste-karti" href="./claude-code-hook/"><h2>Claude Code hook'u ile otomasyon</h2></a>
+        <a class="deste-karti" href="./skytrack-nasil-kurdum/"><h2>SkyTrack'i AI ile nasıl kurdum</h2></a>
+      </noscript>
+    </div>
+  </main>
+
+  <script type="module">
+    import { baslat } from '../js/arkaplan.js';
+    import { DESTELER, kartHTML } from '../js/desteler.js';
+    baslat(document.getElementById('arkaplan'));
+    document.getElementById('desteler').innerHTML = DESTELER.map(kartHTML).join('');
+  </script>
 </body>
 </html>
