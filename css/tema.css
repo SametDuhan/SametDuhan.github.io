@@ -17,12 +17,32 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { background: var(--zemin); -webkit-text-size-adjust: 100%; }
+/* Arka plan: soluk nokta ızgarası; fener (js/fener.js) imlecin çevresini aydınlatır */
+html {
+  --fx: -999px;
+  --fy: -999px;
+  background-color: var(--zemin);
+  background-image: radial-gradient(circle, rgba(var(--vurgu-rgb), 0.09) 0.8px, transparent 1.2px);
+  background-size: 22px 22px;
+  background-attachment: fixed;
+  -webkit-text-size-adjust: 100%;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(var(--vurgu-rgb), 0.65) 0.8px, transparent 1.3px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(150px circle at var(--fx) var(--fy), #000, transparent);
+  mask-image: radial-gradient(150px circle at var(--fx) var(--fy), #000, transparent);
+}
 
 body {
   margin: 0;
   min-height: 100svh;
-  background: var(--zemin);
+  background: transparent;
   color: var(--yazi);
   font-family: var(--sans);
   line-height: 1.55;

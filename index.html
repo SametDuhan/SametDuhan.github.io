@@ -20,49 +20,64 @@
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <main class="giris">
-    <p class="komut">~/samet $ <b>whoami</b></p>
-    <h1>Samet Duhan</h1>
-    <p class="kimlik">&gt; AI ile sistem kuran geliştirici<span class="imlec" aria-hidden="true"></span></p>
+  <main class="giris sahne" id="sahne">
+    <svg class="kablo" aria-hidden="true">
+      <defs><filter id="parilti" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g id="hatlar"></g><path class="govde" id="kablo-yol"/><rect class="bar" id="bar" height="6" rx="3"/><g id="soketler"></g><rect class="soket" id="soket" width="7" height="14" rx="2"/>
+      <g id="rotalar"></g><g id="akimlar"></g>
+    </svg>
+    <canvas class="mini" aria-hidden="true"></canvas>
 
-    <nav class="kareler" aria-label="Bölümler">
-      <a class="kare" href="hakkimda/">
-        <canvas class="kare-efekt" aria-hidden="true"></canvas>
-        <span class="kare-komut">./hakkimda</span>
-        <span class="kare-ad">Hakkımda</span>
-        <span class="kare-alt">ben kimim, ne yapıyorum</span>
-      </a>
-      <a class="kare" href="projeler/">
-        <canvas class="kare-efekt" aria-hidden="true"></canvas>
-        <span class="kare-komut">./projeler</span>
-        <span class="kare-ad">Projeler</span>
-        <span class="kare-alt">3 proje · SkyTrack, done-pixel</span>
-      </a>
-      <a class="kare" href="slaytlar/">
-        <canvas class="kare-efekt" aria-hidden="true"></canvas>
-        <span class="kare-komut">./slaytlar</span>
-        <span class="kare-ad">Slaytlar</span>
-        <span class="kare-alt">AI'ı sıfırdan öğreten 3 sunum</span>
-      </a>
-      <a class="kare" href="iletisim/">
-        <canvas class="kare-efekt" aria-hidden="true"></canvas>
-        <span class="kare-komut">./iletisim</span>
-        <span class="kare-ad">İletişim</span>
-        <span class="kare-alt">mail · GitHub · LinkedIn</span>
-      </a>
-    </nav>
-    <p class="yonlendirme">
-      <span>işverensen → <a href="projeler/">projeler</a></span>
-      <span>AI öğrenmek istiyorsan → <a href="slaytlar/ai-ajani-nedir/">ilk sunum</a></span>
-      <span>birlikte çalışmak için → <a href="iletisim/">iletişim</a></span>
-    </p>
-    <p class="kisayol-ipucu">ipucu: <kbd>1</kbd>–<kbd>4</kbd> tuşlarıyla da açabilirsin</p>
+    <div class="crt" aria-hidden="true">
+      <div class="kasa">
+        <div class="cerceve"><div class="ekran"><canvas id="ekran"></canvas></div></div>
+        <span class="marka">SD-86</span><span class="led"></span>
+      </div>
+      <div class="ayak"></div><div class="taban"></div>
+    </div>
+
+    <div class="sag">
+      <p class="komut">~/samet $ <b>whoami</b></p>
+      <h1>Samet Duhan</h1>
+      <p class="kimlik">&gt; AI ile sistem kuran geliştirici<span class="imlec" aria-hidden="true"></span></p>
+
+      <nav class="kareler" aria-label="Bölümler">
+        <a class="kare" href="hakkimda/">
+          <span class="kare-komut">./hakkimda</span>
+          <span class="kare-ad">Hakkımda</span>
+          <span class="kare-alt">ben kimim, ne yapıyorum</span>
+        </a>
+        <a class="kare" href="projeler/">
+          <span class="kare-komut">./projeler</span>
+          <span class="kare-ad">Projeler</span>
+          <span class="kare-alt">3 proje · SkyTrack, done-pixel</span>
+        </a>
+        <a class="kare" href="slaytlar/">
+          <span class="kare-komut">./slaytlar</span>
+          <span class="kare-ad">Slaytlar</span>
+          <span class="kare-alt">AI'ı sıfırdan öğreten 3 sunum</span>
+        </a>
+        <a class="kare" href="iletisim/">
+          <span class="kare-komut">./iletisim</span>
+          <span class="kare-ad">İletişim</span>
+          <span class="kare-alt">mail · GitHub · LinkedIn</span>
+        </a>
+      </nav>
+      <p class="yonlendirme">
+        <span>işverensen → <a href="projeler/">projeler</a></span>
+        <span>AI öğrenmek istiyorsan → <a href="slaytlar/ai-ajani-nedir/">ilk sunum</a></span>
+        <span>birlikte çalışmak için → <a href="iletisim/">iletişim</a></span>
+      </p>
+      <p class="kisayol-ipucu">ipucu: <kbd>1</kbd>–<kbd>4</kbd> tuşlarıyla da açabilirsin</p>
+    </div>
   </main>
   <footer>samet duhan · 2026</footer>
 
   <script type="module">
-    import { baslat } from './js/arkaplan.js';
-    for (const tuval of document.querySelectorAll('.kare-efekt')) baslat(tuval, { min: 10, max: 24 });
+    import { baslatSahne } from './js/sahne.js';
+    import { baslatFener } from './js/fener.js';
+    baslatSahne(document.getElementById('sahne'));
+    baslatFener({ gezin: true });
     // 1–4: kareleri klavyeyle aç
     const kareler = [...document.querySelectorAll('.kare')];
     addEventListener('keydown', (e) => {

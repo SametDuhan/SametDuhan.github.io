@@ -11,7 +11,6 @@ test('giriş ekranı dört kareyle dört sayfaya gider ve kimlik cümlesini taş
     assert.match(giris, new RegExp(`<a class="kare"[^>]*href="${href}"`), `kare yok: ${href}`);
   }
   assert.equal((giris.match(/<a class="kare"/g) || []).length, 4);
-  assert.equal((giris.match(/<canvas class="kare-efekt"/g) || []).length, 4, 'her karenin arkasında efekt olmalı');
   assert.ok(giris.includes('AI ile sistem kuran geliştirici'));
 });
 

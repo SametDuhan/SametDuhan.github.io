@@ -33,7 +33,7 @@ export function kareDurumu(t, W, u) {
   return { x, yOff, look, run, tilt, armUp, air, legPhase };
 }
 
-function karakter(ctx, d, ground, u, t) {
+export function pikselKarakter(ctx, d, ground, u, t) {
   const R = (cx, cy, x, y, w, h, renk) => { ctx.fillStyle = renk; ctx.fillRect(cx + x * u, cy + y * u, w * u, h * u); };
   const cx = Math.round(d.x), cy = ground - 11 * u + Math.round(d.yOff);
   const sw = d.air ? 8 : 10;
@@ -70,7 +70,7 @@ export function ciz(canvas, tMs) {
   ctx.fillStyle = '#1e1e1e';
   ctx.fillRect(0, 0, W, H);
   const t = tMs / 1000;
-  karakter(ctx, kareDurumu(t, W, u), ground, u, t);
+  pikselKarakter(ctx, kareDurumu(t, W, u), ground, u, t);
 }
 
 let aktif = 0;

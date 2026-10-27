@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { kareDurumu, SURE } from '../slaytlar/claude-code-hook/piksel.js';
+import { kareDurumu, SURE } from '../js/piksel.js';
 
 // claude-done.ps1 ile birebir: T_RUN 1,5 · 2×T_JUMP 0,55 · 2×T_WAVE 0,7 · T_OUT 1,6 (+0,2) saniye.
 // Sahne genişliği W=100, piksel birimi u=1: duruş noktası 0,46·W, başlangıç W+2u.

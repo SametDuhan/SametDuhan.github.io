@@ -48,7 +48,11 @@ export const son = (onek = '../') => `
   <footer class="alt-bilgi">
     <span>samet duhan · 2026</span>
     <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="${onek}iletisim/">iletişim</a></span>
-  </footer>`;
+  </footer>
+  <script type="module">
+    import { baslatFener } from '${onek}js/fener.js';
+    baslatFener();
+  </script>`;
 
 const yaz = (yol, html) => {
   if (!KONTROL) return writeFileSync(KOK + yol, html);

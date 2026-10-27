@@ -17,13 +17,15 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 
 | Yol | Ne |
 |---|---|
-| `index.html` | Giriş: dört kare (hakkımda, projeler, slaytlar, iletişim) |
+| `index.html` | Giriş: tüplü monitör sahnesi ve dört kare (hakkımda, projeler, slaytlar, iletişim) |
 | `hakkimda/`, `projeler/`, `slaytlar/`, `iletisim/`, `404.html` | `araclar/sayfa_yap.mjs` üretir, **elle düzenleme** |
 | `slaytlar/<slug>/index.html` | Desteler; `js/deste.js` gezdirir |
 | `js/projeler.js` | Proje verisi ve kart HTML'i |
 | `js/desteler.js` | Deste listesi, arama |
 | `js/ilerleme.js` | "Kaldığın yer" (yalnız ziyaretçinin tarayıcısında) |
-| `js/arkaplan.js` | Karelerdeki ızgara + ajan ağı efekti |
+| `js/sahne.js` | Giriş sahnesi: tüplü monitör, akan senaryolar, kablo, mini karakterler |
+| `js/piksel.js` | claude-done-pixel karakteri (`claude-done.ps1`'in birebir aktarımı) |
+| `js/fener.js` | Nokta ızgarasında imleci izleyen fener (ızgara `css/tema.css`'te) |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |
 
 ## Yeni proje eklemek
