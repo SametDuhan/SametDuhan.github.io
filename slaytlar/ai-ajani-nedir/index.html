@@ -3,11 +3,163 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hazırlanıyor · Samet Duhan</title>
+  <title>AI ajanı nedir? · Samet Duhan</title>
+  <meta name="description" content="Sohbet botuyla iş bitiren AI ajanı arasındaki fark, sıfırdan ve örneklerle.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
   <link rel="stylesheet" href="../../css/tema.css">
+  <link rel="stylesheet" href="../../css/deste.css">
+  <style>
+    .dongu { width: 100%; max-width: 520px; height: auto; display: block; margin: 0 auto; }
+    .dongu .dugum rect { fill: var(--panel); stroke: var(--kenar); stroke-width: 1.5; transition: stroke 0.2s, fill 0.2s; }
+    .dongu .dugum text { fill: var(--yazi); font: 14px var(--mono); text-anchor: middle; dominant-baseline: middle; }
+    .dongu .dugum.aktif rect { stroke: var(--vurgu); fill: rgba(92, 207, 255, 0.15); }
+    .dongu path { stroke: var(--soluk); stroke-width: 1.5; fill: none; marker-end: url(#ok); }
+    .dongu-log { font-family: var(--mono); font-size: 14px; color: var(--vurgu); min-height: 3.2em; margin: 8px 0 0; }
+    @media (prefers-reduced-motion: reduce) { .dongu .dugum rect { transition: none; } }
+  </style>
 </head>
 <body>
   <canvas id="arkaplan" aria-hidden="true"></canvas>
-  <section class="slayt"><h1>Hazırlanıyor</h1><p><a href="../">← slaytlar</a></p></section>
+  <div class="deste" id="deste">
+    <header class="deste-ust">
+      <a class="geri" href="../">← slaytlar</a>
+      <span class="deste-adi">AI ajanı nedir?</span>
+      <span class="sayac"></span>
+    </header>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Başlangıç · ~8 dakika</p>
+      <h1>AI ajanı nedir?</h1>
+      <p>Bu sunumun sonunda bir <strong>sohbet botu</strong> ile <strong>ajan</strong> arasındaki farkı bilecek, ajanın nasıl "düşünüp iş yaptığını" görecek ve kendin bir tane deneyeceksin.</p>
+      <p class="ipucu">→ tuşu, alttaki düğmeler ya da telefonda sola kaydırma ile ilerle.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">1 · Önce bildiğin şey</p>
+      <h2>Sohbet botu: soruyorsun, cevap veriyor</h2>
+      <p>ChatGPT ya da Claude ile sohbet ettiğinde yapay zekâ bir <strong>metin</strong> üretir. Ne kadar akıllı olursa olsun, işi yapan yine sensin: kodu kopyalarsın, dosyayı açarsın, sonucu kontrol edersin.</p>
+      <div class="terim"><p><strong>Model (LLM):</strong> Çok büyük miktarda yazıyla eğitilmiş, bir sonraki kelimeyi tahmin ederek cevap üreten program. Claude ve GPT birer modeldir.</p></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">2 · Fark</p>
+      <h2>Ajan: işi kendisi yapar</h2>
+      <div class="iki-sutun">
+        <div class="panel">
+          <h3>sohbet botu</h3>
+          <p>"Şu dosyadaki hatayı nasıl düzeltirim?" → Sana bir açıklama ve örnek kod yazar. Gerisi sende.</p>
+        </div>
+        <div class="panel">
+          <h3>ajan</h3>
+          <p>"Şu dosyadaki hatayı düzelt." → Dosyayı kendisi açar, hatayı bulur, düzeltir, testi çalıştırır ve sana ne yaptığını söyler.</p>
+        </div>
+      </div>
+      <p>Farkı yaratan şey <strong>araçlar</strong>: ajanın dosya okumasına, komut çalıştırmasına, internette aramasına izin veren küçük yetenekler.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">3 · Ajanın döngüsü</p>
+      <h2>Bak → karar ver → yap → kontrol et</h2>
+      <p>Bir ajan, iş bitene kadar bu dört adımı tekrar tekrar döner. Düğmeye basıp bir turu adım adım izle:</p>
+      <div class="demo" style="padding:14px">
+        <svg class="dongu" viewBox="0 0 520 260" role="img" aria-label="Ajan döngüsü: bak, karar ver, yap, kontrol et">
+          <defs><marker id="ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7d8590" stroke="none"/></marker></defs>
+          <g class="dugum" data-adim="0"><rect x="190" y="10" width="140" height="44" rx="8"/><text x="260" y="32">1. bak</text></g>
+          <g class="dugum" data-adim="1"><rect x="370" y="108" width="140" height="44" rx="8"/><text x="440" y="130">2. karar ver</text></g>
+          <g class="dugum" data-adim="2"><rect x="190" y="206" width="140" height="44" rx="8"/><text x="260" y="228">3. yap</text></g>
+          <g class="dugum" data-adim="3"><rect x="10" y="108" width="140" height="44" rx="8"/><text x="80" y="130">4. kontrol et</text></g>
+          <path d="M330 40 Q 430 50 440 104"/>
+          <path d="M440 154 Q 430 210 334 226"/>
+          <path d="M190 226 Q 90 210 80 156"/>
+          <path d="M80 104 Q 90 50 186 40"/>
+        </svg>
+        <p class="dongu-log" id="dongu-log" aria-live="polite">Görev: "Sayfadaki kırık linki düzelt."</p>
+        <button type="button" class="dugme" id="dongu-dugme" style="cursor:pointer">▶ bir adım</button>
+      </div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">4 · Kontrol</p>
+      <h2>Anladın mı?</h2>
+      <div class="soru" data-dogru="b">
+        <p>Bir ajanı sohbet botundan ayıran en önemli şey hangisi?</p>
+        <div class="secenekler">
+          <button type="button" data-secenek="a">Daha uzun cevaplar yazması</button>
+          <button type="button" data-secenek="b">Araç kullanarak işi kendisinin yapıp sonucu kontrol etmesi</button>
+          <button type="button" data-secenek="c">İnternete bağlı olması</button>
+        </div>
+        <p class="sonuc" aria-live="polite"></p>
+        <p class="aciklama">Uzunluk ya da internet farkı yaratmaz. Ajanı ajan yapan şey, <strong>araç kullanması</strong> ve döngüyü iş bitene kadar sürdürmesi.</p>
+      </div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">5 · Gerçek bir örnek</p>
+      <h2>Claude Code: terminalde çalışan bir ajan</h2>
+      <p><strong>Claude Code</strong>, bilgisayarındaki proje klasöründe dosya okuyup yazabilen, komut çalıştırabilen bir ajandır. Ona "şunu yap" dersin, döngüyü kendisi döner.</p>
+      <p>Bir sorun var: iş uzun sürünce "bitti mi?" diye sürekli terminale bakıyorsun. Ben bunun için <strong>claude-done-pixel</strong>'i yaptım. Claude işini bitirince ekranın köşesine bir piksel karakter koşup zıplıyor ve yeşil bayrak sallıyor.</p>
+      <img src="../../img/claude-done.png" alt="Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler" width="1680" height="456" style="image-rendering:pixelated;background:#1e1e1e">
+      <p>Nasıl çalıştığı bir sonraki sunumda: <a href="../claude-code-hook/">Claude Code hook'u ile otomasyon →</a></p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">6 · Önemli kural</p>
+      <h2>Son karar insanda</h2>
+      <p>Ajan hızlıdır ama yanılabilir. İyi kurulmuş bir sistemde:</p>
+      <ul>
+        <li>Ajan ne yaptığını <strong>söyler</strong>; sen okursun.</li>
+        <li>Geri alınamayan işlerden (bir şey silmek, yayınlamak, para harcamak) önce <strong>izin ister</strong>.</li>
+        <li>Yaptığı işin doğru olduğunu <strong>test</strong> ile gösterir, "oldu" demekle yetinmez.</li>
+      </ul>
+      <p>AI'ı iyi kullanmak, ona her şeyi bırakmak değil; ona neyi bırakacağını bilmektir.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">7 · Sen de dene</p>
+      <h2>İlk görevin</h2>
+      <p>Ücretsiz bir AI sohbetini aç (Claude, ChatGPT…) ve aşağıdakini yapıştır. Sohbet botu olsa da ona bir ajan gibi <strong>adım adım düşünmeyi</strong> öğretmiş olacaksın:</p>
+      <div class="dene">
+        <code>Bir ajan gibi çalış. Görev: haftalık yemek listemi ve market alışveriş listemi çıkar. Önce bana bilmen gereken 3 soruyu sor (bak). Cevaplarıma göre bir plan yap ve planı göster (karar ver). Listeyi yaz (yap). Son olarak listeyi kendi planınla karşılaştırıp eksik bir şey var mı kontrol et (kontrol et).</code>
+        <button type="button">kopyala</button>
+      </div>
+      <p>Fark ettin mi? Döngünün dört adımını sen tarif ettin. Gerçek ajanlar bunu araçlarla, kendi başlarına yapar.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Bitti</p>
+      <h2>Sırada ne var?</h2>
+      <ul>
+        <li><a href="../claude-code-hook/">Claude Code hook'u ile otomasyon</a>: bir ajanın işi bitince otomatik bir şey çalıştırmak.</li>
+        <li><a href="../skytrack-nasil-kurdum/">SkyTrack'i AI ile nasıl kurdum</a>: gerçek bir uygulamanın AI ile yazılışı.</li>
+        <li><a href="../../">Ana sayfa</a>: projeler ve iletişim.</li>
+      </ul>
+    </section>
+  </div>
+
+  <script type="module">
+    import { baslat } from '../../js/arkaplan.js';
+    import { bagla } from '../../js/deste.js';
+    baslat(document.getElementById('arkaplan'));
+    bagla(document.getElementById('deste'));
+
+    const ADIMLAR = [
+      '1. bak → Sayfayı okur, 4 link bulur. Birinin adresi /projeler yerine /projelr yazılmış.',
+      '2. karar ver → "Doğru yol /projeler olmalı; çünkü klasörün adı bu."',
+      '3. yap → Dosyada /projelr yazısını /projeler ile değiştirir.',
+      '4. kontrol et → Linki yeniden dener: çalışıyor. Görev bitti, sana ne yaptığını raporlar.',
+    ];
+    const dugumler = [...document.querySelectorAll('.dongu .dugum')];
+    const log = document.getElementById('dongu-log');
+    const dugme = document.getElementById('dongu-dugme');
+    let i = -1;
+    dugme.addEventListener('click', () => {
+      i = (i + 1) % (ADIMLAR.length + 1);
+      dugumler.forEach((d, j) => d.classList.toggle('aktif', j === i));
+      log.textContent = i < ADIMLAR.length ? ADIMLAR[i] : 'Görev: "Sayfadaki kırık linki düzelt."';
+      dugme.textContent = i < ADIMLAR.length - 1 ? '▶ bir adım' : (i === ADIMLAR.length - 1 ? '↺ baştan' : '▶ bir adım');
+    });
+  </script>
 </body>
 </html>

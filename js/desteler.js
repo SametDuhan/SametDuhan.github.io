@@ -5,7 +5,7 @@ export const DESTELER = [
     baslik: 'AI ajanı nedir?',
     etiket: 'Başlangıç',
     aciklama: 'Sohbet botuyla iş bitiren ajan arasındaki fark. Hiç bilmeyen için, sıfırdan.',
-    slaytSayisi: 1,
+    slaytSayisi: 9,
   },
   {
     slug: 'claude-code-hook',
