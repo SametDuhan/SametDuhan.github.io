@@ -22,7 +22,7 @@ html { background: var(--zemin); -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   min-height: 100svh;
-  background: var(--zemin);
+  background: transparent;
   color: var(--yazi);
   font-family: var(--sans);
   line-height: 1.55;
@@ -55,6 +55,34 @@ code, pre, .mono { font-family: var(--mono); }
   background: var(--vurgu);
   animation: imlec 1s steps(1) infinite;
 }
+
+.dugme {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--yazi);
+  text-decoration: none;
+  border: 1px solid var(--kenar);
+  border-radius: 6px;
+  padding: 7px 11px;
+  background: rgba(7, 11, 18, 0.6);
+}
+
+.dugme:hover { border-color: var(--vurgu); color: var(--vurgu); }
+
+.dugme.ana {
+  font-size: clamp(16px, 3vw, 20px);
+  padding: 16px 22px;
+  border-color: var(--vurgu);
+  color: var(--vurgu);
+  background: rgba(var(--vurgu-rgb), 0.08);
+  box-shadow: 0 0 24px rgba(var(--vurgu-rgb), 0.15);
+}
+
+.dugme.ana:hover { background: rgba(var(--vurgu-rgb), 0.16); }
 
 @keyframes imlec { 50% { opacity: 0; } }
 

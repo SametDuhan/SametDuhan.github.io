@@ -63,7 +63,7 @@ export function ciz(canvas, t) {
   const d = kareDurumu(t);
   ctx.fillStyle = KOYU;
   ctx.fillRect(0, 0, W, H);
-  const zemin = H - 3 * s;
+  const zemin = H - 6 * s;
   ctx.fillStyle = '#2a2a2a';
   ctx.fillRect(W / 2 - 6 * s, zemin + 8 * s - s, 12 * s, s / 2);
   const ox = W / 2 - 5 * s + d.x * (W / 2 + 8 * s);

@@ -45,46 +45,20 @@ h1 {
 .kart img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   background: #111;
   border-bottom: 1px solid var(--kenar);
 }
 
-.kart img.piksel { object-fit: contain; image-rendering: pixelated; padding: 10px; }
+.kart img.piksel { object-fit: contain; image-rendering: pixelated; padding: 10px; background: #1a1d21; }
 
 .kart-govde { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .kart-govde h3 { margin: 0; font-family: var(--mono); font-size: 16px; color: var(--vurgu); font-weight: 400; }
 .kart-govde p { margin: 0; color: #c3ccd6; font-size: 15px; flex: 1; }
 
 .linkler { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-
-.dugme {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--yazi);
-  text-decoration: none;
-  border: 1px solid var(--kenar);
-  border-radius: 6px;
-  padding: 7px 11px;
-  background: rgba(7, 11, 18, 0.6);
-}
-
-.dugme:hover { border-color: var(--vurgu); color: var(--vurgu); }
-
-.dugme.ana {
-  font-size: clamp(16px, 3vw, 20px);
-  padding: 16px 22px;
-  border-color: var(--vurgu);
-  color: var(--vurgu);
-  background: rgba(var(--vurgu-rgb), 0.08);
-  box-shadow: 0 0 24px rgba(var(--vurgu-rgb), 0.15);
-}
-
-.dugme.ana:hover { background: rgba(var(--vurgu-rgb), 0.16); }
 
 .slayt-cagri p { color: #c3ccd6; max-width: 560px; margin: 0 0 18px; }
 
