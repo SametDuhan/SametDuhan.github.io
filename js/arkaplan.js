@@ -1,11 +1,11 @@
-// Arka plan: altta perspektifli ışıklı ızgara, üstünde fareyi izleyen ajan ağı.
-// Saf fonksiyonlar DOM'a dokunmaz; Node'da sınanır. baslat() tarayıcıya bağlar.
+// Efekt: altta perspektifli ışıklı ızgara, üstünde fareyi izleyen ajan ağı.
+// Saf fonksiyonlar DOM'a dokunmaz; Node'da sınanır. baslat() bir canvas'ı kutusuna bağlar.
 
 const ESIK = 110;
 const VURGU = '92,207,255';
 
-export function noktaSayisi(w, h) {
-  return Math.min(70, Math.max(20, Math.round((w * h) / 18000)));
+export function noktaSayisi(w, h, { min = 20, max = 70 } = {}) {
+  return Math.min(max, Math.max(min, Math.round((w * h) / 18000)));
 }
 
 export function baglantilar(noktalar, esik) {
@@ -73,26 +73,33 @@ function agCiz(ctx, noktalar, fare) {
   }
 }
 
-export function baslat(canvas) {
+export function baslat(canvas, sinir = { min: 14, max: 30 }) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return () => {};
+  const kap = canvas.parentElement;
   const mod = cizimModu(matchMedia('(prefers-reduced-motion: reduce)').matches);
   let w = 0, h = 0, t = 0, kare = 0, fare = null, noktalar = [];
 
   function boyutla() {
     const oran = Math.min(devicePixelRatio || 1, 2);
-    w = innerWidth;
-    h = innerHeight;
+    const kutu = kap.getBoundingClientRect();
+    w = Math.max(1, kutu.width);
+    h = Math.max(1, kutu.height);
     canvas.width = w * oran;
     canvas.height = h * oran;
     ctx.setTransform(oran, 0, 0, oran, 0, 0);
-    const n = noktaSayisi(w, h);
+    const n = noktaSayisi(w, h, sinir);
     noktalar = Array.from({ length: n }, (_, i) => noktalar[i] || {
       x: Math.random() * w,
       y: Math.random() * h,
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
     });
+    // Kutu küçülünce dışarıda kalan noktalar içeri alınır; yoksa kenarda titreşip takılırlar.
+    for (const n of noktalar) {
+      n.x = Math.min(w, Math.max(0, n.x));
+      n.y = Math.min(h, Math.max(0, n.y));
+    }
   }
 
   function ciz() {
@@ -113,19 +120,22 @@ export function baslat(canvas) {
     kare = requestAnimationFrame(adim);
   }
 
-  const fareHareket = (e) => { fare = { x: e.clientX, y: e.clientY }; };
+  const fareHareket = (e) => {
+    const kutu = canvas.getBoundingClientRect();
+    fare = { x: e.clientX - kutu.left, y: e.clientY - kutu.top };
+  };
   const fareCikti = () => { fare = null; };
-  const yenidenBoyutla = () => { boyutla(); if (mod === 'tek-kare') ciz(); };
+  const gozlemci = new ResizeObserver(() => { boyutla(); if (mod === 'tek-kare') ciz(); });
   const gorunurluk = () => {
     cancelAnimationFrame(kare);
     if (!document.hidden && mod === 'animasyon') kare = requestAnimationFrame(adim);
   };
 
   boyutla();
-  addEventListener('resize', yenidenBoyutla);
+  gozlemci.observe(kap);
   if (mod === 'animasyon') {
-    addEventListener('pointermove', fareHareket);
-    document.addEventListener('pointerleave', fareCikti);
+    kap.addEventListener('pointermove', fareHareket);
+    kap.addEventListener('pointerleave', fareCikti);
     document.addEventListener('visibilitychange', gorunurluk);
     kare = requestAnimationFrame(adim);
   } else {
@@ -134,9 +144,9 @@ export function baslat(canvas) {
 
   return () => {
     cancelAnimationFrame(kare);
-    removeEventListener('resize', yenidenBoyutla);
-    removeEventListener('pointermove', fareHareket);
-    document.removeEventListener('pointerleave', fareCikti);
+    gozlemci.disconnect();
+    kap.removeEventListener('pointermove', fareHareket);
+    kap.removeEventListener('pointerleave', fareCikti);
     document.removeEventListener('visibilitychange', gorunurluk);
   };
 }

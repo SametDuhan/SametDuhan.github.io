@@ -21,7 +21,6 @@
   </style>
 </head>
 <body>
-  <canvas id="arkaplan" aria-hidden="true"></canvas>
   <div class="deste" id="deste">
     <header class="deste-ust">
       <a class="geri" href="../">← slaytlar</a>
@@ -139,9 +138,7 @@
   </div>
 
   <script type="module">
-    import { baslat } from '../../js/arkaplan.js';
     import { bagla } from '../../js/deste.js';
-    baslat(document.getElementById('arkaplan'));
     bagla(document.getElementById('deste'));
 
     const ADIMLAR = [

@@ -8,6 +8,11 @@ test('noktaSayisi ekran alanıyla ölçeklenir ve [20, 70] aralığında kalır'
   assert.equal(noktaSayisi(1280, 720), 51);
 });
 
+test('noktaSayisi kare gibi küçük alanlar için sınır alır', () => {
+  assert.equal(noktaSayisi(370, 277, { min: 8, max: 24 }), 8);
+  assert.equal(noktaSayisi(2000, 2000, { min: 8, max: 24 }), 24);
+});
+
 test('baglantilar yalnız eşikten yakın çiftleri, uzaklıkla sönen alfayla verir', () => {
   const sonuc = baglantilar([{ x: 0, y: 0 }, { x: 50, y: 0 }, { x: 500, y: 0 }], 110);
   assert.equal(sonuc.length, 1);

@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <canvas id="arkaplan" aria-hidden="true"></canvas>
   <main class="giris">
     <p class="komut">~/samet $ <b>whoami</b></p>
     <h1>Samet Duhan</h1>
@@ -20,21 +19,25 @@
 
     <nav class="kareler" aria-label="Bölümler">
       <a class="kare" href="hakkimda/">
+        <canvas class="kare-efekt" aria-hidden="true"></canvas>
         <span class="kare-komut">./hakkimda</span>
         <span class="kare-ad">Hakkımda</span>
         <span class="kare-alt">ben kimim, ne yapıyorum</span>
       </a>
       <a class="kare" href="projeler/">
+        <canvas class="kare-efekt" aria-hidden="true"></canvas>
         <span class="kare-komut">./projeler</span>
         <span class="kare-ad">Projeler</span>
         <span class="kare-alt">3 proje · SkyTrack, done-pixel</span>
       </a>
       <a class="kare" href="slaytlar/">
+        <canvas class="kare-efekt" aria-hidden="true"></canvas>
         <span class="kare-komut">./slaytlar</span>
         <span class="kare-ad">Slaytlar</span>
         <span class="kare-alt">AI'ı sıfırdan öğreten 3 sunum</span>
       </a>
       <a class="kare" href="iletisim/">
+        <canvas class="kare-efekt" aria-hidden="true"></canvas>
         <span class="kare-komut">./iletisim</span>
         <span class="kare-ad">İletişim</span>
         <span class="kare-alt">mail · GitHub · LinkedIn</span>
@@ -45,7 +48,7 @@
 
   <script type="module">
     import { baslat } from './js/arkaplan.js';
-    baslat(document.getElementById('arkaplan'));
+    for (const tuval of document.querySelectorAll('.kare-efekt')) baslat(tuval, { min: 10, max: 24 });
   </script>
 </body>
 </html>

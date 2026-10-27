@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
-  <canvas id="arkaplan" aria-hidden="true"></canvas>
   <main>
     <a class="geri" href="../">← ~/samet</a>
     <p class="komut">~/samet $ <b>./iletisim</b></p>
@@ -26,9 +25,7 @@
   </main>
 
   <script type="module">
-    import { baslat } from '../js/arkaplan.js';
     import { bagla } from '../js/iletisim.js';
-    baslat(document.getElementById('arkaplan'));
     const mail = document.getElementById('mail');
     bagla(mail);
     mail.hidden = false;

@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="../../css/deste.css">
 </head>
 <body>
-  <canvas id="arkaplan" aria-hidden="true"></canvas>
   <div class="deste" id="deste">
     <header class="deste-ust">
       <a class="geri" href="../">← slaytlar</a>
@@ -115,10 +114,8 @@ powershell -ExecutionPolicy Bypass -File install.ps1</code>
   </div>
 
   <script type="module">
-    import { baslat } from '../../js/arkaplan.js';
     import { bagla } from '../../js/deste.js';
     import { oynat, durdur, ciz } from './piksel.js';
-    baslat(document.getElementById('arkaplan'));
 
     const tuval = document.getElementById('piksel');
     const slayt = tuval.closest('section.slayt');

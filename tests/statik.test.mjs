@@ -51,7 +51,7 @@ test('iç linkler çözülür', () => {
   assert.deepEqual(kirik, []);
 });
 
-test('her sayfada lang=tr, viewport ve arkaplan canvas', () => {
+test('her sayfada lang=tr ve viewport; sayfa geneli arka plan efekti yok', () => {
   const sayfalar = htmlDosyalari();
   assert.ok(sayfalar.length > 0, 'hiç HTML sayfası yok');
   for (const f of sayfalar) {
@@ -59,6 +59,6 @@ test('her sayfada lang=tr, viewport ve arkaplan canvas', () => {
     const ad = relative(KOK, f);
     assert.match(html, /<html lang="tr">/, `${ad}: lang=tr yok`);
     assert.match(html, /name="viewport"/, `${ad}: viewport yok`);
-    assert.match(html, /<canvas id="arkaplan"/, `${ad}: arkaplan canvas yok`);
+    assert.doesNotMatch(html, /id="arkaplan"/, `${ad}: sayfa geneli arka plan efekti kaldırılacaktı`);
   }
 });

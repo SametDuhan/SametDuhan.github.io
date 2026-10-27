@@ -33,18 +33,20 @@ h1 {
 }
 
 .kare {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   aspect-ratio: 4 / 3;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: 4px;
   padding: clamp(14px, 3vw, 24px);
-  background: var(--panel-cam);
+  background: var(--panel);
   border: 1px solid var(--kenar);
   border-radius: var(--r);
   color: inherit;
   text-decoration: none;
-  backdrop-filter: blur(2px);
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
@@ -53,6 +55,17 @@ h1 {
   box-shadow: 0 0 28px rgba(var(--vurgu-rgb), 0.18);
   transform: translateY(-3px);
 }
+
+.kare-efekt { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.kare::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(13, 20, 32, 0.92) 0%, rgba(13, 20, 32, 0.6) 35%, transparent 65%);
+}
+.kare > span { position: relative; }
 
 .kare-komut { font-family: var(--mono); font-size: clamp(12px, 1.8vw, 14px); color: var(--vurgu); margin-bottom: auto; }
 .kare-ad { font-size: clamp(22px, 4.4vw, 34px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; }

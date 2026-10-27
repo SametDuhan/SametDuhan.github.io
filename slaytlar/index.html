@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
-  <canvas id="arkaplan" aria-hidden="true"></canvas>
   <main>
     <a class="geri" href="../">← ~/samet</a>
     <h1>Slaytlar</h1>
@@ -28,9 +27,7 @@
   </main>
 
   <script type="module">
-    import { baslat } from '../js/arkaplan.js';
     import { DESTELER, kartHTML } from '../js/desteler.js';
-    baslat(document.getElementById('arkaplan'));
     document.getElementById('desteler').innerHTML = DESTELER.map(kartHTML).join('');
   </script>
 </body>
