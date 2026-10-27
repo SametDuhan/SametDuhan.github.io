@@ -145,3 +145,9 @@ test('iletişim kutuları JS kapalıyken doğrudan iletişim bölümüne gider',
   const s = oku('iletisim/index.html');
   assert.equal((s.match(/data-konu="[^"]+" href="#dogrudan-baslik"/g) || []).length, 3);
 });
+
+test('alt sayfalar üreticiyle güncel (elle düzenleme yok; değişiklik araclar/sayfa_yap.mjs içinde)', async () => {
+  const { execFileSync } = await import('node:child_process');
+  const cikti = execFileSync(process.execPath, [new URL('../araclar/sayfa_yap.mjs', import.meta.url).pathname, '--kontrol'], { encoding: 'utf8' });
+  assert.match(cikti, /güncel/);
+});
