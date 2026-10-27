@@ -95,6 +95,7 @@ test('her sayfada açıklama ve paylaşım önizlemesi etiketleri var', () => {
     assert.match(s, /<meta name="description"/, `${yol}: description yok`);
     assert.match(s, /<meta property="og:title"/, `${yol}: og:title yok`);
     assert.match(s, /<link rel="icon"/, `${yol}: ikon yok`);
+    assert.match(s, /<meta name="twitter:card" content="summary_large_image">/, `${yol}: X önizlemesi yok`);
   }
 });
 

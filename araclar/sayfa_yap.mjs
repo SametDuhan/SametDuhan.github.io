@@ -24,6 +24,7 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!d
   <meta property="og:url" content="${URL_KOK}${yol}">
   <meta property="og:image" content="${URL_KOK}img/skytrack-1440.jpg">
   <meta name="theme-color" content="#070b12">
+  <meta name="twitter:card" content="summary_large_image">
   ${IKON}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
