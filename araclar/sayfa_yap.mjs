@@ -11,7 +11,7 @@ const farkli = [];
 const URL_KOK = 'https://sametduhan.github.io/';
 export const IKON = `<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b12'/%3E%3Cpath d='M8 10l6 6-6 6' stroke='%235ccfff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='16' y='20' width='9' height='3' rx='1.5' fill='%235ccfff'/%3E%3C/svg%3E">`;
 
-export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!doctype html>
+export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '', kapak = yol === '404.html' ? 'projeler' : yol.split('/')[0] || 'projeler' }) => `<!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
@@ -22,7 +22,7 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!d
   <meta property="og:description" content="${aciklama}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${URL_KOK}${yol}">
-  <meta property="og:image" content="${URL_KOK}img/skytrack-1440.jpg">
+  <meta property="og:image" content="${URL_KOK}img/paylasim/${kapak}.png">
   <meta name="theme-color" content="#070b12">
   <meta name="twitter:card" content="summary_large_image">
   ${IKON}
@@ -172,7 +172,7 @@ ${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
 `);
 
 // --- Slaytlar
-yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/' })}${menu('slaytlar')}
+yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/', ekCss: '\n  <link rel="stylesheet" href="../css/atolye.css">' })}${menu('slaytlar')}
   <main id="icerik">
     <p class="komut">~/samet $ <b>ls ./slaytlar</b></p>
     <h1>Slaytlar</h1>

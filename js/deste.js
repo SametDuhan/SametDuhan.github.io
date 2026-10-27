@@ -189,7 +189,7 @@ export function bagla(kok) {
   ileri.addEventListener('click', eylem.ileri);
 
   addEventListener('keydown', (e) => {
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.ctrlKey || e.metaKey || e.altKey || kok.classList.contains('okuma') || e.target.closest?.('input, textarea, select, [contenteditable]')) return;
     if (e.target.closest?.('button, a, input, textarea, select') && (e.key === ' ' || e.key === 'Enter')) return;
     const ad = tusEylemi(e.key);
     if (!ad || (yardim.open && ad !== 'yardim' && ad !== 'kapat')) return;
@@ -204,7 +204,7 @@ export function bagla(kok) {
     const son = e.changedTouches[0];
     const ad = kaydirmaYonu(son.clientX - bas.clientX, son.clientY - bas.clientY);
     bas = null;
-    if (ad && !yardim.open && !e.target.closest('pre, .demo')) eylem[ad]();
+    if (ad && !yardim.open && !kok.classList.contains('okuma') && !e.target.closest('pre, .demo, .laboratuvar, input, select, button')) eylem[ad]();
   });
 
   addEventListener('hashchange', () => git(hashtenKonum(location.hash, n)));

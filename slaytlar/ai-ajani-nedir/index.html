@@ -20,6 +20,8 @@
     .dongu-log { font-family: var(--mono); font-size: 14px; color: var(--vurgu); min-height: 3.2em; margin: 8px 0 0; }
     @media (prefers-reduced-motion: reduce) { .dongu .dugum rect { transition: none; } }
   </style>
+<meta property="og:title" content="AI ajanı nedir? · Samet Duhan"><meta property="og:description" content="İzle, dene ve adım adım keşfet. Samet Duhan’dan interaktif geliştirme anlatımı."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/slaytlar/ai-ajani-nedir/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/ai-ajani-nedir.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/atolye.css">
 </head>
 <body>
   <div class="deste" id="deste">
@@ -31,7 +33,7 @@
 
     <section class="slayt">
       <p class="kucuk-baslik">Başlangıç · ~8 dakika</p>
-      <h1>AI ajanı nedir?</h1>
+      <h1>AI ajanı nedir?</h1><div class="kapak-sahne"><span class="orb">AI</span><div><small>01 / KEŞFET</small><strong>Bir cevapla başlayan şey,<br>çalışan bir sisteme dönüşür.</strong><span class="akis">gözlem → karar → araç → sonuç</span></div></div>
       <p>Bu sunumun sonunda bir <strong>sohbet botu</strong> ile <strong>ajan</strong> arasındaki farkı bilecek, ajanın nasıl "düşünüp iş yaptığını" görecek ve kendin bir tane deneyeceksin.</p>
       <p class="ipucu">→ tuşu, alttaki düğmeler ya da telefonda sola kaydırma ile ilerle.</p>
     </section>
@@ -45,7 +47,7 @@
 
     <section class="slayt">
       <p class="kucuk-baslik">2 · Fark</p>
-      <h2>Ajan: işi kendisi yapar</h2>
+      <h2>Ajan: işi kendisi yapar</h2><div class="laboratuvar" data-lab="ajan"><div class="lab-bas"><span>ETKİLEŞİMLİ / AJAN ATÖLYESİ</span><span>Yerel simülasyon</span></div><label>Görevi seç <select data-gorev><option>Kırık bağlantıyı düzelt</option>Bir test hatasını düzelt</option>Bir proje sayfası hazırla</option></select></label><div class="akis-adimlar"><span>01 Gözlem</span><span>02 Plan</span><span>03 Araç</span><span>04 Kontrol</span></div><pre class="terminal" aria-live="polite">$ görev bekleniyor…</pre><button class="dugme" data-adim>Bir adım çalıştır →</button><button class="dugme" data-reset>Baştan</button><p class="lab-not">Bu bir anlatım simülasyonu; gerçek dosyalar değiştirilmez.</p></div>
       <div class="iki-sutun">
         <div class="panel">
           <h3>sohbet botu</h3>
@@ -159,5 +161,6 @@
       dugme.textContent = i < ADIMLAR.length - 1 ? '▶ bir adım' : (i === ADIMLAR.length - 1 ? '↺ baştan' : '▶ bir adım');
     });
   </script>
+<script type="module" src="../../js/atolye.js"></script>
 </body>
 </html>

@@ -26,6 +26,8 @@
     .olcum { font-family: var(--mono); font-size: 12px !important; color: var(--soluk) !important; }
     @media (max-width: 520px) { .sayilar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .sayilar .panel { padding: 10px 6px; } .sayilar b { font-size: 24px; } .sayilar span { font-size: 12px; } }
   </style>
+<meta property="og:title" content="SkyTrack&#x27;i AI ile nasıl kurdum · Samet Duhan"><meta property="og:description" content="İzle, dene ve adım adım keşfet. Samet Duhan’dan interaktif geliştirme anlatımı."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/slaytlar/skytrack-nasil-kurdum/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/skytrack-nasil-kurdum.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../css/atolye.css">
 </head>
 <body>
   <div class="deste" id="deste">
@@ -37,7 +39,7 @@
 
     <section class="slayt">
       <p class="kucuk-baslik">Proje · ~10 dakika</p>
-      <h1>SkyTrack'i AI ile nasıl kurdum</h1>
+      <h1>SkyTrack'i AI ile nasıl kurdum</h1><div class="kapak-sahne haritali"><span class="orb">✈</span><div><small>03 / İNŞA ET</small><strong>Açık veriden<br>çalışan bir uygulamaya.</strong><span class="akis">veri → harita → karar → test</span></div></div>
       <p>Bir masaüstü uygulamasının dokuz günde nasıl büyüdüğünü, uydurmadan, <strong>commit geçmişinden</strong> anlatıyorum: AI neyi hızlandırdı, hangi kararları ben verdim, AI nerede yanıldı.</p>
       <div class="terim"><p><strong>Commit:</strong> Kodda yapılan bir değişikliğin kaydı. Her commit'in bir mesajı, tarihi ve yazarı vardır; projenin günlüğü gibi okunur.</p></div>
     </section>
@@ -45,7 +47,7 @@
     <section class="slayt">
       <p class="kucuk-baslik">1 · Ne yapıyor?</p>
       <h2>Haritada canlı uçaklar</h2>
-      <img src="../../img/skytrack-960.jpg" srcset="../../img/skytrack-960.jpg 960w, ../../img/skytrack-1440.jpg 1440w" sizes="(max-width: 900px) 100vw, 860px" alt="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası" width="2880" height="1620" loading="lazy">
+      <video class="proje-video" controls playsinline preload="none" poster="../../img/skytrack-960.jpg" aria-label="SkyTrack tarayıcı demosunun ekran kaydı"><source src="../../video/skytrack-demo.webm" type="video/webm">Videoyu oynatamıyorsan sunumun sonundaki tarayıcı demosunu açabilirsin.</video><p class="lab-not">Ekran kaydı: tarayıcı demosu. Uçuşlar ve türbülans alanları simülasyondur; video sessizdir.</p>
       <p>SkyTrack, dünyadaki uçakları haritada canlı gösteren ücretsiz bir masaüstü uygulaması. Windows, macOS ve Linux'ta çalışır; hesap ya da API anahtarı istemez.</p>
       <div class="terim"><p><strong>ADS-B:</strong> Uçakların konumlarını, irtifalarını ve hızlarını saniyede birkaç kez yayınladığı açık sinyal. Gönüllülerin alıcıları bu sinyali toplar; SkyTrack bu açık veriyi kullanır.</p></div>
     </section>
@@ -74,7 +76,7 @@
 
     <section class="slayt">
       <p class="kucuk-baslik">4 · Bir kararı yakından</p>
-      <h2>Sahte acil durum alarmları</h2>
+      <h2>Sahte acil durum alarmları</h2><div class="laboratuvar" data-lab="alarm"><div class="lab-bas"><span>KARAR DENEYİ / ALARM EŞİĞİ</span><span>Örnek senaryo</span></div><div class="radar"><div class="radar-halka"></div><span class="ucak">✈</span><span class="radar-etiket">7700 · örnek sinyal</span></div><label>Kodun kesintisiz sürdüğü süre: <output data-sure>1</output> saniye<input type="range" min="1" max="60" value="1" data-sinyal></label><label>Alarm eşiği <select data-esik><option value="0">Anında</option><option value="15">15 saniye</option><option value="45" selected>45 saniye</option></select></label><p class="alarm-sonuc" aria-live="polite"></p><p class="lab-not">Eşik büyüdükçe kısa sinyaller elenir; bildirim de gecikir. 45 saniye bu projede seçilmiş bir kuraldır.</p></div>
       <p>Uçaklar acil durumu bir kodla bildirir: <code>7500</code> kaçırılma, <code>7600</code> telsiz arızası, <code>7700</code> genel acil durum. SkyTrack bu kodları kırmızı halkayla gösterir ve bildirim gönderir. Sorunu commit'ler üzerinden satır satır izle:</p>
       <pre class="adim-kod"><code><span class="satir" data-not="Acil durum kodları uygulamada bir pencereyle açıklanmaya başlandı.">6 Eki  Explain squawk emergency codes (7500/7600/7700) in an in-app dialog</span><span class="satir" data-not="İlk düzeltme: yalnız gerçek acil durum kodları ya da uçağın kendi ADS-B acil durum bilgisi sayılıyor.">6 Eki  0.7.3: only real emergencies (7500/7600/7700 or matching ADS-B status) are shown as emergencies</span><span class="satir" data-not="Asıl çözüm: pilot kodu değiştirirken düğmeyi çevirdiği an 7700'den bir saniyeliğine geçebiliyor. Artık kod 45 saniye kesintisiz sürmedikçe alarm yok.">8 Eki  Emergencies: a squawk 7500/7600/7700 counts only after 45 s without a break (knob transit no longer fires alerts)</span></code></pre>
       <p>Kodu Claude yazdı. Ama "bu alarm neden yanlış?" diye sormak, sebebi bulmak ve 45 saniye gibi bir kurala karar vermek <strong>insanın işi</strong>.</p>
@@ -173,5 +175,6 @@ npm start</code>
 
     bagla(document.getElementById('deste'));
   </script>
+<script type="module" src="../../js/atolye.js"></script>
 </body>
 </html>
