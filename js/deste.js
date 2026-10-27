@@ -1,7 +1,7 @@
 // Deste motoru: section.slayt'ları tek tek gösterir; klavye, kaydırma, hash ve slayt içi bileşenler.
 // Saf fonksiyonlar Node'da sınanır; bagla() tarayıcıya bağlar.
 
-import { ilerlemeKaydet, ilerlemeOku } from './ilerleme.js';
+import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from './ilerleme.js';
 
 export function sikistir(i, n) {
   return Math.min(n - 1, Math.max(0, i));
@@ -88,6 +88,7 @@ function deneKutulariBagla(kok) {
 }
 
 export function bagla(kok) {
+  kok.classList.add('js-hazir');
   const slaytlar = [...kok.querySelectorAll('section.slayt')];
   const n = slaytlar.length;
   let konum = -1;
@@ -169,9 +170,9 @@ export function bagla(kok) {
     if (odak === ileri && ileri.disabled) geri.focus();
     if (odak === geri && geri.disabled) ileri.focus();
     history.replaceState(null, '', `#${konum + 1}`);
-    if (kaydet) ilerlemeKaydet(depo, slug, konum, n);
-    kaydet = true;
-    if (bildirim && konum !== 0) bildirim.hidden = true;
+    // Daha ileride kayıtlı bir yer varsa, ziyaretçi onu geçene ya da "baştan" diyene kadar ezilmez.
+    if (bekleyen && konum >= onceki.konum) { bekleyen = false; bildirim.hidden = true; }
+    if (!bekleyen) ilerlemeKaydet(depo, slug, konum, n);
   }
 
   const eylem = {
@@ -203,7 +204,7 @@ export function bagla(kok) {
     const son = e.changedTouches[0];
     const ad = kaydirmaYonu(son.clientX - bas.clientX, son.clientY - bas.clientY);
     bas = null;
-    if (ad && !e.target.closest('pre, .demo')) eylem[ad]();
+    if (ad && !yardim.open && !e.target.closest('pre, .demo')) eylem[ad]();
   });
 
   addEventListener('hashchange', () => git(hashtenKonum(location.hash, n)));
@@ -214,17 +215,24 @@ export function bagla(kok) {
 
   // Doğrudan açılan sunumda kaldığın yer varsa öner; açılış kendisi kayıtlı ilerlemeyi ezmesin.
   const onceki = ilerlemeOku(depo, slug);
-  let kaydet = Boolean(location.hash);
+  let bekleyen = Boolean(onceki && !onceki.bitti && onceki.konum > hashtenKonum(location.hash, n));
   let bildirim = null;
-  if (!location.hash && onceki && !onceki.bitti && onceki.konum > 0) {
+  if (bekleyen) {
     bildirim = document.createElement('div');
     bildirim.className = 'devam-bildirim';
     bildirim.setAttribute('role', 'status');
     bildirim.innerHTML = `<span>Kaldığın yer: <b>${onceki.konum + 1}/${onceki.n}</b></span>
 <button type="button" class="dugme" data-devam>devam et →</button>
 <button type="button" class="dugme" data-bastan>baştan başla</button>`;
-    bildirim.querySelector('[data-devam]').addEventListener('click', () => { bildirim.hidden = true; git(onceki.konum); });
-    bildirim.querySelector('[data-bastan]').addEventListener('click', () => { bildirim.hidden = true; kaydet = true; ilerlemeKaydet(depo, slug, 0, n); });
+    bildirim.querySelector('[data-devam]').addEventListener('click', () => { git(onceki.konum); ileri.focus(); });
+    bildirim.querySelector('[data-bastan]').addEventListener('click', () => {
+      bekleyen = false;
+      bildirim.hidden = true;
+      ilerlemeSifirla(depo, slug);
+      git(0);
+      ilerlemeKaydet(depo, slug, konum, n);
+      ileri.focus();
+    });
     kok.append(bildirim);
   }
 

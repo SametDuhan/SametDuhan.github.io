@@ -65,7 +65,7 @@
     // 1–4: kareleri klavyeyle aç
     const kareler = [...document.querySelectorAll('.kare')];
     addEventListener('keydown', (e) => {
-      if (e.ctrlKey || e.metaKey || e.altKey || e.target.closest('input, textarea')) return;
+      if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || e.isComposing || e.target.closest('input, textarea, select, [contenteditable]')) return;
       const i = '1234'.indexOf(e.key);
       if (i >= 0) location.href = kareler[i].href;
     });

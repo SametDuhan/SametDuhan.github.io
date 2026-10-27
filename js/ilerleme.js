@@ -21,3 +21,11 @@ export function ilerlemeKaydet(depo, slug, konum, n) {
     // depo dolu ya da engelli: ilerleme hatırlanmaz, sunum yine çalışır
   }
 }
+
+export function ilerlemeSifirla(depo, slug) {
+  try {
+    depo?.removeItem(anahtar(slug));
+  } catch {
+    // engelli depo: yapılacak bir şey yok
+  }
+}

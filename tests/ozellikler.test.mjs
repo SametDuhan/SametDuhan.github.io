@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { PROJELER, projeleriSuz, projeKartiHTML } from '../js/projeler.js';
 import { DESTELER, desteAra } from '../js/desteler.js';
-import { ilerlemeKaydet, ilerlemeOku } from '../js/ilerleme.js';
+import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from '../js/ilerleme.js';
 import { mailtoLinki } from '../js/iletisim.js';
 
 const oku = (yol) => readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
@@ -43,8 +43,17 @@ test('her destenin tahmini süresi var', () => {
 
 function sahteDepo() {
   const m = new Map();
-  return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)) };
+  return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), removeItem: (k) => m.delete(k) };
 }
+
+test('ilerlemeSifirla bitmiş desteyi de sıfırlar; hatalı depoda sessiz kalır', () => {
+  const depo = sahteDepo();
+  ilerlemeKaydet(depo, 'x', 8, 9);
+  ilerlemeSifirla(depo, 'x');
+  assert.equal(ilerlemeOku(depo, 'x'), null);
+  assert.doesNotThrow(() => ilerlemeSifirla({ removeItem() { throw new Error('engelli'); } }, 'x'));
+  assert.doesNotThrow(() => ilerlemeSifirla(null, 'x'));
+});
 
 test('ilerleme kaydedilir ve okunur; son slaytta bitti sayılır', () => {
   const depo = sahteDepo();
@@ -118,4 +127,15 @@ test('slaytlar sayfası yeni başlayana önerilen sırayı verir', () => {
   const s = oku('slaytlar/index.html');
   const sira = s.slice(s.indexOf('class="onerilen-sira"'));
   assert.ok(sira.indexOf('./ai-ajani-nedir/') < sira.indexOf('./claude-code-hook/') && sira.indexOf('./claude-code-hook/') < sira.indexOf('./skytrack-nasil-kurdum/'));
+});
+
+test('JS kapalıyken deste içeriği gizlenmez ya da soluk kalmaz', () => {
+  const css = oku('css/deste.css');
+  for (const kural of ['.adim-kod .satir {', '.soru .aciklama {']) {
+    const i = css.indexOf(kural.replace(' {', ''));
+    assert.ok(i >= 0, kural);
+    const satir = css.slice(css.lastIndexOf('\n', i) + 1, css.indexOf('\n', i));
+    assert.ok(satir.startsWith('.js-hazir '), `JS'e bağlı olmalı: ${satir}`);
+  }
+  assert.match(oku('js/deste.js'), /classList\.add\('js-hazir'\)/);
 });
