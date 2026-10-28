@@ -46,3 +46,19 @@ test('ana sayfa CSS: yana kaymaz, hareketi azaltınca durur, odak görünür', (
   for (const sec of ['.govde', '.seyir-haritasi', '.duman']) assert.ok(az.includes(sec), sec);
   assert.match(css, /\.kare:focus-visible/);
 });
+
+test('her alt sayfada kendi şahin pozu var, terminal kalıntısı ve fener yok', () => {
+  for (const [yol, poz] of [['hakkimda/index.html', 'ceyrek'], ['projeler/index.html', 'sag'], ['slaytlar/index.html', 'sol'], ['iletisim/index.html', 'kanat-kucuk'], ['404.html', 'arka']]) {
+    const s = oku(yol);
+    assert.match(s, new RegExp(`class="sayfa-sahin" src="[^"]*img/sahin/${poz}\\.webp"`), yol);
+    assert.doesNotMatch(s, /fener\.js|~\/samet \$/, yol);
+    assert.match(s, /family=Fraunces/, `${yol}: yazı tipi linki yok`);
+    assert.match(s, /<meta name="theme-color" content="#f2e8d5">/, `${yol}: theme-color eski`);
+  }
+});
+
+test('alt sayfa şahini yalnız nefes alır ve hareketi azaltınca durur', () => {
+  const css = oku('css/site.css');
+  assert.match(css, /\.sayfa-sahin\s*\{[^}]*animation:\s*nefes/);
+  assert.ok(css.slice(css.indexOf('prefers-reduced-motion')).includes('.sayfa-sahin'));
+});

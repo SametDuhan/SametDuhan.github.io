@@ -9,7 +9,7 @@ const KOK = fileURLToPath(new URL('../', import.meta.url));
 const KONTROL = process.argv.includes('--kontrol');
 const farkli = [];
 const URL_KOK = 'https://sametduhan.github.io/';
-export const IKON = `<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b12'/%3E%3Cpath d='M8 10l6 6-6 6' stroke='%235ccfff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='16' y='20' width='9' height='3' rx='1.5' fill='%235ccfff'/%3E%3C/svg%3E">`;
+export const IKON = `<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f2e8d5'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='2' fill='none' stroke='%2333261a' stroke-width='1.5'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%2333261a'%3E%C5%9E%3C/text%3E%3C/svg%3E">`;
 
 export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!doctype html>
 <html lang="tr">
@@ -23,36 +23,43 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!d
   <meta property="og:type" content="website">
   <meta property="og:url" content="${URL_KOK}${yol}">
   <meta property="og:image" content="${URL_KOK}img/skytrack-1440.jpg">
-  <meta name="theme-color" content="#070b12">
+  <meta name="theme-color" content="#f2e8d5">
   <meta name="twitter:card" content="summary_large_image">
   ${IKON}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="${onek}css/tema.css">
   <link rel="stylesheet" href="${onek}css/site.css">${ekCss}
 </head>
 <body>
   <a class="atla" href="#icerik">İçeriğe geç</a>`;
 
-const BOLUMLER = [['hakkimda', 'hakkımda'], ['projeler', 'projeler'], ['slaytlar', 'slaytlar'], ['iletisim', 'iletişim']];
+const BOLUMLER = [['hakkimda', 'Hakkımda'], ['projeler', 'Projeler'], ['slaytlar', 'Slaytlar'], ['iletisim', 'İletişim']];
 export const menu = (aktif, onek = '../') => `
-  <nav class="ust-menu" aria-label="Site">
-    <a class="logo" href="${onek}">~/samet</a>
+  <nav class="yan-menu" aria-label="Site">
+    <a class="logo" href="${onek}"><img src="${onek}img/sahin/logo.webp" alt="" width="40" height="40"><span><b>ŞAHİN</b><small>AÇIKTA KURULUR</small></span></a>
     <div class="menu-linkler">
-${BOLUMLER.map(([h, ad]) => `      <a href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}>${ad}</a>`).join('\n')}
+${BOLUMLER.map(([h, ad], i) => `      <a href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}><i>0${i + 1}</i>${ad}</a>`).join('\n')}
     </div>
   </nav>`;
+
+// Sayfa başı: numaralı etiket + damga, serif başlık, tanıtım ve sayfanın şahin pozu.
+export const sayfaBasi = ({ no, etiket, damga, baslik, tanitim, poz, onek = '../', ek = '' }) => `
+    <header class="sayfa-basi">
+      <img class="sayfa-sahin" src="${onek}img/sahin/${poz}.webp" alt="" width="240" height="240">
+      <div class="sayfa-metin">
+        <p class="etiket"><span class="no">${no}</span>${etiket}<span class="damga">${damga}</span></p>
+        <h1>${baslik}</h1>${ek}
+        <p class="tanitim">${tanitim}</p>
+      </div>
+    </header>`;
 
 export const son = (onek = '../') => `
   <footer class="alt-bilgi">
     <span>samet duhan · 2026</span>
     <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="${onek}iletisim/">iletişim</a></span>
-  </footer>
-  <script type="module">
-    import { baslatFener } from '${onek}js/fener.js';
-    baslatFener();
-  </script>`;
+  </footer>`;
 
 const yaz = (yol, html) => {
   if (!KONTROL) return writeFileSync(KOK + yol, html);
@@ -62,14 +69,11 @@ const yaz = (yol, html) => {
 // --- Hakkımda
 yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama: 'Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.', yol: 'hakkimda/' })}${menu('hakkimda')}
   <main id="icerik">
-    <p class="komut">~/samet $ <b>cat hakkimda.md</b></p>
-    <h1>Hakkımda</h1>
-    <p class="kimlik">&gt; AI ile sistem kuran geliştirici<span class="imlec" aria-hidden="true"></span></p>
-    <p class="tanitim">
-      Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak
+${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', baslik: 'Hakkımda', poz: 'ceyrek',
+      ek: '\n        <p class="kimlik">&gt; AI ile sistem kuran geliştirici</p>',
+      tanitim: `Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak
       için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan
-      uygulamalar. Siber güvenlik de ilgi alanım.
-    </p>
+      uygulamalar. Siber güvenlik de ilgi alanım.` })}
     <div class="linkler hizli">
       <a class="dugme" href="https://github.com/SametDuhan">GitHub</a>
       <a class="dugme" href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a>
@@ -130,9 +134,8 @@ yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama
 // --- Projeler
 yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/' })}${menu('projeler')}
   <main id="icerik">
-    <p class="komut">~/samet $ <b>ls ./projeler</b></p>
-    <h1>Projeler</h1>
-    <p class="tanitim">Hepsi açık kaynak. Kodlarına GitHub'dan bakabilir, nasıl yapıldıklarını slaytlardan öğrenebilirsin.</p>
+${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'sag',
+      tanitim: 'Hepsi açık kaynak. Kodlarına GitHub\'dan bakabilir, nasıl yapıldıklarını slaytlardan öğrenebilirsin.' })}
     <div class="filtre" role="group" aria-label="Projeleri süz">
       <button type="button" data-etiket="hepsi" aria-pressed="true">hepsi</button>
       <button type="button" data-etiket="AI aracı" aria-pressed="false">AI aracı</button>
@@ -174,9 +177,8 @@ ${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
 // --- Slaytlar
 yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/' })}${menu('slaytlar')}
   <main id="icerik">
-    <p class="komut">~/samet $ <b>ls ./slaytlar</b></p>
-    <h1>Slaytlar</h1>
-    <p class="tanitim">Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.</p>
+${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'sol',
+      tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
     <ol class="onerilen-sira" aria-label="Önerilen sıra">
       <li><a href="./ai-ajani-nedir/">AI ajanı nedir?</a></li>
       <li><a href="./claude-code-hook/">Claude Code hook'u ile otomasyon</a></li>
@@ -239,9 +241,8 @@ yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama:
 // --- İletişim
 yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklama: 'Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.', yol: 'iletisim/' })}${menu('iletisim')}
   <main id="icerik">
-    <p class="komut">~/samet $ <b>./iletisim</b></p>
-    <h1>İletişim</h1>
-    <p class="tanitim">En hızlı mail ile ulaşırsın. Ne için yazdığını seç; konu satırı hazır gelsin.</p>
+${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', baslik: 'İletişim', poz: 'kanat-kucuk',
+      tanitim: 'En hızlı mail ile ulaşırsın. Ne için yazdığını seç; konu satırı hazır gelsin.' })}
 
     <div class="uclu" id="konular">
       <a class="kutu" data-konu="İş teklifi" href="#dogrudan-baslik">
@@ -298,10 +299,9 @@ yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklam
 // --- 404
 yaz('404.html', `${bas({ baslik: 'Sayfa bulunamadı · Samet Duhan', aciklama: 'Aradığın sayfa yok. Ana sayfaya, projelere ya da slaytlara dön.', yol: '404.html', onek: '/' })}${menu('', '/')}
   <main id="icerik">
-    <p class="komut">~/samet $ <b>cd bu-sayfa</b></p>
-    <h1>404</h1>
-    <p class="kimlik">bash: cd: bu-sayfa: Böyle bir dosya ya da dizin yok<span class="imlec" aria-hidden="true"></span></p>
-    <p class="tanitim">Aradığın sayfa taşınmış ya da hiç olmamış olabilir.</p>
+${sayfaBasi({ no: '404', etiket: 'KAYIP SAYFA', damga: 'BULUNAMADI', baslik: '404', poz: 'arka', onek: '/',
+      ek: '\n        <p class="kimlik">bash: cd: bu-sayfa: Böyle bir dosya ya da dizin yok</p>',
+      tanitim: 'Aradığın sayfa taşınmış ya da hiç olmamış olabilir.' })}
     <div class="linkler"><a class="dugme ana" href="/">./ana-sayfa →</a><a class="dugme" href="/projeler/">projeler</a><a class="dugme" href="/slaytlar/">slaytlar</a></div>
   </main>${son('/')}
 </body>

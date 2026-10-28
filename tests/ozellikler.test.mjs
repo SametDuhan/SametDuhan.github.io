@@ -80,10 +80,10 @@ test('mailtoLinki konuyu kodlar', () => {
   assert.equal(mailtoLinki('a@b.com'), 'mailto:a@b.com');
 });
 
-test('alt sayfalarda dört bölümlük üst menü var ve bulunduğu sayfa işaretli', () => {
+test('alt sayfalarda dört bölümlük sol menü var ve bulunduğu sayfa işaretli', () => {
   for (const [yol, href] of [['hakkimda/index.html', 'hakkimda'], ['projeler/index.html', 'projeler'], ['slaytlar/index.html', 'slaytlar'], ['iletisim/index.html', 'iletisim']]) {
     const s = oku(yol);
-    assert.match(s, /<nav class="ust-menu"/, `${yol}: menü yok`);
+    assert.match(s, /<nav class="yan-menu"/, `${yol}: menü yok`);
     for (const h of ['hakkimda', 'projeler', 'slaytlar', 'iletisim']) assert.ok(s.includes(`href="../${h}/"`), `${yol}: ${h} linki yok`);
     assert.match(s, new RegExp(`href="../${href}/" aria-current="page"`), `${yol}: kendi sayfası işaretli değil`);
   }
@@ -172,6 +172,6 @@ test('yazdırma görünümü menüleri gizler, beyaz zemine siyah yazı basar', 
   const i = css.indexOf('@media print');
   assert.ok(i >= 0, '@media print yok');
   const blok = css.slice(i);
-  assert.match(blok, /\.ust-menu/);
+  assert.match(blok, /\.yan-menu/);
   assert.match(blok, /background: #fff/);
 });
