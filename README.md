@@ -17,15 +17,18 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 
 | Yol | Ne |
 |---|---|
-| `index.html` | Giriş: tüplü monitör sahnesi ve dört kare (hakkımda, projeler, slaytlar, iletişim) |
+| `index.html` | Giriş: tünekte nefes alan şahin, seyir haritası ve dört kutu (hakkımda, projeler, slaytlar, iletişim) |
 | `hakkimda/`, `projeler/`, `slaytlar/`, `iletisim/`, `404.html` | `araclar/sayfa_yap.mjs` üretir, **elle düzenleme** |
 | `slaytlar/<slug>/index.html` | Desteler; `js/deste.js` gezdirir |
 | `js/projeler.js` | Proje verisi ve kart HTML'i |
 | `js/desteler.js` | Deste listesi, arama |
 | `js/ilerleme.js` | "Kaldığın yer" (yalnız ziyaretçinin tarayıcısında) |
-| `js/sahne.js` | Giriş sahnesi: tüplü monitör, akan senaryolar, kablo, mini karakterler |
+| `js/sahin.js` | Şahin: poz verisi, göz kırpma ve kanat açma kararları, sahneye bağlama |
 | `js/piksel.js` | claude-done-pixel karakteri (`claude-done.ps1`'in birebir aktarımı) |
-| `js/fener.js` | Nokta ızgarasında imleci izleyen fener (ızgara `css/tema.css`'te) |
+| `css/tema.css` | Kâğıt teması: renk tokenları, yazı tipleri, kâğıt dokusu, ortak etiket/damga/düğme/köşe |
+| `css/giris.css`, `css/site.css`, `css/deste.css` | Ana sayfa, alt sayfalar, desteler |
+| `araclar/fabrika.mjs` | Projeler sayfasının tuğla fabrika ve konveyör bandı (SVG) |
+| `img/sahin/` | Şahin pozları (WebP); her alt sayfanın başında bir poz |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |
 
 ## Yeni proje eklemek
