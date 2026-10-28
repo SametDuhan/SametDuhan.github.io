@@ -2,6 +2,7 @@
 export const PROJELER = [
   {
     ad: 'SkyTrack',
+    pigment: 'kehribar',
     komut: './skytrack',
     ozet: 'Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.',
     gorsel: 'img/skytrack-960.jpg',
@@ -21,6 +22,7 @@ export const PROJELER = [
   },
   {
     ad: 'claude-done-pixel',
+    pigment: 'civit',
     komut: './claude-done-pixel',
     ozet: 'Claude Code işini bitirince ekranın köşesinde bir piksel karakter koşup zıplar ve yeşil bayrak sallar; terminali kontrol etmeye son.',
     gorsel: 'img/claude-done.png',
@@ -37,6 +39,7 @@ export const PROJELER = [
   },
   {
     ad: 'chatgpt-done-pixel',
+    pigment: 'bakir',
     komut: './chatgpt-done-pixel',
     ozet: 'Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar.',
     gorsel: 'img/chatgpt-done.png',
@@ -64,7 +67,7 @@ export function projeKartiHTML(p, kok = '') {
     `<a class="dugme" href="${kacis(p.github)}">GitHub</a>`,
     p.deste ? `<a class="dugme" href="${kacis(kok + p.deste)}">nasıl yaptım →</a>` : '',
   ].join('');
-  return `<article class="kart" id="${kacis(p.ad.toLowerCase())}" data-ad="${kacis(p.ad)}">
+  return `<article class="kart kose p-${kacis(p.pigment)}" id="${kacis(p.ad.toLowerCase())}" data-ad="${kacis(p.ad)}"><i class="k2"></i><i class="k3"></i>
   <img${p.piksel ? ' class="piksel"' : ''} src="${kacis(kok + p.gorsel)}"${p.srcset ? ` srcset="${kacis(p.srcset.split(', ').map((g) => kok + g).join(', '))}" sizes="(max-width: 700px) 100vw, 340px"` : ''} alt="${kacis(p.alt)}" loading="lazy">
   <div class="kart-govde">
     <p class="kart-komut">${kacis(p.komut)}</p>

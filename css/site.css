@@ -43,7 +43,7 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .sayfa-basi.bant { min-height: 400px; margin: -56px calc(-1 * clamp(20px, 5vw, 72px)) 34px; padding: 56px clamp(20px, 5vw, 72px) 24px; border-bottom: 1px solid var(--kenar); overflow: hidden; align-items: flex-start; }
 .bant-cizim { position: absolute; inset: 0; opacity: 0.62; pointer-events: none; }
 .bant-cizim svg { width: 100%; height: 100%; display: block; }
-.sayfa-basi.bant .sayfa-metin { max-width: 520px; }
+.sayfa-basi.bant .sayfa-metin { max-width: min(440px, 38vw); }
 .sayfa-basi.bant .tanitim { background: color-mix(in srgb, var(--zemin) 80%, transparent); }
 
 /* ---- bölümler ---- */
@@ -118,6 +118,13 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .kanal-not { font-size: 13px; color: var(--soluk); }
 .kanallar a { color: var(--ceviz); font-weight: 600; }
 
+/* Dar ekranda fabrika metnin altına, tam genişlikte kendi şeridine iner (metinle çakışmasın) */
+@media (max-width: 1320px) {
+  .sayfa-basi.bant { flex-wrap: wrap; min-height: 0; padding-bottom: 0; }
+  .sayfa-basi.bant .sayfa-metin { flex: 1 1 280px; max-width: none; }
+  .sayfa-basi.bant .bant-cizim { position: relative; inset: auto; order: 3; flex: 1 0 100%; height: clamp(160px, 27vw, 300px); }
+}
+
 /* ---- telefon: menü üste yatar ---- */
 @media (max-width: 900px) {
   .yan-menu { position: static; width: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--kenar); }
@@ -126,8 +133,7 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
   .menu-linkler a { padding: 12px 10px; min-height: 44px; }
   main, .alt-bilgi { margin-left: 0; }
   main { padding-top: 32px; }
-  .sayfa-basi.bant { margin-top: -32px; padding-top: 32px; min-height: 360px; }
-  .bant-cizim { opacity: 0.4; }
+  .sayfa-basi.bant { margin-top: -32px; padding-top: 32px; }
   .kart { grid-template-columns: 1fr; }
   .kart img { order: 0; }
 }
@@ -151,3 +157,19 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
   .kimlik, .kutu-komut, .kart-komut, .etiket { color: #555 !important; }
   .dugme { border-color: #999 !important; }
 }
+
+/* ---- fabrika bandı animasyonları (araclar/fabrika.mjs) ---- */
+.bant-cizim .bg-yazi { font: 600 13px var(--mono); fill: var(--yazi); letter-spacing: 0.12em; }
+.bant-cizim .bg-yazi.koyu { font-size: 12px; }
+.bant-cizim .duman circle { transform-box: fill-box; transform-origin: center; opacity: 0; animation: duman 7s ease-out infinite; }
+.bant-cizim .duman circle:nth-child(2) { animation-delay: -1.75s; }
+.bant-cizim .duman circle:nth-child(3) { animation-delay: -3.5s; }
+.bant-cizim .duman circle:nth-child(4) { animation-delay: -5.25s; }
+.bant-cizim .duman circle:nth-child(5) { animation-delay: -0.8s; animation-duration: 6s; }
+.bant-cizim .duman circle:nth-child(6) { animation-delay: -2.8s; animation-duration: 6s; }
+.bant-cizim .duman circle:nth-child(7) { animation-delay: -4.8s; animation-duration: 6s; }
+@keyframes duman { 0% { transform: translate(0, 0) scale(0.6); opacity: 0.55; } 100% { transform: translate(-70px, -190px) scale(3.2); opacity: 0; } }
+.bant-serit { animation: bant-serit 1.2s linear infinite; }
+@keyframes bant-serit { to { stroke-dashoffset: -24; } }
+.sandik { animation: sandik 28s linear infinite; animation-delay: var(--g); }
+@keyframes sandik { from { transform: translate(-160px, 850px); } to { transform: translate(1600px, 850px); } }

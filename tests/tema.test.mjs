@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync, statSync } from 'node:fs';
+import { FABRIKA_SVG } from '../araclar/fabrika.mjs';
 
 const oku = (yol) => readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
 
@@ -61,4 +62,12 @@ test('alt sayfa şahini yalnız nefes alır ve hareketi azaltınca durur', () =>
   const css = oku('css/site.css');
   assert.match(css, /\.sayfa-sahin\s*\{[^}]*animation:\s*nefes/);
   assert.ok(css.slice(css.indexOf('prefers-reduced-motion')).includes('.sayfa-sahin'));
+});
+
+test('fabrika bandı: tuğla fabrika, çalışan saat, tek duman grubu, dişli yok', () => {
+  assert.equal((FABRIKA_SVG.match(/<animateTransform /g) || []).length, 2);
+  assert.doesNotMatch(FABRIKA_SVG, /disli|dondur|fab-b|Demir-cam/);
+  for (const ad of ['SKYTRACK', 'PİKSEL', 'AJAN', 'DESTE', 'ATÖLYE Nº 1', 'ÜRETİM HATTI']) assert.ok(FABRIKA_SVG.includes(ad), ad);
+  assert.equal((FABRIKA_SVG.match(/<g class="duman/g) || []).length, 1);
+  assert.ok(oku('projeler/index.html').includes('ATÖLYE Nº 1'));
 });

@@ -4,6 +4,7 @@
 import { writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { PROJELER, projeKartiHTML } from '../js/projeler.js';
+import { FABRIKA_SVG } from './fabrika.mjs';
 
 const KOK = fileURLToPath(new URL('../', import.meta.url));
 const KONTROL = process.argv.includes('--kontrol');
@@ -45,8 +46,9 @@ ${BOLUMLER.map(([h, ad], i) => `      <a href="${onek}${h}/"${h === aktif ? ' ar
   </nav>`;
 
 // Sayfa başı: numaralı etiket + damga, serif başlık, tanıtım ve sayfanın şahin pozu.
-export const sayfaBasi = ({ no, etiket, damga, baslik, tanitim, poz, onek = '../', ek = '' }) => `
-    <header class="sayfa-basi">
+export const sayfaBasi = ({ no, etiket, damga, baslik, tanitim, poz, onek = '../', ek = '', sinif = '', cizim = '' }) => `
+    <header class="sayfa-basi${sinif ? ` ${sinif}` : ''}">${cizim ? `
+      <div class="bant-cizim" aria-hidden="true">${cizim}</div>` : ''}
       <img class="sayfa-sahin" src="${onek}img/sahin/${poz}.webp" alt="" width="240" height="240">
       <div class="sayfa-metin">
         <p class="etiket"><span class="no">${no}</span>${etiket}<span class="damga">${damga}</span></p>
@@ -134,7 +136,7 @@ ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', basl
 // --- Projeler
 yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/' })}${menu('projeler')}
   <main id="icerik">
-${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'sag',
+${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'sag', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsi açık kaynak. Kodlarına GitHub\'dan bakabilir, nasıl yapıldıklarını slaytlardan öğrenebilirsin.' })}
     <div class="filtre" role="group" aria-label="Projeleri süz">
       <button type="button" data-etiket="hepsi" aria-pressed="true">hepsi</button>
@@ -150,6 +152,8 @@ ${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
 
   <script type="module">
     import { PROJELER, projeleriSuz } from '../js/projeler.js';
+    // hareketi azaltınca fabrikanın SMIL animasyonları (saat) da durur
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.bant-cizim svg')?.pauseAnimations();
     const kartlar = [...document.querySelectorAll('#projeler .kart')];
     const sayac = document.getElementById('proje-sayac');
     const dugmeler = [...document.querySelectorAll('.filtre button')];

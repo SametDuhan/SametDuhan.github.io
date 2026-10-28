@@ -175,3 +175,8 @@ test('yazdırma görünümü menüleri gizler, beyaz zemine siyah yazı basar', 
   assert.match(blok, /\.yan-menu/);
   assert.match(blok, /background: #fff/);
 });
+
+test('proje kartı kendi pigmentini taşır', () => {
+  assert.match(projeKartiHTML(PROJELER[0]), /<article class="kart kose p-kehribar"/);
+  assert.deepEqual(PROJELER.map((p) => p.pigment), ['kehribar', 'civit', 'bakir']);
+});
