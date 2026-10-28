@@ -90,3 +90,59 @@ test('tanımı kalkmış renk değişkeni kullanılmıyor', () => {
   const bulunan = siteDosyalari().filter((f) => readFileSync(f, 'utf8').includes('--vurgu-rgb'));
   assert.deepEqual(bulunan.map((f) => relative(KOK, f)), []);
 });
+
+// WCAG göreli parlaklık ve kontrast oranı
+const parlaklik = (hex) => {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const kontrast = (a, b) => { const [x, y] = [parlaklik(a), parlaklik(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+
+test('yazılar zeminleriyle en az 4,5:1 kontrastta (pigment etiketleri dahil)', () => {
+  const tema = oku('css/tema.css');
+  const tok = Object.fromEntries([...tema.matchAll(/--([\w-]+):\s*(#[0-9a-f]{6})/gi)].map(([, k, v]) => [k, v.toLowerCase()]));
+  // pigment sınıfları --p, --p-dolgu, --p-ust tanımlar; kural pigmentsizse varsayılanlar geçer
+  const pigmentler = [...tema.matchAll(/\.p-(\w+)\s*\{([^}]*)\}/g)].map(([, ad, govde]) => ({ ad, govde }));
+  const coz = (deger, pig) => {
+    let v = deger.trim();
+    for (let i = 0; i < 4; i++) {
+      const m = v.match(/^var\(--([\w-]+)(?:,\s*(.+))?\)$/);
+      if (!m) break;
+      const yerel = pig && pig.govde.match(new RegExp(`--${m[1]}:\\s*([^;]+)`));
+      v = yerel ? yerel[1].trim() : tok[m[1]] ?? (m[2] ?? '').trim();
+    }
+    return /^#[0-9a-f]{6}$/i.test(v) ? v.toLowerCase() : null;
+  };
+  // ebeveyni koyu mürekkep zeminli: <pre> içindeki kod, menüde seçili bağlantının numarası
+  const KOD_ICI = new Set(['.slayt pre code', '.menu-linkler a[aria-current="page"] i']);
+  const dusuk = [];
+  const kaynaklar = ['css/tema.css', 'css/giris.css', 'css/site.css', 'css/deste.css', ...['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum'].map((d) => `slaytlar/${d}/index.html`)];
+  for (const yol of kaynaklar) {
+    for (const [, secici, govde] of oku(yol).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const renk = govde.match(/(?:^|;)\s*color:\s*([^;!]+)/);
+      if (!renk || KOD_ICI.has(secici.trim())) continue;
+      const zemin = govde.match(/background(?:-color)?:\s*([^;!]+)/);
+      for (const pig of [null, ...pigmentler]) {
+        const y = coz(renk[1], pig), z = zemin ? coz(zemin[1], pig) : tok.zemin;
+        if (!y || !z) continue;
+        const k = kontrast(y, z);
+        if (k < 4.5) dusuk.push(`${yol} ${secici.trim()}${pig ? ` [p-${pig.ad}]` : ''}: ${k.toFixed(2)}`);
+      }
+    }
+  }
+  assert.deepEqual([...new Set(dusuk)], []);
+});
+
+test('hareketi azaltınca sandıklar bantta yerinde durur', () => {
+  const sandiklar = FABRIKA_SVG.match(/<g class="sandik" style="[^"]*"/g) || [];
+  assert.equal(sandiklar.length, 4);
+  for (const s of sandiklar) assert.match(s, /--x:\s*\d+px/);
+  assert.match(oku('css/site.css'), /\.sandik\s*\{[^}]*transform:\s*translate\(var\(--x\),\s*850px\)/);
+});
+
+test('ana sayfadaki süs yazıları ekran okuyucudan gizli', () => {
+  const s = oku('index.html');
+  assert.match(s, /<g class="olcu-yazi" aria-hidden="true">/);
+  assert.match(s, /<g class="tunek" aria-hidden="true">/);
+  assert.match(s, /<!-- teknik çizim kılavuzları -->\s*<g aria-hidden="true"/);
+});

@@ -15,13 +15,13 @@
   <style>
     .sayilar { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 12px; margin: 14px 0; }
     .sayilar .panel { margin: 0; text-align: center; }
-    .sayilar b { display: block; font-family: var(--mono); font-size: clamp(30px, 5vw, 44px); color: var(--vurgu); line-height: 1.1; }
+    .sayilar b { display: block; font-family: var(--mono); font-size: clamp(30px, 5vw, 44px); color: var(--vurgu-koyu); line-height: 1.1; }
     .sayilar span { font-size: 14px; color: var(--soluk); }
     .cubuk { height: 14px; border-radius: 7px; background: var(--kenar); overflow: hidden; margin: 6px 0 2px; }
     .cubuk i { display: block; height: 100%; background: var(--vurgu); }
     .zaman { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
     .zaman button { font-family: var(--mono); font-size: 13px; color: var(--yazi); background: var(--panel-cam); border: 1px solid var(--kenar); border-radius: 20px; padding: 6px 12px; cursor: pointer; }
-    .zaman button[aria-pressed="true"] { border-color: var(--vurgu); color: var(--vurgu); background: color-mix(in srgb, var(--vurgu) 10%, transparent); }
+    .zaman button[aria-pressed="true"] { border-color: var(--vurgu-koyu); color: var(--vurgu-koyu); background: color-mix(in srgb, var(--vurgu) 10%, transparent); }
     .zaman-ayrinti { min-height: 7.5em; }
     .zaman-ayrinti code { white-space: normal; }
     .olcum { font-family: var(--mono); font-size: 12px !important; color: var(--soluk) !important; }

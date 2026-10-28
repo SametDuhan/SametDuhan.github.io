@@ -71,7 +71,7 @@
   width: 24px; height: 24px; border-color: var(--p);
 }
 .kare:focus-visible { outline: 2px solid var(--p); outline-offset: 4px; }
-.kare .no { align-self: flex-start; font: 400 11px var(--mono); color: var(--zemin); background: var(--p); padding: 2px 6px; }
+.kare .no { align-self: flex-start; font: 400 11px var(--mono); color: var(--p-ust, var(--yazi)); background: var(--p-dolgu, var(--vurgu)); padding: 2px 6px; }
 .ikon { flex: 1; display: grid; place-items: center; }
 .ikon svg { width: 44%; max-width: 130px; height: auto; overflow: visible; }
 .ikon svg * { stroke: var(--yazi); stroke-width: 1.6; fill: none; vector-effect: non-scaling-stroke; transition: stroke 0.25s, fill 0.25s; }

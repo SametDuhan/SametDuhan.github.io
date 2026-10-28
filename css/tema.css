@@ -8,12 +8,14 @@
   --yazi: #33261a;
   --soluk: #76624c;
   --vurgu: #d07a2a;
-  --iyi: #4f7d6e;
+  --iyi: #3d6356;
   --kotu: #a8432a;
   --kagit2: #e9dcc2;
+  --vurgu-koyu: #9a5214;
   --ceviz: #5b3a21;
   --civit: #2f4a6b;
   --bakir: #4f7d6e;
+  --bakir-koyu: #3d6356;
   --kiremit: #a8432a;
   --muhur: #8e2f23;
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -70,11 +72,11 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 800; line-height: 1.05; }
   color: var(--soluk);
   text-transform: uppercase;
 }
-.etiket .no { background: var(--vurgu); color: var(--zemin); padding: 3px 6px; letter-spacing: 0; }
+.etiket .no { background: var(--p-dolgu, var(--vurgu)); color: var(--p-ust, var(--yazi)); padding: 3px 6px; letter-spacing: 0; }
 .damga {
   display: inline-block;
   border: 1.5px solid var(--bakir);
-  color: var(--bakir);
+  color: var(--bakir-koyu);
   padding: 2px 6px;
   font: 600 10px/1.4 var(--mono);
   letter-spacing: 0.08em;
@@ -95,7 +97,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 800; line-height: 1.05; }
   background: transparent;
 }
 .dugme:hover { background: color-mix(in srgb, var(--yazi) 6%, transparent); }
-.dugme.birincil, .dugme.ana { background: var(--p, var(--vurgu)); border-color: var(--p, var(--vurgu)); color: var(--zemin); }
+.dugme.birincil, .dugme.ana { background: var(--p-dolgu, var(--vurgu)); border-color: var(--p-dolgu, var(--vurgu)); color: var(--p-ust, var(--yazi)); }
 .dugme.birincil:hover, .dugme.ana:hover { filter: brightness(1.08); }
 
 /* Köşe parantezli kutu: iki köşe ::before/::after, iki köşe içteki <i> */
@@ -113,11 +115,13 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 800; line-height: 1.05; }
 .kose > i.k2 { top: -1px; right: -1px; border-width: 1.5px 1.5px 0 0; }
 .kose > i.k3 { bottom: -1px; left: -1px; border-width: 0 0 1.5px 1.5px; }
 
-/* Pigmentler: kutuya ve karta kendi rengini verir */
-.p-kehribar { --p: var(--vurgu); }
-.p-civit { --p: var(--civit); }
-.p-bakir { --p: var(--bakir); }
-.p-kiremit { --p: var(--kiremit); }
+/* Pigmentler: kutuya ve karta kendi rengini verir.
+   --p süs (çizgi, köşe), --p-dolgu yazının arkasındaki dolgu, --p-ust dolgu üstündeki yazı, --p-metin kâğıt üstündeki yazı.
+   Her yazı çifti en az 4,5:1 (tests/tema.test.mjs denetler). */
+.p-kehribar { --p: var(--vurgu); --p-dolgu: var(--vurgu); --p-ust: var(--yazi); --p-metin: var(--vurgu-koyu); }
+.p-civit { --p: var(--civit); --p-dolgu: var(--civit); --p-ust: var(--zemin); --p-metin: var(--civit); }
+.p-bakir { --p: var(--bakir); --p-dolgu: var(--bakir-koyu); --p-ust: var(--zemin); --p-metin: var(--bakir-koyu); }
+.p-kiremit { --p: var(--kiremit); --p-dolgu: var(--kiremit); --p-ust: var(--zemin); --p-metin: var(--kiremit); }
 
 /* Eski sayfalardaki yanıp sönen imleç (alt sayfalar yeni iskelete geçene dek) */
 .imlec {

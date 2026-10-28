@@ -57,14 +57,14 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .uclu { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
 .kutu { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px; color: var(--yazi); text-decoration: none; border: 1px solid rgba(118, 98, 76, 0.3); background: var(--zemin); }
 .kutu::before { content: ''; position: absolute; top: -1px; left: -1px; width: 14px; height: 14px; border: solid var(--yazi); border-width: 1.5px 0 0 1.5px; transition: width 0.25s, height 0.25s, border-color 0.25s; }
-.kutu:hover::before, .kutu:focus-visible::before { width: 24px; height: 24px; border-color: var(--vurgu); }
+.kutu:hover::before, .kutu:focus-visible::before { width: 24px; height: 24px; border-color: var(--vurgu-koyu); }
 .kutu-komut { font: 400 11px var(--mono); color: var(--soluk); }
 .kutu strong { font: 800 20px/1.15 var(--serif); }
 .kutu span:last-child { font-size: 14px; color: var(--soluk); }
 
 .ilkeler { padding-left: 22px; }
 .ilkeler li { margin: 0 0 10px; line-height: 1.6; }
-.ilkeler li::marker { font: 600 13px var(--mono); color: var(--vurgu); }
+.ilkeler li::marker { font: 600 13px var(--mono); color: var(--vurgu-koyu); }
 .rozetler { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .rozetler li { font: 400 13px var(--mono); border: 1px solid var(--kenar); padding: 4px 9px; background: var(--panel); }
 .cagri p { max-width: 60ch; }
@@ -91,25 +91,25 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .kart-govde h2 { font-size: 34px; margin: 8px 0 8px; }
 .kart-govde p { line-height: 1.6; margin: 0 0 12px; }
 .kart .etiketler { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
-.kart .etiketler span { font: 600 10px var(--mono); letter-spacing: 0.08em; color: var(--zemin); background: var(--p, var(--vurgu)); padding: 2px 6px; }
+.kart .etiketler span { font: 600 10px var(--mono); letter-spacing: 0.08em; color: var(--p-ust, var(--yazi)); background: var(--p-dolgu, var(--vurgu)); padding: 2px 6px; }
 .bilgiler { list-style: none; margin: 0 0 16px; padding: 0; font-size: 14px; }
 .bilgiler li { position: relative; padding: 5px 0 5px 20px; border-top: 1px dashed var(--kenar); }
-.bilgiler li::before { content: '›'; position: absolute; left: 4px; color: var(--p, var(--vurgu)); font-weight: 700; }
-.kart .dugme:first-child { background: var(--p, var(--vurgu)); border-color: var(--p, var(--vurgu)); color: var(--zemin); }
+.bilgiler li::before { content: '›'; position: absolute; left: 4px; color: var(--p-metin, var(--vurgu-koyu)); font-weight: 700; }
+.kart .dugme:first-child { background: var(--p-dolgu, var(--vurgu)); border-color: var(--p-dolgu, var(--vurgu)); color: var(--p-ust, var(--yazi)); }
 
 /* ---- sunum kartları ---- */
 .onerilen-sira { font: 400 14px var(--mono); padding-left: 22px; }
-.onerilen-sira li::marker { color: var(--vurgu); }
+.onerilen-sira li::marker { color: var(--vurgu-koyu); }
 .desteler { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
 .deste-karti { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px; color: var(--yazi); text-decoration: none; border: 1px solid rgba(118, 98, 76, 0.3); background: var(--zemin); }
 .deste-karti::before { content: ''; position: absolute; top: -1px; left: -1px; width: 14px; height: 14px; border: solid var(--yazi); border-width: 1.5px 0 0 1.5px; transition: width 0.25s, height 0.25s, border-color 0.25s; }
 .deste-karti:hover::before, .deste-karti:focus-visible::before { width: 24px; height: 24px; border-color: var(--bakir); }
-.deste-karti .etiket { display: inline-block; align-self: flex-start; color: var(--zemin); background: var(--bakir); padding: 2px 6px; letter-spacing: 0.1em; }
+.deste-karti .etiket { display: inline-block; align-self: flex-start; color: var(--zemin); background: var(--bakir-koyu); padding: 2px 6px; letter-spacing: 0.1em; }
 .deste-karti h2 { font-size: 24px; margin: 6px 0 0; }
 .deste-karti p { margin: 0; font-size: 14px; color: var(--soluk); }
 .deste-karti .alt { margin-top: auto; padding-top: 8px; font: 400 12px var(--mono); color: var(--ceviz); }
-.deste-karti .rozet { position: absolute; top: 14px; right: 14px; font: 600 10px var(--mono); border: 1.5px solid var(--vurgu); color: var(--vurgu); padding: 1px 6px; transform: rotate(-2deg); }
-.deste-karti .rozet.bitti { border-color: var(--bakir); color: var(--bakir); }
+.deste-karti .rozet { position: absolute; top: 14px; right: 14px; font: 600 10px var(--mono); border: 1.5px solid var(--vurgu); color: var(--vurgu-koyu); padding: 1px 6px; transform: rotate(-2deg); }
+.deste-karti .rozet.bitti { border-color: var(--bakir); color: var(--bakir-koyu); }
 
 /* ---- iletişim ---- */
 .kanallar { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -171,5 +171,6 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 @keyframes duman { 0% { transform: translate(0, 0) scale(0.6); opacity: 0.55; } 100% { transform: translate(-70px, -190px) scale(3.2); opacity: 0; } }
 .bant-serit { animation: bant-serit 1.2s linear infinite; }
 @keyframes bant-serit { to { stroke-dashoffset: -24; } }
-.sandik { animation: sandik 28s linear infinite; animation-delay: var(--g); }
+/* animasyon yokken (hareketi azalt) sandıklar bantta kendi yerinde durur */
+.sandik { transform: translate(var(--x), 850px); animation: sandik 28s linear infinite; animation-delay: var(--g); }
 @keyframes sandik { from { transform: translate(-160px, 850px); } to { transform: translate(1600px, 850px); } }
