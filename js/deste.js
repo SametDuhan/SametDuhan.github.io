@@ -1,6 +1,7 @@
 // Deste motoru: section.slayt'ları tek tek gösterir; klavye, kaydırma, hash ve slayt içi bileşenler.
 // Saf fonksiyonlar Node'da sınanır; bagla() tarayıcıya bağlar.
 
+import { ekranaSigdir } from './ekrana-sigdir.js';
 import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from './ilerleme.js';
 
 export function sikistir(i, n) {
@@ -92,6 +93,15 @@ export function bagla(kok) {
   const slaytlar = [...kok.querySelectorAll('section.slayt')];
   const n = slaytlar.length;
   let konum = -1;
+  const ekranlar = new Map();
+  const ekran = () => ekranlar.get(konum);
+  function ekranBilgisi() {
+    const p = ekran();
+    if (!p) return;
+    if (sayac) sayac.textContent = `${konum + 1} / ${n}${p.adet > 1 ? ` · ${p.konum + 1}/${p.adet}` : ''}`;
+    geri.disabled = konum === 0 && p.konum === 0;
+    ileri.disabled = konum === n - 1 && p.konum === p.adet - 1;
+  }
   const slug = location.pathname.split('/').filter(Boolean).pop() || '';
   let depo = null;
   try { depo = localStorage; } catch { /* engelli depo: ilerleme hatırlanmaz */ }
@@ -173,11 +183,14 @@ export function bagla(kok) {
     // Daha ileride kayıtlı bir yer varsa, ziyaretçi onu geçene ya da "baştan" diyene kadar ezilmez.
     if (bekleyen && konum >= onceki.konum) { bekleyen = false; bildirim.hidden = true; }
     if (!bekleyen) ilerlemeKaydet(depo, slug, konum, n);
+    if (!ekranlar.has(konum)) ekranlar.set(konum, ekranaSigdir(s, ekranBilgisi));
+    ekran().git(0);
+    ekranBilgisi();
   }
 
   const eylem = {
-    ileri: () => git(konum + 1),
-    geri: () => git(konum - 1),
+    ileri: () => { if (!ekran()?.ileri()) git(konum + 1); },
+    geri: () => { if (!ekran()?.geri()) { git(konum - 1); ekran()?.git(ekran().adet - 1); } },
     basa: () => git(0),
     sona: () => git(n - 1),
     yardim: () => (yardim.open ? yardim.close() : yardim.showModal()),
@@ -189,7 +202,7 @@ export function bagla(kok) {
   ileri.addEventListener('click', eylem.ileri);
 
   addEventListener('keydown', (e) => {
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.ctrlKey || e.metaKey || e.altKey || e.target.closest?.('input, textarea, select, [contenteditable]')) return;
     if (e.target.closest?.('button, a, input, textarea, select') && (e.key === ' ' || e.key === 'Enter')) return;
     const ad = tusEylemi(e.key);
     if (!ad || (yardim.open && ad !== 'yardim' && ad !== 'kapat')) return;
@@ -204,9 +217,10 @@ export function bagla(kok) {
     const son = e.changedTouches[0];
     const ad = kaydirmaYonu(son.clientX - bas.clientX, son.clientY - bas.clientY);
     bas = null;
-    if (ad && !yardim.open && !e.target.closest('pre, .demo')) eylem[ad]();
+    if (ad && !yardim.open && !e.target.closest('pre, .demo, .laboratuvar, input, select, button')) eylem[ad]();
   });
 
+  kok.addEventListener('gorunum-degisti', () => requestAnimationFrame(() => ekran()?.yenile()));
   addEventListener('hashchange', () => git(hashtenKonum(location.hash, n)));
 
   sorulariBagla(kok);

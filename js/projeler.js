@@ -63,7 +63,8 @@ export function projeleriSuz(liste, etiket) {
 
 export function projeKartiHTML(p, kok = '') {
   const linkler = [
-    p.demo ? `<a class="dugme" href="${kacis(p.demo)}">▶ canlı demo</a>` : '',
+    `<a class="dugme" href="${kacis(kok + 'projeler/' + p.ad.toLowerCase() + '/')}">projeyi keşfet →</a>`,
+    p.demo ? `<a class="dugme" href="${kacis(p.demo)}">▶ tarayıcı demosu (simülasyon)</a>` : '',
     `<a class="dugme" href="${kacis(p.github)}">GitHub</a>`,
     p.deste ? `<a class="dugme" href="${kacis(kok + p.deste)}">nasıl yaptım →</a>` : '',
   ].join('');

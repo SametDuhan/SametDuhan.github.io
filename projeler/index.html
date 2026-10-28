@@ -9,7 +9,7 @@
   <meta property="og:description" content="SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan'ın AI ile kurduğu projeler, demoları ve kodları.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sametduhan.github.io/projeler/">
-  <meta property="og:image" content="https://sametduhan.github.io/img/skytrack-1440.jpg">
+  <meta property="og:image" content="https://sametduhan.github.io/img/paylasim/projeler.png">
   <meta name="theme-color" content="#f2e8d5">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f2e8d5'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='2' fill='none' stroke='%2333261a' stroke-width='1.5'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%2333261a'%3E%C5%9E%3C/text%3E%3C/svg%3E">
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="../css/tema.css">
   <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/ekran.css">
 </head>
 <body>
   <a class="atla" href="#icerik">İçeriğe geç</a>
@@ -119,7 +120,7 @@
     <p class="etiketler"><span>Uygulama</span><span>Açık veri</span></p>
     <p>Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.</p>
     <ul class="bilgiler"><li>Windows, macOS ve Linux; Electron ve Leaflet ile</li><li>15 dil ve tarayıcıda çalışan bir web demosu</li><li>Her push&#39;ta GitHub Actions ile testler</li><li>208 commit&#39;in 191&#39;i Claude ile ortak yazıldı</li></ul>
-    <div class="linkler"><a class="dugme" href="https://sametduhan.github.io/airock/app/">▶ canlı demo</a><a class="dugme" href="https://github.com/SametDuhan/airock">GitHub</a><a class="dugme" href="../slaytlar/skytrack-nasil-kurdum/">nasıl yaptım →</a></div>
+    <div class="linkler"><a class="dugme" href="../projeler/skytrack/">projeyi keşfet →</a><a class="dugme" href="https://sametduhan.github.io/airock/app/">▶ tarayıcı demosu (simülasyon)</a><a class="dugme" href="https://github.com/SametDuhan/airock">GitHub</a><a class="dugme" href="../slaytlar/skytrack-nasil-kurdum/">nasıl yaptım →</a></div>
   </div>
 </article>
 <article class="kart kose p-civit" id="claude-done-pixel" data-ad="claude-done-pixel"><i class="k2"></i><i class="k3"></i>
@@ -130,7 +131,7 @@
     <p class="etiketler"><span>AI aracı</span><span>Claude Code</span></p>
     <p>Claude Code işini bitirince ekranın köşesinde bir piksel karakter koşup zıplar ve yeşil bayrak sallar; terminali kontrol etmeye son.</p>
     <ul class="bilgiler"><li>Claude Code&#39;un Stop hook&#39;u ile çalışır</li><li>Windows; PowerShell, ek paket gerektirmez</li><li>Tıklamaları geçirir, klavye odağını çalmaz</li></ul>
-    <div class="linkler"><a class="dugme" href="https://github.com/SametDuhan/claude-done-pixel">GitHub</a><a class="dugme" href="../slaytlar/claude-code-hook/">nasıl yaptım →</a></div>
+    <div class="linkler"><a class="dugme" href="../projeler/claude-done-pixel/">projeyi keşfet →</a><a class="dugme" href="https://github.com/SametDuhan/claude-done-pixel">GitHub</a><a class="dugme" href="../slaytlar/claude-code-hook/">nasıl yaptım →</a></div>
   </div>
 </article>
 <article class="kart kose p-bakir" id="chatgpt-done-pixel" data-ad="chatgpt-done-pixel"><i class="k2"></i><i class="k3"></i>
@@ -141,7 +142,7 @@
     <p class="etiketler"><span>AI aracı</span><span>Codex</span></p>
     <p>Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar.</p>
     <ul class="bilgiler"><li>Codex&#39;in agent-turn-complete bildirimiyle çalışır</li><li>Windows ve WSL</li><li>Ağ isteği yapmaz, sohbet metnini kaydetmez</li></ul>
-    <div class="linkler"><a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel">GitHub</a></div>
+    <div class="linkler"><a class="dugme" href="../projeler/chatgpt-done-pixel/">projeyi keşfet →</a><a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel">GitHub</a></div>
   </div>
 </article>
     </div>
@@ -151,6 +152,10 @@
     <span>samet duhan · 2026</span>
     <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../iletisim/">iletişim</a></span>
   </footer>
+  <script type="module">
+    import { baslatSayfa } from '../js/ekrana-sigdir.js';
+    baslatSayfa();
+  </script>
 
   <script type="module">
     import { PROJELER, projeleriSuz } from '../js/projeler.js';

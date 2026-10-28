@@ -52,3 +52,18 @@ Slayt içi bileşenler: `.soru` (mini soru), `pre.adim-kod` (satır satır kod),
 - `prefers-reduced-motion` açıkken animasyonlar durur.
 
 claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anthropic ve OpenAI ile bağlantısı yoktur.
+
+## İnteraktif anlatımlar ve proje sayfaları
+
+- `npm run sayfalar` ortak bölüm sayfalarını ve üç proje detayını birlikte üretir.
+- Proje hikâyeleri: `araclar/proje_sayfalari.mjs`. Kartlar: `js/projeler.js`.
+- `css/atolye.css` sunumların ve detay sayfalarının görsel tasarımıdır; ana sayfaya yüklenmez.
+- `js/atolye.js` ajan/hook/alarm deneylerini, paylaşımı ve sayfalı okuma görünümünü bağlar.
+- `?gorunum=oku` sunumu dar okuma görünümünde açar; `#3` gibi bağlantılar bir slaydı paylaşır.
+- Paylaşım kapaklarının kaynakları ve 1200×630 PNG çıktıları `img/paylasim/` içindedir.
+- Deneyler tarayıcıda simülasyon olarak çalışır. Gerçek bir ajan ya da PowerShell komutu çalıştırmaz.
+- Yeni proje için detay hikâyesini de ekle; bilgileri README/commit kayıtlarıyla doğrula.
+
+## Tek ekran gezinme
+
+`css/ekran.css` görünümü pencereye sığdırır; `js/ekrana-sigdir.js` uzun içeriği yatay sayfalara böler. İçerik silinmez; önceki/sonraki düğmeleriyle tamamına ulaşılır. Sunumda sayaçtaki ikinci sayı aynı slaydın devam sayfasıdır. Kaydırma yerine ok tuşları da kullanılabilir. JavaScript kapalıyken ve yazdırırken doğal belge akışı korunur.

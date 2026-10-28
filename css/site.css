@@ -174,3 +174,14 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 /* animasyon yokken (hareketi azalt) sandıklar bantta kendi yerinde durur */
 .sandik { transform: translate(var(--x), 850px); animation: sandik 28s linear infinite; animation-delay: var(--g); }
 @keyframes sandik { from { transform: translate(-160px, 850px); } to { transform: translate(1600px, 850px); } }
+
+/* ---- tek ekran gezinme (css/ekran.css) ile sol menü: içerik ve sayfa düğmeleri menünün sağında kalır ---- */
+.tek-ekran > .yan-menu { flex-shrink: 0; }
+@media (min-width: 901px) {
+  body.tek-ekran { padding-left: 220px; }
+  .tek-ekran > .alt-bilgi { margin-left: 0; }
+}
+/* Tek ekranda içerik en fazla 1040px: fabrika her genişlikte metnin altında kendi şeridinde */
+.tek-ekran .sayfa-basi.bant { flex-wrap: wrap; min-height: 0; margin: 0 0 24px; padding: 0; }
+.tek-ekran .sayfa-basi.bant .sayfa-metin { flex: 1 1 280px; max-width: none; }
+.tek-ekran .sayfa-basi.bant .bant-cizim { position: relative; inset: auto; order: 3; flex: 1 0 100%; height: clamp(150px, 24vh, 260px); }

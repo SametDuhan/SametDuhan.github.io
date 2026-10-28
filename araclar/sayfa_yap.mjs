@@ -12,7 +12,7 @@ const farkli = [];
 const URL_KOK = 'https://sametduhan.github.io/';
 export const IKON = `<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f2e8d5'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='2' fill='none' stroke='%2333261a' stroke-width='1.5'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%2333261a'%3E%C5%9E%3C/text%3E%3C/svg%3E">`;
 
-export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!doctype html>
+export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '', kapak = yol === '404.html' ? 'projeler' : yol.split('/')[0] || 'projeler' }) => `<!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
@@ -23,7 +23,7 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!d
   <meta property="og:description" content="${aciklama}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${URL_KOK}${yol}">
-  <meta property="og:image" content="${URL_KOK}img/skytrack-1440.jpg">
+  <meta property="og:image" content="${URL_KOK}img/paylasim/${kapak}.png">
   <meta name="theme-color" content="#f2e8d5">
   <meta name="twitter:card" content="summary_large_image">
   ${IKON}
@@ -32,6 +32,7 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '' }) => `<!d
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="${onek}css/tema.css">
   <link rel="stylesheet" href="${onek}css/site.css">${ekCss}
+  <link rel="stylesheet" href="${onek}css/ekran.css">
 </head>
 <body>
   <a class="atla" href="#icerik">İçeriğe geç</a>`;
@@ -61,7 +62,11 @@ export const son = (onek = '../') => `
   <footer class="alt-bilgi">
     <span>samet duhan · 2026</span>
     <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="${onek}iletisim/">iletişim</a></span>
-  </footer>`;
+  </footer>
+  <script type="module">
+    import { baslatSayfa } from '${onek}js/ekrana-sigdir.js';
+    baslatSayfa();
+  </script>`;
 
 const yaz = (yol, html) => {
   if (!KONTROL) return writeFileSync(KOK + yol, html);
@@ -179,7 +184,7 @@ ${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
 `);
 
 // --- Slaytlar
-yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/' })}${menu('slaytlar')}
+yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/', ekCss: '\n  <link rel="stylesheet" href="../css/atolye.css">' })}${menu('slaytlar')}
   <main id="icerik">
 ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'sol',
       tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
