@@ -140,7 +140,7 @@ ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', basl
 
 // --- Projeler
 yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/' })}${menu('projeler')}
-  <main id="icerik">
+  <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'sag', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsi açık kaynak. Kodlarına GitHub\'dan bakabilir, nasıl yapıldıklarını slaytlardan öğrenebilirsin.' })}
     <div class="filtre" role="group" aria-label="Projeleri süz">
@@ -152,32 +152,41 @@ ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', 
     <div class="projeler" id="projeler">
 ${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
     </div>
+    <nav class="liste-sayfalar" aria-label="Proje sayfaları" hidden></nav>
     <p class="not">claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anthropic ve OpenAI ile bağlantısı yok.</p>
   </main>${son()}
 
   <script type="module">
     import { PROJELER, projeleriSuz } from '../js/projeler.js';
+    import { sayfala, sayfaGezinmesi } from '../js/sayfala.js';
     // hareketi azaltınca fabrikanın SMIL animasyonları (saat) da durur
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.bant-cizim svg')?.pauseAnimations();
     const kartlar = [...document.querySelectorAll('#projeler .kart')];
     const sayac = document.getElementById('proje-sayac');
     const dugmeler = [...document.querySelectorAll('.filtre button')];
-    // Filtre adreste durur: ?etiket=… ile paylaşılabilir.
-    function suz(etiket, adresiGuncelle = true) {
+    // Filtre ve sayfa adreste durur: ?etiket=…&sayfa=… ile paylaşılabilir. Sayfa başına en fazla 5 proje.
+    const sorgu = new URLSearchParams(location.search);
+    let etiket = PROJELER.some((p) => p.etiketler.includes(sorgu.get('etiket'))) ? sorgu.get('etiket') : 'hepsi';
+    let sayfa = sorgu.get('sayfa') || 1;
+    const gezinme = sayfaGezinmesi(document.querySelector('.liste-sayfalar'), (n) => { sayfa = n; goster(); });
+    function goster(adresiGuncelle = true) {
+      const uygun = projeleriSuz(PROJELER, etiket).map((p) => p.ad);
+      const s = sayfala(uygun, sayfa);
+      sayfa = s.sayfa;
+      const gorunur = new Set(s.ogeler);
+      kartlar.forEach((k) => { k.hidden = !gorunur.has(k.dataset.ad); });
+      dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
+      sayac.textContent = \`\${uygun.length} proje\`;
+      gezinme(s);
       if (adresiGuncelle) {
         const u = new URL(location.href);
         if (etiket === 'hepsi') u.searchParams.delete('etiket'); else u.searchParams.set('etiket', etiket);
+        if (sayfa > 1) u.searchParams.set('sayfa', sayfa); else u.searchParams.delete('sayfa');
         history.replaceState(null, '', u);
       }
-      const gorunur = new Set(projeleriSuz(PROJELER, etiket).map((p) => p.ad));
-      kartlar.forEach((k) => { k.hidden = !gorunur.has(k.dataset.ad); });
-      dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
-      sayac.textContent = \`\${gorunur.size} proje\`;
     }
-    dugmeler.forEach((b) => b.addEventListener('click', () => suz(b.dataset.etiket)));
-    const istenen = new URLSearchParams(location.search).get('etiket');
-    // Kartta görünen her etiket adresle süzülebilir (ör. ?etiket=Codex); bilinmeyen etiket → hepsi.
-    suz(PROJELER.some((p) => p.etiketler.includes(istenen)) ? istenen : 'hepsi', false);
+    dugmeler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; sayfa = 1; goster(); }));
+    goster(false);
   </script>
 </body>
 </html>
@@ -185,7 +194,7 @@ ${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
 
 // --- Slaytlar
 yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/', ekCss: '\n  <link rel="stylesheet" href="../css/atolye.css">' })}${menu('slaytlar')}
-  <main id="icerik">
+  <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'sol',
       tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
     <ol class="onerilen-sira" aria-label="Önerilen sıra">
@@ -211,12 +220,14 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
         <a class="deste-karti" href="./skytrack-nasil-kurdum/"><h2>SkyTrack'i AI ile nasıl kurdum</h2></a>
       </noscript>
     </div>
+    <nav class="liste-sayfalar" aria-label="Sunum sayfaları" hidden></nav>
     <p class="bos" id="bos" hidden>Bu aramayla eşleşen sunum yok. <button type="button" class="dugme" id="temizle">aramayı temizle</button></p>
   </main>${son()}
 
   <script type="module">
     import { DESTELER, kartHTML, desteAra } from '../js/desteler.js';
     import { ilerlemeOku } from '../js/ilerleme.js';
+    import { sayfala, sayfaGezinmesi } from '../js/sayfala.js';
     let depo = null;
     try { depo = localStorage; } catch {}
     const kutu = document.getElementById('desteler'), ara = document.getElementById('ara'), sayac = document.getElementById('deste-sayac'), bos = document.getElementById('bos');
@@ -225,22 +236,29 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
     const sorgu = new URLSearchParams(location.search);
     let etiket = cipler.some((b) => b.dataset.etiket === sorgu.get('konu')) ? sorgu.get('konu') : 'hepsi';
     ara.value = sorgu.get('ara') || '';
+    // Sayfa başına en fazla 5 sunum; fazlası sonraki sayfaya geçer (?sayfa=…).
+    let sayfa = sorgu.get('sayfa') || 1;
+    const gezinme = sayfaGezinmesi(document.querySelector('.liste-sayfalar'), (n) => { sayfa = n; goster(); adres(); });
     function adres() {
       const u = new URL(location.href);
       if (ara.value.trim()) u.searchParams.set('ara', ara.value.trim()); else u.searchParams.delete('ara');
       if (etiket !== 'hepsi') u.searchParams.set('konu', etiket); else u.searchParams.delete('konu');
+      if (sayfa > 1) u.searchParams.set('sayfa', sayfa); else u.searchParams.delete('sayfa');
       history.replaceState(null, '', u);
     }
     function goster() {
       const liste = desteAra(DESTELER, ara.value, etiket);
-      kutu.innerHTML = liste.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
+      const s = sayfala(liste, sayfa);
+      sayfa = s.sayfa;
+      kutu.innerHTML = s.ogeler.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
+      gezinme(s);
       cipler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
       sayac.textContent = \`\${liste.length} sunum\`;
       bos.hidden = liste.length > 0;
     }
-    ara.addEventListener('input', () => { goster(); adres(); });
-    cipler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; goster(); adres(); }));
-    document.getElementById('temizle').addEventListener('click', () => { ara.value = ''; etiket = 'hepsi'; goster(); adres(); ara.focus(); });
+    ara.addEventListener('input', () => { sayfa = 1; goster(); adres(); });
+    cipler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; sayfa = 1; goster(); adres(); }));
+    document.getElementById('temizle').addEventListener('click', () => { ara.value = ''; etiket = 'hepsi'; sayfa = 1; goster(); adres(); ara.focus(); });
     goster();
   </script>
 </body>
@@ -249,7 +267,7 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
 
 // --- İletişim
 yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklama: 'Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.', yol: 'iletisim/' })}${menu('iletisim')}
-  <main id="icerik">
+  <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', baslik: 'İletişim', poz: 'kanat-kucuk',
       tanitim: 'En hızlı mail ile ulaşırsın. Ne için yazdığını seç; konu satırı hazır gelsin.' })}
 

@@ -182,6 +182,23 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
   .tek-ekran > .alt-bilgi { margin-left: 0; }
 }
 /* Tek ekranda içerik en fazla 1040px: fabrika her genişlikte metnin altında kendi şeridinde */
-.tek-ekran .sayfa-basi.bant { flex-wrap: wrap; min-height: 0; margin: 0 0 24px; padding: 0; }
-.tek-ekran .sayfa-basi.bant .sayfa-metin { flex: 1 1 280px; max-width: none; }
-.tek-ekran .sayfa-basi.bant .bant-cizim { position: relative; inset: auto; order: 3; flex: 1 0 100%; height: clamp(150px, 24vh, 260px); }
+.tek-ekran:not(.kendi-sayfa) .sayfa-basi.bant { flex-wrap: wrap; min-height: 0; margin: 0 0 24px; padding: 0; }
+.tek-ekran:not(.kendi-sayfa) .sayfa-basi.bant .sayfa-metin { flex: 1 1 280px; max-width: none; }
+.tek-ekran:not(.kendi-sayfa) .sayfa-basi.bant .bant-cizim { position: relative; inset: auto; order: 3; flex: 1 0 100%; height: clamp(150px, 24vh, 260px); }
+
+/* ---- liste sayfaları (projeler, slaytlar, iletişim): kendi sayfalaması, içerik ilk ekranda ---- */
+body.kendi-sayfa main#icerik { width: auto; max-width: 1500px; margin: 0; padding: 40px clamp(20px, 4vw, 56px) 20px; overflow-y: auto; }
+body.kendi-sayfa .sayfa-basi { margin-bottom: 22px; }
+body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * clamp(20px, 4vw, 56px)) 20px; padding: 40px clamp(20px, 4vw, 56px) 16px; }
+.kendi-sayfa .projeler { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.kendi-sayfa .kart { grid-template-columns: 1fr; align-content: start; gap: 12px; padding: 18px; }
+.kendi-sayfa .kart img { order: 0; height: 130px; object-fit: cover; padding: 0; }
+.kendi-sayfa .kart img.piksel { object-fit: contain; padding: 14px; }
+.kendi-sayfa .kart-govde h2 { font-size: 26px; margin: 4px 0 6px; }
+.kendi-sayfa .kart-govde > p:not([class]) { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; font-size: 14.5px; }
+.kendi-sayfa .kart .bilgiler { display: none; }
+.kendi-sayfa .kart .linkler { margin-top: 8px; }
+.kendi-sayfa .kart .dugme { padding: 7px 10px; font-size: 12.5px; }
+.liste-sayfalar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 18px 0 0; font: 12px var(--mono); color: var(--vurgu-koyu); }
+.liste-sayfalar[hidden] { display: none; }
+.liste-sayfalar .dugme:disabled { opacity: 0.35; cursor: default; }

@@ -39,6 +39,8 @@ export function baslatSayfa() {
   const root = document.querySelector('main#icerik');
   if (!root) return;
   document.body.classList.add('tek-ekran');
+  // Liste sayfaları kendi sayfalamasını yapar (js/sayfala.js): içerik tek sütunda, ilk ekranda kalır.
+  if (root.dataset.sayfalama === 'kendi') { document.body.classList.add('kendi-sayfa'); return; }
   const nav = document.createElement('nav'); nav.className = 'ekran-gezinme'; nav.setAttribute('aria-label', 'Sayfa bölümleri');
   const prev = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: '← önceki' });
   const next = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: 'sonraki →' });

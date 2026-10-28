@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { PROJELER, projeleriSuz, projeKartiHTML } from '../js/projeler.js';
+import { sayfala, SAYFA_BOYU } from '../js/sayfala.js';
 import { DESTELER, desteAra } from '../js/desteler.js';
 import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from '../js/ilerleme.js';
 import { mailtoLinki } from '../js/iletisim.js';
@@ -179,4 +180,26 @@ test('yazdırma görünümü menüleri gizler, beyaz zemine siyah yazı basar', 
 test('proje kartı kendi pigmentini taşır', () => {
   assert.match(projeKartiHTML(PROJELER[0]), /<article class="kart kose p-kehribar"/);
   assert.deepEqual(PROJELER.map((p) => p.pigment), ['kehribar', 'civit', 'bakir']);
+});
+
+test('listeler sayfa başına 5; fazlası sonraki sayfaya geçer, sayfa aralığa sıkıştırılır', () => {
+  assert.equal(SAYFA_BOYU, 5);
+  const liste = Array.from({ length: 7 }, (_, i) => i);
+  assert.deepEqual(sayfala(liste, 1), { ogeler: [0, 1, 2, 3, 4], sayfa: 1, adet: 2 });
+  assert.deepEqual(sayfala(liste, 2), { ogeler: [5, 6], sayfa: 2, adet: 2 });
+  assert.deepEqual(sayfala(liste, 9).sayfa, 2);
+  assert.deepEqual(sayfala(liste, 0).sayfa, 1);
+  assert.deepEqual(sayfala(liste, 'x').sayfa, 1);
+  assert.deepEqual(sayfala([1, 2, 3], 1), { ogeler: [1, 2, 3], sayfa: 1, adet: 1 });
+  assert.deepEqual(sayfala([], 1), { ogeler: [], sayfa: 1, adet: 1 });
+});
+
+test('projeler, slaytlar ve iletişim genel sütun sayfalamasını kullanmaz; listeler kendi sayfalamasıyla', () => {
+  for (const yol of ['projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html']) {
+    assert.match(oku(yol), /<main id="icerik" data-sayfalama="kendi">/, yol);
+  }
+  for (const yol of ['projeler/index.html', 'slaytlar/index.html']) {
+    assert.match(oku(yol), /<nav class="liste-sayfalar"[^>]*hidden/, yol);
+  }
+  assert.match(oku('js/ekrana-sigdir.js'), /dataset\.sayfalama === 'kendi'/);
 });

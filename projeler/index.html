@@ -31,7 +31,7 @@
       <a href="../iletisim/"><i>04</i>İletişim</a>
     </div>
   </nav>
-  <main id="icerik">
+  <main id="icerik" data-sayfalama="kendi">
 
     <header class="sayfa-basi bant">
       <div class="bant-cizim" aria-hidden="true"><svg viewBox="380 420 1060 480" preserveAspectRatio="xMaxYMax meet">
@@ -146,6 +146,7 @@
   </div>
 </article>
     </div>
+    <nav class="liste-sayfalar" aria-label="Proje sayfaları" hidden></nav>
     <p class="not">claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anthropic ve OpenAI ile bağlantısı yok.</p>
   </main>
   <footer class="alt-bilgi">
@@ -159,27 +160,35 @@
 
   <script type="module">
     import { PROJELER, projeleriSuz } from '../js/projeler.js';
+    import { sayfala, sayfaGezinmesi } from '../js/sayfala.js';
     // hareketi azaltınca fabrikanın SMIL animasyonları (saat) da durur
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.bant-cizim svg')?.pauseAnimations();
     const kartlar = [...document.querySelectorAll('#projeler .kart')];
     const sayac = document.getElementById('proje-sayac');
     const dugmeler = [...document.querySelectorAll('.filtre button')];
-    // Filtre adreste durur: ?etiket=… ile paylaşılabilir.
-    function suz(etiket, adresiGuncelle = true) {
+    // Filtre ve sayfa adreste durur: ?etiket=…&sayfa=… ile paylaşılabilir. Sayfa başına en fazla 5 proje.
+    const sorgu = new URLSearchParams(location.search);
+    let etiket = PROJELER.some((p) => p.etiketler.includes(sorgu.get('etiket'))) ? sorgu.get('etiket') : 'hepsi';
+    let sayfa = sorgu.get('sayfa') || 1;
+    const gezinme = sayfaGezinmesi(document.querySelector('.liste-sayfalar'), (n) => { sayfa = n; goster(); });
+    function goster(adresiGuncelle = true) {
+      const uygun = projeleriSuz(PROJELER, etiket).map((p) => p.ad);
+      const s = sayfala(uygun, sayfa);
+      sayfa = s.sayfa;
+      const gorunur = new Set(s.ogeler);
+      kartlar.forEach((k) => { k.hidden = !gorunur.has(k.dataset.ad); });
+      dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
+      sayac.textContent = `${uygun.length} proje`;
+      gezinme(s);
       if (adresiGuncelle) {
         const u = new URL(location.href);
         if (etiket === 'hepsi') u.searchParams.delete('etiket'); else u.searchParams.set('etiket', etiket);
+        if (sayfa > 1) u.searchParams.set('sayfa', sayfa); else u.searchParams.delete('sayfa');
         history.replaceState(null, '', u);
       }
-      const gorunur = new Set(projeleriSuz(PROJELER, etiket).map((p) => p.ad));
-      kartlar.forEach((k) => { k.hidden = !gorunur.has(k.dataset.ad); });
-      dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
-      sayac.textContent = `${gorunur.size} proje`;
     }
-    dugmeler.forEach((b) => b.addEventListener('click', () => suz(b.dataset.etiket)));
-    const istenen = new URLSearchParams(location.search).get('etiket');
-    // Kartta görünen her etiket adresle süzülebilir (ör. ?etiket=Codex); bilinmeyen etiket → hepsi.
-    suz(PROJELER.some((p) => p.etiketler.includes(istenen)) ? istenen : 'hepsi', false);
+    dugmeler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; sayfa = 1; goster(); }));
+    goster(false);
   </script>
 </body>
 </html>
