@@ -1,70 +1,84 @@
+/* Şahin teması: kâğıt zemin, mürekkep yazı, tarihî pigmentler.
+   Eski token adları korunur (desteler ve alt sayfalar bunları kullanıyor); değerleri kâğıda döndü. */
 :root {
-  --zemin: #070b12;
-  --panel: #0d1420;
-  --panel-cam: rgba(13, 20, 32, 0.78);
-  --kenar: #23415a;
-  --yazi: #e6edf3;
-  --soluk: #7d8590;
-  --vurgu: #5ccfff;
-  --vurgu-rgb: 92, 207, 255;
-  --iyi: #7ee787;
-  --kotu: #ff7b72;
-  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --r: 10px;
-  color-scheme: dark;
+  --zemin: #f2e8d5;
+  --panel: #e9dcc2;
+  --panel-cam: rgba(233, 220, 194, 0.85);
+  --kenar: #cdb894;
+  --yazi: #33261a;
+  --soluk: #76624c;
+  --vurgu: #d07a2a;
+  --iyi: #4f7d6e;
+  --kotu: #a8432a;
+  --kagit2: #e9dcc2;
+  --ceviz: #5b3a21;
+  --civit: #2f4a6b;
+  --bakir: #4f7d6e;
+  --kiremit: #a8432a;
+  --muhur: #8e2f23;
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  --sans: 'Public Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --r: 2px;
+  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-/* Arka plan: soluk nokta ızgarası; fener (js/fener.js) imlecin çevresini aydınlatır */
 html {
-  --fx: -999px;
-  --fy: -999px;
-  background-color: var(--zemin);
-  background-image: radial-gradient(circle, rgba(var(--vurgu-rgb), 0.09) 0.8px, transparent 1.2px);
-  background-size: 22px 22px;
-  background-attachment: fixed;
+  background: var(--zemin);
   -webkit-text-size-adjust: 100%;
-}
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: radial-gradient(circle, rgba(var(--vurgu-rgb), 0.65) 0.8px, transparent 1.3px);
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(150px circle at var(--fx) var(--fy), #000, transparent);
-  mask-image: radial-gradient(150px circle at var(--fx) var(--fy), #000, transparent);
 }
 
 body {
   margin: 0;
   min-height: 100svh;
-  background: transparent;
+  background: var(--zemin);
   color: var(--yazi);
   font-family: var(--sans);
   line-height: 1.55;
   overflow-x: hidden;
 }
 
-a { color: var(--vurgu); }
+/* Kâğıt: ince lif ve benek gürültüsü + kenarlara doğru hafif kararma */
+body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; }
+body::before {
+  z-index: 50;
+  opacity: 0.45;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .33 0 0 0 0 .2 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after {
+  z-index: 49;
+  background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(91, 58, 33, 0.16) 100%);
+}
+
+a { color: var(--ceviz); }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
 
 code, pre, .mono { font-family: var(--mono); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 800; line-height: 1.05; }
 
-.komut { font-family: var(--mono); color: var(--soluk); font-size: 14px; }
-.komut b { color: var(--vurgu); font-weight: 400; }
-
-.imlec {
+/* Numaralı etiket: "02  ÜRETİM HATTI  [DAMGA]" */
+.etiket {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  font: 600 10px/1.4 var(--mono);
+  letter-spacing: 0.22em;
+  color: var(--soluk);
+  text-transform: uppercase;
+}
+.etiket .no { background: var(--vurgu); color: var(--zemin); padding: 3px 6px; letter-spacing: 0; }
+.damga {
   display: inline-block;
-  width: 0.6em;
-  height: 1.1em;
-  margin-left: 4px;
-  vertical-align: -0.15em;
-  background: var(--vurgu);
-  animation: imlec 1s steps(1) infinite;
+  border: 1.5px solid var(--bakir);
+  color: var(--bakir);
+  padding: 2px 6px;
+  font: 600 10px/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  transform: rotate(-2deg);
 }
 
 .dugme {
@@ -72,29 +86,49 @@ code, pre, .mono { font-family: var(--mono); }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--mono);
-  font-size: 13px;
+  font: 600 13px/1.2 var(--sans);
   color: var(--yazi);
   text-decoration: none;
-  border: 1px solid var(--kenar);
-  border-radius: 6px;
-  padding: 7px 11px;
-  background: rgba(7, 11, 18, 0.6);
+  border: 1.5px solid var(--yazi);
+  border-radius: var(--r);
+  padding: 9px 13px;
+  background: transparent;
 }
+.dugme:hover { background: color-mix(in srgb, var(--yazi) 6%, transparent); }
+.dugme.birincil, .dugme.ana { background: var(--p, var(--vurgu)); border-color: var(--p, var(--vurgu)); color: var(--zemin); }
+.dugme.birincil:hover, .dugme.ana:hover { filter: brightness(1.08); }
 
-.dugme:hover { border-color: var(--vurgu); color: var(--vurgu); }
-
-.dugme.ana {
-  font-size: clamp(16px, 3vw, 20px);
-  padding: 16px 22px;
-  border-color: var(--vurgu);
-  color: var(--vurgu);
-  background: rgba(var(--vurgu-rgb), 0.08);
-  box-shadow: 0 0 24px rgba(var(--vurgu-rgb), 0.15);
+/* Köşe parantezli kutu: iki köşe ::before/::after, iki köşe içteki <i> */
+.kose { position: relative; border: 1px solid rgba(118, 98, 76, 0.3); background: var(--zemin); }
+.kose::before, .kose::after, .kose > i.k2, .kose > i.k3 {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: solid var(--yazi);
+  transition: width 0.25s, height 0.25s, border-color 0.25s;
 }
+.kose::before { top: -1px; left: -1px; border-width: 1.5px 0 0 1.5px; }
+.kose::after { bottom: -1px; right: -1px; border-width: 0 1.5px 1.5px 0; }
+.kose > i.k2 { top: -1px; right: -1px; border-width: 1.5px 1.5px 0 0; }
+.kose > i.k3 { bottom: -1px; left: -1px; border-width: 0 0 1.5px 1.5px; }
 
-.dugme.ana:hover { background: rgba(var(--vurgu-rgb), 0.16); }
+/* Pigmentler: kutuya ve karta kendi rengini verir */
+.p-kehribar { --p: var(--vurgu); }
+.p-civit { --p: var(--civit); }
+.p-bakir { --p: var(--bakir); }
+.p-kiremit { --p: var(--kiremit); }
 
+/* Eski sayfalardaki yanıp sönen imleç (alt sayfalar yeni iskelete geçene dek) */
+.imlec {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 4px;
+  vertical-align: -0.15em;
+  background: var(--yazi);
+  animation: imlec 1s steps(1) infinite;
+}
 @keyframes imlec { 50% { opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {

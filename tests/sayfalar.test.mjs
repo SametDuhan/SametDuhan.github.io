@@ -8,9 +8,9 @@ const oku = (yol) => readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8')
 test('giriş ekranı dört kareyle dört sayfaya gider ve kimlik cümlesini taşır', () => {
   const giris = oku('index.html');
   for (const href of ['hakkimda/', 'projeler/', 'slaytlar/', 'iletisim/']) {
-    assert.match(giris, new RegExp(`<a class="kare"[^>]*href="${href}"`), `kare yok: ${href}`);
+    assert.match(giris, new RegExp(`<a class="kare [^"]*" href="${href}"`), `kare yok: ${href}`);
   }
-  assert.equal((giris.match(/<a class="kare"/g) || []).length, 4);
+  assert.equal((giris.match(/<a class="kare /g) || []).length, 4);
   assert.ok(giris.includes('AI ile sistem kuran geliştirici'));
 });
 
