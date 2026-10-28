@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2e8d5">
   <title>AI ajanı nedir? · Samet Duhan</title>
   <meta name="description" content="Sohbet botuyla iş bitiren AI ajanı arasındaki fark, sıfırdan ve örneklerle.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070b12'/%3E%3Cpath d='M8 10l6 6-6 6' stroke='%235ccfff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='16' y='20' width='9' height='3' rx='1.5' fill='%235ccfff'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f2e8d5'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='2' fill='none' stroke='%2333261a' stroke-width='1.5'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%2333261a'%3E%C5%9E%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="../../css/tema.css">
   <link rel="stylesheet" href="../../css/deste.css">
   <style>
     .dongu { width: 100%; max-width: min(520px, 62svh); height: auto; display: block; margin: 0 auto; }
     .dongu .dugum rect { fill: var(--panel); stroke: var(--kenar); stroke-width: 1.5; transition: stroke 0.2s, fill 0.2s; }
     .dongu .dugum text { fill: var(--yazi); font: 14px var(--mono); text-anchor: middle; dominant-baseline: middle; }
-    .dongu .dugum.aktif rect { stroke: var(--vurgu); fill: rgba(92, 207, 255, 0.15); }
+    .dongu .dugum.aktif rect { stroke: var(--vurgu); fill: color-mix(in srgb, var(--vurgu) 15%, transparent); }
     .dongu path { stroke: var(--soluk); stroke-width: 1.5; fill: none; marker-end: url(#ok); }
     .dongu-log { font-family: var(--mono); font-size: 14px; color: var(--vurgu); min-height: 3.2em; margin: 8px 0 0; }
     @media (prefers-reduced-motion: reduce) { .dongu .dugum rect { transition: none; } }
@@ -65,7 +66,7 @@
       <p>Bir ajan, iş bitene kadar bu dört adımı tekrar tekrar döner. Düğmeye basıp bir turu adım adım izle:</p>
       <div class="demo" style="padding:14px">
         <svg class="dongu" viewBox="0 0 520 260" role="img" aria-label="Ajan döngüsü: bak, karar ver, yap, kontrol et">
-          <defs><marker id="ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7d8590" stroke="none"/></marker></defs>
+          <defs><marker id="ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#76624c" stroke="none"/></marker></defs>
           <g class="dugum" data-adim="0"><rect x="190" y="10" width="140" height="44" rx="8"/><text x="260" y="32">1. bak</text></g>
           <g class="dugum" data-adim="1"><rect x="370" y="108" width="140" height="44" rx="8"/><text x="440" y="130">2. karar ver</text></g>
           <g class="dugum" data-adim="2"><rect x="190" y="206" width="140" height="44" rx="8"/><text x="260" y="228">3. yap</text></g>

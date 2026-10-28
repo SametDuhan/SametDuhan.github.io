@@ -1,8 +1,17 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
+import { join, dirname, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { FABRIKA_SVG } from '../araclar/fabrika.mjs';
 
+const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
+const ATLA = new Set(['tests', '.git', '.superpowers', 'node_modules']);
+const siteDosyalari = (dizin = KOK) => readdirSync(dizin, { withFileTypes: true }).flatMap((g) => {
+  if (ATLA.has(g.name)) return [];
+  const yol = join(dizin, g.name);
+  return g.isDirectory() ? siteDosyalari(yol) : /\.(html|css|js|mjs)$/.test(g.name) ? [yol] : [];
+});
 const oku = (yol) => readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
 
 test('şahin görselleri var ve web boyutunda', () => {
@@ -70,4 +79,14 @@ test('fabrika bandı: tuğla fabrika, çalışan saat, tek duman grubu, dişli y
   for (const ad of ['SKYTRACK', 'PİKSEL', 'AJAN', 'DESTE', 'ATÖLYE Nº 1', 'ÜRETİM HATTI']) assert.ok(FABRIKA_SVG.includes(ad), ad);
   assert.equal((FABRIKA_SVG.match(/<g class="duman/g) || []).length, 1);
   assert.ok(oku('projeler/index.html').includes('ATÖLYE Nº 1'));
+});
+
+test('eski mavi hiçbir site dosyasında kalmadı', () => {
+  const bulunan = siteDosyalari().filter((f) => /5ccfff|92, ?207, ?255/i.test(readFileSync(f, 'utf8')));
+  assert.deepEqual(bulunan.map((f) => relative(KOK, f)), []);
+});
+
+test('tanımı kalkmış renk değişkeni kullanılmıyor', () => {
+  const bulunan = siteDosyalari().filter((f) => readFileSync(f, 'utf8').includes('--vurgu-rgb'));
+  assert.deepEqual(bulunan.map((f) => relative(KOK, f)), []);
 });

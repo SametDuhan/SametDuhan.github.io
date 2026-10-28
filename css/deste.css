@@ -38,12 +38,12 @@
 .slayt .kucuk-baslik { font-family: var(--mono); font-size: 13px; color: var(--vurgu); margin: 0; }
 .slayt h1 { font-size: clamp(32px, 6vw, 56px); line-height: 1.08; margin: 6px 0 12px; letter-spacing: -0.01em; }
 .slayt h2 { font-size: clamp(24px, 4.4vw, 38px); line-height: 1.15; margin: 6px 0 10px; }
-.slayt p, .slayt li { font-size: clamp(16px, 2.1vw, 19px); color: #d0d8e0; }
+.slayt p, .slayt li { font-size: clamp(16px, 2.1vw, 19px); color: var(--yazi); }
 .slayt p { margin: 8px 0; }
 .slayt ul, .slayt ol { padding-left: 1.2em; margin: 8px 0; }
 .slayt li { margin: 6px 0; }
 .slayt strong { color: var(--yazi); }
-.slayt code { background: rgba(var(--vurgu-rgb), 0.1); color: var(--vurgu); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+.slayt code { background: color-mix(in srgb, var(--vurgu) 12%, transparent); color: var(--ceviz); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
 
 .terim {
   border-left: 3px solid var(--vurgu);
@@ -70,7 +70,7 @@
 .slayt img { max-width: 100%; height: auto; max-height: 44svh; width: auto; align-self: flex-start; border-radius: var(--r); border: 1px solid var(--kenar); }
 
 .slayt pre {
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--yazi);
   border: 1px solid var(--kenar);
   border-radius: var(--r);
   padding: 14px 16px;
@@ -80,12 +80,12 @@
   margin: 12px 0 8px;
   max-width: 100%;
 }
-.slayt pre code { background: none; padding: 0; color: var(--yazi); }
+.slayt pre code { background: none; padding: 0; color: var(--zemin); }
 
 /* Adım adım kod */
 .js-hazir .adim-kod .satir { display: block; opacity: 0.25; transition: opacity 0.2s; }
 .js-hazir .adim-kod .satir.acik { opacity: 1; }
-.adim-kod .satir.simdi { background: rgba(var(--vurgu-rgb), 0.12); box-shadow: -16px 0 0 rgba(var(--vurgu-rgb), 0.12), 16px 0 0 rgba(var(--vurgu-rgb), 0.12); }
+.adim-kod .satir.simdi { background: color-mix(in srgb, var(--vurgu) 28%, transparent); box-shadow: -16px 0 0 color-mix(in srgb, var(--vurgu) 28%, transparent), 16px 0 0 color-mix(in srgb, var(--vurgu) 28%, transparent); }
 .adim-not { min-height: 3em; font-size: 16px !important; color: var(--vurgu) !important; }
 
 /* Mini soru */
@@ -107,7 +107,7 @@
   display: block;
   white-space: pre-wrap;
   word-break: break-word;
-  background: rgba(0, 0, 0, 0.45) !important;
+  background: color-mix(in srgb, var(--yazi) 5%, transparent) !important;
   border: 1px dashed var(--vurgu);
   border-radius: 8px;
   padding: 12px 14px !important;
@@ -117,7 +117,7 @@
 .dene button { font-family: var(--mono); font-size: 13px; color: var(--vurgu); background: none; border: 1px solid var(--vurgu); border-radius: 8px; padding: 8px 14px; cursor: pointer; }
 
 /* Canlı demo */
-.demo { margin: 12px 0; border: 1px solid var(--kenar); border-radius: var(--r); background: rgba(0, 0, 0, 0.4); overflow: hidden; position: relative; }
+.demo { margin: 12px 0; border: 1px solid var(--kenar); border-radius: var(--r); background: var(--panel); overflow: hidden; position: relative; }
 .demo canvas { display: block; width: 100%; height: auto; }
 .demo .demo-dugme { position: absolute; right: 10px; bottom: 10px; }
 
@@ -147,24 +147,24 @@
 
 .ipucu { font-family: var(--mono); font-size: 13px; color: var(--soluk); }
 
-.deste-ilerleme { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: rgba(35, 65, 90, 0.5); z-index: 5; }
+.deste-ilerleme { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--kenar); z-index: 5; }
 .deste-ilerleme i { display: block; height: 100%; width: 0; background: var(--vurgu); transition: width 0.25s; }
 
 .yardim-dugme { font-family: var(--mono); font-size: 13px; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--kenar); background: transparent; color: var(--soluk); cursor: pointer; }
 .yardim-dugme:hover { color: var(--vurgu); border-color: var(--vurgu); }
 
 .yardim { max-width: min(92vw, 440px); background: var(--panel); color: var(--yazi); border: 1px solid var(--kenar); border-radius: var(--r); padding: 22px 24px; }
-.yardim::backdrop { background: rgba(0, 0, 0, 0.6); }
+.yardim::backdrop { background: rgba(51, 38, 26, 0.45); }
 .yardim h2 { margin: 0 0 12px; font-size: 20px; }
 .yardim dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0 0 12px; font-size: 15px; }
 .yardim dt { font-family: var(--mono); font-size: 13px; color: var(--vurgu); }
-.yardim dd { margin: 0; color: #c3ccd6; }
+.yardim dd { margin: 0; color: var(--yazi); }
 .yardim p { color: var(--soluk); font-size: 14px; }
 
 @media (prefers-reduced-motion: reduce) { .deste-ilerleme i { transition: none; } }
 
 /* Uzun slaytlarda gezinme hep görünür kalsın; alçak ekranlarda yazı ve boşluk sıkışsın */
-.deste-alt { position: sticky; bottom: 0; z-index: 4; background: linear-gradient(to top, rgba(7, 11, 18, 0.96) 70%, rgba(7, 11, 18, 0)); }
+.deste-alt { position: sticky; bottom: 0; z-index: 4; background: linear-gradient(to top, color-mix(in srgb, var(--zemin) 96%, transparent) 70%, transparent); }
 
 @media (max-height: 820px), (max-width: 520px) {
   .slayt { justify-content: flex-start; padding-top: clamp(8px, 2.5vh, 24px); padding-bottom: 8px; }
@@ -196,7 +196,7 @@
   background: var(--panel);
   border: 1px solid var(--vurgu);
   border-radius: var(--r);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 28px rgba(51, 38, 26, 0.25);
   font-size: 15px;
 }
 .devam-bildirim[hidden] { display: none; }
