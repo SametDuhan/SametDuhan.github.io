@@ -59,33 +59,8 @@
 @keyframes y-test { 0%, 62% { opacity: 0; transform: translateY(6px); } 70%, 100% { opacity: 1; transform: none; } }
 .yorum-yut > * { animation-play-state: running; }
 
-/* ---- 7 · düşünen şahin ---- */
-.dusunen { position: relative; display: flex; justify-content: flex-end; height: 150px; margin-top: 8px; pointer-events: none; }
-.slayt .dusunen img { height: 150px; width: auto; max-height: none; border: 0; border-radius: 0; align-self: flex-end; }
-.dusunen b { position: absolute; bottom: 120px; font: 800 30px var(--serif); color: var(--muhur); animation: soru-yuksel 4.5s ease-out infinite; opacity: 0; }
-.dusunen b:nth-of-type(1) { right: 150px; }
-.dusunen b:nth-of-type(2) { right: 105px; animation-delay: -1.5s; }
-.dusunen b:nth-of-type(3) { right: 60px; animation-delay: -3s; }
-@keyframes soru-yuksel { 0% { transform: translateY(18px); opacity: 0; } 20% { opacity: 1; } 80% { opacity: .7; } 100% { transform: translateY(-36px); opacity: 0; } }
-
-/* ---- 8 · terminal ---- */
-.dene code .tl { opacity: 0; }
-.canli .dene code .tl { animation: tl-gir .45s ease both; animation-delay: calc(var(--i) * .5s + .3s); }
-.deste:not(.js-hazir) .dene code .tl { opacity: 1; }
-@keyframes tl-gir { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
-.dene code::after { content: '▍'; color: var(--vurgu-koyu); animation: imlec 1s steps(2) infinite; }
-@keyframes imlec { 50% { opacity: 0; } }
-
-/* ---- 9 · kutlama ---- */
-.bitti-sahne { position: relative; height: 190px; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; margin-top: 6px; }
-.slayt .bitti-sahne img { height: 180px; max-height: none; width: auto; border: 0 !important; border-radius: 0 !important; align-self: flex-end; animation: sevinc 2.4s ease-in-out infinite; transform-origin: 50% 100%; }
-.bitti-sahne i { position: absolute; top: -10px; left: var(--x); width: 8px; height: 12px; background: var(--c); border-radius: 2px; animation: konfeti var(--d) linear infinite; animation-delay: var(--g); opacity: 0; }
-@keyframes konfeti { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(170px) rotate(540deg); opacity: 0; } }
-@keyframes sevinc { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px) scale(1.015); } }
-
 @media (prefers-reduced-motion: reduce) {
-  .rota-cizim .yol, .terim.ads .sinyal, .terim.ads .dalga, .dene code::after, .bitti-sahne img, .bitti-sahne i, .dusunen b, .yorum-yut *, .canli .dene code .tl { animation: none !important; }
-  .dene code .tl, .yorum-yut .y-hata, .yorum-yut .y-test { opacity: 1; }
+  .rota-cizim .yol, .terim.ads .sinyal, .terim.ads .dalga, .dene code::after, .yorum-yut * { animation: none !important; }
+  .yorum-yut .y-hata, .yorum-yut .y-test { opacity: 1; }
   .yorum-yut .y-yut { color: #b0a08a; text-decoration: line-through; }
-  .bitti-sahne i, .dusunen b { display: none; }
 }

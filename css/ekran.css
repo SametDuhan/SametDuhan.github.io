@@ -19,7 +19,7 @@ body.tek-ekran { height:100dvh; min-height:0; display:flex; flex-direction:colum
 .tek-ekran > .alt-bilgi { width:100%; padding:8px 20px; font-size:10px; flex-shrink:0; }
 body:has(.deste.js-hazir) { height:100dvh; min-height:0; overflow:hidden; }
 .deste.js-hazir { height:100dvh; min-height:0; overflow:hidden; }
-.deste.js-hazir > .slayt { flex:1; min-height:0; width:min(1100px,calc(100% - 48px)); padding:0 6px 14px 0; margin:8px auto; display:block; animation:none; overflow-y:auto; overflow-x:hidden; scrollbar-width:thin; scrollbar-color:var(--kenar) transparent; }
+.deste.js-hazir > .slayt { flex:1; min-height:0; width:min(1100px,calc(100% - 48px)); padding:0 6px 2px 0; margin:6px auto; display:block; animation:none; overflow-y:auto; overflow-x:hidden; scrollbar-width:thin; scrollbar-color:var(--kenar) transparent; }
 .deste.js-hazir > .slayt[hidden] { display:none; }
 .deste.js-hazir > .deste-ust,.deste.js-hazir > .deste-alt,.deste.js-hazir > .atolye-araclar { flex-shrink:0; }
 .deste.js-hazir .deste-ust { padding:10px 24px; }

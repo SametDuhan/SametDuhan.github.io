@@ -147,8 +147,27 @@ for (const demo of document.querySelectorAll('[data-piksel-demo]')) {
       const tick = now => { if (id !== token || document.hidden) return; const t = now - start; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? 5 : Math.min(5, Math.floor(t / 650))); if (t < 3900 && !matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick); };
       requestAnimationFrame(tick);
     });
+    // data-otomatik: slayt açılınca animasyon kendiliğinden başlar ve döngüde tekrarlanır.
+    if (demo.hasAttribute('data-otomatik')) {
+      let dongu = 0;
+      slaytaBagla(demo, () => {
+        const ben = ++dongu;
+        const tekrar = () => { if (ben !== dongu) return; demo.querySelector('button').click(); if (!az()) setTimeout(tekrar, 5600); };
+        tekrar();
+      }, () => { dongu++; token++; });
+    }
   } else {
-    ciz(canvas, 3100); demo.querySelector('button').addEventListener('click', () => oynat(canvas));
+    ciz(canvas, 3100);
+    demo.querySelector('button')?.addEventListener('click', () => oynat(canvas));
+    // data-otomatik: slayt açılınca animasyon kendiliğinden başlar ve döngüde tekrarlanır.
+    if (demo.hasAttribute('data-otomatik')) {
+      let jeton = 0;
+      const dongu = async () => {
+        const ben = ++jeton;
+        while (ben === jeton) { await oynat(canvas); if (ben !== jeton || az()) return; await bekle(1400); }
+      };
+      slaytaBagla(demo, dongu, () => { jeton++; durdur(); });
+    }
   }
 }
 document.addEventListener('visibilitychange', () => { if (document.hidden) durdur(); });

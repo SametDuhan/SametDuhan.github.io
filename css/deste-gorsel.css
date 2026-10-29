@@ -6,12 +6,28 @@
 .deste .deste-ust .atolye-araclar .dugme, .deste .deste-ust .icerik-menusu summary { font-size: 12px; padding: 5px 10px; line-height: 1.4; }
 .deste .deste-ust .icerik-menusu summary { border: 1px solid var(--kenar); border-radius: var(--r); }
 .deste.js-hazir .deste-ust { align-items: center; }
-@media (max-width: 700px) { .deste .deste-ust .atolye-araclar .dugme:not([aria-pressed]), .deste .deste-ust .deste-adi { display: none; } }
+@media (max-width: 700px) { .deste .deste-ust .atolye-araclar .dugme, .deste .deste-ust .deste-adi { display: none; } }
 
 /* ---- slayt dikeyde ortalanır; sığmazsa kendi içinde kaydırılır ---- */
 .deste.js-hazir > section.slayt:not([hidden]) { display: flex; flex-direction: column; }
+.deste.js-hazir > section.slayt > * { flex-shrink: 0; }
+.deste.js-hazir > section.slayt > button.dugme { align-self: flex-start; }
 .deste.js-hazir > section.slayt > :first-child { margin-top: auto; }
 .deste.js-hazir > section.slayt > :last-child { margin-bottom: auto; }
+
+/* ---- laboratuvar içeren slaytlar 900 px yükseklikte kaydırma istemesin ---- */
+.deste.js-hazir section.slayt { gap: 6px; }
+.deste.js-hazir .laboratuvar { margin: 6px 0; }
+.deste.js-hazir .laboratuvar .lab-bas { margin-bottom: 6px; }
+.deste.js-hazir .radar { height: 76px; }
+.deste.js-hazir .radar-halka { width: 68px; height: 68px; left: calc(50% - 34px); top: 4px; }
+.deste.js-hazir .ucak { top: 10px; font-size: 32px; }
+.deste.js-hazir .alarm-sure { margin: 8px 0 4px; }
+.deste.js-hazir .alarm-iz { margin-bottom: 8px; }
+.deste.js-hazir .bildirim-sahne { min-height: 70px; padding: 10px 16px; }
+.deste.js-hazir .mini-karakter { font-size: 44px; }
+.deste.js-hazir .adim-not { min-height: 1.5em; margin: 2px 0; }
+.deste.js-hazir .slayt > p { max-width: 960px; }
 
 /* ---- giriş animasyonları ---- */
 @keyframes yuksel { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -35,9 +51,56 @@
 @keyframes pop { 40% { transform: scale(1.03); } }
 
 /* ---- ilk açılış ipucu ---- */
-.deste-ipucu { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); z-index: 6; background: var(--yazi); color: var(--zemin); font: 13px var(--mono); padding: 9px 16px; border-radius: 20px; white-space: nowrap; max-width: calc(100vw - 24px); overflow: hidden; text-overflow: ellipsis; animation: yuksel .5s both; }
+.demo .demo-dugme { background: var(--zemin); }
+.deste-ipucu { position: fixed; right: 20px; top: 58px; z-index: 6; background: var(--yazi); color: var(--zemin); font: 13px var(--mono); padding: 9px 16px; border-radius: 20px; white-space: nowrap; max-width: calc(100vw - 24px); overflow: hidden; text-overflow: ellipsis; animation: yuksel .5s both; }
+
+/* ---- ortak · düşünen şahin ---- */
+.dusunen { position: relative; display: flex; justify-content: flex-end; height: 150px; margin-top: 8px; pointer-events: none; }
+.slayt .dusunen img { height: 150px; width: auto; max-height: none; border: 0; border-radius: 0; align-self: flex-end; }
+.dusunen b { position: absolute; bottom: 120px; font: 800 30px var(--serif); color: var(--muhur); animation: soru-yuksel 4.5s ease-out infinite; opacity: 0; }
+.dusunen b:nth-of-type(1) { right: 150px; }
+.dusunen b:nth-of-type(2) { right: 105px; animation-delay: -1.5s; }
+.dusunen b:nth-of-type(3) { right: 60px; animation-delay: -3s; }
+@keyframes soru-yuksel { 0% { transform: translateY(18px); opacity: 0; } 20% { opacity: 1; } 80% { opacity: .7; } 100% { transform: translateY(-36px); opacity: 0; } }
+
+/* ---- ortak · kutlama ---- */
+.bitti-sahne { position: relative; height: 190px; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; margin-top: 6px; }
+.slayt .bitti-sahne img { height: 180px; max-height: none; width: auto; border: 0 !important; border-radius: 0 !important; align-self: flex-end; animation: sevinc 2.4s ease-in-out infinite; transform-origin: 50% 100%; }
+.bitti-sahne i { position: absolute; top: -10px; left: var(--x); width: 8px; height: 12px; background: var(--c); border-radius: 2px; animation: konfeti var(--d) linear infinite; animation-delay: var(--g); opacity: 0; }
+@keyframes konfeti { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(170px) rotate(540deg); opacity: 0; } }
+@keyframes sevinc { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px) scale(1.015); } }
+
+/* ---- ortak · terminal ---- */
+.dene code .tl { opacity: 0; }
+.canli .dene code .tl { animation: tl-gir .45s ease both; animation-delay: calc(var(--i) * .5s + .3s); }
+.deste:not(.js-hazir) .dene code .tl { opacity: 1; }
+@keyframes tl-gir { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+.dene code::after { content: '▍'; color: var(--vurgu-koyu); animation: imlec 1s steps(2) infinite; }
+@keyframes imlec { 50% { opacity: 0; } }
+
+/* ---- ortak · canlı piksel demosu ---- */
+.slayt .piksel-demo { margin: 10px 0; padding: 10px; }
+.slayt .piksel-demo p { margin: 0 0 6px; font: 12px var(--mono); color: var(--soluk); }
+.slayt .piksel-demo canvas { max-height: 24dvh; object-fit: contain; margin: 0; }
+
+.piksel-demo[data-otomatik] button { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
+  .dene code::after, .canli .dene code .tl { animation: none; }
+  .dene code .tl { opacity: 1; }
+  .bitti-sahne img, .bitti-sahne i, .dusunen b { animation: none; }
+  .bitti-sahne i { display: none; }
+  .dusunen b { opacity: .85; }
   .deste.js-hazir .slayt.canli > *, .deste.js-hazir .slayt.canli li, .deste-ipucu, .soru button.dogru { animation: none; }
   .cubuk i { transition: none; }
+}
+
+/* ---- yazdırma / PDF: animasyonla gizlenen her şey görünür ---- */
+@media print {
+  .deste *, .deste *::after { animation: none !important; transition: none !important; }
+  .balon, .sen-isi span, .sen-isi small, .dene code .tl, .yorum-yut .y-hata, .yorum-yut .y-test, .dusunen b, .bakan b { opacity: 1 !important; }
+  .bakan b { position: static !important; display: inline-block; margin: 0 4px 4px 0; }
+  .cubuk i { width: var(--g, 100%) !important; }
+  .dene code::after { content: none !important; }
+  .yaziyor, .deste-ipucu, .bitti-sahne i, .halka-cizim, .zincir-cizim, .rota-cizim { display: none !important; }
 }

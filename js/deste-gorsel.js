@@ -25,3 +25,16 @@ for (const slayt of document.querySelectorAll('.deste section.slayt')) {
     kare = requestAnimationFrame(adim);
   }, () => { cancelAnimationFrame(kare); slayt.classList.remove('canli'); });
 }
+
+// "Satır satır" kod blokları slayt açılınca kendiliğinden ilerler; ziyaretçi düğmeye basarsa otomatik durur.
+for (const pre of document.querySelectorAll('.deste pre.adim-kod')) {
+  const dugme = pre.nextElementSibling;
+  if (!dugme || dugme.tagName !== 'BUTTON') continue;
+  let sayac = 0;
+  dugme.addEventListener('click', (e) => { if (e.isTrusted) { clearInterval(sayac); sayac = 0; } });
+  slaytaBagla(pre, () => {
+    for (let koruma = 0; koruma < 60 && !/\(0\//.test(dugme.textContent); koruma++) dugme.click();
+    if (az()) return;
+    sayac = setInterval(() => dugme.click(), 2600);
+  }, () => clearInterval(sayac));
+}
