@@ -27,6 +27,9 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 | `js/piksel.js` | claude-done-pixel karakteri (`claude-done.ps1`'in birebir aktarımı) |
 | `css/tema.css` | Kâğıt teması: renk tokenları, yazı tipleri, kâğıt dokusu, ortak etiket/damga/düğme/köşe |
 | `css/giris.css`, `css/site.css`, `css/deste.css` | Ana sayfa, alt sayfalar, desteler |
+| `css/deste-gorsel.css`, `js/deste-gorsel.js` | Tüm desteler: giriş animasyonu, sayaç, çubuk dolumu, yazdırma/hareketi azalt kuralları |
+| `css/skytrack-gorsel.css`, `css/ajan-gorsel.css`, `css/hook-gorsel.css` | Deste başına görseller ve animasyonlar |
+| `araclar/sahneler.mjs` | Alt sayfa başlıklarındaki şahin sahneleri (SVG); `araclar/sayfa_yap.mjs` yerleştirir |
 | `araclar/fabrika.mjs` | Projeler sayfasının tuğla fabrika ve konveyör bandı (SVG) |
 | `img/sahin/` | Şahin pozları (WebP); her alt sayfanın başında bir poz |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |
@@ -37,10 +40,17 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 2. Görseli `img/` altına koy.
 3. `npm run sayfalar`, sonra `npm test`.
 
+## Sunumlarda animasyonlar
+
+- Slayt açılınca `deste.js` slayta `goster`, kapanınca `gizle` olayı gönderir. Animasyonlar bunu dinler: `js/atolye.js` içindeki `slaytaBagla(oge, baslat, durdur)` slayt görünürken çalıştırır, gizlenince ya da sekme arka plana geçince durdurur.
+- Video slayt açılınca kendiliğinden, sessiz ve döngüde oynar (kontrol çubuğu yok, tıklayınca durur). Alarm, ajan ve hook deneyleri ile `data-otomatik` işaretli piksel demoları da kendiliğinden çalışır.
+- Slayt sığmazsa içinde kaydırılır; "1/2" sayfalaması yok.
+- Her yeni animasyon `prefers-reduced-motion` ve yazdırma görünümünde anlamlı bir karede kalmalı (`css/deste-gorsel.css` sonundaki kurallar).
+
 ## Yeni deste eklemek
 
 1. `slaytlar/<slug>/index.html` oluştur. Var olan bir desteyi kopyala; her slayt bir `<section class="slayt">`.
-2. `js/desteler.js` içindeki `DESTELER` listesine bir satır ekle (`slaytSayisi` sayfadaki slayt sayısına eşit olmalı; test denetler).
+2. `js/desteler.js` içindeki `DESTELER` listesine bir satır ekle (`slaytSayisi` sayfadaki slayt sayısına eşit olmalı; `gorsel` kartın üstündeki küçük çizimi seçer; test ikisini de denetler).
 3. `sitemap.xml`'e adresini ekle, `npm test`.
 
 Slayt içi bileşenler: `.soru` (mini soru), `pre.adim-kod` (satır satır kod), `.dene` (kopyalanabilir komut), `.demo` (canlı demo; `goster`/`gizle` olaylarını dinler).
