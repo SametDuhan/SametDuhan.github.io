@@ -92,6 +92,27 @@
   width: 24px; height: 24px; border-color: var(--p);
 }
 .kare:focus-visible { outline: 2px solid var(--p); outline-offset: 4px; }
+/* hover dekoru (silik): Projeler'de sağ üst köşeden taşan, birbirine geçen dişliler; İletişim'de telefonun sağında düşen mektuplar.
+   Yalnız üzerine gelince ya da odaklanınca belirir ve döner/düşer; köşeden taşan kısım kutu kenarında kırpılır (.dekor-kutu). */
+.dekor-kutu { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .35s ease; }
+.kare:hover .dekor-kutu, .kare:focus-visible .dekor-kutu { opacity: .42; }
+.kare .ikon { position: relative; z-index: 1; }
+.dekor-dislier svg { position: absolute; top: -3%; right: -4%; width: 58%; height: auto; overflow: visible; }
+.dis { transform: rotate(var(--r0)); transform-origin: 0 0; animation: dis-don var(--t) linear infinite paused; }
+.dis path, .dis circle { fill: none; stroke: var(--p); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.dis .dis-g { fill: color-mix(in srgb, var(--p) 16%, transparent); }
+.kare:hover .dis, .kare:focus-visible .dis { animation-play-state: running; }
+@keyframes dis-don { to { transform: rotate(calc(var(--r0) + var(--yon) * 360deg)); } }
+.dekor-mektup svg { position: absolute; top: 0; right: 2%; width: 26%; height: 100%; overflow: visible; }
+.mektup { opacity: 0; transform: translate(var(--x), -24px) rotate(var(--a0)) scale(var(--b)); animation: mektup-dus var(--t) linear var(--d) infinite paused; }
+.mektup rect { fill: color-mix(in srgb, var(--p) 14%, #f7f0e0); stroke: var(--p); stroke-width: 1.4; }
+.mektup path { fill: none; stroke: var(--p); stroke-width: 1.4; stroke-linejoin: round; }
+.kare:hover .mektup, .kare:focus-visible .mektup { animation-play-state: running; }
+@keyframes mektup-dus {
+  0% { opacity: 0; transform: translate(var(--x), -24px) rotate(var(--a0)) scale(var(--b)); }
+  10%, 78% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(var(--x) + 6px), 262px) rotate(var(--a1)) scale(var(--b)); }
+}
 .kare .no { align-self: flex-start; font: 400 11px var(--mono); color: var(--p-ust, var(--yazi)); background: var(--p-dolgu, var(--vurgu)); padding: 2px 6px; }
 .ikon { flex: 1; min-height: 0; display: grid; place-items: center; overflow: hidden; }
 .ikon svg { width: 44%; max-width: 130px; height: auto; overflow: visible; }
@@ -206,6 +227,7 @@
   .kare:hover .mini .ka, .kare:hover .mini .st { animation: none !important; stroke-dasharray: none; }
   .seyir-haritasi * { animation: none !important; }
   .poz { transition: none; }
+  .dekor-kutu { display: none; }
 }
 
 /* ---- sol kenardan akan çok soluk kod ---- */
