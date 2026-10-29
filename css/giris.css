@@ -45,10 +45,12 @@
 /* nefes: şahin kendi katmanında, hareket donanımla hızlanır (yeniden boyama yok) */
 .sahin-kat { transform-origin: 50% 74%; will-change: transform; animation: nefes-kat 4.2s ease-in-out infinite; }
 @keyframes nefes-kat { 0%, 100% { transform: translateY(0) scaleY(1); } 45% { transform: translateY(-.45%) scaleY(1.012); } }
-/* 8 sn'de bir oynayan kanat videosu: oynarken ayaktaki şahin yalnız videonun alt kenarında belirir (maske #videoAlti) */
-.video-kutu { pointer-events: none; }
-.sahin-video { display: block; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
-.sahin-kat.video-oynuyor .sahin-video { opacity: 1; }
+/* 8 sn'de bir oynayan kanat videosu: düz HTML katmanı, şahin sahnesinin (viewBox 1100×1560) üstüne oturur; konumu js/sahin.js verir.
+   Video, sahnenin koordinatında x -10…1270, y 53…773 aralığını kaplar; oynarken ayaktaki şahin yalnız alt kenarında belirir (maske #videoAlti). */
+.kus-alan { position: relative; }
+.video-sahne { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; transform-origin: 50% 74%; will-change: transform; animation: nefes-kat 4.2s ease-in-out infinite; }
+.sahin-video { position: absolute; left: -8.1818%; top: 0.8333%; width: 116.3636%; height: 46.1538%; opacity: 0; pointer-events: none; }
+.sahin-kat.video-oynuyor ~ .video-sahne .sahin-video { opacity: 1; }
 .sahin-kat.video-oynuyor .poz.aktif { mask: url(#videoAlti); }
 .poz { opacity: 0; transition: opacity 0.16s ease; pointer-events: none; }
 .poz.aktif { opacity: 1; pointer-events: auto; }
@@ -205,7 +207,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .govde, .sahin-kat, .kapak.kirp, .duman circle, .rotalar path, .kare:hover .ciz { animation: none !important; }
+  .govde, .sahin-kat, .video-sahne, .kapak.kirp, .duman circle, .rotalar path, .kare:hover .ciz { animation: none !important; }
   .ust small, .ust h1, .ust .alt, .ust .tanit, .terminal .imlec, .muhur-kat, .kare, .mini *, .mini { animation: none !important; transition: none !important; }
   .h-ort { transform: scaleX(0) !important; } .h-yer { opacity: 0; }
   .m-sl-b { opacity: 0; }
@@ -213,7 +215,7 @@
   .kare:hover .mini .ka, .kare:hover .mini .st { animation: none !important; stroke-dasharray: none; }
   .seyir-haritasi * { animation: none !important; }
   .poz { transition: none; }
-  .video-kutu { display: none; }
+  .video-sahne { display: none; }
 }
 
 /* ---- sol kenardan akan çok soluk kod ---- */

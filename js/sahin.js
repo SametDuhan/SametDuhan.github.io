@@ -15,6 +15,7 @@ export const ATKI = {
 
 // Kanat videosu (video/sahin-sahne.webm, ~5 sn, şeffaf zeminli) her 8 sn'de bir başlar; bitince şahin yine düz durur.
 export const VIDEO_ARALIK_MS = 8000;
+export const VIDEO_SURE_MS = 5042;
 
 export function pozDonusumu(poz) {
   if (poz.ayakX === ON.ayakX && poz.alt === ON.alt && poz.boy === ON.boy) return '';
@@ -33,17 +34,29 @@ export function videoDestekliMi(ua, oynatilabilir) {
   return Boolean(oynatilabilir) && !safari;
 }
 
+// Video katmanı, şahin sahnesinin (viewBox 1100×1560, ortalanmış, gerekirse yanlarda boşluklu) çizildiği dikdörtgene oturur.
+export const SAHNE = { genislik: 1100, yukseklik: 1560 };
+export function sahneKutusu(kutu, ana) {
+  const olcek = Math.min(kutu.width / SAHNE.genislik, kutu.height / SAHNE.yukseklik);
+  const w = SAHNE.genislik * olcek, h = SAHNE.yukseklik * olcek;
+  return { left: kutu.left - ana.left + (kutu.width - w) / 2, top: kutu.top - ana.top + (kutu.height - h) / 2, width: w, height: h };
+}
+
 export function baslatSahin(kok, {
   az = matchMedia('(prefers-reduced-motion: reduce)').matches,
   ua = navigator.userAgent,
 } = {}) {
   const govde = kok.querySelector('#sahin');
-  const video = kok.querySelector('#sahinVideo');
+  const video = kok.parentElement.querySelector('#sahinVideo');
+  const katman = video?.parentElement;
+  const olcu = kok.parentElement.querySelector('svg');
   const kapaklar = [kok.querySelector('#kapakSol'), kok.querySelector('#kapakSag')].filter(Boolean);
   const videoVar = Boolean(video) && !az && videoDestekliMi(ua, video.canPlayType('video/webm; codecs="vp9"'));
   let oynuyor = false;
+  let guvenlik = 0;
 
   function videoBitti() {
+    clearTimeout(guvenlik);
     kok.classList.remove('video-oynuyor');
     oynuyor = false;
   }
@@ -53,6 +66,8 @@ export function baslatSahin(kok, {
     oynuyor = true;
     video.currentTime = 0;
     video.play().catch(videoBitti);
+    // Video takılırsa şahin sonsuza dek kanat açık kalmasın: süre + 2 sn sonra düz poza döner.
+    guvenlik = setTimeout(() => { video.pause(); videoBitti(); }, VIDEO_SURE_MS + 2000);
   }
 
   function kirp() {
@@ -69,7 +84,14 @@ export function baslatSahin(kok, {
     })();
   }
 
+  function yerlestir() {
+    const k = sahneKutusu(olcu.getBoundingClientRect(), kok.parentElement.getBoundingClientRect());
+    Object.assign(katman.style, { left: `${k.left}px`, top: `${k.top}px`, width: `${k.width}px`, height: `${k.height}px` });
+  }
+
   if (videoVar) {
+    yerlestir();
+    new ResizeObserver(yerlestir).observe(olcu);
     // İlk kare ekrana gelince ayaktaki şahin maskelenir; böylece boş kare görünmez.
     video.addEventListener('playing', () => kok.classList.add('video-oynuyor'));
     video.addEventListener('ended', videoBitti);

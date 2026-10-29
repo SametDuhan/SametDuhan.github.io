@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import {
   POZLAR, ATKI, VIDEO_ARALIK_MS,
-  pozDonusumu, noktalar, kirpmaGecikmesi, ciftKirpar, videoDestekliMi,
+  pozDonusumu, noktalar, kirpmaGecikmesi, ciftKirpar, videoDestekliMi, sahneKutusu,
 } from '../js/sahin.js';
 
 test('ön poz dönüşümsüz; kanat pozu kalmadı', () => {
@@ -45,4 +45,12 @@ test('ana sayfada video dosyası var ve şahin sahnesine bağlı', () => {
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   assert.match(html, /<video class="sahin-video" id="sahinVideo" muted playsinline[^>]*src="video\/sahin-sahne\.webm"/);
   assert.doesNotMatch(html, /kanat\.webp|data-poz="kanat"/);
+});
+
+test('video katmanı sahne kutusuna oturur: kutu sahneden genişse yanlarda, yüksekse altta üstte boşluk kalır', () => {
+  const ana = { left: 100, top: 50 };
+  // 550×1560 kutu: ölçek yüksekliğe değil genişliğe bağlı (0,5), sahne 550×780 olur ve dikeyde ortalanır
+  assert.deepEqual(sahneKutusu({ left: 100, top: 50, width: 550, height: 1560 }, ana), { left: 0, top: 390, width: 550, height: 780 });
+  // 2200×1560 kutu: ölçek yüksekliğe bağlı (1), sahne 1100 genişliğinde yatayda ortalanır
+  assert.deepEqual(sahneKutusu({ left: 100, top: 50, width: 2200, height: 1560 }, ana), { left: 550, top: 0, width: 1100, height: 1560 });
 });
