@@ -139,3 +139,16 @@ test('sol menü: yalnız ikonlu dört bölüm bağlantısı; hover boyutu deği�
   assert.match(css, /\.menu-linkler a:hover, \.menu-linkler a:focus-visible \{ color:/);
   assert.doesNotMatch(css, /\.menu-linkler a:hover[^}]*(padding|transform|max-height)/, 'hover boyutu değiştirmez');
 });
+
+test('sunum kartları: rozet akışta, çizimler yalnız hover/odakta çalışır, kartHareketi SMIL uçağı duraklatır', async () => {
+  const { kartHTML, DESTELER } = await import('../js/desteler.js');
+  const html = kartHTML(DESTELER[0], { konum: 8, n: 9, bitti: true });
+  assert.match(html, /<div class="kart-ust"><span class="etiket">[^<]+<\/span><span class="rozet bitti">/);
+  const css = oku('css/site.css');
+  assert.doesNotMatch(css, /\.deste-karti \.rozet \{[^}]*position: absolute/);
+  assert.match(css, /\.deste-karti:hover, \.deste-karti:focus-visible \{ transform: translate/);
+  assert.match(css, /\.deste-karti:hover \.mini-iz[^{]*\{ animation: bant-serit/);
+  assert.doesNotMatch(css, /\.mini-iz \{[^}]*animation:/, 'çizgi akışı boşta çalışmaz');
+  assert.match(oku('js/desteler.js'), /export function kartHareketi/);
+  assert.doesNotMatch(oku('js/desteler.js'), /<animateMotion dur="(4\.5|5)s"/, 'halka ve zincirde SMIL noktası yok');
+});
