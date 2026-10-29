@@ -93,7 +93,13 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 
 /* ---- sunum kartları ---- */
 .desteler { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-.deste-karti { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px; color: var(--yazi); text-decoration: none; border: 1px solid rgba(118, 98, 76, 0.3); background: var(--zemin); }
+.deste-karti { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px; color: var(--yazi); text-decoration: none; border: 1px solid rgba(118, 98, 76, 0.3); background: var(--zemin); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+/* hangi kartın üzerinde olduğun belli olur: kart hafif kalkar, koyu çerçeve ve renkli gölge, başlık ve ok renklenir */
+.deste-karti:hover, .deste-karti:focus-visible { transform: translate(-3px, -3px); border-color: var(--yazi); box-shadow: 6px 6px 0 var(--vurgu); }
+.deste-karti h2 { transition: color .2s ease; }
+.deste-karti:hover h2, .deste-karti:focus-visible h2 { color: var(--vurgu-koyu); }
+.deste-karti .alt { transition: color .2s ease, letter-spacing .2s ease; }
+.deste-karti:hover .alt, .deste-karti:focus-visible .alt { color: var(--vurgu-koyu); font-weight: 600; }
 .deste-karti::before { content: ''; position: absolute; top: -1px; left: -1px; width: 14px; height: 14px; border: solid var(--yazi); border-width: 1.5px 0 0 1.5px; transition: width 0.25s, height 0.25s, border-color 0.25s; }
 .deste-karti:hover::before, .deste-karti:focus-visible::before { width: 24px; height: 24px; border-color: var(--bakir); }
 .deste-karti .etiket { display: inline-block; align-self: flex-start; color: var(--zemin); background: var(--bakir-koyu); padding: 2px 6px; letter-spacing: 0.1em; }
@@ -141,6 +147,8 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 
 @media (prefers-reduced-motion: reduce) {
   .menu-linkler a, .menu-linkler a svg, .menu-linkler a i { animation: none !important; transition: none !important; }
+  .deste-karti, .deste-karti h2, .deste-karti .alt { transition: none !important; }
+  .deste-karti:hover, .deste-karti:focus-visible { transform: none; }
   .sayfa-sahin, .bant-cizim *, .mini-iz, .cal, .cal-ahize, .cal-isaret path, .tik, .slayt-a, .slayt-b, .sl, .cubuk, .tabela, .soru { animation: none !important; }
   .slayt-b { opacity: 0; }
   .cal-isaret path { opacity: 1; }
