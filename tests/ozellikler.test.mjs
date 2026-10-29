@@ -197,7 +197,7 @@ test('projeler, slaytlar ve iletişim genel sütun sayfalamasını kullanmaz; li
   for (const yol of ['projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html']) {
     assert.match(oku(yol), /<main id="icerik" data-sayfalama="kendi">/, yol);
   }
-  assert.match(oku('slaytlar/index.html'), /<nav class="liste-sayfalar"[^>]*hidden/);
+  assert.doesNotMatch(oku('slaytlar/index.html'), /class="filtre"|id="ara"|liste-sayfalar|deste-sayac/, 'slaytlar: arama, konu düğmeleri ve sayfalama yok');
   assert.doesNotMatch(oku('projeler/index.html'), /liste-sayfalar|class="filtre"/, 'projeler tek akış, filtre ve sayfalama yok');
   assert.match(oku('js/ekrana-sigdir.js'), /dataset\.sayfalama === 'kendi'/);
 });
