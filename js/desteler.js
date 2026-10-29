@@ -56,7 +56,7 @@ export function kartHTML(d, ilerleme = null) {
   const href = devam ? `./${kacis(d.slug)}/#${ilerleme.konum + 1}` : `./${kacis(d.slug)}/`;
   const gorsel = MINI[d.gorsel] ? `<div class="mini-gorsel">${MINI[d.gorsel]}</div>\n  ` : '';
   return `<a class="deste-karti" href="${href}">
-  ${gorsel}<span class="etiket">${kacis(d.etiket)}</span>${rozet}
+  ${gorsel}<div class="kart-ust"><span class="etiket">${kacis(d.etiket)}</span>${rozet}</div>
   <h2>${kacis(d.baslik)}</h2>
   <p>${kacis(d.aciklama)}</p>
   <span class="alt">${d.slaytSayisi} slayt · ~${d.dakika} dk${ornek} ${devam ? '· devam et' : ''} →</span>

@@ -100,7 +100,8 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .deste-karti h2 { font-size: 24px; margin: 6px 0 0; }
 .deste-karti p { margin: 0; font-size: 14px; color: var(--soluk); }
 .deste-karti .alt { margin-top: auto; padding-top: 8px; font: 400 12px var(--mono); color: var(--ceviz); }
-.deste-karti .rozet { position: absolute; top: 14px; right: 14px; font: 600 10px var(--mono); border: 1.5px solid var(--vurgu); color: var(--vurgu-koyu); padding: 1px 6px; transform: rotate(-2deg); }
+.deste-karti .kart-ust { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 6px 10px; }
+.deste-karti .rozet { flex: 0 0 auto; font: 600 10px var(--mono); border: 1.5px solid var(--vurgu); color: var(--vurgu-koyu); padding: 1px 6px; transform: rotate(-2deg); }
 .deste-karti .rozet.bitti { border-color: var(--bakir); color: var(--bakir-koyu); }
 
 .mini-gorsel { margin: -18px -18px 4px; padding: 10px 18px; background: color-mix(in srgb, var(--vurgu) 9%, var(--panel)); border-bottom: 1px dashed var(--kenar); }
