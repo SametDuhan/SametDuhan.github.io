@@ -170,3 +170,16 @@ test('sol menü: başlıkta Samet Duhan, altındaki yazı yok; sayfalar arasınd
   assert.doesNotMatch(html, /AÇIKTA KURULUR<\/small>/);
   assert.match(oku('css/site.css'), /\.menu-linkler a \{[^}]*border-top: 1px dashed var\(--kenar\)/);
 });
+
+test('ai-ajani-nedir izin kapısı: ajan, claude-done-pixel karakteriyle çizilir (kutu değil), yürüme ve bayrak kareleri var', () => {
+  const html = oku('slaytlar/ai-ajani-nedir/index.html');
+  assert.doesNotMatch(html, /<g class="ajan-kutu"><rect/, 'mavi ajan kutusu kalktı');
+  assert.match(html, /<g class="piksel-ajan"/);
+  assert.equal((html.match(/class="pf pf-a"/g) || []).length, 2, 'yürüme ve bekleme için A kareleri');
+  assert.equal((html.match(/class="pf pf-b"/g) || []).length, 2, 'yürüme ve bekleme için B kareleri');
+  assert.ok(html.includes('fill="#d97757"') && html.includes('fill="#2ecc40"'), 'claude-done-pixel renkleri (gövde, bayrak)');
+  const css = oku('css/ajan-gorsel.css');
+  assert.match(css, /@keyframes faz-kos/);
+  assert.match(css, /@keyframes faz-bekle/);
+  assert.match(css, /\.kapi \.pf-b, \.kapi \.faz-bekle \{ opacity: 0; \}/, 'hareketi azaltınca tek kare görünür');
+});
