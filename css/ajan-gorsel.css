@@ -1,9 +1,7 @@
 /* "AI ajanı nedir?" sunumu: kapak döngüsü, sohbet balonları, araç çipleri, izin kapısı, ipucu vurguları. */
 
 /* ---- kapak: dört adımlı halka ---- */
-.kapak-sahne.halkali { position: relative; }
-.kapak-sahne.halkali > div { position: relative; z-index: 1; max-width: min(430px, 52%); }
-.halka-cizim { position: absolute; right: clamp(150px, 19%, 230px); top: 50%; width: min(170px, 22%); translate: 0 -50%; pointer-events: none; overflow: visible; }
+.halka-cizim { pointer-events: none; overflow: visible; }
 .halka-cizim .iz { fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-dasharray: 4 6; animation: rota-akis 1.6s linear infinite; }
 .halka-cizim .dugum circle { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.8; transform-box: fill-box; transform-origin: center; animation: dugum-nabiz 6s ease-in-out infinite; }
 .halka-cizim .dugum:nth-of-type(2) circle { animation-delay: 1.5s; }
@@ -13,9 +11,6 @@
 .halka-cizim .tasiyici { fill: var(--vurgu); stroke: var(--zemin); stroke-width: 1.5; }
 @keyframes dugum-nabiz { 0%, 22%, 100% { transform: scale(1); fill: var(--zemin); } 6%, 14% { transform: scale(1.35); fill: var(--vurgu); } }
 @keyframes rota-akis { to { stroke-dashoffset: -20; } }
-.slayt img.kapak-sahin { position: absolute; right: clamp(8px, 2%, 28px); bottom: 0; height: min(96%, 190px); width: auto; max-height: none; border: 0; border-radius: 0; }
-@media (max-width: 760px) { .halka-cizim { display: none; } .kapak-sahne.halkali > div { max-width: 100%; } .slayt img.kapak-sahin { height: 110px; opacity: .9; } }
-
 /* ---- 1 · sohbet balonları ---- */
 .sohbet { position: relative; display: flex; flex-direction: column; gap: 8px; margin: 10px 0 4px; min-height: 196px; }
 .balon { max-width: min(520px, 90%); padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.5; border: 1px solid var(--kenar); opacity: 0; }

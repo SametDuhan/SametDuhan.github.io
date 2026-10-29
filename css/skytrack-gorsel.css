@@ -1,17 +1,12 @@
 /* SkyTrack sunumu: kapak rotası, ADS-B sinyali, zaman rotası, yorum hatası, terminal, kutlama. */
 
 /* ---- 1 · kapak ---- */
-.kapak-sahne.haritali { position: relative; }
-.kapak-sahne.haritali > div { position: relative; z-index: 1; max-width: min(430px, 52%); }
-.rota-cizim { position: absolute; right: clamp(150px, 19%, 230px); top: 10px; width: min(300px, 36%); height: auto; opacity: .95; pointer-events: none; }
+.rota-cizim { pointer-events: none; overflow: visible; }
 .rota-cizim .yol { fill: none; stroke: var(--civit); stroke-width: 2; stroke-dasharray: 5 7; animation: rota-akis 1.4s linear infinite; }
 .rota-cizim circle { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.6; }
 .rota-cizim text { font: 600 9px var(--mono); fill: var(--yazi); letter-spacing: .1em; }
 .rota-cizim .ucak-sekil { fill: var(--civit); stroke: var(--zemin); stroke-width: 1; }
 @keyframes rota-akis { to { stroke-dashoffset: -24; } }
-.slayt img.kapak-sahin { position: absolute; right: clamp(8px, 2%, 28px); bottom: 0; height: min(96%, 190px); width: auto; max-height: none; border: 0; border-radius: 0; }
-@media (max-width: 760px) { .rota-cizim { display: none; } .kapak-sahne.haritali > div { max-width: 100%; } .slayt img.kapak-sahin { height: 110px; opacity: .9; } }
-
 /* ---- 2 · ADS-B sinyali ---- */
 .terim.ads { display: flex; align-items: center; gap: 16px; }
 .terim.ads svg { flex: none; width: 150px; height: 54px; overflow: visible; }

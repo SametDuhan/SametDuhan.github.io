@@ -8,6 +8,21 @@
 .deste.js-hazir .deste-ust { align-items: center; }
 @media (max-width: 700px) { .deste .deste-ust .atolye-araclar .dugme, .deste .deste-ust .deste-adi { display: none; } }
 
+/* ---- üst çubuk: geri düğmesi ile sunum adı ayrı durur ---- */
+.deste .deste-ust { gap: 12px 16px; }
+.deste .deste-ust .geri { flex: none; padding: 5px 12px; border: 1.5px solid var(--yazi); border-radius: var(--r); color: var(--yazi); background: var(--zemin); font-weight: 600; transition: background .2s, color .2s; }
+.deste .deste-ust .geri:hover, .deste .deste-ust .geri:focus-visible { background: var(--yazi); color: var(--zemin); }
+.deste .deste-ust .deste-adi { padding-left: 16px; border-left: 1px solid var(--kenar); color: var(--yazi); font-weight: 600; }
+
+/* ---- kapak: orb, yazı, çizim ve şahin yan yana kendi yerinde durur; dar olunca çizim ve şahin sırayla gizlenir ---- */
+.kapak-sahne.haritali, .kapak-sahne.halkali, .kapak-sahne.zincirli { container-type: inline-size; }
+.kapak-sahne.haritali > .orb, .kapak-sahne.halkali > .orb, .kapak-sahne.zincirli > .orb { display: none; }
+.kapak-sahne.haritali > div, .kapak-sahne.halkali > div, .kapak-sahne.zincirli > div { flex: 1 1 0; min-width: 0; }
+.rota-cizim, .halka-cizim, .zincir-cizim { flex: 0 0 clamp(150px, 24cqw, 250px); width: clamp(150px, 24cqw, 250px); height: auto; }
+.slayt img.kapak-sahin { flex: none; align-self: flex-end; height: clamp(120px, 20cqw, 180px); width: auto; max-height: none; border: 0; border-radius: 0; margin-block: -8px -12px; }
+@container (max-width: 860px) { .rota-cizim, .halka-cizim, .zincir-cizim { display: none; } }
+@container (max-width: 560px) { .slayt img.kapak-sahin { display: none; } }
+
 /* ---- slayt dikeyde ortalanır; sığmazsa kendi içinde kaydırılır ---- */
 .deste.js-hazir > section.slayt:not([hidden]) { display: flex; flex-direction: column; }
 .deste.js-hazir > section.slayt > * { flex-shrink: 0; }

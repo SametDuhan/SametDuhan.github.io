@@ -1,9 +1,7 @@
 /* "Claude Code hook'u" sunumu: kapak zinciri, bekleme sahnesi, ayar dosyası. */
 
 /* ---- kapak: Stop → hook → PowerShell → piksel ---- */
-.kapak-sahne.zincirli { position: relative; }
-.kapak-sahne.zincirli > div { position: relative; z-index: 1; max-width: min(400px, 48%); }
-.zincir-cizim { position: absolute; right: clamp(120px, 15%, 190px); top: 50%; width: min(310px, 40%); translate: 0 -50%; pointer-events: none; overflow: visible; }
+.zincir-cizim { pointer-events: none; overflow: visible; }
 .zincir-cizim rect { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.8; animation: kutu-yan 6s ease-in-out infinite; }
 .zincir-cizim g:nth-of-type(2) rect { animation-delay: 1.5s; }
 .zincir-cizim g:nth-of-type(3) rect { animation-delay: 3s; }
@@ -13,9 +11,6 @@
 .zincir-cizim .tasiyici { fill: var(--vurgu); stroke: var(--zemin); stroke-width: 1.5; }
 @keyframes kutu-yan { 0%, 24%, 100% { fill: var(--zemin); } 6%, 18% { fill: color-mix(in srgb, var(--vurgu) 45%, var(--zemin)); } }
 @keyframes rota-akis { to { stroke-dashoffset: -18; } }
-.slayt img.kapak-sahin { position: absolute; right: clamp(8px, 2%, 28px); bottom: 0; height: min(96%, 190px); width: auto; max-height: none; border: 0; border-radius: 0; }
-@media (max-width: 760px) { .zincir-cizim { display: none; } .kapak-sahne.zincirli > div { max-width: 100%; } .slayt img.kapak-sahin { height: 110px; opacity: .9; } }
-
 /* ---- 1 · "bitti mi?" bekleme sahnesi ---- */
 .bekleme { display: flex; align-items: flex-end; gap: 22px; margin: 10px 0; }
 .pencere { flex: 1 1 360px; max-width: 520px; border: 1.5px solid var(--yazi); border-radius: 8px; background: var(--yazi); overflow: hidden; }
