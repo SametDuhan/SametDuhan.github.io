@@ -8,9 +8,9 @@ if (deck) {
   const slides = [...deck.querySelectorAll('section.slayt')];
   const toolbar = document.createElement('div'); toolbar.className = 'atolye-araclar';
   const read = document.createElement('button'); read.type = 'button'; read.className = 'dugme';
-  const share = document.createElement('button'); share.type = 'button'; share.className = 'dugme'; share.textContent = 'Slayt bağlantısını kopyala';
+  const share = document.createElement('button'); share.type = 'button'; share.className = 'dugme'; share.textContent = 'Bağlantıyı kopyala';
   const contents = document.createElement('details'); contents.className = 'icerik-menusu';
-  contents.innerHTML = '<summary>Bölümlere git</summary>';
+  contents.innerHTML = '<summary>Bölümler ▾</summary>';
   slides.forEach((s, i) => {
     s.dataset.sira = String(i + 1);
     const a = document.createElement('a'); a.href = `#${i + 1}`; a.textContent = `${String(i + 1).padStart(2, '0')} / ${s.querySelector('h1,h2')?.textContent || 'Bölüm'}`;
@@ -28,38 +28,110 @@ if (deck) {
     try { await navigator.clipboard.writeText(location.href); share.textContent = 'Bağlantı kopyalandı ✓'; }
     catch { share.textContent = 'Adres çubuğundaki bağlantıyı kopyala'; }
   });
-  toolbar.append(read, contents, share); deck.querySelector('.deste-ust').after(toolbar); mode();
+  toolbar.append(contents, read, share); (deck.querySelector('.deste-ust .sayac') ?? deck.querySelector('.deste-ust')).after(toolbar); mode();
+}
+
+const az = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const bekle = (ms) => new Promise((bitti) => setTimeout(bitti, ms));
+
+// Slayttaki animasyonlar slayt açılınca kendiliğinden başlar, slayt kapanınca ya da sekme gizlenince durur
+// (deste.js slayta 'goster' / 'gizle' olayı gönderir). Slayt dışındaki sayfalarda hemen başlar.
+export function slaytaBagla(oge, baslat, durdur) {
+  const slayt = oge.closest('.slayt');
+  if (!slayt) { baslat(); return; }
+  let calisiyor = false;
+  const ac = () => { if (!calisiyor && !document.hidden) { calisiyor = true; baslat(); } };
+  const kapat = () => { if (calisiyor) { calisiyor = false; durdur(); } };
+  slayt.addEventListener('goster', ac);
+  slayt.addEventListener('gizle', kapat);
+  document.addEventListener('visibilitychange', () => (document.hidden ? kapat() : !slayt.hidden && ac()));
+  if (!slayt.hidden && slayt.closest('.deste')?.classList.contains('js-hazir')) ac();
+  return { get calisiyor() { return calisiyor; } };
 }
 
 for (const lab of document.querySelectorAll('[data-lab]')) {
   const type = lab.dataset.lab;
   const log = lab.querySelector('.terminal');
+  const adimlar = [...lab.querySelectorAll('.akis-adimlar span')];
+  let jeton = 0;
+  let durum = null;
+  const yenidenBaslat = () => { if (durum?.calisiyor) oyna(); else if (az()) oyna(); };
+  let oyna = () => {};
   if (type === 'ajan') {
-    let step = 0;
     const tasks = [
       ['Bağlantı kontrolü: /proje adresi bulunamadı.', 'Plan: doğru adresi bul, bağlantıyı güncelle.', 'Dosya düzenlendi: href="/projeler/"', 'Kontrol: bağlantı açılıyor. Görev tamamlandı ✓'],
       ['Test sonucu: beklenen 4, gelen 3.', 'Plan: sınır değerini ve hesaplamayı incele.', 'Hesaplama düzeltildi; test yeniden çalıştırıldı.', 'Kontrol: test geçti. Görev tamamlandı ✓'],
       ['Proje açıklaması ve görseller incelendi.', 'Plan: amaç, demo, mimari ve öğrenilenler.', 'Sayfa hazırlandı, bağlantılar eklendi.', 'Kontrol: sayfa ve bağlantılar çalışıyor ✓']
     ];
-    const select = lab.querySelector('select'); const button = lab.querySelector('[data-adim]');
-    function reset() { step = 0; log.textContent = '$ görev bekleniyor…'; button.disabled = false; lab.querySelectorAll('.akis-adimlar span').forEach(n => n.classList.remove('aktif')); }
-    select.addEventListener('change', reset); lab.querySelector('[data-reset]').addEventListener('click', reset);
-    button.addEventListener('click', () => { if (step >= 4) return; lab.querySelectorAll('.akis-adimlar span').forEach((n,i) => n.classList.toggle('aktif', i <= step)); log.textContent += `\n${step + 1} > ${tasks[select.selectedIndex][step]}`; step++; button.disabled = step === 4; });
+    const select = lab.querySelector('select');
+    oyna = async () => {
+      const ben = ++jeton;
+      const gorev = () => tasks[select.selectedIndex];
+      if (az()) { adimlar.forEach((n) => n.classList.add('aktif')); log.textContent = gorev().map((t, i) => `${i + 1} > ${t}`).join('\n'); return; }
+      while (ben === jeton) {
+        log.textContent = '$ görev bekleniyor…'; adimlar.forEach((n) => n.classList.remove('aktif'));
+        await bekle(900);
+        for (let adim = 0; adim < 4; adim++) {
+          if (ben !== jeton) return;
+          adimlar.forEach((n, i) => n.classList.toggle('aktif', i <= adim));
+          log.textContent += `\n${adim + 1} > ${gorev()[adim]}`;
+          await bekle(1500);
+        }
+        await bekle(2800);
+      }
+    };
+    select.addEventListener('change', yenidenBaslat);
   }
   if (type === 'hook') {
-    lab.querySelector('[data-bitir]').addEventListener('click', () => {
-      const on = lab.querySelector('input').checked;
-      lab.classList.remove('kutla'); void lab.offsetWidth; lab.classList.toggle('kutla', on);
-      lab.querySelector('[data-durum]').textContent = on ? 'İş tamamlandı. Bildirim geldi ✓' : 'İş tamamlandı. Hook bağlı değil.';
-      log.textContent = on ? '$ Stop alındı\n→ hook komutu çağrıldı\n→ PowerShell: piksel bildirimi gösterildi ✓' : '$ Stop alındı\n→ bağlı komut yok; bildirim gösterilmedi';
-      lab.querySelectorAll('.akis-adimlar span').forEach((n,i) => n.classList.toggle('aktif', on || i < 2));
-    });
+    const kutu = lab.querySelector('input'), metin = lab.querySelector('[data-durum]');
+    oyna = async () => {
+      const ben = ++jeton;
+      do {
+        const bagli = kutu.checked;
+        lab.classList.remove('kutla'); adimlar.forEach((n) => n.classList.remove('aktif'));
+        metin.textContent = 'Görev çalışıyor…'; log.textContent = '$ Stop olayını bekliyor…';
+        if (!az()) await bekle(1500);
+        if (ben !== jeton) return;
+        void lab.offsetWidth;
+        lab.classList.toggle('kutla', bagli);
+        metin.textContent = bagli ? 'İş tamamlandı. Bildirim geldi ✓' : 'İş tamamlandı. Hook bağlı değil.';
+        log.textContent = bagli ? '$ Stop alındı\n→ hook komutu çağrıldı\n→ PowerShell: piksel bildirimi gösterildi ✓' : '$ Stop alındı\n→ bağlı komut yok; bildirim gösterilmedi';
+        for (let i = 0; i < (bagli ? 4 : 2); i++) { adimlar[i].classList.add('aktif'); if (!az()) await bekle(450); }
+        if (az()) return;
+        await bekle(4200);
+      } while (ben === jeton);
+    };
+    kutu.addEventListener('change', yenidenBaslat);
   }
   if (type === 'alarm') {
-    const range = lab.querySelector('input'); const select = lab.querySelector('select');
-    const update = () => { const active = alarmDurumu(range.value, select.value); lab.querySelector('output').textContent = range.value; lab.querySelector('.alarm-sonuc').textContent = active ? '● Alarm tetiklenir. Sinyal seçilen eşiği geçti.' : '○ Alarm bekler. Bu süre seçilen eşikten kısa.'; lab.classList.toggle('alarm-aktif', active); };
-    range.addEventListener('input', update); select.addEventListener('change', update); update();
+    const select = lab.querySelector('select'), cikti = lab.querySelector('[data-sure]'), sonuc = lab.querySelector('.alarm-sonuc');
+    const dolum = lab.querySelector('[data-dolum]'), isaret = lab.querySelector('[data-isaret]');
+    const EN_COK = 60;
+    const goster = (sure) => {
+      const aktif = alarmDurumu(sure, select.value);
+      cikti.textContent = Math.round(sure);
+      dolum.style.transform = `scaleX(${sure / EN_COK})`;
+      isaret.style.left = `${(Number(select.value) / EN_COK) * 100}%`;
+      sonuc.textContent = aktif ? '● Alarm tetiklenir. Sinyal seçilen eşiği geçti.' : '○ Alarm bekler. Bu süre seçilen eşikten kısa.';
+      lab.classList.toggle('alarm-aktif', aktif);
+    };
+    // Süre kendiliğinden akar (yaklaşık 10 sn'de 60 saniye); eşiği geçince alarm çalar, sonra baştan başlar.
+    oyna = async () => {
+      const ben = ++jeton;
+      if (az()) { goster(EN_COK); return; }
+      while (ben === jeton) {
+        const bas = performance.now();
+        let sure = 1;
+        while (ben === jeton && sure < EN_COK) { goster(sure); await bekle(100); sure = Math.min(EN_COK, 1 + ((performance.now() - bas) / 1000) * 6); }
+        if (ben !== jeton) return;
+        goster(EN_COK);
+        await bekle(2600);
+      }
+    };
+    select.addEventListener('change', yenidenBaslat);
   }
+  durum = slaytaBagla(lab, () => oyna(), () => { jeton++; });
+  if (az()) oyna();
 }
 
 for (const demo of document.querySelectorAll('[data-piksel-demo]')) {
@@ -81,7 +153,11 @@ for (const demo of document.querySelectorAll('[data-piksel-demo]')) {
 }
 document.addEventListener('visibilitychange', () => { if (document.hidden) durdur(); });
 
+// Videolar slayt açılınca kendiliğinden, sessiz ve döngüde oynar; kontrol çubuğu yok, tıklayınca durur/başlar.
+// Hareketi azalt tercihinde kendiliğinden oynamaz (poster görünür), tıklayınca oynar.
 for (const video of document.querySelectorAll('video')) {
-  video.closest('.slayt')?.addEventListener('gizle', () => video.pause());
-  document.addEventListener('visibilitychange', () => { if (document.hidden) video.pause(); });
+  video.muted = true; video.loop = true; video.removeAttribute('controls');
+  video.title = 'Durdurmak ya da oynatmak için tıkla';
+  video.addEventListener('click', () => (video.paused ? video.play().catch(() => {}) : video.pause()));
+  slaytaBagla(video, () => { if (!az()) { video.currentTime = 0; video.play().catch(() => {}); } }, () => video.pause());
 }

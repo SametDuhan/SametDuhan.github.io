@@ -1,7 +1,6 @@
 // Deste motoru: section.slayt'ları tek tek gösterir; klavye, kaydırma, hash ve slayt içi bileşenler.
 // Saf fonksiyonlar Node'da sınanır; bagla() tarayıcıya bağlar.
 
-import { ekranaSigdir } from './ekrana-sigdir.js';
 import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from './ilerleme.js';
 
 export function sikistir(i, n) {
@@ -88,6 +87,9 @@ function deneKutulariBagla(kok) {
   }
 }
 
+// Slayt içeriği bölünmez: sığmayan slayt kendi içinde kaydırılır ("1/2" sayfalaması yok).
+const TEK_SAYFA = { konum: 0, adet: 1, git() {}, ileri: () => false, geri: () => false, yenile() {} };
+
 export function bagla(kok) {
   kok.classList.add('js-hazir');
   const slaytlar = [...kok.querySelectorAll('section.slayt')];
@@ -160,6 +162,7 @@ export function bagla(kok) {
     const yeni = sikistir(i, n);
     if (yeni === konum) return;
     const eski = slaytlar[konum];
+    const yon = yeni >= konum ? 'ileri' : 'geri';
     if (eski) {
       // Gizlenen slayttaki düğme odakta kalırsa Boşluk tuşu onu tıklamaya devam eder.
       if (eski.contains(document.activeElement)) document.activeElement.blur();
@@ -169,6 +172,8 @@ export function bagla(kok) {
     konum = yeni;
     const s = slaytlar[konum];
     s.hidden = false;
+    s.dataset.yon = yon;
+    s.scrollTop = 0;
     s.dispatchEvent(new CustomEvent('goster'));
     noktaDugmeleri.forEach((b, j) => (j === konum ? b.setAttribute('aria-current', 'step') : b.removeAttribute('aria-current')));
     cubuk.firstChild.style.width = `${((konum + 1) / n) * 100}%`;
@@ -183,8 +188,7 @@ export function bagla(kok) {
     // Daha ileride kayıtlı bir yer varsa, ziyaretçi onu geçene ya da "baştan" diyene kadar ezilmez.
     if (bekleyen && konum >= onceki.konum) { bekleyen = false; bildirim.hidden = true; }
     if (!bekleyen) ilerlemeKaydet(depo, slug, konum, n);
-    if (!ekranlar.has(konum)) ekranlar.set(konum, ekranaSigdir(s, ekranBilgisi));
-    ekran().git(0);
+    ekranlar.set(konum, TEK_SAYFA);
     ekranBilgisi();
   }
 
@@ -248,6 +252,20 @@ export function bagla(kok) {
       ileri.focus();
     });
     kok.append(bildirim);
+  }
+
+  // İlk ziyarette gezinme ipucu; bir tuşa basınca ya da birkaç saniye sonra kaybolur.
+  if (!bekleyen && depo) {
+    let goruldu = false;
+    try { goruldu = Boolean(depo.getItem('deste-ipucu')); depo.setItem('deste-ipucu', '1'); } catch { goruldu = true; }
+    if (!goruldu) {
+      const ipucu = Object.assign(document.createElement('div'), { className: 'deste-ipucu', textContent: '← → ile gez · F tam ekran · ? kısayollar' });
+      ipucu.setAttribute('role', 'status');
+      kok.append(ipucu);
+      const kaldir = () => { ipucu.remove(); removeEventListener('keydown', kaldir); };
+      addEventListener('keydown', kaldir);
+      setTimeout(kaldir, 6500);
+    }
   }
 
   slaytlar.forEach((s) => { s.hidden = true; });

@@ -29,6 +29,8 @@
   </style>
 <meta property="og:title" content="SkyTrack&#x27;i AI ile nasıl kurdum · Samet Duhan"><meta property="og:description" content="İzle, dene ve adım adım keşfet. Samet Duhan’dan interaktif geliştirme anlatımı."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/slaytlar/skytrack-nasil-kurdum/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/skytrack-nasil-kurdum.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../css/atolye.css">
+<link rel="stylesheet" href="../../css/deste-gorsel.css">
+<link rel="stylesheet" href="../../css/skytrack-gorsel.css">
 <link rel="stylesheet" href="../../css/ekran.css">
 </head>
 <body>
@@ -41,7 +43,15 @@
 
     <section class="slayt">
       <p class="kucuk-baslik">Proje · ~10 dakika</p>
-      <h1>SkyTrack'i AI ile nasıl kurdum</h1><div class="kapak-sahne haritali"><span class="orb">✈</span><div><small>03 / İNŞA ET</small><strong>Açık veriden<br>çalışan bir uygulamaya.</strong><span class="akis">veri → harita → karar → test</span></div></div>
+      <h1>SkyTrack'i AI ile nasıl kurdum</h1><div class="kapak-sahne haritali"><span class="orb">✈</span><div><small>03 / İNŞA ET</small><strong>Açık veriden<br>çalışan bir uygulamaya.</strong><span class="akis">veri → harita → karar → test</span></div>
+        <svg class="rota-cizim" viewBox="0 0 320 150" aria-hidden="true">
+          <path id="kapak-rota" class="yol" d="M24 118C70 24 120 22 160 44S256 70 296 112"/>
+          <circle cx="24" cy="118" r="5"/><circle cx="160" cy="44" r="5"/><circle cx="296" cy="112" r="5"/>
+          <text x="14" y="140">IST</text><text x="148" y="30">ESB</text><text x="284" y="134">AYT</text>
+          <g class="ucak-sekil"><path d="M12 0L-9 -8L-5 0L-9 8Z"/><animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath href="#kapak-rota"/></animateMotion></g>
+        </svg>
+        <img class="kapak-sahin" src="../../img/sahin/ceyrek.webp" alt="" width="210" height="210">
+      </div>
       <p>Bir masaüstü uygulamasının dokuz günde nasıl büyüdüğünü, uydurmadan, <strong>commit geçmişinden</strong> anlatıyorum: AI neyi hızlandırdı, hangi kararları ben verdim, AI nerede yanıldı.</p>
       <div class="terim"><p><strong>Commit:</strong> Kodda yapılan bir değişikliğin kaydı. Her commit'in bir mesajı, tarihi ve yazarı vardır; projenin günlüğü gibi okunur.</p></div>
     </section>
@@ -49,20 +59,25 @@
     <section class="slayt">
       <p class="kucuk-baslik">1 · Ne yapıyor?</p>
       <h2>Haritada canlı uçaklar</h2>
-      <video class="proje-video" controls playsinline preload="none" poster="../../img/skytrack-960.jpg" aria-label="SkyTrack tarayıcı demosunun ekran kaydı"><source src="../../video/skytrack-demo.webm" type="video/webm">Videoyu oynatamıyorsan sunumun sonundaki tarayıcı demosunu açabilirsin.</video><p class="lab-not">Ekran kaydı: tarayıcı demosu. Uçuşlar ve türbülans alanları simülasyondur; video sessizdir.</p>
+      <video class="proje-video" muted loop playsinline preload="auto" poster="../../img/skytrack-960.jpg" aria-label="SkyTrack tarayıcı demosunun ekran kaydı"><source src="../../video/skytrack-demo.webm" type="video/webm">Videoyu oynatamıyorsan sunumun sonundaki tarayıcı demosunu açabilirsin.</video><p class="lab-not">Ekran kaydı: tarayıcı demosu. Uçuşlar ve türbülans alanları simülasyondur; video sessizdir.</p>
       <p>SkyTrack, dünyadaki uçakları haritada canlı gösteren ücretsiz bir masaüstü uygulaması. Windows, macOS ve Linux'ta çalışır; hesap ya da API anahtarı istemez.</p>
-      <div class="terim"><p><strong>ADS-B:</strong> Uçakların konumlarını, irtifalarını ve hızlarını saniyede birkaç kez yayınladığı açık sinyal. Gönüllülerin alıcıları bu sinyali toplar; SkyTrack bu açık veriyi kullanır.</p></div>
+      <div class="terim ads"><svg viewBox="0 0 150 54" aria-hidden="true">
+        <path class="sinyal" d="M30 14C60 14 80 28 112 30"/>
+        <path class="dalga" d="M118 18Q130 30 118 42"/><path class="dalga" d="M118 18Q130 30 118 42"/><path class="dalga" d="M118 18Q130 30 118 42"/>
+        <path class="tel" d="M108 50L113 20L118 50M110 40H116M111 31H115"/>
+        <g class="ucak-sekil" style="fill:var(--civit)"><path d="M0 0L-11 -8L-7 0L-11 8Z" transform="translate(30 14) scale(1.1)"><animateTransform attributeName="transform" type="translate" values="0 0;10 6;0 0" dur="4s" repeatCount="indefinite" additive="sum"/></path></g>
+      </svg><p><strong>ADS-B:</strong> Uçakların konumlarını, irtifalarını ve hızlarını saniyede birkaç kez yayınladığı açık sinyal. Gönüllülerin alıcıları bu sinyali toplar; SkyTrack bu açık veriyi kullanır.</p></div>
     </section>
 
     <section class="slayt">
       <p class="kucuk-baslik">2 · Sayılarla</p>
       <h2>Ne kadarını AI ile yazdım?</h2>
       <div class="sayilar">
-        <div class="panel"><b>208</b><span>toplam commit</span></div>
-        <div class="panel"><b>191</b><span>Claude ile ortak yazılmış</span></div>
-        <div class="panel"><b>9 gün</b><span>ilk dosyadan v0.7.9'a</span></div>
+        <div class="panel"><b data-say="208">208</b><span>toplam commit</span></div>
+        <div class="panel"><b data-say="191">191</b><span>Claude ile ortak yazılmış</span></div>
+        <div class="panel"><b data-say="9" data-son=" gün">9 gün</b><span>ilk dosyadan v0.7.9'a</span></div>
       </div>
-      <div class="cubuk" role="img" aria-label="208 commit'in 191'i, yüzde 92'si, Claude ile ortak"><i style="width:91.8%"></i></div>
+      <div class="cubuk" role="img" aria-label="208 commit'in 191'i, yüzde 92'si, Claude ile ortak"><i style="--g:91.8%"></i></div>
       <p>Geri kalan 17 commit: projenin ilk günlerinde elle yaptığım 7 değişiklik ve 10 birleştirme (merge) kaydı.</p>
       <p>Claude ile yazılan commit'lerin sonunda <code>Co-Authored-By: Claude</code> satırı var; saydığım şey bu satır.</p>
       <p class="olcum">Ölçüm: github.com/SametDuhan/airock commit geçmişi, 27 Ekim 2026.</p>
@@ -71,14 +86,14 @@
     <section class="slayt">
       <p class="kucuk-baslik">3 · Zaman çizelgesi</p>
       <h2>Dokuz günde ne oldu?</h2>
-      <p>Bir durağa tıkla:</p>
-      <div class="zaman" id="zaman" role="group" aria-label="Zaman çizelgesi"></div>
+      <p>Rota kendiliğinden ilerler; bir durağa tıklayıp durdurabilirsin.</p>
+      <div class="rota" id="zaman" role="group" aria-label="Zaman çizelgesi"></div>
       <div class="panel zaman-ayrinti" id="zaman-ayrinti" aria-live="polite"></div>
     </section>
 
     <section class="slayt">
       <p class="kucuk-baslik">4 · Bir kararı yakından</p>
-      <h2>Sahte acil durum alarmları</h2><div class="laboratuvar" data-lab="alarm"><div class="lab-bas"><span>KARAR DENEYİ / ALARM EŞİĞİ</span><span>Örnek senaryo</span></div><div class="radar"><div class="radar-halka"></div><span class="ucak">✈</span><span class="radar-etiket">7700 · örnek sinyal</span></div><label>Kodun kesintisiz sürdüğü süre: <output data-sure>1</output> saniye<input type="range" min="1" max="60" value="1" data-sinyal></label><label>Alarm eşiği <select data-esik><option value="0">Anında</option><option value="15">15 saniye</option><option value="45" selected>45 saniye</option></select></label><p class="alarm-sonuc" aria-live="polite"></p><p class="lab-not">Eşik büyüdükçe kısa sinyaller elenir; bildirim de gecikir. 45 saniye bu projede seçilmiş bir kuraldır.</p></div>
+      <h2>Sahte acil durum alarmları</h2><div class="laboratuvar" data-lab="alarm"><div class="lab-bas"><span>KARAR DENEYİ / ALARM EŞİĞİ</span><span>Örnek senaryo</span></div><div class="radar"><div class="radar-halka"></div><span class="ucak">✈</span><span class="radar-etiket">7700 · örnek sinyal</span></div><p class="alarm-sure">Kodun kesintisiz sürdüğü süre: <output data-sure>1</output> saniye</p><div class="alarm-iz" aria-hidden="true"><i data-dolum></i><b data-isaret></b></div><label>Alarm eşiği <select data-esik><option value="0">Anında</option><option value="15">15 saniye</option><option value="45" selected>45 saniye</option></select></label><p class="alarm-sonuc" aria-live="polite"></p><p class="lab-not">Eşik büyüdükçe kısa sinyaller elenir; bildirim de gecikir. 45 saniye bu projede seçilmiş bir kuraldır.</p></div>
       <p>Uçaklar acil durumu bir kodla bildirir: <code>7500</code> kaçırılma, <code>7600</code> telsiz arızası, <code>7700</code> genel acil durum. SkyTrack bu kodları kırmızı halkayla gösterir ve bildirim gönderir. Sorunu commit'ler üzerinden satır satır izle:</p>
       <pre class="adim-kod"><code><span class="satir" data-not="Acil durum kodları uygulamada bir pencereyle açıklanmaya başlandı.">6 Eki  Explain squawk emergency codes (7500/7600/7700) in an in-app dialog</span><span class="satir" data-not="İlk düzeltme: yalnız gerçek acil durum kodları ya da uçağın kendi ADS-B acil durum bilgisi sayılıyor.">6 Eki  0.7.3: only real emergencies (7500/7600/7700 or matching ADS-B status) are shown as emergencies</span><span class="satir" data-not="Asıl çözüm: pilot kodu değiştirirken düğmeyi çevirdiği an 7700'den bir saniyeliğine geçebiliyor. Artık kod 45 saniye kesintisiz sürmedikçe alarm yok.">8 Eki  Emergencies: a squawk 7500/7600/7700 counts only after 45 s without a break (knob transit no longer fires alerts)</span></code></pre>
       <p>Kodu Claude yazdı. Ama "bu alarm neden yanlış?" diye sormak, sebebi bulmak ve 45 saniye gibi bir kurala karar vermek <strong>insanın işi</strong>.</p>
@@ -88,6 +103,10 @@
       <p class="kucuk-baslik">5 · AI de yanılır</p>
       <h2>Bir yorum satırı, bütün açılışı bozdu</h2>
       <p>7 Ekim'de fotoğraf görüntüleyicide bir açılış hatası çıktı. Commit mesajı şöyle diyor:</p>
+      <div class="yorum-yut" aria-hidden="true">
+        <code><span class="y-kod">baslat();</span> <span class="y-yorum">// geçici not</span> <span class="y-yut">fotografi_yukle(); pencereyi_ac();</span></code>
+        <div class="y-durum"><span class="y-hata">✗ yorum, satırın geri kalanını yuttu: açılış bozuldu</span><span class="y-test">✓ yeni test: her betik hatasız okunuyor</span></div>
+      </div>
       <pre><code>Fix start-up error in the photo viewer (a comment swallowed the rest of a line); test that every script parses</code></pre>
       <p>Yani yanlış yere konmuş bir yorum, satırın geri kalanını "yorum" hâline getirmiş ve kod çalışmamış. Düzeltmenin ikinci yarısı daha önemli: <strong>bütün betiklerin hatasız okunabildiğini sınayan bir test</strong> eklendi. Aynı tür hata bir daha sessizce geçemez.</p>
       <p>Ders: AI ile hızlı yazınca hata da hızlı gelir. Cevap AI'ı bırakmak değil, <strong>test</strong> yazdırmak. SkyTrack'in testleri her değişiklikte GitHub'da kendiliğinden çalışıyor.</p>
@@ -106,6 +125,7 @@
         <p class="sonuc" aria-live="polite"></p>
         <p class="aciklama">Düzeltmek bugünkü sorunu çözer; test, aynı sorunun yarın sessizce geri gelmesini engeller. SkyTrack'teki "test that every script parses" commit'i tam olarak bu.</p>
       </div>
+      <div class="dusunen" aria-hidden="true"><b>?</b><b>?</b><b>?</b><img src="../../img/sahin/sol.webp" alt="" width="150" height="150"></div>
     </section>
 
     <section class="slayt">
@@ -115,10 +135,10 @@
       <p><a class="dugme" href="https://sametduhan.github.io/airock/app/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;border:1px solid var(--vurgu);border-radius:8px;padding:10px 16px">▶ web demoyu yeni sekmede aç</a></p>
       <p>Kodu kendi bilgisayarında çalıştırmak için Node.js 18 ya da daha yenisi gerekir:</p>
       <div class="dene">
-        <code>git clone https://github.com/SametDuhan/airock.git
-cd airock
-npm install
-npm start</code>
+        <code><span class="tl" style="--i:0">git clone https://github.com/SametDuhan/airock.git</span>
+<span class="tl" style="--i:1">cd airock</span>
+<span class="tl" style="--i:2">npm install</span>
+<span class="tl" style="--i:3">npm start</span></code>
         <button type="button">kopyala</button>
       </div>
       <p>Testleri görmek için: <code>npm test</code></p>
@@ -132,6 +152,7 @@ npm start</code>
         <li><strong>Kararları sen verirsin:</strong> neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.</li>
         <li><strong>Testler seni korur:</strong> AI'ın hatası bir kere düzelir, test sayesinde bir daha gelmez.</li>
       </ul>
+      <div class="bitti-sahne" aria-hidden="true"><img src="../../img/sahin/kanat-kucuk.webp" alt="" width="140" height="140"><i style="--x:8%;--c:#d07a2a;--d:3.1s;--g:0s"></i><i style="--x:18%;--c:#2f4a6b;--d:2.7s;--g:.6s"></i><i style="--x:30%;--c:#4f7d6e;--d:3.4s;--g:1.1s"></i><i style="--x:42%;--c:#a8432a;--d:2.9s;--g:.3s"></i><i style="--x:58%;--c:#d07a2a;--d:3.2s;--g:1.4s"></i><i style="--x:70%;--c:#2f4a6b;--d:2.6s;--g:.9s"></i><i style="--x:82%;--c:#4f7d6e;--d:3.3s;--g:.2s"></i><i style="--x:92%;--c:#a8432a;--d:2.8s;--g:1.7s"></i></div>
       <p><a href="https://github.com/SametDuhan/airock">SkyTrack GitHub</a> · <a href="../">Tüm slaytlar</a> · <a href="../../projeler/">Projeler</a> · <a href="../../iletisim/">İletişim</a></p>
     </section>
   </div>
@@ -151,17 +172,28 @@ npm start</code>
     ];
     const kutu = document.getElementById('zaman');
     const ayrinti = document.getElementById('zaman-ayrinti');
+    const dolu = Object.assign(document.createElement('i'), { className: 'rota-dolu' });
+    const ucak = Object.assign(document.createElement('span'), { className: 'rota-ucak', textContent: '✈' });
+    ucak.setAttribute('aria-hidden', 'true');
+    kutu.append(dolu, ucak);
     const dugmeler = DURAKLAR.map(([tarih, ad], i) => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.textContent = `${tarih} · ${ad}`;
-      b.addEventListener('click', () => sec(i));
+      b.innerHTML = '<b></b><span></span>';
+      b.firstChild.textContent = tarih;
+      b.lastChild.textContent = ad;
+      b.addEventListener('click', () => { durdur(); sec(i); });
       kutu.append(b);
       return b;
     });
+    let simdi = 0, sayac = 0;
     function sec(i) {
+      simdi = i;
       const [tarih, ad, anlatim, mesaj] = DURAKLAR[i];
-      dugmeler.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+      dugmeler.forEach((b, j) => { b.setAttribute('aria-pressed', String(j === i)); b.classList.toggle('gecildi', j < i); });
+      const yuzde = ((i + 0.5) / DURAKLAR.length) * 100;
+      ucak.style.left = `${yuzde}%`;
+      dolu.style.width = `calc((100% - 100% / ${DURAKLAR.length}) * ${i / (DURAKLAR.length - 1)})`;
       ayrinti.replaceChildren();
       const h = document.createElement('p');
       h.innerHTML = '<strong></strong>';
@@ -172,11 +204,24 @@ npm start</code>
       c.className = 'olcum';
       c.textContent = `commit: "${mesaj}"`;
       ayrinti.append(h, p, c);
+      ayrinti.classList.remove('degisti'); void ayrinti.offsetWidth; ayrinti.classList.add('degisti');
     }
+    // Rota slayt açılınca kendiliğinden ilerler; bir durağa tıklayınca durur.
+    const durdur = () => { clearInterval(sayac); sayac = 0; };
+    const baslat = () => {
+      durdur();
+      sec(0);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      sayac = setInterval(() => sec((simdi + 1) % DURAKLAR.length), 3600);
+    };
+    const slayt = kutu.closest('.slayt');
+    slayt.addEventListener('goster', baslat);
+    slayt.addEventListener('gizle', durdur);
     sec(0);
 
     bagla(document.getElementById('deste'));
   </script>
 <script type="module" src="../../js/atolye.js"></script>
+<script type="module" src="../../js/deste-gorsel.js"></script>
 </body>
 </html>

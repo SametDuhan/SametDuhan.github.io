@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../../css/deste.css">
 <meta property="og:title" content="Claude Code hook&#x27;u ile otomasyon · Samet Duhan"><meta property="og:description" content="İzle, dene ve adım adım keşfet. Samet Duhan’dan interaktif geliştirme anlatımı."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/slaytlar/claude-code-hook/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/claude-code-hook.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../css/atolye.css">
+<link rel="stylesheet" href="../../css/deste-gorsel.css">
 <link rel="stylesheet" href="../../css/ekran.css">
 </head>
 <body>
@@ -41,7 +42,7 @@
 
     <section class="slayt">
       <p class="kucuk-baslik">2 · Çözümün adı</p>
-      <h2>Hook = "şu olunca, şunu çalıştır"</h2><div class="laboratuvar" data-lab="hook"><div class="lab-bas"><span>OLAY AKIŞI / SEN TETİKLE</span><span>Yerel simülasyon</span></div><label><input type="checkbox" data-hook checked> Stop hook bağlı</label><div class="akis-adimlar"><span>Claude Code</span><span>Stop olayı</span><span>PowerShell</span><span>Bildirim</span></div><div class="bildirim-sahne"><span class="mini-karakter" aria-hidden="true">▟</span><strong data-durum>Görev çalışıyor…</strong></div><pre class="terminal" aria-live="polite">$ Stop olayını bekliyor…</pre><button class="dugme" data-bitir>Görevi bitir ↗</button><p class="lab-not">Hook’u kapatıp yeniden dene: olay ile otomasyonun farkını gör.</p></div>
+      <h2>Hook = "şu olunca, şunu çalıştır"</h2><div class="laboratuvar" data-lab="hook"><div class="lab-bas"><span>OLAY AKIŞI / KENDİ KENDİNE ÇALIŞIR</span><span>Yerel simülasyon</span></div><label><input type="checkbox" data-hook checked> Stop hook bağlı</label><div class="akis-adimlar"><span>Claude Code</span><span>Stop olayı</span><span>PowerShell</span><span>Bildirim</span></div><div class="bildirim-sahne"><span class="mini-karakter" aria-hidden="true">▟</span><strong data-durum>Görev çalışıyor…</strong></div><pre class="terminal" aria-live="polite">$ Stop olayını bekliyor…</pre><p class="lab-not">Hook’u kapatıp yeniden dene: olay ile otomasyonun farkını gör.</p></div>
       <div class="terim"><p><strong>Hook (kanca):</strong> Bir programın belli bir anında, senin verdiğin bir komutu otomatik olarak çalıştırma kuralı.</p></div>
       <p>Claude Code'da hook'lar bir ayar dosyasına yazılır: <code>settings.json</code>. Her hook iki şey söyler:</p>
       <ul>
@@ -132,5 +133,6 @@ powershell -ExecutionPolicy Bypass -File install.ps1</code>
     bagla(document.getElementById('deste'));
   </script>
 <script type="module" src="../../js/atolye.js"></script>
+<script type="module" src="../../js/deste-gorsel.js"></script>
 </body>
 </html>
