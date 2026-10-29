@@ -98,7 +98,7 @@ ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', basl
       alt: `
         <dl class="kimlik-bilgi">
           <div><dt>Okuyor</dt><dd>Bilgisayar mühendisliği, 3. sınıf</dd></div>
-          <div><dt>İlgi alanı</dt><dd>Siber güvenlik</dd></div>
+          <div><dt>İlgi alanı</dt><dd>Yapay zeka</dd></div>
           <div><dt>Son işi</dt><dd>SkyTrack: ilk dosyadan v0.7.9'a 9 gün, 208 commit</dd></div>
           <div><dt>Açık kaynak</dt><dd><a href="../projeler/#skytrack">SkyTrack</a> · <a href="../projeler/#claude-done-pixel">claude-done-pixel</a> · <a href="../projeler/#chatgpt-done-pixel">chatgpt-done-pixel</a></dd></div>
           <div><dt>Bağlantılar</dt><dd><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../iletisim/">iletişim</a></dd></div>
