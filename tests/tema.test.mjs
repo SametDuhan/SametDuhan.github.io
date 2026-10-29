@@ -36,12 +36,13 @@ test('tema tokenları kâğıt paletinde', () => {
   assert.match(css, /'Fraunces'/);
 });
 
-test('ana sayfa: şahin önden başlar, kanat pozu yok (video var), klavyeyle erişilir', () => {
+test('ana sayfa: şahin önden başlar, kanat pozu yok, süs olduğu için ekran okuyucudan gizli', () => {
   const s = oku('index.html');
   assert.match(s, /<g class="poz aktif" data-poz="on">/);
   assert.doesNotMatch(s, /data-poz="kanat"/);
   assert.doesNotMatch(s, /data-poz="(sol|sag|arka|ceyrek)/);
-  assert.match(s, /id="sahin" tabindex="0" role="button" aria-label="[^"]+"/);
+  assert.match(s, /id="sahin" aria-hidden="true"/);
+  assert.doesNotMatch(s, /id="sahin"[^>]*(tabindex|role="button")/);
   assert.equal((s.match(/<a class="kare /g) || []).length, 4);
   for (const p of ['p-kehribar', 'p-civit', 'p-bakir', 'p-kiremit']) assert.ok(s.includes(p), p);
   assert.match(s, /class="seyir-haritasi"/);
