@@ -77,3 +77,10 @@ test('dış bağlantılar (GitHub, LinkedIn, proje siteleri) yeni sekmede açıl
   const eksik = gez('').flatMap((f) => eksikDisBaglantilar(oku(f)).filter((u) => !/^https?:\/\/(sametduhan\.github\.io\/(en\/)?$)/.test(u)).map((u) => `${f} → ${u}`));
   assert.deepEqual(eksik, [], 'bu dış bağlantılar target="_blank" almamış');
 });
+
+test('hakkımda sahnesi: mühür vurulunca damga solup kaybolur, iz kalır; hareketi azaltınca damga görünmez', () => {
+  const css = oku('css/site.css');
+  assert.match(css, /@keyframes hk-damga \{[^}]*15%, 100% \{[^}]*opacity:0/);
+  assert.match(css, /\.hk-damga \{ transform: translate\(166px, 130px\) rotate\(5deg\); opacity: 0; \}/);
+  assert.match(css, /\.hk-iz \{ opacity: \.92; \}/, 'mühür izi hareketi azaltınca kalır');
+});

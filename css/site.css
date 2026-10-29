@@ -346,7 +346,8 @@ body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * c
 @keyframes hk-gor4 { 0%, 72.5% { opacity:0 } 75%, 97.5% { opacity:1 } 100% { opacity:0 } }
 .hk-damga { animation: hk-damga 28s linear infinite; }
 .hk-iz { opacity: 0; animation: hk-iz 28s linear infinite; transform-box: fill-box; }
-@keyframes hk-damga { 0%, 5% { transform:translate(166px, 150px) rotate(0) } 7.6% { transform:translate(166px, 199px) } 8.6% { transform:translate(166px, 201px) rotate(-3deg) } 11% { transform:translate(166px, 198px) } 15%, 100% { transform:translate(166px, 130px) rotate(5deg) } }
+/* mühür vurulunca damga yukarı kalkarken solup kaybolur (iz kalır, aracı kalmaz) */
+@keyframes hk-damga { 0%, 5% { transform:translate(166px, 150px) rotate(0); opacity:1 } 7.6% { transform:translate(166px, 199px) } 8.6% { transform:translate(166px, 201px) rotate(-3deg) } 11% { transform:translate(166px, 198px); opacity:1 } 15%, 100% { transform:translate(166px, 130px) rotate(5deg); opacity:0 } }
 @keyframes hk-iz { 0%, 8% { opacity:0 } 9%, 22.5% { opacity:.92 } 25%, 100% { opacity:0 } }
 .hk-cip1 { animation: hk-cip1 28s linear infinite; }
 @keyframes hk-cip1 { 0%, 27.0% { transform:translateY(-96px);opacity:0 } 27.2% { opacity:1 } 28.6% { transform:translateY(5px) } 29.3%, 47.5% { transform:translateY(0);opacity:1 } 50%, 100% { transform:translateY(0);opacity:1 } }
@@ -386,7 +387,7 @@ body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * c
 @media (prefers-reduced-motion: reduce) {
   .hk-k1, .hk-damga, .hk-iz, .hk-n1 { animation: none !important; }
   .hk-k1 { opacity: 1; }
-  .hk-damga { transform: translate(166px, 130px) rotate(5deg); }
+  .hk-damga { transform: translate(166px, 130px) rotate(5deg); opacity: 0; }
   .hk-iz { opacity: .92; }
   .hk-n1 { opacity: 1; }
   .hk-k2, .hk-k3, .hk-k4, .hk-cip, .hk-canta, .hk-kilit, .hk-onay, .hk-tara, .hk-dugum, .hk-yol, .hk-n2, .hk-n3, .hk-n4 { animation: none !important; }
