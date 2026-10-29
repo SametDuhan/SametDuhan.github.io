@@ -63,3 +63,17 @@ test('betik metinleri: t() Node\'da Türkçe seçer; sunum kartlarının İngili
   assert.equal(t('merhaba', 'hello'), 'merhaba');
   for (const d of DESTELER) for (const alan of ['baslik', 'etiket', 'aciklama']) assert.ok(d.en?.[alan], `${d.slug}.en.${alan} yok`);
 });
+
+test('dış bağlantılar (GitHub, LinkedIn, proje siteleri) yeni sekmede açılır; mailto ve sayfa içi bağlantılar değişmez', async () => {
+  const { disBaglantilar, eksikDisBaglantilar } = await import('../araclar/dis-baglanti.mjs');
+  const ham = '<a href="https://github.com/x">g</a> <a href="mailto:a@b.c">m</a> <a href="../projeler/">p</a> <a href="https://x.y" target="_self">k</a>';
+  const son = disBaglantilar(ham);
+  assert.match(son, /<a href="https:\/\/github\.com\/x" target="_blank" rel="noopener noreferrer">/);
+  assert.match(son, /<a href="mailto:a@b\.c">/);
+  assert.match(son, /<a href="\.\.\/projeler\/">/);
+  assert.match(son, /target="_self"/, 'elle verilen hedef korunur');
+  const { readdirSync, statSync } = await import('node:fs');
+  const gez = (d) => readdirSync(new URL(`../${d}`, import.meta.url), { withFileTypes: true }).flatMap((g) => (g.isDirectory() ? (['tests', 'araclar', 'js', 'css', 'img', 'video', 'docs', 'node_modules'].includes(g.name) ? [] : gez(`${d}${g.name}/`)) : (g.name.endsWith('.html') ? [`${d}${g.name}`] : [])));
+  const eksik = gez('').flatMap((f) => eksikDisBaglantilar(oku(f)).filter((u) => !/^https?:\/\/(sametduhan\.github\.io\/(en\/)?$)/.test(u)).map((u) => `${f} → ${u}`));
+  assert.deepEqual(eksik, [], 'bu dış bağlantılar target="_blank" almamış');
+});

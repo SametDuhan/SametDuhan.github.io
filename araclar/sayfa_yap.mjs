@@ -7,6 +7,7 @@ import { PROJELER, projeVitrinHTML, sayacHTML, medyaHTML } from '../js/projeler.
 import { FABRIKA_SVG } from './fabrika.mjs';
 import { SAHNELER } from './sahneler.mjs';
 import { dilSecici, dilEtiketleri } from './dil-baglanti.mjs';
+import { disBaglantilar } from './dis-baglanti.mjs';
 
 const KOK = fileURLToPath(new URL('../', import.meta.url));
 const KONTROL = process.argv.includes('--kontrol');
@@ -77,7 +78,8 @@ export const son = (onek = '../') => `
     baslatSayfa();
   </script>`;
 
-const yaz = (yol, html) => {
+const yaz = (yol, ham) => {
+  const html = disBaglantilar(ham);
   if (!KONTROL) return writeFileSync(KOK + yol, html);
   if (readFileSync(KOK + yol, 'utf8') !== html) farkli.push(yol);
 };

@@ -2,6 +2,7 @@
 // kartlar ve sayaçlar js/projeler.js'ten gelir. Her bilgi README'den ya da commit geçmişinden.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { bas, menu, son } from './sayfa_yap.mjs';
+import { disBaglantilar } from './dis-baglanti.mjs';
 import { PROJELER, medyaHTML, sayacHTML } from '../js/projeler.js';
 
 const stories = {
@@ -203,5 +204,5 @@ for (const p of PROJELER) {
 </html>
 `;
   mkdirSync(yol, { recursive: true });
-  writeFileSync(yol + 'index.html', govde);
+  writeFileSync(yol + 'index.html', disBaglantilar(govde));
 }
