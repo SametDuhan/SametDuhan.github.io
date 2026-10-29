@@ -43,10 +43,27 @@ const kacis = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': 
 
 // Kartların üstündeki küçük canlı çizim: sunumun kapağındaki motifin sadeleşmiş hali (hareket css/site.css'te).
 const MINI = {
-  halka: '<svg viewBox="0 0 240 64" aria-hidden="true"><path id="mini-halka" class="mini-iz" d="M120 8A24 24 0 1 1 119.9 8"/><circle class="mini-dugum" cx="120" cy="8" r="5"/><circle class="mini-dugum" cx="144" cy="32" r="5"/><circle class="mini-dugum" cx="120" cy="56" r="5"/><circle class="mini-dugum" cx="96" cy="32" r="5"/><circle class="mini-nokta" r="3.5"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#mini-halka"/></animateMotion></circle></svg>',
-  zincir: '<svg viewBox="0 0 240 64" aria-hidden="true"><path id="mini-zincir" class="mini-iz" d="M30 32H210"/><rect class="mini-kutu" x="8" y="20" width="44" height="24" rx="5"/><rect class="mini-kutu" x="66" y="20" width="44" height="24" rx="5"/><rect class="mini-kutu" x="124" y="20" width="44" height="24" rx="5"/><rect class="mini-kutu" x="182" y="20" width="44" height="24" rx="5"/><circle class="mini-nokta" r="3.5"><animateMotion dur="4.5s" repeatCount="indefinite"><mpath href="#mini-zincir"/></animateMotion></circle></svg>',
-  rota: '<svg viewBox="0 0 240 64" aria-hidden="true"><path id="mini-rota" class="mini-iz" d="M18 52C70 2 150 2 222 46"/><circle class="mini-dugum" cx="18" cy="52" r="4.5"/><circle class="mini-dugum" cx="120" cy="14" r="4.5"/><circle class="mini-dugum" cx="222" cy="46" r="4.5"/><path class="mini-ucak" d="M9 0L-6 -6L-3 0L-6 6Z"><animateMotion dur="6s" repeatCount="indefinite" rotate="auto"><mpath href="#mini-rota"/></animateMotion></path></svg>',
+  // Dört adımlı halka: üzerine gelince düğümler sırayla yanar, çizgi akar (css/site.css .mini-*)
+  halka: '<svg viewBox="0 0 240 64" aria-hidden="true"><circle class="mini-iz" cx="120" cy="32" r="24"/><circle class="mini-dugum d1" cx="120" cy="8" r="5"/><circle class="mini-dugum d2" cx="144" cy="32" r="5"/><circle class="mini-dugum d3" cx="120" cy="56" r="5"/><circle class="mini-dugum d4" cx="96" cy="32" r="5"/></svg>',
+  // Dört kutulu zincir: kutular soldan sağa sırayla yanar, aralardaki çizgi akar
+  zincir: '<svg viewBox="0 0 240 64" aria-hidden="true"><path class="mini-iz" d="M52 32H66M110 32H124M168 32H182"/><rect class="mini-kutu k1" x="8" y="20" width="44" height="24" rx="5"/><rect class="mini-kutu k2" x="66" y="20" width="44" height="24" rx="5"/><rect class="mini-kutu k3" x="124" y="20" width="44" height="24" rx="5"/><rect class="mini-kutu k4" x="182" y="20" width="44" height="24" rx="5"/></svg>',
+  // Rota: uçak yalnız üzerine gelince uçar (SMIL; js/desteler.js'teki kartHareketi başlatır/durdurur)
+  rota: '<svg viewBox="0 0 240 64" aria-hidden="true"><path id="mini-rota" class="mini-iz" d="M18 52C70 2 150 2 222 46"/><circle class="mini-dugum" cx="18" cy="52" r="4.5"/><circle class="mini-dugum" cx="120" cy="14" r="4.5"/><circle class="mini-dugum" cx="222" cy="46" r="4.5"/><path class="mini-ucak" d="M9 0L-6 -6L-3 0L-6 6Z"><animateMotion dur="3.4s" repeatCount="indefinite" rotate="auto"><mpath href="#mini-rota"/></animateMotion></path></svg>',
 };
+
+// Kart çizimindeki SMIL animasyonu (uçak) yalnız üzerine gelince ya da odaklanınca çalışır; hareketi azaltınca hiç.
+export function kartHareketi(kutu) {
+  const az = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for (const svg of kutu.querySelectorAll('.mini-gorsel svg')) {
+    svg.pauseAnimations();
+    if (az) continue;
+    const kart = svg.closest('.deste-karti');
+    kart.addEventListener('pointerenter', () => svg.unpauseAnimations());
+    kart.addEventListener('focusin', () => svg.unpauseAnimations());
+    kart.addEventListener('pointerleave', () => svg.pauseAnimations());
+    kart.addEventListener('focusout', () => svg.pauseAnimations());
+  }
+}
 
 export function kartHTML(d, ilerleme = null) {
   const ornek = d.ornek ? ` · örnek: ${kacis(d.ornek)}` : '';

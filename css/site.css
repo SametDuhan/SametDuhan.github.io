@@ -112,9 +112,17 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 
 .mini-gorsel { margin: -18px -18px 4px; padding: 10px 18px; background: color-mix(in srgb, var(--vurgu) 9%, var(--panel)); border-bottom: 1px dashed var(--kenar); }
 .mini-gorsel svg { display: block; width: 100%; height: 56px; }
-.mini-iz { fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-dasharray: 4 5; animation: bant-serit 1.4s linear infinite; }
+.mini-iz { fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-dasharray: 4 5; }
 .mini-dugum { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.6; }
 .mini-kutu { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.6; }
+/* çizimler boşta durur; üzerine gelince ya da odaklanınca çalışır */
+.deste-karti:hover .mini-iz, .deste-karti:focus-visible .mini-iz { animation: bant-serit 1.4s linear infinite; }
+.deste-karti:hover .mini-dugum, .deste-karti:focus-visible .mini-dugum { animation: mini-yan 3.2s ease-in-out infinite; }
+.deste-karti:hover .mini-kutu, .deste-karti:focus-visible .mini-kutu { animation: mini-yan 3.2s ease-in-out infinite; }
+.mini-dugum.d2, .mini-kutu.k2 { animation-delay: .8s !important; }
+.mini-dugum.d3, .mini-kutu.k3 { animation-delay: 1.6s !important; }
+.mini-dugum.d4, .mini-kutu.k4 { animation-delay: 2.4s !important; }
+@keyframes mini-yan { 0%, 30%, 100% { fill: var(--zemin); } 8%, 22% { fill: var(--vurgu); } }
 .mini-nokta { fill: var(--vurgu); stroke: var(--zemin); stroke-width: 1.2; }
 .mini-ucak { fill: var(--civit); stroke: var(--zemin); stroke-width: 1; }
 .deste-karti:hover .mini-gorsel { background: color-mix(in srgb, var(--vurgu) 16%, var(--panel)); }
@@ -147,7 +155,7 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 
 @media (prefers-reduced-motion: reduce) {
   .menu-linkler a, .menu-linkler a svg, .menu-linkler a i { animation: none !important; transition: none !important; }
-  .deste-karti, .deste-karti h2, .deste-karti .alt { transition: none !important; }
+  .deste-karti, .deste-karti h2, .deste-karti .alt, .mini-iz, .mini-dugum, .mini-kutu { animation: none !important; transition: none !important; }
   .deste-karti:hover, .deste-karti:focus-visible { transform: none; }
   .sayfa-sahin, .bant-cizim *, .mini-iz, .cal, .cal-ahize, .cal-isaret path, .tik, .slayt-a, .slayt-b, .sl, .cubuk, .tabela, .soru { animation: none !important; }
   .slayt-b { opacity: 0; }

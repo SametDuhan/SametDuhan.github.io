@@ -205,14 +205,14 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
   </main>${son()}
 
   <script type="module">
-    import { DESTELER, kartHTML } from '../js/desteler.js';
+    import { DESTELER, kartHTML, kartHareketi } from '../js/desteler.js';
     import { ilerlemeOku } from '../js/ilerleme.js';
     let depo = null;
     try { depo = localStorage; } catch {}
     // Tüm sunumlar tek listede; kaldığın yer rozetiyle gelir.
     const kutu = document.getElementById('desteler');
     kutu.innerHTML = DESTELER.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) kutu.querySelectorAll('.mini-gorsel svg').forEach((v) => v.pauseAnimations());
+    kartHareketi(kutu);
   </script>
 </body>
 </html>
