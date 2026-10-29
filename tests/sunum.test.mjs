@@ -59,3 +59,23 @@ test('slayttaki animasyonlar slayt açılınca başlar, kapanınca durur', () =>
   assert.match(js, /addEventListener\('goster'/);
   assert.match(js, /addEventListener\('gizle'/);
 });
+
+test('projeler sayfası vitrin stilini ve betiğini yükler; hareketi azaltınca vitrinler görünür kalır', () => {
+  const s = oku('projeler/index.html');
+  assert.match(s, /css\/vitrin\.css/);
+  assert.match(s, /js\/vitrin\.js/);
+  const css = oku('css/vitrin.css');
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[^]*opacity: 1/);
+  assert.match(oku('js/vitrin.js'), /prefers-reduced-motion/);
+});
+
+test('hakkımda: ne arıyorsun yolları, canlı kartlar, ilkeler ve araçlar; tüm animasyonlar hareketi azaltınca durur', () => {
+  const s = oku('hakkimda/index.html');
+  for (const h of ['../projeler/"', '../slaytlar/ai-ajani-nedir/"', '../iletisim/"']) assert.ok(s.includes(`class="yol belir`) && s.includes(`href="${h}`), h);
+  assert.equal((s.match(/class="ilke belir"/g) || []).length, 3);
+  assert.equal((s.match(/<li style="--i:\d+">/g) || []).length, 12);
+  assert.match(s, /data-medya="video"/);
+  assert.match(s, /data-medya="claude"/);
+  assert.match(s, /css\/hakkimda\.css/);
+  assert.match(oku('css/hakkimda.css'), /@media \(prefers-reduced-motion: reduce\)[^]*animation: none !important/);
+});

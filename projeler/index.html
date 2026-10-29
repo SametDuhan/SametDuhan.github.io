@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="../css/tema.css">
   <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/vitrin.css">
   <link rel="stylesheet" href="../css/ekran.css">
 </head>
 <body>
@@ -118,51 +119,61 @@
       <div class="sayfa-metin">
         <p class="etiket"><span class="no">02</span>ÜRETİM HATTI<span class="damga">HEPSİ AÇIK KAYNAK</span></p>
         <h1>Projeler</h1>
-        <p class="tanitim">Hepsi açık kaynak. Kodlarına GitHub'dan bakabilir, nasıl yapıldıklarını slaytlardan öğrenebilirsin.</p>
+        <p class="tanitim">Hepsinin kodu GitHub'da, nasıl yapıldığı slaytlarda.</p>
       </div>
     </header>
-    <div class="filtre" role="group" aria-label="Projeleri süz">
-      <button type="button" data-etiket="hepsi" aria-pressed="true">hepsi</button>
-      <button type="button" data-etiket="AI aracı" aria-pressed="false">AI aracı</button>
-      <button type="button" data-etiket="Uygulama" aria-pressed="false">uygulama</button>
-      <span class="sayac-yazi" id="proje-sayac" aria-live="polite"></span>
-    </div>
-    <div class="projeler" id="projeler">
-<article class="kart kose p-kehribar" id="skytrack" data-ad="SkyTrack"><i class="k2"></i><i class="k3"></i>
-  <img src="../img/skytrack-960.jpg" srcset="../img/skytrack-960.jpg 960w, ../img/skytrack-1440.jpg 1440w, ../img/skytrack.jpg 2880w" sizes="(max-width: 700px) 100vw, 340px" alt="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası" loading="lazy">
-  <div class="kart-govde">
-    <p class="kart-komut">./skytrack</p>
+    <div class="sayaclar" aria-label="Rakamlarla"><div class="sayac"><b data-say="3">3</b><span>açık kaynak proje</span></div><div class="sayac"><b data-say="208">208</b><span>commit, SkyTrack</span></div><div class="sayac"><b data-say="191">191</b><span>Claude ile ortak yazıldı</span></div><div class="sayac"><b data-say="15">15</b><span>dil desteği, SkyTrack</span></div></div>
+    <div class="vitrinler" id="projeler">
+<article class="vitrin belir p-kehribar" id="skytrack" data-ad="SkyTrack">
+  <div class="v-medya" data-medya="video"><div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı demo · sessiz ekran kaydı</span></div><video class="v-ekran" muted loop playsinline preload="metadata" poster="../img/skytrack-960.jpg" aria-label="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası"><source src="../video/skytrack-demo.webm" type="video/webm"></video></div></div>
+  <div class="v-govde">
+    <p class="v-komut">./skytrack</p>
     <h2>SkyTrack</h2>
-    <p class="etiketler"><span>Uygulama</span><span>Açık veri</span></p>
-    <p>Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.</p>
-    <ul class="bilgiler"><li>Windows, macOS ve Linux; Electron ve Leaflet ile</li><li>15 dil ve tarayıcıda çalışan bir web demosu</li><li>Her push&#39;ta GitHub Actions ile testler</li><li>208 commit&#39;in 191&#39;i Claude ile ortak yazıldı</li></ul>
-    <div class="linkler"><a class="dugme" href="../projeler/skytrack/">projeyi keşfet →</a><a class="dugme" href="https://sametduhan.github.io/airock/app/">▶ tarayıcı demosu (simülasyon)</a><a class="dugme" href="https://github.com/SametDuhan/airock">GitHub</a><a class="dugme" href="../slaytlar/skytrack-nasil-kurdum/">nasıl yaptım →</a></div>
+    <p class="v-etiketler"><span>Uygulama</span><span>Açık veri</span></p>
+    <p class="v-ozet">Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.</p>
+    <ul class="v-bilgiler"><li>Windows, macOS ve Linux; Electron ve Leaflet ile</li><li>15 dil ve tarayıcıda çalışan bir web demosu</li><li>Her push&#39;ta GitHub Actions ile testler</li><li>208 commit&#39;in 191&#39;i Claude ile ortak yazıldı</li></ul>
+    <div class="linkler">
+      <a class="dugme ana" href="../projeler/skytrack/">projeyi keşfet →</a>
+      <a class="dugme" href="https://github.com/SametDuhan/airock">GitHub ↗</a>
+    </div>
+    <p class="v-ek"><a href="https://sametduhan.github.io/airock/app/">▶ web demo</a><a href="../slaytlar/skytrack-nasil-kurdum/">nasıl yaptım →</a></p>
   </div>
 </article>
-<article class="kart kose p-civit" id="claude-done-pixel" data-ad="claude-done-pixel"><i class="k2"></i><i class="k3"></i>
-  <img class="piksel" src="../img/claude-done.png" alt="Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler" loading="lazy">
-  <div class="kart-govde">
-    <p class="kart-komut">./claude-done-pixel</p>
+<article class="vitrin belir p-civit" id="claude-done-pixel" data-ad="claude-done-pixel">
+  <div class="v-medya" data-medya="claude"><div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı önizleme · piksel animasyonu</span></div><canvas class="v-ekran v-piksel" width="640" height="400" role="img" aria-label="Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler"></canvas></div></div>
+  <div class="v-govde">
+    <p class="v-komut">./claude-done-pixel</p>
     <h2>claude-done-pixel</h2>
-    <p class="etiketler"><span>AI aracı</span><span>Claude Code</span></p>
-    <p>Claude Code işini bitirince ekranın köşesinde bir piksel karakter koşup zıplar ve yeşil bayrak sallar; terminali kontrol etmeye son.</p>
-    <ul class="bilgiler"><li>Claude Code&#39;un Stop hook&#39;u ile çalışır</li><li>Windows; PowerShell, ek paket gerektirmez</li><li>Tıklamaları geçirir, klavye odağını çalmaz</li></ul>
-    <div class="linkler"><a class="dugme" href="../projeler/claude-done-pixel/">projeyi keşfet →</a><a class="dugme" href="https://github.com/SametDuhan/claude-done-pixel">GitHub</a><a class="dugme" href="../slaytlar/claude-code-hook/">nasıl yaptım →</a></div>
+    <p class="v-etiketler"><span>AI aracı</span><span>Claude Code</span></p>
+    <p class="v-ozet">Claude Code işini bitirince ekranın köşesinde bir piksel karakter koşup zıplar ve yeşil bayrak sallar; terminali kontrol etmeye son.</p>
+    <ul class="v-bilgiler"><li>Claude Code&#39;un Stop hook&#39;u ile çalışır</li><li>Windows; PowerShell, ek paket gerektirmez</li><li>Tıklamaları geçirir, klavye odağını çalmaz</li></ul>
+    <div class="linkler">
+      <a class="dugme ana" href="../projeler/claude-done-pixel/">projeyi keşfet →</a>
+      <a class="dugme" href="https://github.com/SametDuhan/claude-done-pixel">GitHub ↗</a>
+    </div>
+    <p class="v-ek"><a href="../slaytlar/claude-code-hook/">nasıl yaptım →</a></p>
   </div>
 </article>
-<article class="kart kose p-bakir" id="chatgpt-done-pixel" data-ad="chatgpt-done-pixel"><i class="k2"></i><i class="k3"></i>
-  <img class="piksel" src="../img/chatgpt-done.png" alt="Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama" loading="lazy">
-  <div class="kart-govde">
-    <p class="kart-komut">./chatgpt-done-pixel</p>
+<article class="vitrin belir p-bakir" id="chatgpt-done-pixel" data-ad="chatgpt-done-pixel">
+  <div class="v-medya" data-medya="codex"><div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı önizleme · piksel animasyonu</span></div><canvas class="v-ekran v-piksel" width="640" height="400" role="img" aria-label="Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama"></canvas></div></div>
+  <div class="v-govde">
+    <p class="v-komut">./chatgpt-done-pixel</p>
     <h2>chatgpt-done-pixel</h2>
-    <p class="etiketler"><span>AI aracı</span><span>Codex</span></p>
-    <p>Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar.</p>
-    <ul class="bilgiler"><li>Codex&#39;in agent-turn-complete bildirimiyle çalışır</li><li>Windows ve WSL</li><li>Ağ isteği yapmaz, sohbet metnini kaydetmez</li></ul>
-    <div class="linkler"><a class="dugme" href="../projeler/chatgpt-done-pixel/">projeyi keşfet →</a><a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel">GitHub</a></div>
+    <p class="v-etiketler"><span>AI aracı</span><span>Codex</span></p>
+    <p class="v-ozet">Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar.</p>
+    <ul class="v-bilgiler"><li>Codex&#39;in agent-turn-complete bildirimiyle çalışır</li><li>Windows ve WSL</li><li>Ağ isteği yapmaz, sohbet metnini kaydetmez</li></ul>
+    <div class="linkler">
+      <a class="dugme ana" href="../projeler/chatgpt-done-pixel/">projeyi keşfet →</a>
+      <a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel">GitHub ↗</a>
+    </div>
   </div>
 </article>
     </div>
-    <nav class="liste-sayfalar" aria-label="Proje sayfaları" hidden></nav>
+    <footer class="vitrin-son belir">
+      <img src="../img/sahin/kanat-kucuk.webp" alt="" width="120" height="120">
+      <p><strong>Daha fazlası GitHub'da.</strong> Yeni projeler önce orada görünür.</p>
+      <a class="dugme ana" href="https://github.com/SametDuhan">github.com/SametDuhan ↗</a>
+    </footer>
     <p class="not">claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anthropic ve OpenAI ile bağlantısı yok.</p>
   </main>
   <footer class="alt-bilgi">
@@ -173,38 +184,9 @@
     import { baslatSayfa } from '../js/ekrana-sigdir.js';
     baslatSayfa();
   </script>
-
   <script type="module">
-    import { PROJELER, projeleriSuz } from '../js/projeler.js';
-    import { sayfala, sayfaGezinmesi } from '../js/sayfala.js';
-    // hareketi azaltınca fabrikanın SMIL animasyonları (saat) da durur
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.bant-cizim svg')?.pauseAnimations();
-    const kartlar = [...document.querySelectorAll('#projeler .kart')];
-    const sayac = document.getElementById('proje-sayac');
-    const dugmeler = [...document.querySelectorAll('.filtre button')];
-    // Filtre ve sayfa adreste durur: ?etiket=…&sayfa=… ile paylaşılabilir. Sayfa başına en fazla 5 proje.
-    const sorgu = new URLSearchParams(location.search);
-    let etiket = PROJELER.some((p) => p.etiketler.includes(sorgu.get('etiket'))) ? sorgu.get('etiket') : 'hepsi';
-    let sayfa = sorgu.get('sayfa') || 1;
-    const gezinme = sayfaGezinmesi(document.querySelector('.liste-sayfalar'), (n) => { sayfa = n; goster(); });
-    function goster(adresiGuncelle = true) {
-      const uygun = projeleriSuz(PROJELER, etiket).map((p) => p.ad);
-      const s = sayfala(uygun, sayfa);
-      sayfa = s.sayfa;
-      const gorunur = new Set(s.ogeler);
-      kartlar.forEach((k) => { k.hidden = !gorunur.has(k.dataset.ad); });
-      dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
-      sayac.textContent = `${uygun.length} proje`;
-      gezinme(s);
-      if (adresiGuncelle) {
-        const u = new URL(location.href);
-        if (etiket === 'hepsi') u.searchParams.delete('etiket'); else u.searchParams.set('etiket', etiket);
-        if (sayfa > 1) u.searchParams.set('sayfa', sayfa); else u.searchParams.delete('sayfa');
-        history.replaceState(null, '', u);
-      }
-    }
-    dugmeler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; sayfa = 1; goster(); }));
-    goster(false);
+    import { baslat } from '../js/vitrin.js';
+    baslat();
   </script>
 </body>
 </html>

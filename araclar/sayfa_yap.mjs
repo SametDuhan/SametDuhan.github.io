@@ -3,7 +3,7 @@
 //           node araclar/sayfa_yap.mjs --kontrol → yazmadan karşılaştırır (testler kullanır)
 import { writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { PROJELER, projeKartiHTML } from '../js/projeler.js';
+import { PROJELER, projeVitrinHTML, sayacHTML, medyaHTML } from '../js/projeler.js';
 import { FABRIKA_SVG } from './fabrika.mjs';
 import { SAHNELER } from './sahneler.mjs';
 
@@ -48,14 +48,14 @@ ${BOLUMLER.map(([h, ad], i) => `      <a href="${onek}${h}/"${h === aktif ? ' ar
   </nav>`;
 
 // Sayfa başı: numaralı etiket + damga, serif başlık, tanıtım ve sayfanın şahin pozu.
-export const sayfaBasi = ({ no, etiket, damga, baslik, tanitim, poz, onek = '../', ek = '', sinif = '', cizim = '', sahne = '' }) => `
+export const sayfaBasi = ({ no, etiket, damga, baslik, tanitim, poz, onek = '../', ek = '', alt = '', sinif = '', cizim = '', sahne = '' }) => `
     <header class="sayfa-basi${sinif ? ` ${sinif}` : ''}">${cizim ? `
       <div class="bant-cizim" aria-hidden="true">${cizim}</div>` : ''}
       ${sahne ? `<div class="sayfa-sahne" data-sahne="${sahne}">${SAHNELER[sahne](onek)}</div>` : `<img class="sayfa-sahin" src="${onek}img/sahin/${poz}.webp" alt="" width="240" height="240">`}
       <div class="sayfa-metin">
         <p class="etiket"><span class="no">${no}</span>${etiket}<span class="damga">${damga}</span></p>
         <h1>${baslik}</h1>${ek}
-        <p class="tanitim">${tanitim}</p>
+        <p class="tanitim">${tanitim}</p>${alt}
       </div>
     </header>`;
 
@@ -75,119 +75,109 @@ const yaz = (yol, html) => {
 };
 
 // --- Hakkımda
-yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama: 'Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.', yol: 'hakkimda/' })}${menu('hakkimda')}
+const ARAC_LISTESI = ['Claude Code', 'Codex', 'JavaScript', 'Node.js', 'Electron', 'Python', 'PowerShell', 'Go', 'C', 'Bash', 'Git', 'GitHub Actions'];
+const ILKELER = [
+  { baslik: 'AI hızlandırır, kararı ben veririm.', metin: 'Neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.', cizim: '<svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><text x="2" y="19">AI</text><rect class="iz" x="26" y="11" width="92" height="9" rx="4.5"/><rect class="hizli" x="26" y="11" width="92" height="9" rx="4.5"/><text x="2" y="51">sen</text><rect class="iz" x="26" y="43" width="92" height="9" rx="4.5"/><g class="karar"><circle cx="106" cy="47.5" r="10"/><path d="M101 47.5l4 4 8-9"/></g></svg>' },
+  { baslik: 'Test yazdırırım.', metin: 'AI\'ın yaptığı bir hata bir kez düzelir; test sayesinde bir daha gelmez.', cizim: '<svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><g class="hata"><circle cx="16" cy="32" r="10"/><path d="M11 27l10 10M21 27l-10 10"/></g><g class="testler"><circle cx="42" cy="32" r="7"/><circle cx="62" cy="32" r="7"/><circle cx="82" cy="32" r="7"/><circle cx="102" cy="32" r="7"/></g><g class="tikler"><path d="M38 32l3 3 5-6"/><path d="M58 32l3 3 5-6"/><path d="M78 32l3 3 5-6"/><path d="M98 32l3 3 5-6"/></g></svg>' },
+  { baslik: 'Kaynağa dayanırım.', metin: 'Bu sitedeki her sayı ve iddia bir README\'ye ya da commit geçmişine dayanıyor.', cizim: '<svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><rect class="satir" x="4" y="10" width="86" height="6" rx="3"/><rect class="vurgu-seridi" x="4" y="26" width="64" height="9" rx="2"/><rect class="satir kalin" x="4" y="28" width="64" height="5" rx="2.5"/><rect class="satir" x="4" y="46" width="72" height="6" rx="3"/><g class="kaynak"><rect x="74" y="22" width="44" height="17" rx="3"/><text x="96" y="34" text-anchor="middle">README</text></g></svg>' },
+];
+
+yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama: 'Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.', yol: 'hakkimda/', ekCss: '\n  <link rel="stylesheet" href="../css/vitrin.css">\n  <link rel="stylesheet" href="../css/hakkimda.css">' })}${menu('hakkimda')}
   <main id="icerik" data-sayfalama="kaydir">
 ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', baslik: 'Hakkımda', poz: 'ceyrek', sahne: 'hakkimda',
       ek: '\n        <p class="kimlik">&gt; AI ile sistem kuran geliştirici</p>',
       tanitim: `Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak
       için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan
-      uygulamalar. Siber güvenlik de ilgi alanım.` })}
-    <div class="linkler hizli">
-      <a class="dugme" href="https://github.com/SametDuhan">GitHub</a>
-      <a class="dugme" href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a>
-      <a class="dugme" href="../iletisim/">iletişim</a>
-    </div>
+      uygulamalar. Siber güvenlik de ilgi alanım.`,
+      alt: `
+        <dl class="kimlik-bilgi">
+          <div><dt>Okuyor</dt><dd>Bilgisayar mühendisliği, 3. sınıf</dd></div>
+          <div><dt>İlgi alanı</dt><dd>Siber güvenlik</dd></div>
+          <div><dt>Son işi</dt><dd>SkyTrack: ilk dosyadan v0.7.9'a 9 gün, 208 commit</dd></div>
+          <div><dt>Açık kaynak</dt><dd><a href="../projeler/#skytrack">SkyTrack</a> · <a href="../projeler/#claude-done-pixel">claude-done-pixel</a> · <a href="../projeler/#chatgpt-done-pixel">chatgpt-done-pixel</a></dd></div>
+          <div><dt>Bağlantılar</dt><dd><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../iletisim/">iletişim</a></dd></div>
+        </dl>` })}
+
+    <section class="bolum" aria-labelledby="yol-baslik">
+      <h2 id="yol-baslik" class="bolum-baslik">Ne arıyorsun?</h2>
+      <div class="yollar">
+        <a class="yol belir y-kehribar" href="../projeler/"><span class="yol-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><b>Yaptıklarımı görmek</b><span>Projeler, canlı demolar ve kodlar</span><em aria-hidden="true">→</em></a>
+        <a class="yol belir y-civit" href="../slaytlar/ai-ajani-nedir/"><span class="yol-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6l9-3 9 3-9 3z"/><path d="M7 11v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4"/></svg></span><b>AI'ı öğrenmek</b><span>Sıfırdan anlatan, etkileşimli sunumlar</span><em aria-hidden="true">→</em></a>
+        <a class="yol belir y-bakir" href="../iletisim/"><span class="yol-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg></span><b>Birlikte çalışmak</b><span>İş teklifi, ortak proje ya da soru</span><em aria-hidden="true">→</em></a>
+      </div>
+    </section>
 
     <section class="bolum" aria-labelledby="ne-baslik">
       <h2 id="ne-baslik" class="bolum-baslik">Ne yapıyorum</h2>
-      <div class="uclu">
-        <a class="kutu" href="../projeler/#skytrack">
-          <span class="kutu-komut">./uygulamalar</span>
-          <strong>Açık veriyle uygulamalar</strong>
-          <span>SkyTrack: canlı uçak takibi, türbülans uyarısı, 15 dil. Windows, macOS ve Linux.</span>
-        </a>
-        <a class="kutu" href="../slaytlar/claude-code-hook/">
-          <span class="kutu-komut">./otomasyon</span>
-          <strong>AI ajanlarına araç ve otomasyon</strong>
-          <span>Claude Code hook'u ve Codex bildirimiyle: ajan işini bitirince bilgisayar kendiliğinden haber verir.</span>
-        </a>
-        <a class="kutu" href="../slaytlar/">
-          <span class="kutu-komut">./ogretmek</span>
-          <strong>Öğretmek</strong>
-          <span>AI'ı sıfırdan anlatan, projelerimden örnek veren interaktif sunumlar.</span>
-        </a>
+      <div class="yap-kartlar">
+        <article class="yap-kart belir p-kehribar">
+          <div class="v-medya" data-medya="video">${medyaHTML(PROJELER[0], '../')}</div>
+          <p class="v-komut">./uygulamalar</p>
+          <h3><a href="../projeler/#skytrack">Açık veriyle uygulamalar</a></h3>
+          <p>SkyTrack: canlı uçak takibi, türbülans uyarısı, 15 dil. Windows, macOS ve Linux.</p>
+        </article>
+        <article class="yap-kart belir p-civit">
+          <div class="v-medya" data-medya="claude">${medyaHTML(PROJELER[1], '../')}</div>
+          <p class="v-komut">./otomasyon</p>
+          <h3><a href="../slaytlar/claude-code-hook/">AI ajanlarına araç ve otomasyon</a></h3>
+          <p>Claude Code hook'u ve Codex bildirimiyle: ajan işini bitirince bilgisayar kendiliğinden haber verir.</p>
+        </article>
+        <article class="yap-kart belir p-bakir">
+          <div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı çizim · sunum</span></div><div class="yap-sahne">${SAHNELER.slaytlar('../')}</div></div>
+          <p class="v-komut">./ogretmek</p>
+          <h3><a href="../slaytlar/">Öğretmek</a></h3>
+          <p>AI'ı sıfırdan anlatan, projelerimden örnek veren interaktif sunumlar.</p>
+        </article>
       </div>
     </section>
 
     <section class="bolum" aria-labelledby="nasil-baslik">
       <h2 id="nasil-baslik" class="bolum-baslik">Nasıl çalışıyorum</h2>
-      <ol class="ilkeler">
-        <li><strong>AI hızlandırır, kararı ben veririm.</strong> Neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.</li>
-        <li><strong>Test yazdırırım.</strong> AI'ın yaptığı bir hata bir kez düzelir; test sayesinde bir daha gelmez.</li>
-        <li><strong>Kaynağa dayanırım.</strong> Bu sitedeki her sayı ve iddia bir README'ye ya da commit geçmişine dayanıyor.</li>
+      <ol class="ilkeler-kart">
+${ILKELER.map((i, n) => `        <li class="ilke belir">${i.cizim}<span class="ilke-no">0${n + 1}</span><div><strong>${i.baslik}</strong><span>${i.metin}</span></div></li>`).join('\n')}
       </ol>
     </section>
 
     <section class="bolum" aria-labelledby="arac-baslik">
       <h2 id="arac-baslik" class="bolum-baslik">Araçlar</h2>
-      <ul class="rozetler">
-        <li>Claude Code</li><li>Codex</li><li>JavaScript</li><li>Node.js</li><li>Electron</li><li>Python</li>
-        <li>PowerShell</li><li>Go</li><li>C</li><li>Bash</li><li>Git</li><li>GitHub Actions</li>
+      <ul class="aletler belir">
+${ARAC_LISTESI.map((a, i) => `        <li style="--i:${i}">${a}</li>`).join('\n')}
       </ul>
     </section>
 
-    <section class="bolum cagri">
-      <h2 class="bolum-baslik">Birlikte bir şey kuralım</h2>
-      <p>İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım.</p>
-      <div class="linkler">
-        <a class="dugme ana" href="../iletisim/">./iletisim →</a>
-        <a class="dugme" href="../projeler/">projelere bak</a>
-      </div>
-    </section>
+    <footer class="vitrin-son belir">
+      <img src="../img/sahin/kanat-kucuk.webp" alt="" width="120" height="120">
+      <p><strong>Birlikte bir şey kuralım.</strong> İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım.</p>
+      <a class="dugme ana" href="../iletisim/">iletişime geç →</a>
+    </footer>
   </main>${son()}
+  <script type="module">
+    import { baslat } from '../js/vitrin.js';
+    baslat();
+  </script>
 </body>
 </html>
 `);
 
 // --- Projeler
-yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/' })}${menu('projeler')}
+yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/', ekCss: '\n  <link rel="stylesheet" href="../css/vitrin.css">' })}${menu('projeler')}
   <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'sag', sahne: 'projeler', sinif: 'bant', cizim: FABRIKA_SVG,
-      tanitim: 'Hepsi açık kaynak. Kodlarına GitHub\'dan bakabilir, nasıl yapıldıklarını slaytlardan öğrenebilirsin.' })}
-    <div class="filtre" role="group" aria-label="Projeleri süz">
-      <button type="button" data-etiket="hepsi" aria-pressed="true">hepsi</button>
-      <button type="button" data-etiket="AI aracı" aria-pressed="false">AI aracı</button>
-      <button type="button" data-etiket="Uygulama" aria-pressed="false">uygulama</button>
-      <span class="sayac-yazi" id="proje-sayac" aria-live="polite"></span>
+      tanitim: 'Hepsinin kodu GitHub\'da, nasıl yapıldığı slaytlarda.' })}
+    <div class="sayaclar" aria-label="Rakamlarla">${sayacHTML()}</div>
+    <div class="vitrinler" id="projeler">
+${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
     </div>
-    <div class="projeler" id="projeler">
-${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
-    </div>
-    <nav class="liste-sayfalar" aria-label="Proje sayfaları" hidden></nav>
+    <footer class="vitrin-son belir">
+      <img src="../img/sahin/kanat-kucuk.webp" alt="" width="120" height="120">
+      <p><strong>Daha fazlası GitHub'da.</strong> Yeni projeler önce orada görünür.</p>
+      <a class="dugme ana" href="https://github.com/SametDuhan">github.com/SametDuhan ↗</a>
+    </footer>
     <p class="not">claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anthropic ve OpenAI ile bağlantısı yok.</p>
   </main>${son()}
-
   <script type="module">
-    import { PROJELER, projeleriSuz } from '../js/projeler.js';
-    import { sayfala, sayfaGezinmesi } from '../js/sayfala.js';
-    // hareketi azaltınca fabrikanın SMIL animasyonları (saat) da durur
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.bant-cizim svg')?.pauseAnimations();
-    const kartlar = [...document.querySelectorAll('#projeler .kart')];
-    const sayac = document.getElementById('proje-sayac');
-    const dugmeler = [...document.querySelectorAll('.filtre button')];
-    // Filtre ve sayfa adreste durur: ?etiket=…&sayfa=… ile paylaşılabilir. Sayfa başına en fazla 5 proje.
-    const sorgu = new URLSearchParams(location.search);
-    let etiket = PROJELER.some((p) => p.etiketler.includes(sorgu.get('etiket'))) ? sorgu.get('etiket') : 'hepsi';
-    let sayfa = sorgu.get('sayfa') || 1;
-    const gezinme = sayfaGezinmesi(document.querySelector('.liste-sayfalar'), (n) => { sayfa = n; goster(); });
-    function goster(adresiGuncelle = true) {
-      const uygun = projeleriSuz(PROJELER, etiket).map((p) => p.ad);
-      const s = sayfala(uygun, sayfa);
-      sayfa = s.sayfa;
-      const gorunur = new Set(s.ogeler);
-      kartlar.forEach((k) => { k.hidden = !gorunur.has(k.dataset.ad); });
-      dugmeler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
-      sayac.textContent = \`\${uygun.length} proje\`;
-      gezinme(s);
-      if (adresiGuncelle) {
-        const u = new URL(location.href);
-        if (etiket === 'hepsi') u.searchParams.delete('etiket'); else u.searchParams.set('etiket', etiket);
-        if (sayfa > 1) u.searchParams.set('sayfa', sayfa); else u.searchParams.delete('sayfa');
-        history.replaceState(null, '', u);
-      }
-    }
-    dugmeler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; sayfa = 1; goster(); }));
-    goster(false);
+    import { baslat } from '../js/vitrin.js';
+    baslat();
   </script>
 </body>
 </html>
@@ -198,11 +188,6 @@ yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama:
   <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'sol', sahne: 'slaytlar',
       tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
-    <ol class="onerilen-sira" aria-label="Önerilen sıra">
-      <li><a href="./ai-ajani-nedir/">AI ajanı nedir?</a></li>
-      <li><a href="./claude-code-hook/">Claude Code hook'u ile otomasyon</a></li>
-      <li><a href="./skytrack-nasil-kurdum/">SkyTrack'i AI ile nasıl kurdum</a></li>
-    </ol>
     <p class="ipucu">→ ve ← ile gez · F tam ekran · telefonda kaydır · kaldığın yer bu tarayıcıda hatırlanır</p>
     <div class="filtre" role="search">
       <label class="arama"><span class="gizli">Sunumlarda ara</span><input type="search" id="ara" placeholder="ara: hook, ajan, SkyTrack…" autocomplete="off"></label>
@@ -270,56 +255,61 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
 // --- İletişim
 yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklama: 'Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.', yol: 'iletisim/' })}${menu('iletisim')}
   <main id="icerik" data-sayfalama="kendi">
-${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', baslik: 'İletişim', poz: 'kanat-kucuk', sahne: 'iletisim',
-      tanitim: 'En hızlı mail ile ulaşırsın. Ne için yazdığını seç; konu satırı hazır gelsin.' })}
+${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', baslik: 'İletişim', poz: 'on', sahne: 'iletisim',
+      tanitim: 'Konuyu seç, mesajını yaz, gönder. Mail uygulaman açılmazsa mesajın kendiliğinden kopyalanır.' })}
 
-    <div class="uclu" id="konular">
-      <a class="kutu" data-konu="İş teklifi" href="#dogrudan-baslik">
-        <span class="kutu-komut">./is-teklifi</span>
-        <strong>İş teklifi</strong>
-        <span>Staj, yarı zamanlı ya da proje bazlı iş.</span>
-      </a>
-      <a class="kutu" data-konu="Ortak proje" href="#dogrudan-baslik">
-        <span class="kutu-komut">./ortak-proje</span>
-        <strong>Ortak proje</strong>
-        <span>Birlikte bir şey kurmak, katkı vermek ya da almak.</span>
-      </a>
-      <a class="kutu" data-konu="Soru" href="#dogrudan-baslik">
-        <span class="kutu-komut">./soru</span>
-        <strong>Soru ya da öneri</strong>
-        <span>Slaytlar, projeler ya da AI hakkında.</span>
-      </a>
+    <div class="iletisim-yerlesim">
+      <section class="kanal-kart" aria-labelledby="dogrudan-baslik">
+        <h2 id="dogrudan-baslik" class="bolum-baslik">Doğrudan</h2>
+        <ul class="kanallar">
+          <li class="kanal kanal-mail">
+            <span class="kanal-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg></span>
+            <div class="kanal-metin">
+              <span class="kanal-ad">mail</span>
+              <a id="mail" data-k="16sametduhan16" data-a="gmail.com" hidden>mail</a>
+              <noscript><span class="kanal-adres">16sametduhan16 [at] gmail [dot] com</span></noscript>
+            </div>
+            <button type="button" class="dugme" id="kopyala" hidden>kopyala</button>
+          </li>
+          <li class="kanal kanal-github">
+            <span class="kanal-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 5l-4 14"/></svg></span>
+            <div class="kanal-metin"><span class="kanal-ad">GitHub</span><a class="kanal-adres" href="https://github.com/SametDuhan">github.com/SametDuhan</a></div>
+            <span class="kanal-git" aria-hidden="true">↗</span>
+          </li>
+          <li class="kanal kanal-linkedin">
+            <span class="kanal-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10.5V17M8 7.2v.1M12 17v-6.5M12 13c0-1.5 1-2.5 2.5-2.5S17 11.5 17 13v4"/></svg></span>
+            <div class="kanal-metin"><span class="kanal-ad">LinkedIn</span><a class="kanal-adres" href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">Samet Duhan Şahin</a></div>
+            <span class="kanal-git" aria-hidden="true">↗</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="yaz-kart" aria-labelledby="yaz-baslik">
+        <h2 id="yaz-baslik" class="bolum-baslik">Mesaj yaz</h2>
+        <div class="konular" id="konular" role="group" aria-label="Konu">
+          <a class="konu" data-konu="İş teklifi" href="#dogrudan-baslik">İş teklifi</a>
+          <a class="konu" data-konu="Ortak proje" href="#dogrudan-baslik">Ortak proje</a>
+          <a class="konu" data-konu="Soru ya da öneri" href="#dogrudan-baslik">Soru ya da öneri</a>
+          <a class="konu" data-konu="Diğer" href="#dogrudan-baslik">Diğer</a>
+        </div>
+        <form class="yazi-formu" id="yazi-formu" hidden onsubmit="return false">
+          <label class="gizli" for="mesaj">Mesajın</label>
+          <textarea id="mesaj" rows="7"></textarea>
+          <p class="kime"><span>Kime</span><output id="kime"></output></p>
+          <div class="eylemler">
+            <a class="dugme ana" id="mail-ac" href="#">Mail uygulamasında aç →</a>
+            <a class="dugme" id="gmail-ac" href="#" target="_blank" rel="noopener noreferrer">Gmail'de aç ↗</a>
+            <button type="button" class="dugme" id="metin-kopyala">Metni kopyala</button>
+          </div>
+          <p class="durum" id="durum" role="status" aria-live="polite"></p>
+        </form>
+      </section>
     </div>
-
-    <section class="bolum" aria-labelledby="dogrudan-baslik">
-      <h2 id="dogrudan-baslik" class="bolum-baslik">Doğrudan</h2>
-      <ul class="kanallar">
-        <li>
-          <span class="kanal-ad">mail</span>
-          <a id="mail" data-k="16sametduhan16" data-a="gmail.com" hidden>mail</a>
-          <noscript><span>16sametduhan16 [at] gmail [dot] com</span></noscript>
-          <button type="button" class="dugme" id="kopyala" hidden>adresi kopyala</button>
-        </li>
-        <li><span class="kanal-ad">GitHub</span><a href="https://github.com/SametDuhan">github.com/SametDuhan</a><span class="kanal-not">kodlar ve projeler</span></li>
-        <li><span class="kanal-ad">LinkedIn</span><a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">Samet Duhan Şahin</a><span class="kanal-not">iş ve kariyer</span></li>
-      </ul>
-    </section>
   </main>${son()}
 
   <script type="module">
-    import { mailAdresi, mailtoLinki, bagla } from '../js/iletisim.js';
-    const mail = document.getElementById('mail');
-    const adres = mailAdresi(mail.dataset.k, mail.dataset.a);
-    bagla(mail);
-    mail.hidden = false;
-    for (const k of document.querySelectorAll('[data-konu]')) k.href = mailtoLinki(adres, k.dataset.konu);
-    const kopyala = document.getElementById('kopyala');
-    kopyala.hidden = false;
-    kopyala.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(adres); kopyala.textContent = 'kopyalandı ✓'; }
-      catch { kopyala.textContent = 'seçip kopyala'; }
-      setTimeout(() => { kopyala.textContent = 'adresi kopyala'; }, 2000);
-    });
+    import { baslat } from '../js/iletisim.js';
+    baslat();
   </script>
 </body>
 </html>

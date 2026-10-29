@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { PROJELER, projeleriSuz, projeKartiHTML } from '../js/projeler.js';
+import { PROJELER, projeVitrinHTML, sayacHTML, SAYACLAR } from '../js/projeler.js';
 import { sayfala, SAYFA_BOYU } from '../js/sayfala.js';
 import { DESTELER, desteAra } from '../js/desteler.js';
 import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from '../js/ilerleme.js';
@@ -9,26 +9,27 @@ import { mailtoLinki } from '../js/iletisim.js';
 
 const oku = (yol) => readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
 
-test('projeleriSuz etikete göre süzer, "hepsi" tümünü verir', () => {
-  assert.equal(projeleriSuz(PROJELER, 'hepsi').length, PROJELER.length);
-  const ai = projeleriSuz(PROJELER, 'AI aracı');
-  assert.ok(ai.length > 0 && ai.every((p) => p.etiketler.includes('AI aracı')));
-  assert.deepEqual(projeleriSuz(PROJELER, 'yok-boyle-etiket'), []);
-});
-
-test('projeKartiHTML metni kaçışlar, GitHub linkini ve bilgi maddelerini verir', () => {
-  const html = projeKartiHTML({ ad: '<x>', komut: './x', ozet: 'a & b', gorsel: 'img/a.png', alt: 'a', github: 'https://github.com/SametDuhan/x', etiketler: ['AI aracı'], bilgiler: ['bir', 'iki'] });
+test('projeVitrinHTML metni kaçışlar, GitHub linkini ve bilgi maddelerini verir', () => {
+  const html = projeVitrinHTML({ ad: '<x>', komut: './x', ozet: 'a & b', gorsel: 'img/a.png', alt: 'a', github: 'https://github.com/SametDuhan/x', etiketler: ['AI aracı'], bilgiler: ['bir', 'iki'], medya: 'claude', pigment: 'civit' });
   assert.ok(html.includes('&lt;x&gt;'));
   assert.ok(html.includes('a &amp; b'));
   assert.ok(html.includes('href="https://github.com/SametDuhan/x"'));
   assert.equal((html.match(/<li>/g) || []).length, 2);
-  assert.ok(html.includes('data-ad="&lt;x&gt;"'), 'kart adıyla eşleşmeli');
+  assert.ok(html.includes('data-ad="&lt;x&gt;"'), 'vitrin adıyla eşleşmeli');
 });
 
-test('projeKartiHTML verilirse srcset ile ekrana uygun görseli sunar', () => {
-  const html = projeKartiHTML({ ad: 'x', komut: './x', ozet: '', gorsel: 'img/a-960.jpg', srcset: 'img/a-960.jpg 960w, img/a-1440.jpg 1440w', alt: 'a', github: 'g', etiketler: [], bilgiler: [] }, '../');
-  assert.ok(html.includes('srcset="../img/a-960.jpg 960w, ../img/a-1440.jpg 1440w"'));
-  assert.ok(html.includes('sizes="'));
+test('projeVitrinHTML medya türüne göre video ya da canlı piksel tuvali verir', () => {
+  const video = projeVitrinHTML(PROJELER[0], '../');
+  assert.match(video, /<video class="v-ekran" muted loop playsinline[^>]*poster="\.\.\/img\/skytrack-960\.jpg"/);
+  assert.doesNotMatch(video, /\bcontrols\b/);
+  assert.match(video, /src="\.\.\/video\/skytrack-demo\.webm"/);
+  for (const p of PROJELER.slice(1)) assert.match(projeVitrinHTML(p, '../'), /<canvas class="v-ekran v-piksel"/, p.ad);
+});
+
+test('sayaçlar projelerin sayısını ve SkyTrack sayılarını gösterir', () => {
+  assert.equal(SAYACLAR[0].say, PROJELER.length);
+  const html = sayacHTML();
+  for (const sayi of ['208', '191', '15']) assert.ok(html.includes(`data-say="${sayi}"`), sayi);
 });
 
 test('desteAra başlık, açıklama ve etikette büyük/küçük harf ve Türkçe karakter duyarsız arar', () => {
@@ -116,20 +117,18 @@ test('hakkımda sayfası işverenin aradığı linkleri en üstte verir', () => 
   }
 });
 
-test('giriş ekranı 1–4 kısayolunu anlatır', () => {
-  assert.match(oku('index.html'), /class="kisayol-ipucu"/);
-});
-
-test('giriş ekranı üç ziyaretçi tipine nereden başlayacağını söyler', () => {
+test('giriş ekranında dört kutu canlı mini sahne taşır; ipucu ve yönlendirme satırı yok', () => {
   const s = oku('index.html');
-  assert.match(s, /class="yonlendirme"/);
-  for (const h of ['projeler/', 'slaytlar/ai-ajani-nedir/', 'iletisim/']) assert.ok(s.includes(`href="${h}"`), h);
+  assert.equal((s.match(/<svg class="mini"/g) || []).length, 4);
+  assert.doesNotMatch(s, /class="yonlendirme"|class="kisayol-ipucu"/);
+  // 1–4 tuşları kutuları hâlâ açar
+  assert.match(s, /'1234'\.indexOf\(e\.key\)/);
 });
 
-test('slaytlar sayfası yeni başlayana önerilen sırayı verir', () => {
+test('slaytlar sayfası yeni başlayanı ilk sunuma yönlendirir', () => {
   const s = oku('slaytlar/index.html');
-  const sira = s.slice(s.indexOf('class="onerilen-sira"'));
-  assert.ok(sira.indexOf('./ai-ajani-nedir/') < sira.indexOf('./claude-code-hook/') && sira.indexOf('./claude-code-hook/') < sira.indexOf('./skytrack-nasil-kurdum/'));
+  assert.ok(s.includes('<a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla'));
+  assert.ok(!s.includes('onerilen-sira'));
 });
 
 test('JS kapalıyken deste içeriği gizlenmez ya da soluk kalmaz', () => {
@@ -143,9 +142,9 @@ test('JS kapalıyken deste içeriği gizlenmez ya da soluk kalmaz', () => {
   assert.match(oku('js/deste.js'), /classList\.add\('js-hazir'\)/);
 });
 
-test('iletişim kutuları JS kapalıyken doğrudan iletişim bölümüne gider', () => {
+test('iletişim konu bağlantıları JS kapalıyken doğrudan iletişim bölümüne gider', () => {
   const s = oku('iletisim/index.html');
-  assert.equal((s.match(/data-konu="[^"]+" href="#dogrudan-baslik"/g) || []).length, 3);
+  assert.equal((s.match(/data-konu="[^"]+" href="#dogrudan-baslik"/g) || []).length, 4);
 });
 
 test('alt sayfalar üreticiyle güncel (elle düzenleme yok; değişiklik araclar/sayfa_yap.mjs içinde)', async () => {
@@ -177,8 +176,8 @@ test('yazdırma görünümü menüleri gizler, beyaz zemine siyah yazı basar', 
   assert.match(blok, /background: #fff/);
 });
 
-test('proje kartı kendi pigmentini taşır', () => {
-  assert.match(projeKartiHTML(PROJELER[0]), /<article class="kart kose p-kehribar"/);
+test('proje vitrini kendi pigmentini taşır', () => {
+  assert.match(projeVitrinHTML(PROJELER[0]), /<article class="vitrin belir p-kehribar"/);
   assert.deepEqual(PROJELER.map((p) => p.pigment), ['kehribar', 'civit', 'bakir']);
 });
 
@@ -198,9 +197,8 @@ test('projeler, slaytlar ve iletişim genel sütun sayfalamasını kullanmaz; li
   for (const yol of ['projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html']) {
     assert.match(oku(yol), /<main id="icerik" data-sayfalama="kendi">/, yol);
   }
-  for (const yol of ['projeler/index.html', 'slaytlar/index.html']) {
-    assert.match(oku(yol), /<nav class="liste-sayfalar"[^>]*hidden/, yol);
-  }
+  assert.match(oku('slaytlar/index.html'), /<nav class="liste-sayfalar"[^>]*hidden/);
+  assert.doesNotMatch(oku('projeler/index.html'), /liste-sayfalar|class="filtre"/, 'projeler tek akış, filtre ve sayfalama yok');
   assert.match(oku('js/ekrana-sigdir.js'), /dataset\.sayfalama === 'kendi'/);
 });
 

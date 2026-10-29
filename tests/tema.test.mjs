@@ -117,7 +117,7 @@ test('yazılar zeminleriyle en az 4,5:1 kontrastta (pigment etiketleri dahil)', 
   // ebeveyni koyu mürekkep zeminli: <pre> içindeki kod, menüde seçili bağlantının numarası
   const KOD_ICI = new Set(['.slayt pre code', '.menu-linkler a[aria-current="page"] i']);
   const dusuk = [];
-  const kaynaklar = ['css/tema.css', 'css/giris.css', 'css/site.css', 'css/deste.css', 'css/atolye.css', 'css/ekran.css', ...['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum'].map((d) => `slaytlar/${d}/index.html`)];
+  const kaynaklar = ['css/tema.css', 'css/giris.css', 'css/site.css', 'css/deste.css', 'css/atolye.css', 'css/ekran.css', 'css/vitrin.css', 'css/hakkimda.css', ...['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum'].map((d) => `slaytlar/${d}/index.html`)];
   for (const yol of kaynaklar) {
     for (const [, secici, govde] of oku(yol).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
       const renk = govde.match(/(?:^|;)\s*color:\s*([^;!]+)/);
@@ -143,7 +143,7 @@ test('hareketi azaltınca sandıklar bantta yerinde durur', () => {
 
 test('ana sayfadaki süs yazıları ekran okuyucudan gizli', () => {
   const s = oku('index.html');
-  assert.match(s, /<g class="olcu-yazi" aria-hidden="true">/);
+  assert.doesNotMatch(s, /olcu-yazi/, 'ölçü yazıları kaldırıldı');
   assert.match(s, /<g class="tunek" aria-hidden="true">/);
   assert.match(s, /<!-- teknik çizim kılavuzları -->\s*<g aria-hidden="true"/);
 });

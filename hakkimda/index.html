@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="../css/tema.css">
   <link rel="stylesheet" href="../css/site.css">
+  <link rel="stylesheet" href="../css/vitrin.css">
+  <link rel="stylesheet" href="../css/hakkimda.css">
   <link rel="stylesheet" href="../css/ekran.css">
 </head>
 <body>
@@ -34,23 +36,79 @@
   <main id="icerik" data-sayfalama="kaydir">
 
     <header class="sayfa-basi">
-      <div class="sayfa-sahne" data-sahne="hakkimda"><svg viewBox="0 0 500 330" role="img" aria-label="Şahin bir kimlik kartına bakıyor; mühür kartı damgalıyor" preserveAspectRatio="xMidYMax meet">
+      <div class="sayfa-sahne" data-sahne="hakkimda"><svg viewBox="0 0 500 330" role="img" aria-label="Şahin bir sunum perdesine bakıyor; perdede sırayla kimlik kartı mühürleniyor, araçlar çantaya doluyor, kilit açılıp kapanıyor ve ajan döngüsü dönüyor" preserveAspectRatio="xMidYMax meet">
   <defs><pattern id="sTar" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><line x1="0" y1="0" x2="0" y2="5" stroke="#33261a" stroke-width=".8"/></pattern><pattern id="sTar2" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="5" stroke="#33261a" stroke-width=".8"/></pattern></defs>
   <path d="M0 312H500" stroke="#33261a" stroke-width="1.5"/><path d="M0 319H500M0 326H500" stroke="#33261a" stroke-dasharray="2 8" opacity=".5"/>
 
+  <defs>
+    <filter id="hkKaba" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.7"/></filter>
+    <path id="hkHalka" d="M0 -17a17 17 0 1 1 -.1 0"/>
+    <path id="hkYol" d="M122 120A40 40 0 1 1 121.9 120"/>
+  </defs>
   <image href="../img/sahin/ceyrek.webp" x="215" y="49" width="280" height="280"/>
-  <g stroke="#33261a" stroke-width="2.2" stroke-linecap="round"><path d="M118 244L70 312M118 244L166 312M118 244V312" fill="none"/></g>
-  <g stroke="#33261a">
-    <rect x="30" y="92" width="176" height="150" rx="3" fill="#f2e8d5" stroke-width="2.4"/>
-    <rect x="30" y="92" width="176" height="20" fill="#33261a"/>
-    <rect x="46" y="124" width="52" height="60" fill="#e9dcc2" stroke-width="1.6"/><rect x="46" y="124" width="52" height="60" fill="url(#sTar)" opacity=".3" stroke="none"/>
-    <image href="../img/sahin/logo.webp" x="51" y="134" width="42" height="42"/>
-    <g stroke-width="2" stroke-linecap="round" opacity=".7"><path d="M110 134H190M110 148H176M110 162H186M46 200H190M46 212H150"/></g>
-    <g stroke-width="1.2" opacity=".6"><path d="M46 226V236M50 226V236M53 226V236M58 226V236M61 226V236M67 226V236M70 226V236M76 226V236M80 226V236"/></g>
+  <g stroke="#33261a" stroke-width="2.4" stroke-linecap="round"><path d="M122 246L74 312M122 246L170 312M122 246V312" fill="none"/></g>
+  <rect x="24" y="70" width="196" height="176" rx="3" fill="#f7f0e0" stroke="#33261a" stroke-width="2.6"/><path d="M24 70h196" stroke="#33261a" stroke-width="5"/>
+
+  <!-- 1 · kimlik kartı + mühür -->
+  <g class="hk hk-k1">
+    <rect x="36" y="80" width="172" height="17" fill="#33261a"/><text x="44" y="92" style="font:600 8px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f2e8d5">KİMLİK KARTI</text>
+    <rect x="46" y="106" width="46" height="54" fill="#e9dcc2" stroke="#33261a" stroke-width="1.6"/><rect x="46" y="106" width="46" height="54" fill="url(#sTar)" opacity=".3"/>
+    <image href="../img/sahin/logo.webp" x="50" y="114" width="38" height="38"/>
+    <text x="100" y="116" style="font:600 8.2px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" >SAMET DUHAN</text><text x="100" y="128" style="font:600 6.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#76624c">AI İLE SİSTEM</text><text x="100" y="138" style="font:600 6.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#76624c">KURAN GELİŞTİRİCİ</text>
+    <g stroke="#cdb894" stroke-width="1.6" stroke-linecap="round"><path d="M100 148H160M100 156H146M46 176H194M46 186H170"/></g>
+    <g stroke="#33261a" stroke-width="1.2" opacity=".65"><path d="M46 206V222M50 206V222M53 206V222M58 206V222M61 206V222M67 206V222M70 206V222M76 206V222M80 206V222M85 206V222M88 206V222"/></g>
+    <g class="hk-iz" transform="translate(166 198) rotate(-14)" filter="url(#hkKaba)">
+      <circle r="25" fill="none" stroke="#8e2f23" stroke-width="2.8"/><circle r="12.5" fill="none" stroke="#8e2f23" stroke-width="1.1"/>
+      <text style="font:600 5.4px 'IBM Plex Mono',monospace;letter-spacing:.2px" fill="#8e2f23"><textPath href="#hkHalka" transform="scale(1.3)" startOffset="0" textLength="102" lengthAdjust="spacing">AÇIKTA KURULUR · MMXXVI ·</textPath></text>
+      <text y="4.2" text-anchor="middle" style="font:800 10.5px 'Fraunces',Georgia,serif" fill="#8e2f23">ŞHN</text>
+      <path d="M-8 9.5h16" stroke="#8e2f23" stroke-width="1"/><path d="M0 -21l1.2 2.5 2.7.4-2 1.9.5 2.7-2.4-1.3-2.4 1.3.5-2.7-2-1.9 2.7-.4z" fill="#8e2f23" transform="translate(0 40) scale(.8)"/>
+      <g fill="#f7f0e0"><circle cx="-14" cy="-12" r="1.1"/><circle cx="9" cy="-19" r=".9"/><circle cx="17" cy="6" r="1.2"/><circle cx="-6" cy="19" r="1"/><circle cx="-19" cy="3" r=".8"/><circle cx="12" cy="15" r="1.1"/></g>
+    </g>
+    <g class="hk-damga" transform="translate(166 198)">
+      <ellipse cx="0" cy="2" rx="26" ry="5" fill="#8e2f23" opacity=".3"/>
+      <rect x="-27" y="-17" width="54" height="17" rx="4" fill="#5b3a21" stroke="#33261a" stroke-width="2"/><path d="M-24 -13H24" stroke="#c9893a" stroke-width="1.6" opacity=".8"/>
+      <rect x="-24" y="-3" width="48" height="5" rx="2" fill="#8e2f23" stroke="#33261a" stroke-width="1.4"/>
+      <path d="M-7 -17v-26h14v26" fill="#8a5a33" stroke="#33261a" stroke-width="2" stroke-linejoin="round"/><path d="M-3 -40v18" stroke="#c9893a" stroke-width="2" opacity=".7"/>
+      <ellipse cx="0" cy="-46" rx="15" ry="9" fill="#5b3a21" stroke="#33261a" stroke-width="2"/><ellipse cx="-4" cy="-49" rx="6" ry="2.6" fill="#c9893a" opacity=".55"/>
+    </g>
   </g>
-  <text x="40" y="106" style="font:600 8px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" fill="#f2e8d5">KİMLİK KARTI</text><text x="110" y="128" style="font:600 7px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" >SAMET DUHAN</text>
-  <g class="muhur-iz" fill="none" stroke="#8e2f23"><circle cx="168" cy="204" r="22" stroke-width="2.4"/><circle cx="168" cy="204" r="16" stroke-width="1" stroke-dasharray="3 3"/><text x="168" y="209" text-anchor="middle" style="font:700 12px 'Fraunces',Georgia,serif" fill="#8e2f23" stroke="none">ŞHN</text></g>
-  <g class="muhur"><rect x="146" y="214" width="44" height="9" rx="2" fill="#8e2f23" stroke="#33261a" stroke-width="2"/><rect x="161" y="190" width="14" height="24" fill="#a8432a" stroke="#33261a" stroke-width="2"/><ellipse cx="168" cy="184" rx="13" ry="9" fill="#5b3a21" stroke="#33261a" stroke-width="2"/></g>
+
+  <!-- 2 · araç çantası -->
+  <g class="hk hk-k2">
+    <rect x="36" y="80" width="172" height="17" fill="#33261a"/><text x="44" y="92" style="font:600 8px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f2e8d5">ARAÇ ÇANTASI</text>
+    <g class="hk-cip hk-cip1"><rect x="52" y="180" width="52" height="10" rx="5" fill="#d07a2a" stroke="#33261a" stroke-width="1.3"/><text x="78" y="187.3" style="font:600 5.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f7f0e0" text-anchor="middle">Claude Code</text></g>
+    <g class="hk-cip hk-cip2"><rect x="108" y="180" width="34" height="10" rx="5" fill="#4f7d6e" stroke="#33261a" stroke-width="1.3"/><text x="125" y="187.3" style="font:600 5.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f7f0e0" text-anchor="middle">Codex</text></g>
+    <g class="hk-cip hk-cip3"><rect x="146" y="180" width="40" height="10" rx="5" fill="#2f4a6b" stroke="#33261a" stroke-width="1.3"/><text x="166" y="187.3" style="font:600 5.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f7f0e0" text-anchor="middle">Node.js</text></g>
+    <g class="hk-cip hk-cip4"><rect x="56" y="192" width="40" height="10" rx="5" fill="#a8432a" stroke="#33261a" stroke-width="1.3"/><text x="76" y="199.3" style="font:600 5.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f7f0e0" text-anchor="middle">Python</text></g>
+    <g class="hk-cip hk-cip5"><rect x="100" y="192" width="24" height="10" rx="5" fill="#c9893a" stroke="#33261a" stroke-width="1.3"/><text x="112" y="199.3" style="font:600 5.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f7f0e0" text-anchor="middle">Go</text></g>
+    <g class="hk-cip hk-cip6"><rect x="128" y="192" width="28" height="10" rx="5" fill="#5b3a21" stroke="#33261a" stroke-width="1.3"/><text x="142" y="199.3" style="font:600 5.4px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f7f0e0" text-anchor="middle">Git</text></g>
+    <g class="hk-canta" stroke="#33261a" stroke-width="2"><path d="M96 168Q96 156 122 156Q148 156 148 168" fill="none" stroke-width="3.4" stroke-linecap="round"/><rect x="46" y="202" width="152" height="30" rx="3" fill="#d3b987"/><rect x="46" y="202" width="152" height="30" rx="3" fill="url(#sTar2)" opacity=".28" stroke="none"/><path d="M46 211H198" stroke-width="1.4"/><rect x="113" y="207" width="18" height="9" rx="1.5" fill="#c9893a" stroke-width="1.4"/></g>
+  </g>
+
+  <!-- 3 · siber güvenlik: kilit açılıp kapanır -->
+  <g class="hk hk-k3">
+    <rect x="36" y="80" width="172" height="17" fill="#33261a"/><text x="44" y="92" style="font:600 8px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f2e8d5">SİBER GÜVENLİK</text>
+    <g stroke="#cdb894" stroke-width="1.2" stroke-linecap="round" font-family="'IBM Plex Mono',monospace" fill="#cdb894"><text x="42" y="116" style="font-size:6px" stroke="none">A3 F1 09 7C</text><text x="42" y="130" style="font-size:6px" stroke="none">1F 4B E2 00</text><text x="42" y="144" style="font-size:6px" stroke="none">C8 5D 3A 91</text><text x="164" y="204" style="font-size:6px" stroke="none">0x7E 22 B0</text><text x="164" y="218" style="font-size:6px" stroke="none">D4 18 6F A5</text></g>
+    <path d="M122 106L152 118V146Q152 170 122 186Q92 170 92 146V118Z" fill="#e9dcc2" stroke="#33261a" stroke-width="2.6" stroke-linejoin="round"/><path d="M122 114L146 124V146Q146 165 122 179Q98 165 98 146V124Z" fill="none" stroke="#cdb894" stroke-width="1.4"/>
+    <g class="hk-kilit"><path d="M115 149V143a7 7 0 0 1 14 0V149" fill="none" stroke="#33261a" stroke-width="3.2" stroke-linecap="round"/></g>
+    <rect x="110" y="149" width="24" height="18" rx="3" fill="#33261a"/><circle cx="122" cy="157" r="2.6" fill="#f2e8d5"/><path d="M122 158v5" stroke="#f2e8d5" stroke-width="2"/>
+    <g class="hk-onay"><circle cx="158" cy="176" r="11" fill="#4f7d6e" stroke="#33261a" stroke-width="1.8"/><path d="M152.5 176l4 4 7-8" fill="none" stroke="#f2e8d5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <rect class="hk-tara" x="38" y="104" width="168" height="5" fill="#d07a2a" opacity=".55"/>
+    <text x="122" y="226" style="font:600 6.6px 'IBM Plex Mono',monospace;letter-spacing:.12em" text-anchor="middle" fill="#76624c">KİLİTLİ ✓ İLGİ ALANI</text>
+  </g>
+
+  <!-- 4 · AI ile sistem: bak → karar → yap → kontrol -->
+  <g class="hk hk-k4">
+    <rect x="36" y="80" width="172" height="17" fill="#33261a"/><text x="44" y="92" style="font:600 8px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#f2e8d5">AI İLE SİSTEM</text>
+    <path class="hk-yol" d="M122 120A40 40 0 1 1 121.9 120" fill="none" stroke="#76624c" stroke-width="1.6" stroke-dasharray="4 5"/>
+    <g stroke="#33261a" stroke-width="1.8"><circle class="hk-dugum hk-d1" cx="122" cy="120" r="8" fill="#f7f0e0"/><circle class="hk-dugum hk-d2" cx="162" cy="160" r="8" fill="#f7f0e0"/><circle class="hk-dugum hk-d3" cx="122" cy="200" r="8" fill="#f7f0e0"/><circle class="hk-dugum hk-d4" cx="82" cy="160" r="8" fill="#f7f0e0"/></g>
+    <text x="122" y="108" style="font:600 6.6px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" text-anchor="middle">bak</text><text x="174" y="163" style="font:600 6.6px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" text-anchor="start">karar</text><text x="122" y="220" style="font:600 6.6px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" text-anchor="middle">yap</text><text x="70" y="163" style="font:600 6.6px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" text-anchor="end">kontrol</text>
+    <circle r="5" fill="#d07a2a" stroke="#f7f0e0" stroke-width="1.4"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#hkYol"/></animateMotion></circle>
+    <text x="122" y="160" style="font:600 14px 'IBM Plex Mono',monospace;letter-spacing:.12em" fill="#33261a" text-anchor="middle" font-weight="800">AI</text>
+  </g>
+
+  <g class="hk-nokta-sira" fill="#cdb894" stroke="#33261a" stroke-width="1"><circle cx="104" cy="238" r="2.6"/><circle cx="114" cy="238" r="2.6"/><circle cx="124" cy="238" r="2.6"/><circle cx="134" cy="238" r="2.6"/></g>
+  <g class="hk-nokta-acik" fill="#d07a2a"><circle class="hk-n1" cx="104" cy="238" r="2.6"/><circle class="hk-n2" cx="114" cy="238" r="2.6"/><circle class="hk-n3" cx="124" cy="238" r="2.6"/><circle class="hk-n4" cx="134" cy="238" r="2.6"/></g>
 </svg></div>
       <div class="sayfa-metin">
         <p class="etiket"><span class="no">01</span>KİMLİK KARTI<span class="damga">AI İLE SİSTEM</span></p>
@@ -59,60 +117,100 @@
         <p class="tanitim">Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak
       için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan
       uygulamalar. Siber güvenlik de ilgi alanım.</p>
+        <dl class="kimlik-bilgi">
+          <div><dt>Okuyor</dt><dd>Bilgisayar mühendisliği, 3. sınıf</dd></div>
+          <div><dt>İlgi alanı</dt><dd>Siber güvenlik</dd></div>
+          <div><dt>Son işi</dt><dd>SkyTrack: ilk dosyadan v0.7.9'a 9 gün, 208 commit</dd></div>
+          <div><dt>Açık kaynak</dt><dd><a href="../projeler/#skytrack">SkyTrack</a> · <a href="../projeler/#claude-done-pixel">claude-done-pixel</a> · <a href="../projeler/#chatgpt-done-pixel">chatgpt-done-pixel</a></dd></div>
+          <div><dt>Bağlantılar</dt><dd><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../iletisim/">iletişim</a></dd></div>
+        </dl>
       </div>
     </header>
-    <div class="linkler hizli">
-      <a class="dugme" href="https://github.com/SametDuhan">GitHub</a>
-      <a class="dugme" href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a>
-      <a class="dugme" href="../iletisim/">iletişim</a>
-    </div>
+
+    <section class="bolum" aria-labelledby="yol-baslik">
+      <h2 id="yol-baslik" class="bolum-baslik">Ne arıyorsun?</h2>
+      <div class="yollar">
+        <a class="yol belir y-kehribar" href="../projeler/"><span class="yol-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><b>Yaptıklarımı görmek</b><span>Projeler, canlı demolar ve kodlar</span><em aria-hidden="true">→</em></a>
+        <a class="yol belir y-civit" href="../slaytlar/ai-ajani-nedir/"><span class="yol-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6l9-3 9 3-9 3z"/><path d="M7 11v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4"/></svg></span><b>AI'ı öğrenmek</b><span>Sıfırdan anlatan, etkileşimli sunumlar</span><em aria-hidden="true">→</em></a>
+        <a class="yol belir y-bakir" href="../iletisim/"><span class="yol-ikon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg></span><b>Birlikte çalışmak</b><span>İş teklifi, ortak proje ya da soru</span><em aria-hidden="true">→</em></a>
+      </div>
+    </section>
 
     <section class="bolum" aria-labelledby="ne-baslik">
       <h2 id="ne-baslik" class="bolum-baslik">Ne yapıyorum</h2>
-      <div class="uclu">
-        <a class="kutu" href="../projeler/#skytrack">
-          <span class="kutu-komut">./uygulamalar</span>
-          <strong>Açık veriyle uygulamalar</strong>
-          <span>SkyTrack: canlı uçak takibi, türbülans uyarısı, 15 dil. Windows, macOS ve Linux.</span>
-        </a>
-        <a class="kutu" href="../slaytlar/claude-code-hook/">
-          <span class="kutu-komut">./otomasyon</span>
-          <strong>AI ajanlarına araç ve otomasyon</strong>
-          <span>Claude Code hook'u ve Codex bildirimiyle: ajan işini bitirince bilgisayar kendiliğinden haber verir.</span>
-        </a>
-        <a class="kutu" href="../slaytlar/">
-          <span class="kutu-komut">./ogretmek</span>
-          <strong>Öğretmek</strong>
-          <span>AI'ı sıfırdan anlatan, projelerimden örnek veren interaktif sunumlar.</span>
-        </a>
+      <div class="yap-kartlar">
+        <article class="yap-kart belir p-kehribar">
+          <div class="v-medya" data-medya="video"><div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı demo · sessiz ekran kaydı</span></div><video class="v-ekran" muted loop playsinline preload="metadata" poster="../img/skytrack-960.jpg" aria-label="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası"><source src="../video/skytrack-demo.webm" type="video/webm"></video></div></div>
+          <p class="v-komut">./uygulamalar</p>
+          <h3><a href="../projeler/#skytrack">Açık veriyle uygulamalar</a></h3>
+          <p>SkyTrack: canlı uçak takibi, türbülans uyarısı, 15 dil. Windows, macOS ve Linux.</p>
+        </article>
+        <article class="yap-kart belir p-civit">
+          <div class="v-medya" data-medya="claude"><div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı önizleme · piksel animasyonu</span></div><canvas class="v-ekran v-piksel" width="640" height="400" role="img" aria-label="Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler"></canvas></div></div>
+          <p class="v-komut">./otomasyon</p>
+          <h3><a href="../slaytlar/claude-code-hook/">AI ajanlarına araç ve otomasyon</a></h3>
+          <p>Claude Code hook'u ve Codex bildirimiyle: ajan işini bitirince bilgisayar kendiliğinden haber verir.</p>
+        </article>
+        <article class="yap-kart belir p-bakir">
+          <div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı çizim · sunum</span></div><div class="yap-sahne"><svg viewBox="0 0 500 330" role="img" aria-label="Şahin bir sunum perdesine bakıyor; slaytlar çizilip değişiyor" preserveAspectRatio="xMidYMax meet">
+  <defs><pattern id="sTar" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><line x1="0" y1="0" x2="0" y2="5" stroke="#33261a" stroke-width=".8"/></pattern><pattern id="sTar2" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="5" stroke="#33261a" stroke-width=".8"/></pattern></defs>
+  <path d="M0 312H500" stroke="#33261a" stroke-width="1.5"/><path d="M0 319H500M0 326H500" stroke="#33261a" stroke-dasharray="2 8" opacity=".5"/>
+
+  <image href="../img/sahin/sol.webp" x="215" y="49" width="280" height="280"/>
+  <g stroke="#33261a" stroke-width="2.4" stroke-linecap="round"><path d="M122 210V232M122 232L78 312M122 232L166 312M122 232V312" fill="none"/></g>
+  <g stroke="#33261a"><rect x="24" y="68" width="196" height="136" rx="2" fill="#f7f0e0" stroke-width="2.6"/><path d="M24 68h196" stroke-width="5"/></g>
+  <g class="slayt-a" fill="none" stroke-linecap="round">
+    <path class="sl sl1" d="M42 92H150" stroke="#33261a" stroke-width="9" stroke-dasharray="108"/>
+    <path class="sl sl2" d="M50 122H196" stroke="#76624c" stroke-width="5" stroke-dasharray="146"/>
+    <path class="sl sl3" d="M50 144H176" stroke="#76624c" stroke-width="5" stroke-dasharray="126"/>
+    <path class="sl sl4" d="M50 166H160" stroke="#76624c" stroke-width="5" stroke-dasharray="110"/>
+    <circle cx="42" cy="122" r="2.6" fill="#d07a2a" stroke="none"/><circle cx="42" cy="144" r="2.6" fill="#d07a2a" stroke="none"/><circle cx="42" cy="166" r="2.6" fill="#d07a2a" stroke="none"/>
+  </g>
+  <g class="slayt-b" stroke="#33261a" stroke-width="1.6">
+    <path d="M42 190V92M42 190H206" fill="none"/>
+    <rect class="cubuk cb1" x="56" y="140" width="26" height="50" fill="#d07a2a"/><rect class="cubuk cb2" x="92" y="112" width="26" height="78" fill="#2f4a6b"/>
+    <rect class="cubuk cb3" x="128" y="126" width="26" height="64" fill="#4f7d6e"/><rect class="cubuk cb4" x="164" y="100" width="26" height="90" fill="#a8432a"/>
+  </g>
+</svg></div></div>
+          <p class="v-komut">./ogretmek</p>
+          <h3><a href="../slaytlar/">Öğretmek</a></h3>
+          <p>AI'ı sıfırdan anlatan, projelerimden örnek veren interaktif sunumlar.</p>
+        </article>
       </div>
     </section>
 
     <section class="bolum" aria-labelledby="nasil-baslik">
       <h2 id="nasil-baslik" class="bolum-baslik">Nasıl çalışıyorum</h2>
-      <ol class="ilkeler">
-        <li><strong>AI hızlandırır, kararı ben veririm.</strong> Neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.</li>
-        <li><strong>Test yazdırırım.</strong> AI'ın yaptığı bir hata bir kez düzelir; test sayesinde bir daha gelmez.</li>
-        <li><strong>Kaynağa dayanırım.</strong> Bu sitedeki her sayı ve iddia bir README'ye ya da commit geçmişine dayanıyor.</li>
+      <ol class="ilkeler-kart">
+        <li class="ilke belir"><svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><text x="2" y="19">AI</text><rect class="iz" x="26" y="11" width="92" height="9" rx="4.5"/><rect class="hizli" x="26" y="11" width="92" height="9" rx="4.5"/><text x="2" y="51">sen</text><rect class="iz" x="26" y="43" width="92" height="9" rx="4.5"/><g class="karar"><circle cx="106" cy="47.5" r="10"/><path d="M101 47.5l4 4 8-9"/></g></svg><span class="ilke-no">01</span><div><strong>AI hızlandırır, kararı ben veririm.</strong><span>Neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.</span></div></li>
+        <li class="ilke belir"><svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><g class="hata"><circle cx="16" cy="32" r="10"/><path d="M11 27l10 10M21 27l-10 10"/></g><g class="testler"><circle cx="42" cy="32" r="7"/><circle cx="62" cy="32" r="7"/><circle cx="82" cy="32" r="7"/><circle cx="102" cy="32" r="7"/></g><g class="tikler"><path d="M38 32l3 3 5-6"/><path d="M58 32l3 3 5-6"/><path d="M78 32l3 3 5-6"/><path d="M98 32l3 3 5-6"/></g></svg><span class="ilke-no">02</span><div><strong>Test yazdırırım.</strong><span>AI'ın yaptığı bir hata bir kez düzelir; test sayesinde bir daha gelmez.</span></div></li>
+        <li class="ilke belir"><svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><rect class="satir" x="4" y="10" width="86" height="6" rx="3"/><rect class="vurgu-seridi" x="4" y="26" width="64" height="9" rx="2"/><rect class="satir kalin" x="4" y="28" width="64" height="5" rx="2.5"/><rect class="satir" x="4" y="46" width="72" height="6" rx="3"/><g class="kaynak"><rect x="74" y="22" width="44" height="17" rx="3"/><text x="96" y="34" text-anchor="middle">README</text></g></svg><span class="ilke-no">03</span><div><strong>Kaynağa dayanırım.</strong><span>Bu sitedeki her sayı ve iddia bir README'ye ya da commit geçmişine dayanıyor.</span></div></li>
       </ol>
     </section>
 
     <section class="bolum" aria-labelledby="arac-baslik">
       <h2 id="arac-baslik" class="bolum-baslik">Araçlar</h2>
-      <ul class="rozetler">
-        <li>Claude Code</li><li>Codex</li><li>JavaScript</li><li>Node.js</li><li>Electron</li><li>Python</li>
-        <li>PowerShell</li><li>Go</li><li>C</li><li>Bash</li><li>Git</li><li>GitHub Actions</li>
+      <ul class="aletler belir">
+        <li style="--i:0">Claude Code</li>
+        <li style="--i:1">Codex</li>
+        <li style="--i:2">JavaScript</li>
+        <li style="--i:3">Node.js</li>
+        <li style="--i:4">Electron</li>
+        <li style="--i:5">Python</li>
+        <li style="--i:6">PowerShell</li>
+        <li style="--i:7">Go</li>
+        <li style="--i:8">C</li>
+        <li style="--i:9">Bash</li>
+        <li style="--i:10">Git</li>
+        <li style="--i:11">GitHub Actions</li>
       </ul>
     </section>
 
-    <section class="bolum cagri">
-      <h2 class="bolum-baslik">Birlikte bir şey kuralım</h2>
-      <p>İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım.</p>
-      <div class="linkler">
-        <a class="dugme ana" href="../iletisim/">./iletisim →</a>
-        <a class="dugme" href="../projeler/">projelere bak</a>
-      </div>
-    </section>
+    <footer class="vitrin-son belir">
+      <img src="../img/sahin/kanat-kucuk.webp" alt="" width="120" height="120">
+      <p><strong>Birlikte bir şey kuralım.</strong> İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım.</p>
+      <a class="dugme ana" href="../iletisim/">iletişime geç →</a>
+    </footer>
   </main>
   <footer class="alt-bilgi">
     <span>samet duhan · 2026</span>
@@ -121,6 +219,10 @@
   <script type="module">
     import { baslatSayfa } from '../js/ekrana-sigdir.js';
     baslatSayfa();
+  </script>
+  <script type="module">
+    import { baslat } from '../js/vitrin.js';
+    baslat();
   </script>
 </body>
 </html>
