@@ -40,7 +40,8 @@ export function baslatSayfa() {
   if (!root) return;
   document.body.classList.add('tek-ekran');
   // Liste sayfaları kendi sayfalamasını yapar (js/sayfala.js): içerik tek sütunda, ilk ekranda kalır.
-  if (root.dataset.sayfalama === 'kendi') { document.body.classList.add('kendi-sayfa'); return; }
+  // Uzun, bölünmemesi gereken sayfalar (hakkımda) tek parça kalır; main içinde kaydırılır.
+  if (root.dataset.sayfalama === 'kendi' || root.dataset.sayfalama === 'kaydir') { document.body.classList.add('kendi-sayfa'); return; }
   const nav = document.createElement('nav'); nav.className = 'ekran-gezinme'; nav.setAttribute('aria-label', 'Sayfa bölümleri');
   const prev = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: '← önceki' });
   const next = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: 'sonraki →' });

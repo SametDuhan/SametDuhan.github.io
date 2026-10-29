@@ -7,8 +7,8 @@ export const FABRIKA_SVG = `<svg viewBox="380 420 1060 480" preserveAspectRatio=
     <filter id="bulut" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter><pattern id="tugla" width="18" height="9" patternUnits="userSpaceOnUse"><rect width="18" height="9" fill="#e4d3b4"/><path d="M0 .5H18M0 5H18M6 .5V5M15 5V9" stroke="#33261a" stroke-width=".8" opacity=".7"/></pattern></defs>
 <!-- ===== A: FABRİKA ===== -->
     <g>
-      <path d="M0 792H1440" stroke="#33261a" stroke-width="1.5"/>
-      <path d="M0 800H1440M0 808H1440" stroke="#33261a" stroke-dasharray="2 8" opacity=".6"/>
+      <path d="M-1500 792H1440" stroke="#33261a" stroke-width="1.5"/>
+      <path d="M-1500 800H1440M-1500 808H1440" stroke="#33261a" stroke-dasharray="2 8" opacity=".6"/>
       <!-- tuğla fabrika -->
       <g class="fabrika">
         <!-- arkadaki ince baca -->
@@ -48,18 +48,18 @@ export const FABRIKA_SVG = `<svg viewBox="380 420 1060 480" preserveAspectRatio=
       
 <!-- konveyör bant -->
       <g stroke="#33261a">
-        <rect x="-10" y="850" width="1460" height="16" rx="8" fill="none" stroke-width="2"/>
-        <path class="bant-serit" d="M0 850H1440M0 866H1440" stroke-width="2" stroke-dasharray="10 14"/>
+        <rect x="-1500" y="850" width="2950" height="16" rx="8" fill="none" stroke-width="2"/>
+        <path class="bant-serit" d="M-1500 850H1440M-1500 866H1440" stroke-width="2" stroke-dasharray="10 14"/>
         <g fill="#f2e8d5" stroke-width="1.5">
-          <circle cx="60" cy="858" r="6"/><circle cx="260" cy="858" r="6"/><circle cx="460" cy="858" r="6"/><circle cx="660" cy="858" r="6"/><circle cx="860" cy="858" r="6"/><circle cx="1060" cy="858" r="6"/><circle cx="1260" cy="858" r="6"/>
+          <circle cx="-1340" cy="858" r="6"/><circle cx="-1140" cy="858" r="6"/><circle cx="-940" cy="858" r="6"/><circle cx="-740" cy="858" r="6"/><circle cx="-540" cy="858" r="6"/><circle cx="-340" cy="858" r="6"/><circle cx="-140" cy="858" r="6"/><circle cx="60" cy="858" r="6"/><circle cx="260" cy="858" r="6"/><circle cx="460" cy="858" r="6"/><circle cx="660" cy="858" r="6"/><circle cx="860" cy="858" r="6"/><circle cx="1060" cy="858" r="6"/><circle cx="1260" cy="858" r="6"/>
         </g>
-        <path d="M120 866l-30 34M1320 866l30 34M700 866v34" stroke-width="2"/>
+        <path d="M-1180 866l-30 34M-780 866l-30 34M-380 866l-30 34M120 866l-30 34M1320 866l30 34M700 866v34" stroke-width="2"/>
       </g>
       <g class="sandiklar">
         <g class="sandik" style="--g:0s;--x:520px"><rect x="-70" y="-46" width="140" height="46" fill="#e9dcc2" stroke="#33261a" stroke-width="2"/><path d="M-70 -46l20 -14h140l-20 14M70 0l20 -14v-46l-20 14z" fill="#ddcdb0" stroke="#33261a" stroke-width="1.5"/><path d="M-70 -46l20 -14h140l-20 14M70 0l20 -14v-46l-20 14z" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.5"/><text y="-17" text-anchor="middle" class="bg-yazi koyu">SKYTRACK</text></g>
-        <g class="sandik" style="--g:-7s;--x:820px"><rect x="-60" y="-46" width="120" height="46" fill="#e9dcc2" stroke="#33261a" stroke-width="2"/><path d="M-60 -46l20 -14h120l-20 14M60 0l20 -14v-46l-20 14z" fill="#ddcdb0" stroke="#33261a" stroke-width="1.5"/><path d="M-60 -46l20 -14h120l-20 14M60 0l20 -14v-46l-20 14z" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.5"/><text y="-17" text-anchor="middle" class="bg-yazi koyu">PİKSEL</text></g>
-        <g class="sandik" style="--g:-14s;--x:1120px"><rect x="-55" y="-46" width="110" height="46" fill="#e9dcc2" stroke="#33261a" stroke-width="2"/><path d="M-55 -46l20 -14h110l-20 14M55 0l20 -14v-46l-20 14z" fill="#ddcdb0" stroke="#33261a" stroke-width="1.5"/><path d="M-55 -46l20 -14h110l-20 14M55 0l20 -14v-46l-20 14z" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.5"/><text y="-17" text-anchor="middle" class="bg-yazi koyu">AJAN</text></g>
-        <g class="sandik" style="--g:-21s;--x:1360px"><rect x="-58" y="-46" width="116" height="46" fill="#e9dcc2" stroke="#33261a" stroke-width="2"/><path d="M-58 -46l20 -14h116l-20 14M58 0l20 -14v-46l-20 14z" fill="#ddcdb0" stroke="#33261a" stroke-width="1.5"/><path d="M-58 -46l20 -14h116l-20 14M58 0l20 -14v-46l-20 14z" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.5"/><text y="-17" text-anchor="middle" class="bg-yazi koyu">DESTE</text></g>
+        <g class="sandik" style="--g:-12.75s;--x:820px"><rect x="-60" y="-46" width="120" height="46" fill="#e9dcc2" stroke="#33261a" stroke-width="2"/><path d="M-60 -46l20 -14h120l-20 14M60 0l20 -14v-46l-20 14z" fill="#ddcdb0" stroke="#33261a" stroke-width="1.5"/><path d="M-60 -46l20 -14h120l-20 14M60 0l20 -14v-46l-20 14z" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.5"/><text y="-17" text-anchor="middle" class="bg-yazi koyu">PİKSEL</text></g>
+        <g class="sandik" style="--g:-25.5s;--x:1120px"><rect x="-55" y="-46" width="110" height="46" fill="#e9dcc2" stroke="#33261a" stroke-width="2"/><path d="M-55 -46l20 -14h110l-20 14M55 0l20 -14v-46l-20 14z" fill="#ddcdb0" stroke="#33261a" stroke-width="1.5"/><path d="M-55 -46l20 -14h110l-20 14M55 0l20 -14v-46l-20 14z" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.5"/><text y="-17" text-anchor="middle" class="bg-yazi koyu">AJAN</text></g>
+        <g class="sandik" style="--g:-38.25s;--x:1360px"><rect x="-58" y="-46" width="116" height="46" fill="#e9dcc2" stroke="#33261a" stroke-width="2"/><path d="M-58 -46l20 -14h116l-20 14M58 0l20 -14v-46l-20 14z" fill="#ddcdb0" stroke="#33261a" stroke-width="1.5"/><path d="M-58 -46l20 -14h116l-20 14M58 0l20 -14v-46l-20 14z" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.5"/><text y="-17" text-anchor="middle" class="bg-yazi koyu">DESTE</text></g>
       </g>
       <text x="716" y="892" class="bg-yazi">ÜRETİM HATTI — FİKİR → KOD → ÇALIŞAN SİSTEM</text>
     </g>

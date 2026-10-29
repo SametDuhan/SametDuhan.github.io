@@ -203,3 +203,8 @@ test('projeler, slaytlar ve iletişim genel sütun sayfalamasını kullanmaz; li
   }
   assert.match(oku('js/ekrana-sigdir.js'), /dataset\.sayfalama === 'kendi'/);
 });
+
+test('hakkımda ikiye bölünmez: tek sayfada kaydırılır', () => {
+  assert.match(oku('hakkimda/index.html'), /<main id="icerik" data-sayfalama="kaydir">/);
+  assert.match(oku('js/ekrana-sigdir.js'), /dataset\.sayfalama === 'kaydir'/);
+});

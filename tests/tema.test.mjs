@@ -58,9 +58,10 @@ test('ana sayfa CSS: yana kaymaz, hareketi azaltınca durur, odak görünür', (
 });
 
 test('her alt sayfada kendi şahin pozu var, terminal kalıntısı ve fener yok', () => {
-  for (const [yol, poz] of [['hakkimda/index.html', 'ceyrek'], ['projeler/index.html', 'sag'], ['slaytlar/index.html', 'sol'], ['iletisim/index.html', 'kanat-kucuk'], ['404.html', 'arka']]) {
+  for (const [yol, poz] of [['hakkimda/index.html', 'ceyrek'], ['projeler/index.html', 'sag'], ['slaytlar/index.html', 'sol'], ['iletisim/index.html', 'on'], ['404.html', 'arka']]) {
     const s = oku(yol);
-    assert.match(s, new RegExp(`class="sayfa-sahin" src="[^"]*img/sahin/${poz}\\.webp"`), yol);
+    // Sahneli sayfalarda şahin, sayfaya uygun nesnelerle aynı SVG'nin içinde durur.
+    assert.match(s, new RegExp(`class="sayfa-sahin" src="[^"]*img/sahin/${poz}\\.webp"|class="sayfa-sahne"[^>]*>.*<image[^>]*href="[^"]*img/sahin/${poz}\\.webp"`, 's'), yol);
     assert.doesNotMatch(s, /fener\.js|~\/samet \$/, yol);
     assert.match(s, /family=Fraunces/, `${yol}: yazı tipi linki yok`);
     assert.match(s, /<meta name="theme-color" content="#f2e8d5">/, `${yol}: theme-color eski`);

@@ -5,6 +5,7 @@ import { writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { PROJELER, projeKartiHTML } from '../js/projeler.js';
 import { FABRIKA_SVG } from './fabrika.mjs';
+import { SAHNELER } from './sahneler.mjs';
 
 const KOK = fileURLToPath(new URL('../', import.meta.url));
 const KONTROL = process.argv.includes('--kontrol');
@@ -47,10 +48,10 @@ ${BOLUMLER.map(([h, ad], i) => `      <a href="${onek}${h}/"${h === aktif ? ' ar
   </nav>`;
 
 // Sayfa başı: numaralı etiket + damga, serif başlık, tanıtım ve sayfanın şahin pozu.
-export const sayfaBasi = ({ no, etiket, damga, baslik, tanitim, poz, onek = '../', ek = '', sinif = '', cizim = '' }) => `
+export const sayfaBasi = ({ no, etiket, damga, baslik, tanitim, poz, onek = '../', ek = '', sinif = '', cizim = '', sahne = '' }) => `
     <header class="sayfa-basi${sinif ? ` ${sinif}` : ''}">${cizim ? `
       <div class="bant-cizim" aria-hidden="true">${cizim}</div>` : ''}
-      <img class="sayfa-sahin" src="${onek}img/sahin/${poz}.webp" alt="" width="240" height="240">
+      ${sahne ? `<div class="sayfa-sahne" data-sahne="${sahne}">${SAHNELER[sahne](onek)}</div>` : `<img class="sayfa-sahin" src="${onek}img/sahin/${poz}.webp" alt="" width="240" height="240">`}
       <div class="sayfa-metin">
         <p class="etiket"><span class="no">${no}</span>${etiket}<span class="damga">${damga}</span></p>
         <h1>${baslik}</h1>${ek}
@@ -75,8 +76,8 @@ const yaz = (yol, html) => {
 
 // --- Hakkımda
 yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama: 'Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.', yol: 'hakkimda/' })}${menu('hakkimda')}
-  <main id="icerik">
-${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', baslik: 'Hakkımda', poz: 'ceyrek',
+  <main id="icerik" data-sayfalama="kaydir">
+${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', baslik: 'Hakkımda', poz: 'ceyrek', sahne: 'hakkimda',
       ek: '\n        <p class="kimlik">&gt; AI ile sistem kuran geliştirici</p>',
       tanitim: `Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak
       için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan
@@ -141,7 +142,7 @@ ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', basl
 // --- Projeler
 yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/' })}${menu('projeler')}
   <main id="icerik" data-sayfalama="kendi">
-${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'sag', sinif: 'bant', cizim: FABRIKA_SVG,
+${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'sag', sahne: 'projeler', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsi açık kaynak. Kodlarına GitHub\'dan bakabilir, nasıl yapıldıklarını slaytlardan öğrenebilirsin.' })}
     <div class="filtre" role="group" aria-label="Projeleri süz">
       <button type="button" data-etiket="hepsi" aria-pressed="true">hepsi</button>
@@ -195,7 +196,7 @@ ${PROJELER.map((p) => projeKartiHTML(p, '../')).join('\n')}
 // --- Slaytlar
 yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/', ekCss: '\n  <link rel="stylesheet" href="../css/atolye.css">' })}${menu('slaytlar')}
   <main id="icerik" data-sayfalama="kendi">
-${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'sol',
+${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'sol', sahne: 'slaytlar',
       tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
     <ol class="onerilen-sira" aria-label="Önerilen sıra">
       <li><a href="./ai-ajani-nedir/">AI ajanı nedir?</a></li>
@@ -268,7 +269,7 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
 // --- İletişim
 yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklama: 'Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.', yol: 'iletisim/' })}${menu('iletisim')}
   <main id="icerik" data-sayfalama="kendi">
-${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', baslik: 'İletişim', poz: 'kanat-kucuk',
+${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', baslik: 'İletişim', poz: 'kanat-kucuk', sahne: 'iletisim',
       tanitim: 'En hızlı mail ile ulaşırsın. Ne için yazdığını seç; konu satırı hazır gelsin.' })}
 
     <div class="uclu" id="konular">
@@ -326,7 +327,7 @@ ${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', b
 // --- 404
 yaz('404.html', `${bas({ baslik: 'Sayfa bulunamadı · Samet Duhan', aciklama: 'Aradığın sayfa yok. Ana sayfaya, projelere ya da slaytlara dön.', yol: '404.html', onek: '/' })}${menu('', '/')}
   <main id="icerik">
-${sayfaBasi({ no: '404', etiket: 'KAYIP SAYFA', damga: 'BULUNAMADI', baslik: '404', poz: 'arka', onek: '/',
+${sayfaBasi({ no: '404', etiket: 'KAYIP SAYFA', damga: 'BULUNAMADI', baslik: '404', poz: 'arka', sahne: 'hata404', onek: '/',
       ek: '\n        <p class="kimlik">bash: cd: bu-sayfa: Böyle bir dosya ya da dizin yok</p>',
       tanitim: 'Aradığın sayfa taşınmış ya da hiç olmamış olabilir.' })}
     <div class="linkler"><a class="dugme ana" href="/">./ana-sayfa →</a><a class="dugme" href="/projeler/">projeler</a><a class="dugme" href="/slaytlar/">slaytlar</a></div>
