@@ -57,7 +57,8 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .sayfa-basi.bant { min-height: 400px; margin: -56px calc(-1 * clamp(20px, 5vw, 72px)) 34px; padding: 56px clamp(20px, 5vw, 72px) 24px; border-bottom: 1px solid var(--kenar); overflow: hidden; align-items: flex-start; }
 .bant-cizim { position: absolute; inset: 0; opacity: 0.62; pointer-events: none; }
 .bant-cizim svg { width: 100%; height: 100%; display: block; }
-.sayfa-basi.bant .sayfa-metin { max-width: min(290px, 26vw); }
+.sayfa-basi.bant .sayfa-metin { max-width: min(262px, 23vw); }
+.sayfa-basi.bant h1 { font-size: clamp(40px, 4.4vw, 62px); }
 .sayfa-basi.bant .tanitim { background: color-mix(in srgb, var(--zemin) 80%, transparent); }
 
 /* ---- bölümler ---- */
@@ -195,26 +196,21 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 /* animasyon yokken (hareketi azalt) sandıklar bantta kendi yerinde durur */
 .sandik { transform: translate(var(--x), 846px); animation: sandik 51s linear infinite; animation-delay: var(--g); }
 @keyframes sandik { from { transform: translate(-1600px, 846px); } to { transform: translate(1600px, 846px); } }
-/* sandık istasyonlardan geçerken biçim değiştirir: fikir (kesikli) → kod (taramalı) → çalışan sistem (projenin renginde, tik); x = -1600 + 3200·p, istasyonlar x=800 (p .75) ve x=1040 (p .825) */
+/* sandık istasyonlardan geçerken biçim değiştirir: fikir (kesikli) → kod (taramalı) → çalışan sistem (projenin renginde, tik).
+   Sandığın x'i = -1600 + 3200·p; istasyonlar x=650 (p .703) ve x=800 (p .75); her geçişte ±1,2 p'lik yumuşak değişim */
 .sandik .s { opacity: 0; animation: 51s linear infinite; animation-delay: var(--g); }
 .sandik .s-fikir { animation-name: s-fikir; opacity: 1; }
 .sandik .s-kod { animation-name: s-kod; }
 .sandik .s-bitti { animation-name: s-bitti; }
-@keyframes s-fikir { 0%, 73.8% { opacity: 1; } 75.2%, 100% { opacity: 0; } }
-@keyframes s-kod { 0%, 73.8% { opacity: 0; } 75.2%, 81.3% { opacity: 1; } 82.7%, 100% { opacity: 0; } }
-@keyframes s-bitti { 0%, 81.3% { opacity: 0; } 82.7%, 100% { opacity: 1; } }
+@keyframes s-fikir { 0%, 69.1% { opacity: 1; } 71.5%, 100% { opacity: 0; } }
+@keyframes s-kod { 0%, 69.1% { opacity: 0; } 71.5%, 73.8% { opacity: 1; } 76.2%, 100% { opacity: 0; } }
+@keyframes s-bitti { 0%, 73.8% { opacity: 0; } 76.2%, 100% { opacity: 1; } }
 .bant-cizim .sd-yazi { font: 600 11px var(--mono); fill: var(--yazi); letter-spacing: .06em; }
 .bant-cizim .sd-ad { font-size: 12px; letter-spacing: .12em; }
 .bant-cizim .tik-c { stroke-dasharray: 30; animation: tik-c 51s linear infinite; animation-delay: var(--g); stroke-dashoffset: 30; }
-@keyframes tik-c { 0%, 82.7% { stroke-dashoffset: 30; } 85%, 100% { stroke-dashoffset: 0; } }
+@keyframes tik-c { 0%, 76.2% { stroke-dashoffset: 30; } 78.6%, 100% { stroke-dashoffset: 0; } }
 .bant-cizim .rolka { transform-box: fill-box; transform-origin: center; animation: rolka 1.8s linear infinite; }
 @keyframes rolka { to { transform: rotate(360deg); } }
-.bant-cizim .isik { animation: isik 2.4s ease-in-out infinite; }
-@keyframes isik { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
-.bant-cizim .tarama { animation: tarama 2.2s ease-in-out infinite; }
-@keyframes tarama { 0%, 100% { transform: translateY(0); opacity: .2; } 50% { transform: translateY(40px); opacity: 1; } }
-.bant-cizim .lamba { animation: lamba 3s steps(1) infinite; }
-@keyframes lamba { 0%, 100% { fill: #5f9a7e; } 50% { fill: #8fd0ae; } }
 
 /* ---- tek ekran gezinme (css/ekran.css) ile sol menü: içerik ve sayfa düğmeleri menünün sağında kalır ---- */
 .tek-ekran > .yan-menu { flex-shrink: 0; }

@@ -149,3 +149,12 @@ test('ana sayfadaki süs yazıları ekran okuyucudan gizli', () => {
   assert.match(s, /<g class="tunek" aria-hidden="true">/);
   assert.match(s, /<!-- teknik çizim kılavuzları -->\s*<g aria-hidden="true"/);
 });
+
+test('üretim bandı: istasyonlarda ikon yok, istasyonlar fabrikanın solunda; makaralar bandın tamamında', () => {
+  assert.doesNotMatch(FABRIKA_SVG, /class="(ampul|isik|tarama|lamba)"/);
+  const xs = [...FABRIKA_SVG.matchAll(/class="istasyon" transform="translate\((\d+) 846\)"/g)].map((m) => Number(m[1]));
+  assert.equal(xs.length, 3);
+  for (const x of xs) assert.ok(x + 42 < 880, `istasyon x=${x} fabrikaya (x=880) biniyor`);
+  const makaralar = [...FABRIKA_SVG.matchAll(/<g transform="translate\((-?\d+) 860\)"><g class="rolka">/g)].map((m) => Number(m[1]));
+  assert.ok(Math.min(...makaralar) < 0 && Math.max(...makaralar) > 1300, 'makaralar yalnız bir tarafta');
+});
