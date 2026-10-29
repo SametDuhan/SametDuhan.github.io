@@ -1,4 +1,5 @@
-// Yeni deste = bu listeye bir satır + slaytlar/<slug>/index.html. En yeni en üstte.
+import { t, EN } from './dil.js';
+// Yeni deste = bu listeye bir satır (en: İngilizce başlık, etiket, açıklama) + slaytlar/<slug>/index.html. En yeni en üstte.
 export const DESTELER = [
   {
     slug: 'ai-ajani-nedir',
@@ -8,6 +9,7 @@ export const DESTELER = [
     slaytSayisi: 9,
     dakika: 8,
     gorsel: 'halka',
+    en: { baslik: 'What is an AI agent?', etiket: 'Beginner', aciklama: 'The difference between a chatbot and an agent that gets work done. For complete beginners, from scratch.' },
   },
   {
     slug: 'claude-code-hook',
@@ -18,6 +20,7 @@ export const DESTELER = [
     dakika: 8,
     ornek: 'claude-done-pixel',
     gorsel: 'zincir',
+    en: { baslik: 'Automation with a Claude Code hook', etiket: 'Claude Code', aciklama: '"When this happens, run that": how to build a character that jumps on screen when AI finishes its job.' },
   },
   {
     slug: 'skytrack-nasil-kurdum',
@@ -28,8 +31,12 @@ export const DESTELER = [
     dakika: 10,
     ornek: 'SkyTrack',
     gorsel: 'rota',
+    en: { baslik: 'How I built SkyTrack with AI', etiket: 'Project', aciklama: 'A live flight tracking app, commit by commit: what AI sped up and who made the decisions.' },
   },
 ];
+
+// Sayfanın diline göre deste yazısı: İngilizce sayfada d.en varsa o, yoksa Türkçesi.
+const yazi = (d, alan) => (EN && d.en?.[alan]) || d[alan];
 
 const sade = (s) => String(s).toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
@@ -58,16 +65,16 @@ export function kartHareketi(kutu) {
 }
 
 export function kartHTML(d, ilerleme = null) {
-  const ornek = d.ornek ? ` · örnek: ${kacis(d.ornek)}` : '';
+  const ornek = d.ornek ? ` · ${t('örnek', 'example')}: ${kacis(d.ornek)}` : '';
   const devam = ilerleme && !ilerleme.bitti && ilerleme.konum > 0;
-  const rozet = ilerleme?.bitti ? '<span class="rozet bitti">✓ tamamlandı</span>'
-    : devam ? `<span class="rozet">kaldığın yer: ${ilerleme.konum + 1}/${ilerleme.n}</span>` : '';
+  const rozet = ilerleme?.bitti ? `<span class="rozet bitti">${t('✓ tamamlandı', '✓ completed')}</span>`
+    : devam ? `<span class="rozet">${t('kaldığın yer', 'where you left off')}: ${ilerleme.konum + 1}/${ilerleme.n}</span>` : '';
   const href = devam ? `./${kacis(d.slug)}/#${ilerleme.konum + 1}` : `./${kacis(d.slug)}/`;
   const gorsel = MINI[d.gorsel] ? `<div class="mini-gorsel">${MINI[d.gorsel]}</div>\n  ` : '';
   return `<a class="deste-karti" href="${href}">
-  ${gorsel}<div class="kart-ust"><span class="etiket">${kacis(d.etiket)}</span>${rozet}</div>
-  <h2>${kacis(d.baslik)}</h2>
-  <p>${kacis(d.aciklama)}</p>
-  <span class="alt">${d.slaytSayisi} slayt · ~${d.dakika} dk${ornek} ${devam ? '· devam et' : ''} →</span>
+  ${gorsel}<div class="kart-ust"><span class="etiket">${kacis(yazi(d, 'etiket'))}</span>${rozet}</div>
+  <h2>${kacis(yazi(d, 'baslik'))}</h2>
+  <p>${kacis(yazi(d, 'aciklama'))}</p>
+  <span class="alt">${d.slaytSayisi} ${t('slayt', 'slides')} · ~${d.dakika} ${t('dk', 'min')}${ornek} ${devam ? t('· devam et', '· continue') : ''} →</span>
 </a>`;
 }

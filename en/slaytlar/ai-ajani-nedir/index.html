@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2e8d5">
+  <title>What is an AI agent? · Samet Duhan</title>
+  <meta name="description" content="The difference between a chatbot and an AI agent that gets work done, from scratch and with examples.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f2e8d5'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='2' fill='none' stroke='%2333261a' stroke-width='1.5'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%2333261a'%3E%C5%9E%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="../../../css/tema.css">
+  <link rel="stylesheet" href="../../../css/deste.css">
+  <style>
+    .dongu { width: 100%; max-width: min(520px, 62svh); height: auto; display: block; margin: 0 auto; }
+    .dongu .dugum rect { fill: var(--panel); stroke: var(--kenar); stroke-width: 1.5; transition: stroke 0.2s, fill 0.2s; }
+    .dongu .dugum text { fill: var(--yazi); font: 14px var(--mono); text-anchor: middle; dominant-baseline: middle; }
+    .dongu .dugum.aktif rect { stroke: var(--vurgu); fill: color-mix(in srgb, var(--vurgu) 15%, transparent); }
+    .dongu path { stroke: var(--soluk); stroke-width: 1.5; fill: none; marker-end: url(#ok); }
+    .dongu-log { font-family: var(--mono); font-size: 14px; color: var(--vurgu-koyu); min-height: 3.2em; margin: 8px 0 0; }
+    @media (prefers-reduced-motion: reduce) { .dongu .dugum rect { transition: none; } }
+  </style>
+<meta property="og:title" content="What is an AI agent? · Samet Duhan"><meta property="og:description" content="Watch, try, and explore step by step. An interactive development walkthrough from Samet Duhan."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/en/slaytlar/ai-ajani-nedir/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/ai-ajani-nedir.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../../css/atolye.css">
+<link rel="stylesheet" href="../../../css/deste-gorsel.css">
+<link rel="stylesheet" href="../../../css/ajan-gorsel.css">
+<link rel="stylesheet" href="../../../css/ekran.css">
+  <link rel="alternate" hreflang="tr" href="https://sametduhan.github.io/slaytlar/ai-ajani-nedir/">
+  <link rel="alternate" hreflang="en" href="https://sametduhan.github.io/en/slaytlar/ai-ajani-nedir/">
+  <link rel="alternate" hreflang="x-default" href="https://sametduhan.github.io/slaytlar/ai-ajani-nedir/">
+</head>
+<body>
+  <div class="deste" id="deste">
+    <header class="deste-ust">
+      <a class="geri" href="../">← slides</a>
+      <span class="deste-adi">What is an AI agent?</span>
+      <span class="sayac"></span>
+      <!--dil--><div class="dil-sec" role="group" aria-label="Language"><a href="../../../slaytlar/ai-ajani-nedir/" lang="tr" hreflang="tr">TR</a><a href="./" lang="en" hreflang="en" aria-current="true">EN</a></div><!--/dil-->
+    </header>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Beginner · ~8 minutes</p>
+      <h1>What is an AI agent?</h1><div class="kapak-sahne halkali"><span class="orb">AI</span><div><small>01 / DISCOVER</small><strong>What starts as an answer<br>turns into a working system.</strong><span class="akis">observe → decide → tool → result</span></div>
+        <svg class="halka-cizim" viewBox="0 -14 170 200" aria-hidden="true">
+          <path id="halka-yol" class="iz" d="M85 20A65 65 0 1 1 84.9 20"/>
+          <g class="dugum"><circle cx="85" cy="20" r="11"/><text x="85" y="-1">look</text></g>
+          <g class="dugum"><circle cx="150" cy="85" r="11"/><text x="150" y="114" dx="-2">decide</text></g>
+          <g class="dugum"><circle cx="85" cy="150" r="11"/><text x="85" y="179">do</text></g>
+          <g class="dugum"><circle cx="20" cy="85" r="11"/><text x="20" y="114" dx="8">check</text></g>
+          <circle class="tasiyici" r="5"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#halka-yol"/></animateMotion></circle>
+        </svg>
+        <img class="kapak-sahin" src="../../../img/sahin/on.webp" alt="" width="210" height="210">
+      </div>
+      <p>By the end of this deck you will know the difference between a <strong>chatbot</strong> and an <strong>agent</strong>, see how an agent "thinks and gets the work done," and try one yourself.</p>
+      <p class="ipucu">Move forward with the → key, the buttons below, or by swiping left on a phone.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">1 · What you already know</p>
+      <h2>Chatbot: you ask, it answers</h2>
+      <p>When you chat with ChatGPT or Claude, the AI produces <strong>text</strong>. However smart it is, you are still the one doing the work: you copy the code, open the file, and check the result.</p>
+      <div class="sohbet" aria-hidden="true">
+        <div class="balon kullanici">How do I fix the bug in this file?</div>
+        <div class="balon bot yaziyor"><i></i><i></i><i></i></div>
+        <div class="balon bot cevap">Try this: change the line that says <code>sayi = sayi + 1</code> to <code>sayi += 1</code>.</div>
+        <div class="sen-isi"><small>the rest is up to you:</small><span>copy</span><span>open the file</span><span>paste</span><span>test it</span></div>
+      </div>
+      <div class="terim"><p><strong>Model (LLM):</strong> A program trained on a huge amount of text that produces answers by predicting the next word. Claude and GPT are models.</p></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">2 · The difference</p>
+      <h2>Agent: it does the work itself</h2><div class="laboratuvar" data-lab="ajan"><div class="lab-bas"><span>AGENT WORKSHOP / WORKS ON ITS OWN</span><span>Local simulation</span></div><label>Pick a task <select data-gorev><option>Fix the broken link</option><option>Fix a failing test</option><option>Prepare a project page</option></select></label><div class="akis-adimlar"><span>01 Observe</span><span>02 Plan</span><span>03 Tool</span><span>04 Check</span></div><pre class="terminal" aria-live="polite">$ waiting for a task…</pre><p class="lab-not">This is a demonstration simulation; no real files are changed.</p></div>
+      <div class="iki-sutun">
+        <div class="panel">
+          <h3>chatbot</h3>
+          <p>"How do I fix the bug in this file?" → It writes you an explanation and example code. The rest is up to you.</p>
+        </div>
+        <div class="panel">
+          <h3>agent</h3>
+          <p>"Fix the bug in this file." → It opens the file itself, finds the bug, fixes it, runs the test, and tells you what it did.</p>
+        </div>
+      </div>
+      <p>What makes the difference is <strong>tools</strong>: small abilities that let the agent read files, run commands, and search the internet.</p>
+      <div class="arac-cipleri" aria-hidden="true"><span>read a file</span><span>write a file</span><span>run a command</span><span>search the internet</span></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">3 · The agent loop</p>
+      <h2>Look → decide → do → check</h2>
+      <p>An agent repeats these four steps over and over until the job is done. The loop runs by itself; you can also pause it and watch step by step:</p>
+      <div class="demo" style="padding:14px">
+        <svg class="dongu" viewBox="0 0 520 260" role="img" aria-label="Agent loop: look, decide, do, check">
+          <defs><marker id="ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#76624c" stroke="none"/></marker></defs>
+          <g class="dugum" data-adim="0"><rect x="190" y="10" width="140" height="44" rx="8"/><text x="260" y="32">1. look</text></g>
+          <g class="dugum" data-adim="1"><rect x="370" y="108" width="140" height="44" rx="8"/><text x="440" y="130">2. decide</text></g>
+          <g class="dugum" data-adim="2"><rect x="190" y="206" width="140" height="44" rx="8"/><text x="260" y="228">3. do</text></g>
+          <g class="dugum" data-adim="3"><rect x="10" y="108" width="140" height="44" rx="8"/><text x="80" y="130">4. check</text></g>
+          <path d="M330 40 Q 430 50 440 104"/>
+          <path d="M440 154 Q 430 210 334 226"/>
+          <path d="M190 226 Q 90 210 80 156"/>
+          <path d="M80 104 Q 90 50 186 40"/>
+        </svg>
+        <p class="dongu-log" id="dongu-log" aria-live="polite">Task: "Fix the broken link on the page."</p>
+        <button type="button" class="dugme" id="dongu-dugme" style="cursor:pointer">pause</button>
+      </div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">4 · Check</p>
+      <h2>Did you get it?</h2>
+      <div class="soru" data-dogru="b">
+        <p>What is the most important thing that separates an agent from a chatbot?</p>
+        <div class="secenekler">
+          <button type="button" data-secenek="a">Writing longer answers</button>
+          <button type="button" data-secenek="b">Doing the work itself with tools and checking the result</button>
+          <button type="button" data-secenek="c">Being connected to the internet</button>
+        </div>
+        <p class="sonuc" aria-live="polite"></p>
+        <p class="aciklama">Length and internet access are not what makes the difference. What makes an agent an agent is that it <strong>uses tools</strong> and keeps the loop going until the job is done.</p>
+      </div>
+      <div class="dusunen" aria-hidden="true"><b>?</b><b>?</b><b>?</b><img src="../../../img/sahin/sol.webp" alt="" width="150" height="150"></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">5 · A real example</p>
+      <h2>Claude Code: an agent that runs in the terminal</h2>
+      <p><strong>Claude Code</strong> is an agent that can read and write files and run commands in the project folder on your computer. You tell it "do this," and it runs the loop itself.</p>
+      <p>There is one problem: when a job takes long, you keep looking at the terminal asking "is it done?" I made <strong>claude-done-pixel</strong> for that. When Claude finishes its job, a pixel character runs and jumps in the corner of the screen and waves a green flag.</p>
+      <div class="piksel-demo" data-piksel-demo="claude" data-otomatik><p>claude-done-pixel: in the corner of the screen when the job is done</p><canvas width="720" height="220" role="img" aria-label="Animation of an orange pixel character running, jumping, and waving a green flag">The pixel character runs, jumps, and waves a green flag.</canvas></div>
+      <p>How it works is in the next deck: <a href="../claude-code-hook/">Automation with a Claude Code hook →</a></p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">6 · An important rule</p>
+      <h2>The final decision is the human's</h2>
+      <p>An agent is fast but can be wrong. In a well-built system:</p>
+      <svg class="kapi" viewBox="0 0 640 124" aria-hidden="true">
+        <path class="yer" d="M10 104H630"/>
+        <rect class="direk" x="352" y="40" width="16" height="64"/>
+        <g class="bariyer"><rect x="360" y="86" width="150" height="12" rx="3"/><path d="M400 86v12M440 86v12M480 86v12" stroke="#f2e8d5" stroke-width="5"/></g>
+        <text class="tabela-yazi" x="410" y="62">DELETE · PUBLISH · SPEND</text>
+        <g class="ajan-kutu"><rect x="20" y="64" width="78" height="40" rx="8"/><text x="59" y="89">agent</text></g>
+        <g class="soru-balon"><rect x="150" y="14" width="150" height="30" rx="6"/><text class="yazi" x="164" y="34">can't be undone: permission?</text></g>
+        <g class="onay"><rect x="440" y="14" width="150" height="30" rx="6"/><text x="515" y="34">YOU: OK ✓</text></g>
+      </svg>
+      <ul>
+        <li>The agent <strong>tells</strong> you what it did; you read it.</li>
+        <li>Before anything that can't be undone (deleting something, publishing, spending money), it <strong>asks permission</strong>.</li>
+        <li>It shows the work is correct with a <strong>test</strong> instead of settling for saying "done."</li>
+      </ul>
+      <p>Using AI well is not leaving everything to it; it is knowing what to leave to it.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">7 · Try it yourself</p>
+      <h2>Your first task</h2>
+      <p>Open a free AI chat (Claude, ChatGPT…) and paste the text below. Even though it is a chatbot, you will have taught it to <strong>think step by step</strong> like an agent:</p>
+      <div class="dene">
+        <code>Work like an agent. Task: put together my weekly meal plan and grocery list. First ask me the 3 questions you need answered <mark>(look)</mark>. Based on my answers, make a plan and show it to me <mark>(decide)</mark>. Write the list <mark>(do)</mark>. Finally, compare the list against your own plan and check whether anything is missing <mark>(check)</mark>.</code>
+        <button type="button">copy</button>
+      </div>
+      <p>Did you notice? You described the four steps of the loop yourself. Real agents do this on their own, with tools.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Done</p>
+      <h2>What's next?</h2>
+      <ul>
+        <li><a href="../claude-code-hook/">Automation with a Claude Code hook</a>: running something automatically when an agent finishes.</li>
+        <li><a href="../skytrack-nasil-kurdum/">How I built SkyTrack with AI</a>: how a real app was written with AI.</li>
+        <li><a href="../../projeler/">Projects</a> · <a href="../../iletisim/">Contact</a>: write to me with your questions.</li>
+      </ul>
+      <div class="yol-sahne" aria-hidden="true"><img src="../../../img/sahin/sag.webp" alt="" width="128" height="128"><b>→</b></div>
+    </section>
+  </div>
+
+  <script type="module">
+    import { bagla } from '../../../js/deste.js';
+    bagla(document.getElementById('deste'));
+
+    const ADIMLAR = [
+      '1. look → Reads the page and finds 4 links. One has the address /projelr instead of /projeler.',
+      '2. decide → "The right path should be /projeler, because that is the folder name."',
+      '3. do → Replaces /projelr with /projeler in the file.',
+      '4. check → Tries the link again: it works. Task done; it reports to you what it did.',
+    ];
+    const dugumler = [...document.querySelectorAll('.dongu .dugum')];
+    const oklar = [...document.querySelectorAll('.dongu path')];
+    const log = document.getElementById('dongu-log');
+    const dugme = document.getElementById('dongu-dugme');
+    let i = -1, sayac = 0, duraklatildi = false;
+    function goster(yeni) {
+      i = yeni;
+      dugumler.forEach((d, j) => d.classList.toggle('aktif', j === i));
+      oklar.forEach((o, j) => o.classList.toggle('aktif', i >= 0 && j === (i + oklar.length - 1) % oklar.length));
+      log.textContent = i >= 0 ? ADIMLAR[i] : 'Task: "Fix the broken link on the page."';
+    }
+    // Döngü slayt açılınca kendiliğinden döner; düğme duraklatır, duraklatınca düğme adım adım ilerletir.
+    const durdur = () => { clearInterval(sayac); sayac = 0; };
+    const baslat = () => {
+      durdur();
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { duraklatildi = true; dugme.textContent = 'one step forward'; goster(0); return; }
+      duraklatildi = false; dugme.textContent = 'pause'; goster(0);
+      sayac = setInterval(() => goster((i + 1) % ADIMLAR.length), 3200);
+    };
+    dugme.addEventListener('click', () => {
+      if (!duraklatildi) { duraklatildi = true; durdur(); dugme.textContent = 'one step forward'; return; }
+      goster((i + 1) % ADIMLAR.length);
+    });
+    const slayt = dugme.closest('.slayt');
+    slayt.addEventListener('goster', baslat);
+    slayt.addEventListener('gizle', durdur);
+    goster(0);
+  </script>
+<script type="module" src="../../../js/atolye.js"></script>
+<script type="module" src="../../../js/deste-gorsel.js"></script>
+</body>
+</html>

@@ -51,13 +51,14 @@ test('iç linkler çözülür', () => {
   assert.deepEqual(kirik, []);
 });
 
-test('her sayfada lang=tr ve viewport; sayfa geneli arka plan efekti yok', () => {
+test('her sayfada doğru lang (Türkçe kökte tr, en/ altında en) ve viewport; sayfa geneli arka plan efekti yok', () => {
   const sayfalar = htmlDosyalari();
   assert.ok(sayfalar.length > 0, 'hiç HTML sayfası yok');
   for (const f of sayfalar) {
     const html = readFileSync(f, 'utf8');
     const ad = relative(KOK, f);
-    assert.match(html, /<html lang="tr">/, `${ad}: lang=tr yok`);
+    const dil = ad.startsWith('en/') ? 'en' : 'tr';
+    assert.match(html, new RegExp(`<html lang="${dil}">`), `${ad}: lang=${dil} yok`);
     assert.match(html, /name="viewport"/, `${ad}: viewport yok`);
     assert.doesNotMatch(html, /id="arkaplan"/, `${ad}: sayfa geneli arka plan efekti kaldırılacaktı`);
   }

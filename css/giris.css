@@ -271,3 +271,6 @@
   .aciklama { display: none; }
   .kod-yagmuru { display: none; }
 }
+
+/* ana sayfada sağ üst köşede dil seçici */
+.giris > .dil-sec { position: absolute; top: 14px; left: 18px; z-index: 5; }

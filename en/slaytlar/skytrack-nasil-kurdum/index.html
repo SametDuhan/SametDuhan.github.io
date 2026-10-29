@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2e8d5">
+  <title>How I built SkyTrack with AI · Samet Duhan</title>
+  <meta name="description" content="How the live flight tracking app SkyTrack was written with AI, from the commit history.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f2e8d5'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='2' fill='none' stroke='%2333261a' stroke-width='1.5'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%2333261a'%3E%C5%9E%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="../../../css/tema.css">
+  <link rel="stylesheet" href="../../../css/deste.css">
+  <style>
+    .sayilar { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 12px; margin: 14px 0; }
+    .sayilar .panel { margin: 0; text-align: center; }
+    .sayilar b { display: block; font-family: var(--mono); font-size: clamp(30px, 5vw, 44px); color: var(--vurgu-koyu); line-height: 1.1; }
+    .sayilar span { font-size: 14px; color: var(--soluk); }
+    .cubuk { height: 14px; border-radius: 7px; background: var(--kenar); overflow: hidden; margin: 6px 0 2px; }
+    .cubuk i { display: block; height: 100%; background: var(--vurgu); }
+    .zaman { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .zaman button { font-family: var(--mono); font-size: 13px; color: var(--yazi); background: var(--panel-cam); border: 1px solid var(--kenar); border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+    .zaman button[aria-pressed="true"] { border-color: var(--vurgu-koyu); color: var(--vurgu-koyu); background: color-mix(in srgb, var(--vurgu) 10%, transparent); }
+    .zaman-ayrinti { min-height: 7.5em; }
+    .zaman-ayrinti code { white-space: normal; }
+    .olcum { font-family: var(--mono); font-size: 12px !important; color: var(--soluk) !important; }
+    @media (max-width: 520px) { .sayilar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .sayilar .panel { padding: 10px 6px; } .sayilar b { font-size: 24px; } .sayilar span { font-size: 12px; } }
+  </style>
+<meta property="og:title" content="How I built SkyTrack with AI · Samet Duhan"><meta property="og:description" content="Watch, try, and explore step by step. An interactive development walkthrough from Samet Duhan."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/en/slaytlar/skytrack-nasil-kurdum/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/skytrack-nasil-kurdum.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../../css/atolye.css">
+<link rel="stylesheet" href="../../../css/deste-gorsel.css">
+<link rel="stylesheet" href="../../../css/skytrack-gorsel.css">
+<link rel="stylesheet" href="../../../css/ekran.css">
+  <link rel="alternate" hreflang="tr" href="https://sametduhan.github.io/slaytlar/skytrack-nasil-kurdum/">
+  <link rel="alternate" hreflang="en" href="https://sametduhan.github.io/en/slaytlar/skytrack-nasil-kurdum/">
+  <link rel="alternate" hreflang="x-default" href="https://sametduhan.github.io/slaytlar/skytrack-nasil-kurdum/">
+</head>
+<body>
+  <div class="deste" id="deste">
+    <header class="deste-ust">
+      <a class="geri" href="../">← slides</a>
+      <span class="deste-adi">How I built SkyTrack with AI</span>
+      <span class="sayac"></span>
+      <!--dil--><div class="dil-sec" role="group" aria-label="Language"><a href="../../../slaytlar/skytrack-nasil-kurdum/" lang="tr" hreflang="tr">TR</a><a href="./" lang="en" hreflang="en" aria-current="true">EN</a></div><!--/dil-->
+    </header>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Project · ~10 minutes</p>
+      <h1>How I built SkyTrack with AI</h1><div class="kapak-sahne haritali"><span class="orb">✈</span><div><small>03 / BUILD</small><strong>From open data<br>to a working app.</strong><span class="akis">data → map → decision → test</span></div>
+        <svg class="rota-cizim" viewBox="0 0 320 150" aria-hidden="true">
+          <path id="kapak-rota" class="yol" d="M24 118C70 24 120 22 160 44S256 70 296 112"/>
+          <circle cx="24" cy="118" r="5"/><circle cx="160" cy="44" r="5"/><circle cx="296" cy="112" r="5"/>
+          <text x="14" y="140">IST</text><text x="148" y="30">ESB</text><text x="284" y="134">AYT</text>
+          <g class="ucak-sekil"><path d="M12 0L-9 -8L-5 0L-9 8Z"/><animateMotion dur="8s" repeatCount="indefinite" rotate="auto"><mpath href="#kapak-rota"/></animateMotion></g>
+        </svg>
+        <img class="kapak-sahin" src="../../../img/sahin/ceyrek.webp" alt="" width="210" height="210">
+      </div>
+      <p>I explain how a desktop app grew in nine days, without making anything up, <strong>from the commit history</strong>: what AI sped up, which decisions I made, and where the AI got it wrong.</p>
+      <div class="terim"><p><strong>Commit:</strong> A record of a change made to the code. Every commit has a message, a date, and an author; it reads like the project's diary.</p></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">1 · What does it do?</p>
+      <h2>Live aircraft on a map</h2>
+      <video class="proje-video" muted loop playsinline preload="auto" poster="../../../img/skytrack-960.jpg" aria-label="Screen recording of the SkyTrack browser demo"><source src="../../../video/skytrack-demo.webm" type="video/webm">If you can't play the video, you can open the browser demo at the end of the deck.</video><p class="lab-not">Screen recording: the browser demo. The flights and turbulence areas are simulated; the video is silent.</p>
+      <p>SkyTrack is a free desktop app that shows aircraft around the world live on a map. It runs on Windows, macOS, and Linux and needs no account or API key.</p>
+      <div class="terim ads"><svg viewBox="0 0 150 54" aria-hidden="true">
+        <path class="sinyal" d="M30 14C60 14 80 28 112 30"/>
+        <path class="dalga" d="M118 18Q130 30 118 42"/><path class="dalga" d="M118 18Q130 30 118 42"/><path class="dalga" d="M118 18Q130 30 118 42"/>
+        <path class="tel" d="M108 50L113 20L118 50M110 40H116M111 31H115"/>
+        <g class="ucak-sekil" style="fill:var(--civit)"><path d="M0 0L-11 -8L-7 0L-11 8Z" transform="translate(30 14) scale(1.1)"><animateTransform attributeName="transform" type="translate" values="0 0;10 6;0 0" dur="4s" repeatCount="indefinite" additive="sum"/></path></g>
+      </svg><p><strong>ADS-B:</strong> The open signal in which aircraft broadcast their position, altitude, and speed several times a second. Volunteers' receivers pick up this signal; SkyTrack uses this open data.</p></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">2 · In numbers</p>
+      <h2>How much did I write with AI?</h2>
+      <div class="sayilar">
+        <div class="panel"><b data-say="208">208</b><span>total commits</span></div>
+        <div class="panel"><b data-say="191">191</b><span>co-written with Claude</span></div>
+        <div class="panel"><b data-say="9" data-son=" days">9 days</b><span>from the first file to v0.7.9</span></div>
+      </div>
+      <div class="cubuk" role="img" aria-label="191 of 208 commits, 92 percent, co-written with Claude"><i style="--g:91.8%"></i></div>
+      <p>The remaining 17 commits: 7 changes I made by hand in the first days of the project and 10 merge records.</p>
+      <p>Commits written with Claude end with a <code>Co-Authored-By: Claude</code> line; that line is what I counted.</p>
+      <p class="olcum">Measured from: the github.com/SametDuhan/airock commit history, 27 October 2026.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">3 · Timeline</p>
+      <h2>What happened in nine days?</h2>
+      <p>The route advances by itself; click a stop to pause it.</p>
+      <div class="rota" id="zaman" role="group" aria-label="Timeline"></div>
+      <div class="panel zaman-ayrinti" id="zaman-ayrinti" aria-live="polite"></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">4 · A closer look at one decision</p>
+      <h2>False emergency alarms</h2><div class="laboratuvar" data-lab="alarm"><div class="lab-bas"><span>DECISION EXPERIMENT / ALARM THRESHOLD</span><span>Example scenario</span></div><div class="radar"><div class="radar-halka"></div><span class="ucak">✈</span><span class="radar-etiket">7700 · sample signal</span></div><p class="alarm-sure">How long the code persisted without a break: <output data-sure>1</output> seconds</p><div class="alarm-iz" aria-hidden="true"><i data-dolum></i><b data-isaret></b></div><label>Alarm threshold <select data-esik><option value="0">Immediately</option><option value="15">15 seconds</option><option value="45" selected>45 seconds</option></select></label><p class="alarm-sonuc" aria-live="polite"></p><p class="lab-not">As the threshold grows, brief signals are filtered out, but the notification is delayed too. 45 seconds is the rule chosen in this project.</p></div>
+      <p>Aircraft report an emergency with a code: <code>7500</code> hijacking, <code>7600</code> radio failure, <code>7700</code> general emergency. SkyTrack shows these codes with a red ring and sends a notification. Follow the problem line by line through the commits:</p>
+      <pre class="adim-kod"><code><span class="satir" data-not="Acil durum kodları uygulamada bir pencereyle açıklanmaya başlandı.">Oct 6 Explain squawk emergency codes (7500/7600/7700) in an in-app dialog</span><span class="satir" data-not="İlk düzeltme: yalnız gerçek acil durum kodları ya da uçağın kendi ADS-B acil durum bilgisi sayılıyor.">Oct 6 0.7.3: only real emergencies (7500/7600/7700 or matching ADS-B status) are shown as emergencies</span><span class="satir" data-not="Asıl çözüm: pilot kodu değiştirirken düğmeyi çevirdiği an 7700'den bir saniyeliğine geçebiliyor. Artık kod 45 saniye kesintisiz sürmedikçe alarm yok.">Oct 8 Emergencies: a squawk 7500/7600/7700 counts only after 45 s without a break (knob transit no longer fires alerts)</span></code></pre>
+      <p>Claude wrote the code. But asking "why is this alarm wrong?", finding the cause, and deciding on a rule like 45 seconds is <strong>a human's job</strong>.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">5 · AI gets it wrong too</p>
+      <h2>One comment line broke the whole startup</h2>
+      <p>On October 7, a startup error showed up in the photo viewer. The commit message says:</p>
+      <div class="yorum-yut" aria-hidden="true">
+        <code><span class="y-kod">baslat();</span> <span class="y-yorum">// temporary note</span> <span class="y-yut">fotografi_yukle(); pencereyi_ac();</span></code>
+        <div class="y-durum"><span class="y-hata">✗ the comment swallowed the rest of the line: startup broke</span><span class="y-test">✓ new test: every script parses without errors</span></div>
+      </div>
+      <pre><code>Fix start-up error in the photo viewer (a comment swallowed the rest of a line); test that every script parses</code></pre>
+      <p>So a misplaced comment turned the rest of the line into a "comment" and the code didn't run. The second half of the fix is more important: <strong>a test that checks all scripts can be read without errors</strong> was added. The same kind of error can't slip through silently again.</p>
+      <p>Lesson: when you write fast with AI, mistakes also arrive fast. The answer is not to drop AI but to have it write <strong>tests</strong>. SkyTrack's tests run automatically on GitHub with every change.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">6 · Check</p>
+      <h2>Which do you think?</h2>
+      <div class="soru" data-dogru="a">
+        <p>The AI made a mistake in the code and you noticed. What is the best next step?</p>
+        <div class="secenekler">
+          <button type="button" data-secenek="a">Having it fix the bug and also write a test that would catch the same bug</button>
+          <button type="button" data-secenek="b">Never having the AI write that part again</button>
+          <button type="button" data-secenek="c">Having it fix the bug and moving on</button>
+        </div>
+        <p class="sonuc" aria-live="polite"></p>
+        <p class="aciklama">Fixing solves today's problem; a test keeps the same problem from quietly coming back tomorrow. The "test that every script parses" commit in SkyTrack is exactly that.</p>
+      </div>
+      <div class="dusunen" aria-hidden="true"><b>?</b><b>?</b><b>?</b><img src="../../../img/sahin/sol.webp" alt="" width="150" height="150"></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">7 · Try it yourself</p>
+      <h2>Try it without installing, or run the code if you like</h2>
+      <p>The browser demo runs with simulated flights and turbulence areas:</p>
+      <p><a class="dugme" href="https://sametduhan.github.io/airock/app/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;border:1px solid var(--vurgu);border-radius:8px;padding:10px 16px">▶ open the web demo in a new tab</a></p>
+      <p>To run the code on your own computer you need Node.js 18 or newer:</p>
+      <div class="dene">
+        <code><span class="tl" style="--i:0">git clone https://github.com/SametDuhan/airock.git</span>
+<span class="tl" style="--i:1">cd airock</span>
+<span class="tl" style="--i:2">npm install</span>
+<span class="tl" style="--i:3">npm start</span></code>
+        <button type="button">copy</button>
+      </div>
+      <p>To see the tests: <code>npm test</code></p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Done</p>
+      <h2>What stays from this project</h2>
+      <ul>
+        <li><strong>AI speeds things up:</strong> 191 of the 208 commits were written with Claude in nine days.</li>
+        <li><strong>You make the decisions:</strong> spotting what is wrong and setting the rule is a human's job.</li>
+        <li><strong>Tests protect you:</strong> The AI's mistake gets fixed once; thanks to a test, it never comes back.</li>
+      </ul>
+      <div class="bitti-sahne" aria-hidden="true"><img src="../../../img/sahin/kanat-kucuk.webp" alt="" width="140" height="140"><i style="--x:8%;--c:#d07a2a;--d:3.1s;--g:0s"></i><i style="--x:18%;--c:#2f4a6b;--d:2.7s;--g:.6s"></i><i style="--x:30%;--c:#4f7d6e;--d:3.4s;--g:1.1s"></i><i style="--x:42%;--c:#a8432a;--d:2.9s;--g:.3s"></i><i style="--x:58%;--c:#d07a2a;--d:3.2s;--g:1.4s"></i><i style="--x:70%;--c:#2f4a6b;--d:2.6s;--g:.9s"></i><i style="--x:82%;--c:#4f7d6e;--d:3.3s;--g:.2s"></i><i style="--x:92%;--c:#a8432a;--d:2.8s;--g:1.7s"></i></div>
+      <p><a href="https://github.com/SametDuhan/airock">SkyTrack GitHub</a> · <a href="../">All slides</a> · <a href="../../projeler/">Projects</a> · <a href="../../iletisim/">Contact</a></p>
+    </section>
+  </div>
+
+  <script type="module">
+    import { bagla } from '../../../js/deste.js';
+
+    // Duraklar commit geçmişinden; mesajlar birebir alıntı.
+    const DURAKLAR = [
+      ['Sep 30', 'First files', 'The project started by hand: the first files were uploaded; the next day the map was connected to OpenStreetMap and Leaflet.', 'Add files via upload'],
+      ['Oct 2', 'First AI commit', 'The first commit co-written with Claude: where flights go from and to, and the v0.2 features.', 'Flight route (from → to) and v0.2 features'],
+      ['Oct 6', 'Turbulence', 'A "is there turbulence ahead" line on the aircraft card, wind, fuel/CO₂ estimate, and map layers.', 'Add wind component, ETA clock, fuel/CO2 estimate, turbulence, wind and night map layers'],
+      ['Oct 6', 'v0.6.0', 'A big release in one day: five languages, a flight diary, and macOS and Linux packages.', '0.6.0: five languages, flight diary, share image, altitude profile, airport board status, tray + notifications, mac/linux builds'],
+      ['Oct 7', 'Web demo', 'A browser demo was added so people can try the app without installing it.', 'Landing page leads with turbulence; add browser demo (site/app)'],
+      ['Oct 7', 'Arabic (right to left)', 'Arabic, Chinese, Japanese, Korean; interface fixes for the right-to-left language.', 'Languages: Arabic (RTL), Chinese, Japanese, Korean'],
+      ['Oct 8', 'v0.7.9', 'Latest release: airport service vehicles were separated from aircraft, and the emergency alarm was tied to the 45-second rule.', 'v0.7.9'],
+    ];
+    const kutu = document.getElementById('zaman');
+    const ayrinti = document.getElementById('zaman-ayrinti');
+    const dolu = Object.assign(document.createElement('i'), { className: 'rota-dolu' });
+    const ucak = Object.assign(document.createElement('span'), { className: 'rota-ucak', textContent: '✈' });
+    ucak.setAttribute('aria-hidden', 'true');
+    kutu.append(dolu, ucak);
+    const dugmeler = DURAKLAR.map(([tarih, ad], i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.innerHTML = '<b></b><span></span>';
+      b.firstChild.textContent = tarih;
+      b.lastChild.textContent = ad;
+      b.addEventListener('click', () => { durdur(); sec(i); });
+      kutu.append(b);
+      return b;
+    });
+    let simdi = 0, sayac = 0;
+    function sec(i) {
+      simdi = i;
+      const [tarih, ad, anlatim, mesaj] = DURAKLAR[i];
+      dugmeler.forEach((b, j) => { b.setAttribute('aria-pressed', String(j === i)); b.classList.toggle('gecildi', j < i); });
+      const yuzde = ((i + 0.5) / DURAKLAR.length) * 100;
+      ucak.style.left = `${yuzde}%`;
+      dolu.style.width = `calc((100% - 100% / ${DURAKLAR.length}) * ${i / (DURAKLAR.length - 1)})`;
+      ayrinti.replaceChildren();
+      const h = document.createElement('p');
+      h.innerHTML = '<strong></strong>';
+      h.firstChild.textContent = `${tarih} — ${ad}`;
+      const p = document.createElement('p');
+      p.textContent = anlatim;
+      const c = document.createElement('p');
+      c.className = 'olcum';
+      c.textContent = `commit: "${mesaj}"`;
+      ayrinti.append(h, p, c);
+      ayrinti.classList.remove('degisti'); void ayrinti.offsetWidth; ayrinti.classList.add('degisti');
+    }
+    // Rota slayt açılınca kendiliğinden ilerler; bir durağa tıklayınca durur.
+    const durdur = () => { clearInterval(sayac); sayac = 0; };
+    const baslat = () => {
+      durdur();
+      sec(0);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      sayac = setInterval(() => sec((simdi + 1) % DURAKLAR.length), 3600);
+    };
+    const slayt = kutu.closest('.slayt');
+    slayt.addEventListener('goster', baslat);
+    slayt.addEventListener('gizle', durdur);
+    sec(0);
+
+    bagla(document.getElementById('deste'));
+  </script>
+<script type="module" src="../../../js/atolye.js"></script>
+<script type="module" src="../../../js/deste-gorsel.js"></script>
+</body>
+</html>

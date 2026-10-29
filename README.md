@@ -32,7 +32,13 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 | `araclar/sahneler.mjs` | Alt sayfa başlıklarındaki şahin sahneleri (SVG); `araclar/sayfa_yap.mjs` yerleştirir |
 | `araclar/fabrika.mjs` | Projeler sayfasının tuğla fabrika ve konveyör bandı (SVG) |
 | `img/sahin/` | Şahin pozları (WebP); her alt sayfanın başında bir poz |
+| `araclar/ingilizce.mjs`, `araclar/en-sozluk.txt` | İngilizce sayfaları üretir; çeviri sözlüğü |
+| `js/dil.js` | Betik metinleri için `t(tr, en)` |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |
+
+## İngilizce sürüm
+
+Türkçe sayfalar kaynaktır; `en/` altındaki İngilizce sayfalar **elle düzenlenmez**, `node araclar/ingilizce.mjs` üretir. Metinler `araclar/en-sozluk.txt` sözlüğünden gelir (`TR ::: EN` satırları; `= metin` çevrilmeden kalır; `H:` satır içi işaretli cümle; `J:` satır içi betik metni). Türkçe sayfaya yeni bir metin eklenip sözlüğe girilmezse üretim durur ve eksikleri listeler, testler de başarısız olur. Betik dosyalarındaki metinler `js/dil.js`'teki `t(tr, en)` ile seçilir. Her sayfada TR | EN seçici ve `hreflang` bağlantıları var. 404 sayfası tek dilli (Türkçe) kalır.
 
 ## Yeni proje eklemek
 

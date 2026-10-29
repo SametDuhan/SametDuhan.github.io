@@ -2,6 +2,7 @@
 // Saf fonksiyonlar Node'da sınanır; bagla() tarayıcıya bağlar.
 
 import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from './ilerleme.js';
+import { t } from './dil.js';
 
 export function sikistir(i, n) {
   return Math.min(n - 1, Math.max(0, i));
@@ -43,7 +44,7 @@ function sorulariBagla(kok) {
       dugme.classList.add(dogruMu ? 'dogru' : 'yanlis');
       soru.classList.add('cevaplandi');
       const sonuc = soru.querySelector('.sonuc');
-      if (sonuc) sonuc.textContent = dogruMu ? '✓ Doğru.' : '✗ Tekrar dene.';
+      if (sonuc) sonuc.textContent = dogruMu ? t('✓ Doğru.', '✓ Correct.') : t('✗ Tekrar dene.', '✗ Try again.');
     });
   }
 }
@@ -61,8 +62,8 @@ function adimKodlariBagla(kok) {
     const guncelle = () => {
       satirlar.forEach((s, i) => s.classList.toggle('acik', i < acik));
       satirlar.forEach((s, i) => s.classList.toggle('simdi', i === acik - 1));
-      not.textContent = acik ? satirlar[acik - 1].dataset.not || '' : 'Satır satır açmak için düğmeye bas.';
-      dugme.textContent = acik < satirlar.length ? `sonraki satır (${acik}/${satirlar.length}) ↓` : 'baştan ↺';
+      not.textContent = acik ? satirlar[acik - 1].dataset.not || '' : t('Satır satır açmak için düğmeye bas.', 'Press the button to open it line by line.');
+      dugme.textContent = acik < satirlar.length ? t(`sonraki satır (${acik}/${satirlar.length}) ↓`, `next line (${acik}/${satirlar.length}) ↓`) : t('baştan ↺', 'restart ↺');
     };
     dugme.addEventListener('click', () => { acik = acik < satirlar.length ? acik + 1 : 0; guncelle(); });
     pre.after(dugme, not);
@@ -78,9 +79,9 @@ function deneKutulariBagla(kok) {
     dugme.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(kod.textContent);
-        dugme.textContent = 'kopyalandı ✓';
+        dugme.textContent = t('kopyalandı ✓', 'copied ✓');
       } catch {
-        dugme.textContent = 'seçip kopyala';
+        dugme.textContent = t('seçip kopyala', 'select and copy');
       }
       setTimeout(() => { dugme.textContent = 'kopyala'; }, 2000);
     });
@@ -111,9 +112,9 @@ export function bagla(kok) {
   const sayac = kok.querySelector('.sayac');
   const alt = document.createElement('nav');
   alt.className = 'deste-alt';
-  alt.setAttribute('aria-label', 'Slayt gezinmesi');
-  const geri = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: '← önceki' });
-  const ileri = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: 'sonraki →' });
+  alt.setAttribute('aria-label', t('Slayt gezinmesi', 'Slide navigation'));
+  const geri = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: t('← önceki', '← previous') });
+  const ileri = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: t('sonraki →', 'next →') });
   const noktalar = document.createElement('div');
   noktalar.className = 'noktalar';
   const noktaDugmeleri = slaytlar.map((_, i) => {
@@ -135,8 +136,8 @@ export function bagla(kok) {
 
   const yardim = document.createElement('dialog');
   yardim.className = 'yardim';
-  yardim.setAttribute('aria-label', 'Klavye kısayolları');
-  yardim.innerHTML = `<h2>Kısayollar</h2>
+  yardim.setAttribute('aria-label', t('Klavye kısayolları', 'Keyboard shortcuts'));
+  yardim.innerHTML = t(`<h2>Kısayollar</h2>
 <dl>
   <dt>→ · Boşluk · PageDown</dt><dd>sonraki slayt</dd>
   <dt>← · PageUp</dt><dd>önceki slayt</dd>
@@ -146,14 +147,24 @@ export function bagla(kok) {
   <dt>telefonda</dt><dd>sola / sağa kaydır</dd>
 </dl>
 <p>Kaldığın yer bu tarayıcıda hatırlanır.</p>
-<button type="button" class="dugme">kapat (Esc)</button>`;
+<button type="button" class="dugme">kapat (Esc)</button>`, `<h2>Shortcuts</h2>
+<dl>
+  <dt>→ · Space · PageDown</dt><dd>next slide</dd>
+  <dt>← · PageUp</dt><dd>previous slide</dd>
+  <dt>Home · End</dt><dd>first · last slide</dd>
+  <dt>F</dt><dd>full screen</dd>
+  <dt>?</dt><dd>this help</dd>
+  <dt>on a phone</dt><dd>swipe left / right</dd>
+</dl>
+<p>Your place is remembered in this browser.</p>
+<button type="button" class="dugme">close (Esc)</button>`);
   yardim.querySelector('button').addEventListener('click', () => yardim.close());
   yardim.addEventListener('click', (e) => { if (e.target === yardim) yardim.close(); });
   kok.append(yardim);
   const ust = kok.querySelector('.deste-ust');
   if (ust) {
     const soru = Object.assign(document.createElement('button'), { type: 'button', className: 'yardim-dugme', textContent: '?' });
-    soru.setAttribute('aria-label', 'Klavye kısayolları');
+    soru.setAttribute('aria-label', t('Klavye kısayolları', 'Keyboard shortcuts'));
     soru.addEventListener('click', () => yardim.showModal());
     ust.append(soru);
   }
@@ -239,9 +250,9 @@ export function bagla(kok) {
     bildirim = document.createElement('div');
     bildirim.className = 'devam-bildirim';
     bildirim.setAttribute('role', 'status');
-    bildirim.innerHTML = `<span>Kaldığın yer: <b>${Math.min(onceki.konum, n - 1) + 1}/${n}</b></span>
-<button type="button" class="dugme" data-devam>devam et →</button>
-<button type="button" class="dugme" data-bastan>baştan başla</button>`;
+    bildirim.innerHTML = `<span>${t('Kaldığın yer', 'Where you left off')}: <b>${Math.min(onceki.konum, n - 1) + 1}/${n}</b></span>
+<button type="button" class="dugme" data-devam>${t('devam et →', 'continue →')}</button>
+<button type="button" class="dugme" data-bastan>${t('baştan başla', 'start over')}</button>`;
     bildirim.querySelector('[data-devam]').addEventListener('click', () => { git(onceki.konum); ileri.focus(); });
     bildirim.querySelector('[data-bastan]').addEventListener('click', () => {
       bekleyen = false;
@@ -259,7 +270,7 @@ export function bagla(kok) {
     let goruldu = false;
     try { goruldu = Boolean(depo.getItem('deste-ipucu')); depo.setItem('deste-ipucu', '1'); } catch { goruldu = true; }
     if (!goruldu) {
-      const ipucu = Object.assign(document.createElement('div'), { className: 'deste-ipucu', textContent: '← → ile gez · F tam ekran · ? kısayollar' });
+      const ipucu = Object.assign(document.createElement('div'), { className: 'deste-ipucu', textContent: t('← → ile gez · F tam ekran · ? kısayollar', '← → to move · F full screen · ? shortcuts') });
       ipucu.setAttribute('role', 'status');
       kok.append(ipucu);
       const kaldir = () => { ipucu.remove(); removeEventListener('keydown', kaldir); };

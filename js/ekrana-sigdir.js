@@ -1,3 +1,4 @@
+import { t } from './dil.js';
 // Fixed-height columns keep every paragraph reachable with previous/next controls.
 export function ekranaSigdir(root, degisti = () => {}) {
   if (root.ekranPager) return root.ekranPager;
@@ -42,9 +43,9 @@ export function baslatSayfa() {
   // Liste sayfaları kendi sayfalamasını yapar (js/sayfala.js): içerik tek sütunda, ilk ekranda kalır.
   // Uzun, bölünmemesi gereken sayfalar (hakkımda) tek parça kalır; main içinde kaydırılır.
   if (root.dataset.sayfalama === 'kendi' || root.dataset.sayfalama === 'kaydir') { document.body.classList.add('kendi-sayfa'); return; }
-  const nav = document.createElement('nav'); nav.className = 'ekran-gezinme'; nav.setAttribute('aria-label', 'Sayfa bölümleri');
-  const prev = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: '← önceki' });
-  const next = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: 'sonraki →' });
+  const nav = document.createElement('nav'); nav.className = 'ekran-gezinme'; nav.setAttribute('aria-label', t('Sayfa bölümleri', 'Page sections'));
+  const prev = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: t('← önceki', '← previous') });
+  const next = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: t('sonraki →', 'next →') });
   const status = document.createElement('span'); status.setAttribute('aria-live', 'polite');
   nav.append(prev, status, next); root.after(nav);
   const pager = ekranaSigdir(root, p => { prev.disabled = p.konum === 0; next.disabled = p.konum === p.adet - 1; status.textContent = `${p.konum + 1} / ${p.adet}`; });

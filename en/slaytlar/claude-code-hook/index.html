@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2e8d5">
+  <title>Automation with a Claude Code hook · Samet Duhan</title>
+  <meta name="description" content="What a Claude Code hook is and how to use the Stop event, with the claude-done-pixel example.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23f2e8d5'/%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='2' fill='none' stroke='%2333261a' stroke-width='1.5'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='19' fill='%2333261a'%3E%C5%9E%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="../../../css/tema.css">
+  <link rel="stylesheet" href="../../../css/deste.css">
+<meta property="og:title" content="Automation with a Claude Code hook · Samet Duhan"><meta property="og:description" content="Watch, try, and explore step by step. An interactive development walkthrough from Samet Duhan."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/en/slaytlar/claude-code-hook/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/claude-code-hook.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../../../css/atolye.css">
+<link rel="stylesheet" href="../../../css/deste-gorsel.css">
+<link rel="stylesheet" href="../../../css/hook-gorsel.css">
+<link rel="stylesheet" href="../../../css/ekran.css">
+  <link rel="alternate" hreflang="tr" href="https://sametduhan.github.io/slaytlar/claude-code-hook/">
+  <link rel="alternate" hreflang="en" href="https://sametduhan.github.io/en/slaytlar/claude-code-hook/">
+  <link rel="alternate" hreflang="x-default" href="https://sametduhan.github.io/slaytlar/claude-code-hook/">
+</head>
+<body>
+  <div class="deste" id="deste">
+    <header class="deste-ust">
+      <a class="geri" href="../">← slides</a>
+      <span class="deste-adi">Automation with a Claude Code hook</span>
+      <span class="sayac"></span>
+      <!--dil--><div class="dil-sec" role="group" aria-label="Language"><a href="../../../slaytlar/claude-code-hook/" lang="tr" hreflang="tr">TR</a><a href="./" lang="en" hreflang="en" aria-current="true">EN</a></div><!--/dil-->
+    </header>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Claude Code · ~8 minutes</p>
+      <h1>Automation with a Claude Code hook</h1><div class="kapak-sahne zincirli"><span class="orb turuncu">↯</span><div><small>02 / CONNECT</small><strong>The job ends.<br>The screen tells you.</strong><span class="akis">Stop → hook → PowerShell → pixel</span></div>
+        <svg class="zincir-cizim" viewBox="0 0 320 70" aria-hidden="true">
+          <path id="zincir-yol" class="ok" d="M36 35H284"/>
+          <g><rect x="2" y="17" width="68" height="36" rx="6"/><text x="36" y="39">Stop</text></g>
+          <g><rect x="92" y="17" width="68" height="36" rx="6"/><text x="126" y="39">hook</text></g>
+          <g><rect x="170" y="17" width="82" height="36" rx="6"/><text x="211" y="39">PowerShell</text></g>
+          <g><rect x="262" y="17" width="56" height="36" rx="6"/><text x="290" y="39">pixel</text></g>
+          <circle class="tasiyici" r="5"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#zincir-yol"/></animateMotion></circle>
+        </svg>
+        <img class="kapak-sahin" src="../../../img/sahin/ceyrek.webp" alt="" width="210" height="210">
+      </div>
+      <p>We will make your computer do something <strong>on its own</strong> when an AI agent finishes its job. Example project: <strong>claude-done-pixel</strong>.</p>
+      <p>If you don't know what an AI agent is, look at this first: <a href="../ai-ajani-nedir/">What is an AI agent?</a></p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">1 · The problem</p>
+      <h2>Checking the terminal asking "is it done?"</h2>
+      <p><strong>Claude Code</strong> is an AI agent that runs in the terminal: it writes code, edits files, and runs commands. Some jobs take minutes.</p>
+      <p>Meanwhile you are working in another window, and every half minute you go back to the terminal to see "is it done?" Your attention gets split and you lose time.</p>
+      <div class="bekleme" aria-hidden="true">
+        <div class="pencere"><div class="pencere-bas"><i></i><i></i><i></i><span>claude</span></div>
+          <div class="pencere-ic"><p class="komut">&gt; run the tests and fix the errors</p><p class="calisiyor">running</p><div class="belirsiz"><i></i></div></div></div>
+        <div class="bakan"><b>done yet?</b><b>done yet?</b><b>still?</b><img src="../../../img/sahin/sol.webp" alt="" width="150" height="150"></div>
+      </div>
+      <p>What we want is simple: <strong>Claude should tell me when it finishes.</strong></p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">2 · The solution has a name</p>
+      <h2>Hook = "when this happens, run that"</h2><div class="laboratuvar" data-lab="hook"><div class="lab-bas"><span>EVENT FLOW / RUNS ON ITS OWN</span><span>Local simulation</span></div><label><input type="checkbox" data-hook checked> Stop hook connected</label><div class="akis-adimlar"><span>Claude Code</span><span>Stop event</span><span>PowerShell</span><span>Notification</span></div><div class="bildirim-sahne"><span class="mini-karakter" aria-hidden="true">▟</span><strong data-durum>Task running…</strong></div><pre class="terminal" aria-live="polite">$ waiting for the Stop event…</pre><p class="lab-not">Turn the hook off and try again: see the difference between an event and automation.</p></div>
+      <div class="terim"><p><strong>Hook:</strong> A rule that automatically runs a command you give at a certain moment in a program.</p></div>
+      <p>In Claude Code, hooks are written in a settings file: <code>settings.json</code>. Each hook says two things:</p>
+      <ul>
+        <li><strong>When?</strong> The name of an event. Our event is <code>Stop</code>: when Claude finishes an answer.</li>
+        <li><strong>What should happen?</strong> The command to run. Ours is a small script that opens the pixel animation.</li>
+      </ul>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">3 · The settings file, line by line</p>
+      <h2>How is a hook written?</h2>
+      <p>The block added to the <code>~/.claude/settings.json</code> file in claude-done-pixel's WSL setup:</p>
+      <pre class="adim-kod"><code><span class="satir" data-not="Dosyanın tamamı tek bir JSON nesnesi: süslü parantezle açılır.">{</span><span class="satir" data-not="&quot;hooks&quot; bölümü: bütün kancalar burada durur.">  "hooks": {</span><span class="satir" data-not="Olayın adı: Stop. Claude bir cevabı bitirdiği an tetiklenir.">    "Stop": [</span><span class="satir" data-not="Bu olaya bağlı bir hook grubu açılıyor; bir olaya birden çok hook bağlanabilir.">      { "hooks": [ {</span><span class="satir" data-not="Hook'un türü: bir terminal komutu çalıştırılacak.">        "type": "command",</span><span class="satir" data-not="Çalışacak komut: Windows'taki PowerShell ile animasyon betiğini gizli pencerede, arka planda (&amp;) başlatır. Sonundaki &amp; sayesinde Claude animasyonun bitmesini beklemez.">        "command": "(powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File 'C:\\Users\\you\\claude-done\\claude-done.ps1' &gt;/dev/null 2&gt;&amp;1 &amp;)"</span><span class="satir" data-not="Açılan parantezler kapanır. Hepsi bu: bir olay, bir komut.">      } ] }
+    ]
+  }
+}</span></code></pre>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">4 · Live demo</p>
+      <h2>What happens when Claude finishes?</h2>
+      <p>In reality this character appears at the bottom right of your screen, right above the clock. I redrew it here in the browser:</p>
+      <div class="demo">
+        <canvas id="piksel" width="720" height="220" aria-label="The pixel character comes in from the right, jumps twice, waves a green flag, and leaves to the right"></canvas>
+        <button type="button" class="dugme demo-dugme" id="piksel-dugme" style="cursor:pointer">↺ replay</button>
+      </div>
+      <p>It runs in from the right, jumps twice, waves the green flag twice, and leaves to the right. About 6.5 seconds, silent. The window lets clicks through and does not steal focus; what you are typing is not interrupted.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">5 · Same idea, different agent</p>
+      <h2>For Codex: chatgpt-done-pixel</h2>
+      <p>In OpenAI's coding agent <strong>Codex</strong>, the hook has a different name but the idea is the same: when a turn ends, Codex sends an <code>agent-turn-complete</code> notification, and the <code>notify</code> command in the settings file runs on that notification.</p>
+      <div class="piksel-demo" data-piksel-demo="codex" data-otomatik><p>chatgpt-done-pixel: above the clock when the turn ends</p><canvas width="640" height="270" role="img" aria-label="Pixel logo animation: arrival, two jumps, two flags, celebration"></canvas><button class="dugme" type="button" hidden>play</button></div>
+      <p>Lesson: tools change, the concept stays. If you have learned to ask "which events exist, and what can I run on that event?", you can apply it to any agent.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">6 · Check</p>
+      <h2>A small but important detail</h2>
+      <div class="soru" data-dogru="c">
+        <p>When does the <code>Stop</code> hook run?</p>
+        <div class="secenekler">
+          <button type="button" data-secenek="a">Only when long-running jobs finish</button>
+          <button type="button" data-secenek="b">When Claude Code is closed</button>
+          <button type="button" data-secenek="c">Whenever Claude finishes any answer, short ones included</button>
+        </div>
+        <p class="sonuc" aria-live="polite"></p>
+        <p class="aciklama"><code>Stop</code> runs after every answer; the character jumps even when you just say "hello." If that is too frequent, Claude Code's hook guide explains ways to limit when it fires.</p>
+      </div>
+      <div class="dusunen" aria-hidden="true"><b>?</b><b>?</b><b>?</b><img src="../../../img/sahin/sol.webp" alt="" width="150" height="150"></div>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">7 · Try it yourself</p>
+      <h2>Install it on your own computer</h2>
+      <p>On Windows, if Claude Code is installed, run these in order in PowerShell:</p>
+      <div class="dene">
+        <code><span class="tl" style="--i:0">git clone https://github.com/SametDuhan/claude-done-pixel</span>
+<span class="tl" style="--i:1">cd claude-done-pixel</span>
+<span class="tl" style="--i:2">powershell -ExecutionPolicy Bypass -File install.ps1</span></code>
+        <button type="button">copy</button>
+      </div>
+      <p>The install script adds the <code>Stop</code> hook to <code>settings.json</code> and saves a backup of your old settings as <code>settings.json.bak</code>. Restart Claude Code, ask something, and wait for the character. To remove it: <code>uninstall.ps1</code>.</p>
+    </section>
+
+    <section class="slayt">
+      <p class="kucuk-baslik">Done</p>
+      <h2>What's next?</h2>
+      <ul>
+        <li>Code: <a href="https://github.com/SametDuhan/claude-done-pixel">claude-done-pixel</a> · <a href="https://github.com/SametDuhan/chatgpt-done-pixel">chatgpt-done-pixel</a></li>
+        <li><a href="../skytrack-nasil-kurdum/">How I built SkyTrack with AI</a>: writing an entire app with AI.</li>
+        <li><a href="../">All slides</a> · <a href="../../projeler/">Projects</a> · <a href="../../iletisim/">Contact</a></li>
+      </ul>
+      <div class="bitti-sahne" aria-hidden="true"><img src="../../../img/sahin/kanat-kucuk.webp" alt="" width="140" height="140"><i style="--x:8%;--c:#d07a2a;--d:3.1s;--g:0s"></i><i style="--x:18%;--c:#2f4a6b;--d:2.7s;--g:.6s"></i><i style="--x:30%;--c:#4f7d6e;--d:3.4s;--g:1.1s"></i><i style="--x:42%;--c:#a8432a;--d:2.9s;--g:.3s"></i><i style="--x:58%;--c:#d07a2a;--d:3.2s;--g:1.4s"></i><i style="--x:70%;--c:#2f4a6b;--d:2.6s;--g:.9s"></i><i style="--x:82%;--c:#4f7d6e;--d:3.3s;--g:.2s"></i><i style="--x:92%;--c:#a8432a;--d:2.8s;--g:1.7s"></i></div>
+    </section>
+  </div>
+
+  <script type="module">
+    import { bagla } from '../../../js/deste.js';
+    import { oynat, durdur, ciz } from '../../../js/piksel.js';
+
+    const tuval = document.getElementById('piksel');
+    const slayt = tuval.closest('section.slayt');
+    ciz(tuval, 0);
+    // Animasyon slayt açılınca kendiliğinden oynar ve döngüde tekrarlanır; düğme baştan başlatır.
+    let jeton = 0;
+    const dongu = async () => {
+      const ben = ++jeton;
+      while (ben === jeton) {
+        await oynat(tuval);
+        if (ben !== jeton || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        await new Promise((bitti) => setTimeout(bitti, 1400));
+      }
+    };
+    slayt.addEventListener('goster', dongu);
+    slayt.addEventListener('gizle', () => { jeton++; durdur(); });
+    document.getElementById('piksel-dugme').addEventListener('click', dongu);
+
+    bagla(document.getElementById('deste'));
+  </script>
+<script type="module" src="../../../js/atolye.js"></script>
+<script type="module" src="../../../js/deste-gorsel.js"></script>
+</body>
+</html>

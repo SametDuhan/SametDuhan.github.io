@@ -1,3 +1,4 @@
+import { t } from './dil.js';
 // İletişim sayfası: konu seçimi, hazır mesaj şablonu, mail/Gmail bağlantıları, taslak, kişi kartı.
 // Mail adresi kaynakta düz metin durmaz; sayfa açılınca parçalardan kurulur.
 // Saf fonksiyonlar Node'da sınanır; baslat() tarayıcıya bağlar.
@@ -21,14 +22,15 @@ export function bagla(el) {
   el.textContent = adres;
 }
 
+// ad: sayfadaki konu bağlantılarının data-konu değeri (arama anahtarı, hep Türkçe); baslik: mailin konu satırı (sayfanın diliyle)
 export const KONULAR = [
-  { kod: 'is', ad: 'İş teklifi',
-    sablon: 'Merhaba Samet,\n\n[Şirket / ekip adı] olarak sana bir fırsat için yazıyorum.\n\n• Rol: \n• Süre: \n• Çalışma şekli (uzaktan / ofis): \n\nUygun olduğun bir zaman yazarsan görüşelim.' },
-  { kod: 'ortak', ad: 'Ortak proje',
-    sablon: 'Merhaba Samet,\n\nŞöyle bir proje üzerinde çalışıyorum: \n\nSenden beklediğim katkı: \nBağlantı (varsa): \n\nİlgini çeker mi?' },
-  { kod: 'soru', ad: 'Soru ya da öneri',
-    sablon: 'Merhaba Samet,\n\n[Slaytlar / projeler / AI] hakkında şunu merak ediyorum: \n' },
-  { kod: 'diger', ad: 'Diğer', sablon: 'Merhaba Samet,\n\n' },
+  { kod: 'is', ad: 'İş teklifi', baslik: t('İş teklifi', 'Job offer'),
+    sablon: t('Merhaba Samet,\n\n[Şirket / ekip adı] olarak sana bir fırsat için yazıyorum.\n\n• Rol: \n• Süre: \n• Çalışma şekli (uzaktan / ofis): \n\nUygun olduğun bir zaman yazarsan görüşelim.', 'Hi Samet,\n\n[Company / team name] here, and I am writing to you about an opportunity.\n\n• Role: \n• Duration: \n• Work arrangement (remote / office): \n\nIf you tell me a time that works for you, let us talk.') },
+  { kod: 'ortak', ad: 'Ortak proje', baslik: t('Ortak proje', 'Joint project'),
+    sablon: t('Merhaba Samet,\n\nŞöyle bir proje üzerinde çalışıyorum: \n\nSenden beklediğim katkı: \nBağlantı (varsa): \n\nİlgini çeker mi?', 'Hi Samet,\n\nI am working on a project like this: \n\nThe contribution I am hoping for from you: \nLink (if any): \n\nWould you be interested?') },
+  { kod: 'soru', ad: 'Soru ya da öneri', baslik: t('Soru ya da öneri', 'Question or suggestion'),
+    sablon: t('Merhaba Samet,\n\n[Slaytlar / projeler / AI] hakkında şunu merak ediyorum: \n', 'Hi Samet,\n\nI am curious about this regarding [slides / projects / AI]: \n') },
+  { kod: 'diger', ad: 'Diğer', baslik: t('Diğer', 'Other'), sablon: t('Merhaba Samet,\n\n', 'Hi Samet,\n\n') },
 ];
 
 // ?konu=ortak, ?konu=İş teklifi ya da #ortak: bilinmeyen değer ilk konuya düşer.
@@ -59,8 +61,8 @@ export function baslat() {
   const kopyalaDugme = al('kopyala');
   kopyalaDugme.hidden = false;
   kopyalaDugme.addEventListener('click', async () => {
-    kopyalaDugme.textContent = (await kopyala(adres)) ? 'kopyalandı ✓' : 'seçip kopyala';
-    setTimeout(() => { kopyalaDugme.textContent = 'kopyala'; }, 2000);
+    kopyalaDugme.textContent = (await kopyala(adres)) ? t('kopyalandı ✓', 'copied ✓') : t('seçip kopyala', 'select and copy');
+    setTimeout(() => { kopyalaDugme.textContent = t('kopyala', 'copy'); }, 2000);
   });
 
   // Mesaj formu: JS varsa açılır; yoksa konu bağlantıları doğrudan kanallara gider.
@@ -85,10 +87,10 @@ export function baslat() {
   function guncelle() {
     chipler.forEach((c) => { c.setAttribute('role', 'button'); c.setAttribute('aria-pressed', String(c.dataset.konu === konu.ad)); });
     const govde = mesajGovdesi(mesaj.value);
-    const link = mailtoLinki(adres, konu.ad, govde);
+    const link = mailtoLinki(adres, konu.baslik, govde);
     mailAc.href = link;
-    gmailAc.href = gmailLinki(adres, konu.ad, govde);
-    durumYaz(link.length > 1900 ? 'Mesaj uzun: mail uygulaması kırpabilir. "Metni kopyala" daha güvenli.' : '', link.length > 1900);
+    gmailAc.href = gmailLinki(adres, konu.baslik, govde);
+    durumYaz(link.length > 1900 ? t('Mesaj uzun: mail uygulaması kırpabilir. "Metni kopyala" daha güvenli.', 'The message is long: your mail app may trim it. "Copy text" is safer.') : '', link.length > 1900);
     try { depo?.setItem(ANAHTAR, JSON.stringify({ konu: konu.kod, mesaj: mesaj.value, kirli })); } catch { /* depo dolu */ }
   }
 
@@ -102,9 +104,9 @@ export function baslat() {
   }));
   mesaj.addEventListener('input', () => { kirli = mesaj.value !== konu.sablon; guncelle(); });
 
-  const hepsi = () => `Kime: ${adres}\nKonu: ${konu.ad}\n\n${mesajGovdesi(mesaj.value)}`;
+  const hepsi = () => `${t('Kime', 'To')}: ${adres}\n${t('Konu', 'Subject')}: ${konu.baslik}\n\n${mesajGovdesi(mesaj.value)}`;
   metinDugme.addEventListener('click', async () => {
-    durumYaz((await kopyala(hepsi())) ? 'Kime, konu ve mesaj kopyalandı ✓' : 'Kopyalanamadı: metni seçip kopyala.');
+    durumYaz((await kopyala(hepsi())) ? t('Kime, konu ve mesaj kopyalandı ✓', 'Recipient, subject, and message copied ✓') : t('Kopyalanamadı: metni seçip kopyala.', 'Could not copy: select the text and copy it.'));
   });
   // Mail uygulaması açılmazsa (pencere odağı bırakılmadıysa) metin kendiliğinden kopyalanır.
   mailAc.addEventListener('click', () => {
@@ -114,7 +116,7 @@ export function baslat() {
     setTimeout(async () => {
       removeEventListener('blur', birakildi);
       if (acildi || document.hidden) return;
-      durumYaz((await kopyala(hepsi())) ? 'Mail uygulaması açılmadı: mesajını kopyaladım ✓ İstersen "Gmail\'de aç"ı dene.' : 'Mail uygulaması açılmadı. "Gmail\'de aç"ı dene.', true);
+      durumYaz((await kopyala(hepsi())) ? t('Mail uygulaması açılmadı: mesajını kopyaladım ✓ İstersen "Gmail\'de aç"ı dene.', 'The mail app did not open: I copied your message ✓ You can try "Open in Gmail".') : t('Mail uygulaması açılmadı. "Gmail\'de aç"ı dene.', 'The mail app did not open. Try "Open in Gmail".'), true);
     }, 1600);
   });
 

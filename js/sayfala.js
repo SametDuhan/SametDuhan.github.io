@@ -1,3 +1,4 @@
+import { t } from './dil.js';
 // Liste sayfaları (projeler, slaytlar) tek ekrandır: sayfa başına en fazla SAYFA_BOYU öğe; fazlası sonraki sayfaya geçer.
 export const SAYFA_BOYU = 5;
 
@@ -10,8 +11,8 @@ export function sayfala(liste, sayfa, boyut = SAYFA_BOYU) {
 // <nav class="liste-sayfalar"> içine "← önceki · 1 / 2 · sonraki →" kurar; tek sayfada gizli kalır.
 // git(n) yeni sayfayı ister; dönen goster(durum) sayfalama sonucunu yansıtır.
 export function sayfaGezinmesi(nav, git) {
-  const onceki = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: '← önceki' });
-  const sonraki = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: 'sonraki →' });
+  const onceki = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: t('← önceki', '← previous') });
+  const sonraki = Object.assign(document.createElement('button'), { type: 'button', className: 'dugme', textContent: t('sonraki →', 'next →') });
   const durum = document.createElement('span');
   durum.setAttribute('aria-live', 'polite');
   nav.replaceChildren(onceki, durum, sonraki);

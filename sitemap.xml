@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sametduhan.github.io/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/hakkimda/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/hakkimda/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/projeler/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/projeler/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/slaytlar/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/slaytlar/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/iletisim/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/iletisim/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/slaytlar/ai-ajani-nedir/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/slaytlar/ai-ajani-nedir/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/slaytlar/claude-code-hook/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/slaytlar/claude-code-hook/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/slaytlar/skytrack-nasil-kurdum/</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://sametduhan.github.io/en/slaytlar/skytrack-nasil-kurdum/</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://sametduhan.github.io/projeler/skytrack/</loc></url>
+  <url><loc>https://sametduhan.github.io/en/projeler/skytrack/</loc></url>
   <url><loc>https://sametduhan.github.io/projeler/claude-done-pixel/</loc></url>
+  <url><loc>https://sametduhan.github.io/en/projeler/claude-done-pixel/</loc></url>
   <url><loc>https://sametduhan.github.io/projeler/chatgpt-done-pixel/</loc></url>
+  <url><loc>https://sametduhan.github.io/en/projeler/chatgpt-done-pixel/</loc></url>
 </urlset>

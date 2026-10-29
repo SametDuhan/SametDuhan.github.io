@@ -138,3 +138,11 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 800; line-height: 1.05; }
   .imlec { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* Dil seçici (TR | EN): iki bağlantılı küçük şerit; geçerli dil koyu dolu */
+.dil-sec { display: inline-flex; border: 1.5px solid var(--yazi); font: 600 11px var(--mono); letter-spacing: .12em; }
+.dil-sec a { padding: 4px 9px; color: var(--yazi); text-decoration: none; background: var(--zemin); transition: background-color .2s, color .2s; }
+.dil-sec a + a { border-left: 1.5px solid var(--yazi); }
+.dil-sec a:hover { background: color-mix(in srgb, var(--yazi) 10%, var(--zemin)); }
+.dil-sec a[aria-current="true"] { background: var(--yazi); color: var(--zemin); }
+.dil-sec a:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }

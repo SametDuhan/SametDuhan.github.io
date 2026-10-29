@@ -395,3 +395,6 @@ body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * c
   .hk-n1 { opacity: 1; }
   .hk-k2, .hk-k3, .hk-k4, .hk-cip, .hk-canta, .hk-kilit, .hk-onay, .hk-tara, .hk-dugum, .hk-yol, .hk-n2, .hk-n3, .hk-n4 { animation: none !important; }
 }
+
+/* sol menünün altında dil seçici */
+.yan-menu .dil-sec { margin-top: auto; align-self: flex-start; }

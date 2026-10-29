@@ -1,4 +1,5 @@
 import { ciz, oynat, durdur } from './piksel.js';
+import { t } from './dil.js';
 
 export function alarmDurumu(sure, esik) { return Number(sure) >= Number(esik); }
 
@@ -8,25 +9,25 @@ if (deck) {
   const slides = [...deck.querySelectorAll('section.slayt')];
   const toolbar = document.createElement('div'); toolbar.className = 'atolye-araclar';
   const read = document.createElement('button'); read.type = 'button'; read.className = 'dugme';
-  const share = document.createElement('button'); share.type = 'button'; share.className = 'dugme'; share.textContent = 'Bağlantıyı kopyala';
+  const share = document.createElement('button'); share.type = 'button'; share.className = 'dugme'; share.textContent = t('Bağlantıyı kopyala', 'Copy link');
   const contents = document.createElement('details'); contents.className = 'icerik-menusu';
-  contents.innerHTML = '<summary>Bölümler ▾</summary>';
+  contents.innerHTML = `<summary>${t('Bölümler', 'Sections')} ▾</summary>`;
   slides.forEach((s, i) => {
     s.dataset.sira = String(i + 1);
-    const a = document.createElement('a'); a.href = `#${i + 1}`; a.textContent = `${String(i + 1).padStart(2, '0')} / ${s.querySelector('h1,h2')?.textContent || 'Bölüm'}`;
+    const a = document.createElement('a'); a.href = `#${i + 1}`; a.textContent = `${String(i + 1).padStart(2, '0')} / ${s.querySelector('h1,h2')?.textContent || t('Bölüm', 'Section')}`;
     a.addEventListener('click', () => { contents.open = false; });
     contents.append(a);
   });
   let reading = new URLSearchParams(location.search).get('gorunum') === 'oku';
   function mode() {
-    deck.classList.toggle('anlatim', reading); read.textContent = reading ? 'Sunum görünümü' : 'Okuma görünümü'; read.setAttribute('aria-pressed', String(reading));
+    deck.classList.toggle('anlatim', reading); read.textContent = reading ? t('Sunum görünümü', 'Slide view') : t('Okuma görünümü', 'Reading view'); read.setAttribute('aria-pressed', String(reading));
     const u = new URL(location.href); reading ? u.searchParams.set('gorunum', 'oku') : u.searchParams.delete('gorunum'); history.replaceState(null, '', u);
     deck.dispatchEvent(new CustomEvent('gorunum-degisti'));
   }
   read.addEventListener('click', () => { reading = !reading; mode(); });
   share.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(location.href); share.textContent = 'Bağlantı kopyalandı ✓'; }
-    catch { share.textContent = 'Adres çubuğundaki bağlantıyı kopyala'; }
+    try { await navigator.clipboard.writeText(location.href); share.textContent = t('Bağlantı kopyalandı ✓', 'Link copied ✓'); }
+    catch { share.textContent = t('Adres çubuğundaki bağlantıyı kopyala', 'Copy the link from the address bar'); }
   });
   toolbar.append(contents, read, share); (deck.querySelector('.deste-ust .sayac') ?? deck.querySelector('.deste-ust')).after(toolbar); mode();
 }
@@ -58,18 +59,22 @@ for (const lab of document.querySelectorAll('[data-lab]')) {
   const yenidenBaslat = () => { if (durum?.calisiyor) oyna(); else if (az()) oyna(); };
   let oyna = () => {};
   if (type === 'ajan') {
-    const tasks = [
+    const tasks = t([
       ['Bağlantı kontrolü: /proje adresi bulunamadı.', 'Plan: doğru adresi bul, bağlantıyı güncelle.', 'Dosya düzenlendi: href="/projeler/"', 'Kontrol: bağlantı açılıyor. Görev tamamlandı ✓'],
       ['Test sonucu: beklenen 4, gelen 3.', 'Plan: sınır değerini ve hesaplamayı incele.', 'Hesaplama düzeltildi; test yeniden çalıştırıldı.', 'Kontrol: test geçti. Görev tamamlandı ✓'],
       ['Proje açıklaması ve görseller incelendi.', 'Plan: amaç, demo, mimari ve öğrenilenler.', 'Sayfa hazırlandı, bağlantılar eklendi.', 'Kontrol: sayfa ve bağlantılar çalışıyor ✓']
-    ];
+    ], [
+      ['Link check: the /proje address was not found.', 'Plan: find the right address and update the link.', 'File edited: href="/projeler/"', 'Check: the link opens. Task complete ✓'],
+      ['Test result: expected 4, got 3.', 'Plan: inspect the boundary value and the calculation.', 'Calculation fixed; test run again.', 'Check: the test passed. Task complete ✓'],
+      ['Project description and images reviewed.', 'Plan: purpose, demo, architecture, and lessons learned.', 'Page prepared, links added.', 'Check: the page and links work ✓']
+    ]);
     const select = lab.querySelector('select');
     oyna = async () => {
       const ben = ++jeton;
       const gorev = () => tasks[select.selectedIndex];
       if (az()) { adimlar.forEach((n) => n.classList.add('aktif')); log.textContent = gorev().map((t, i) => `${i + 1} > ${t}`).join('\n'); return; }
       while (ben === jeton) {
-        log.textContent = '$ görev bekleniyor…'; adimlar.forEach((n) => n.classList.remove('aktif'));
+        log.textContent = t('$ görev bekleniyor…', '$ waiting for a task…'); adimlar.forEach((n) => n.classList.remove('aktif'));
         await bekle(900);
         for (let adim = 0; adim < 4; adim++) {
           if (ben !== jeton) return;
@@ -89,13 +94,13 @@ for (const lab of document.querySelectorAll('[data-lab]')) {
       do {
         const bagli = kutu.checked;
         lab.classList.remove('kutla'); adimlar.forEach((n) => n.classList.remove('aktif'));
-        metin.textContent = 'Görev çalışıyor…'; log.textContent = '$ Stop olayını bekliyor…';
+        metin.textContent = t('Görev çalışıyor…', 'Task running…'); log.textContent = t('$ Stop olayını bekliyor…', '$ waiting for the Stop event…');
         if (!az()) await bekle(1500);
         if (ben !== jeton) return;
         void lab.offsetWidth;
         lab.classList.toggle('kutla', bagli);
-        metin.textContent = bagli ? 'İş tamamlandı. Bildirim geldi ✓' : 'İş tamamlandı. Hook bağlı değil.';
-        log.textContent = bagli ? '$ Stop alındı\n→ hook komutu çağrıldı\n→ PowerShell: piksel bildirimi gösterildi ✓' : '$ Stop alındı\n→ bağlı komut yok; bildirim gösterilmedi';
+        metin.textContent = bagli ? t('İş tamamlandı. Bildirim geldi ✓', 'Job complete. The notification arrived ✓') : t('İş tamamlandı. Hook bağlı değil.', 'Job complete. The hook is not connected.');
+        log.textContent = bagli ? t('$ Stop alındı\n→ hook komutu çağrıldı\n→ PowerShell: piksel bildirimi gösterildi ✓', '$ Stop received\n→ hook command called\n→ PowerShell: pixel notification shown ✓') : t('$ Stop alındı\n→ bağlı komut yok; bildirim gösterilmedi', '$ Stop received\n→ no connected command; no notification shown');
         for (let i = 0; i < (bagli ? 4 : 2); i++) { adimlar[i].classList.add('aktif'); if (!az()) await bekle(450); }
         if (az()) return;
         await bekle(4200);
@@ -112,7 +117,7 @@ for (const lab of document.querySelectorAll('[data-lab]')) {
       cikti.textContent = Math.round(sure);
       dolum.style.transform = `scaleX(${sure / EN_COK})`;
       isaret.style.left = `${(Number(select.value) / EN_COK) * 100}%`;
-      sonuc.textContent = aktif ? '● Alarm tetiklenir. Sinyal seçilen eşiği geçti.' : '○ Alarm bekler. Bu süre seçilen eşikten kısa.';
+      sonuc.textContent = aktif ? t('● Alarm tetiklenir. Sinyal seçilen eşiği geçti.', '● The alarm fires. The signal passed the chosen threshold.') : t('○ Alarm bekler. Bu süre seçilen eşikten kısa.', '○ The alarm waits. This duration is shorter than the chosen threshold.');
       lab.classList.toggle('alarm-aktif', aktif);
     };
     // Süre kendiliğinden akar (yaklaşık 10 sn'de 60 saniye); eşiği geçince alarm çalar, sonra baştan başlar.
@@ -176,7 +181,7 @@ document.addEventListener('visibilitychange', () => { if (document.hidden) durdu
 // Hareketi azalt tercihinde kendiliğinden oynamaz (poster görünür), tıklayınca oynar.
 for (const video of document.querySelectorAll('video')) {
   video.muted = true; video.loop = true; video.removeAttribute('controls');
-  video.title = 'Durdurmak ya da oynatmak için tıkla';
+  video.title = t('Durdurmak ya da oynatmak için tıkla', 'Click to pause or play');
   video.addEventListener('click', () => (video.paused ? video.play().catch(() => {}) : video.pause()));
   slaytaBagla(video, () => { if (!az()) { video.currentTime = 0; video.play().catch(() => {}); } }, () => video.pause());
 }

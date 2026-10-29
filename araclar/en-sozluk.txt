@@ -1,0 +1,654 @@
+# ===== Ortak: menü, alt bilgi, etiketler =====
+= Samet Duhan
+= SAMET
+= DUHAN
+= GitHub
+= LinkedIn
+= SkyTrack
+= claude-done-pixel
+= chatgpt-done-pixel
+= Claude Code
+= Codex
+= Node.js
+= Python
+= Go
+= Git
+= JavaScript
+= Electron
+= PowerShell
+= Bash
+= GitHub Actions
+= README
+= AI
+= IST
+= ESB
+= AYT
+= ADB
+= ŞHN
+= samet duhan · 2026
+= samet@sahin:~$
+= echo "Systems. Built in the open."
+= Systems. Built in the open.
+= summary_large_image
+= agent-turn-complete
+= github.com/SametDuhan
+= github.com/SametDuhan ↗
+= Samet Duhan Şahin
+= 16sametduhan16 [at] gmail [dot] com
+İçeriğe geç ::: Skip to content
+Site ::: Site
+Hakkımda ::: About
+Projeler ::: Projects
+Slaytlar ::: Slides
+İletişim ::: Contact
+iletişim ::: contact
+ben kimim, ne yapıyorum ::: who I am, what I do
+canlı demolar, açık kaynak ::: live demos, open source
+AI'ı sıfırdan öğren ::: learn AI from scratch
+iş, proje ya da soru ::: work, projects, or questions
+ben kimim, ne yapıyorum. ::: who I am, what I do.
+canlı demolar, açık kaynak. ::: live demos, open source.
+AI'ı sıfırdan öğren. ::: Learn AI from scratch.
+iş, proje ya da soru. ::: work, projects, or questions.
+Bölümler ::: Sections
+
+# ===== Ana sayfa =====
+Samet Duhan — AI ile sistem kuran geliştirici. Projeler ve AI'ı sıfırdan öğreten interaktif slaytlar. ::: Samet Duhan — a developer who builds systems with AI. Projects and interactive slides that teach AI from scratch.
+Samet Duhan — AI ile sistem kuran geliştirici ::: Samet Duhan — a developer who builds systems with AI
+Projeler, AI'ı sıfırdan öğreten interaktif slaytlar ve iletişim. ::: Projects, interactive slides that teach AI from scratch, and contact.
+AI İLE SİSTEM KURAN GELİŞTİRİCİ ::: DEVELOPER WHO BUILDS SYSTEMS WITH AI
+SAMET DUHAN ::: SAMET DUHAN
+Sistemler. Açıkta kurulur. Systems. Built in the open. ::: Systems. Built in the open.
+Ajanlar, açık kaynak araçlar ve günlük hayatta karşılığı olan uygulamalar. Her şey açık repoda, her adım izlenebilir. ::: Agents, open-source tools, and apps that solve everyday problems. Everything lives in an open repo, and every step can be traced.
+AÇIKTA KURULUR · MMXXVI · ::: BUILT IN THE OPEN · MMXXVI ·
+ATÖLYE ::: WORKSHOP
+ATÖLYE Nº 1 ::: WORKSHOP Nº 1
+KİMLİK KARTI ::: ID CARD
+AI ile sistem kuran ::: Developer who builds
+geliştirici ::: systems with AI
+Bilgisayar müh., 3. sınıf ::: Comp. eng., 3rd year
+İlgi alanı: siber güvenlik ::: Interest: cybersecurity
+SkyTrack: 208 commit, 9 gün ::: SkyTrack: 208 commits, 9 days
+3 açık kaynak proje ::: 3 open-source projects
+F → tam ekran ::: F → full screen
+Ajan nedir? ::: What is an agent?
+
+# ===== Hakkımda =====
+Hakkımda · Samet Duhan ::: About · Samet Duhan
+Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar. ::: Samet Duhan: a developer who builds systems with AI and a computer engineering student. What gets built, how the work gets done, and the tools behind it.
+Şahin bir sunum perdesine bakıyor; perdede sırayla kimlik kartı mühürleniyor, araçlar çantaya doluyor, kilit açılıp kapanıyor ve ajan döngüsü dönüyor ::: The falcon looks at a presentation screen; on it, an ID card is stamped, tools drop into a bag, a lock opens and closes, and the agent loop turns, one after another
+AI İLE SİSTEM ::: SYSTEMS WITH AI
+KURAN GELİŞTİRİCİ ::: DEVELOPER
+ARAÇ ÇANTASI ::: TOOL BAG
+SİBER GÜVENLİK ::: CYBERSECURITY
+KİLİTLİ ✓ İLGİ ALANI ::: LOCKED ✓ INTEREST
+bak ::: look
+karar ::: decide
+yap ::: do
+kontrol ::: check
+> AI ile sistem kuran geliştirici ::: > Developer who builds systems with AI
+Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan uygulamalar. Siber güvenlik de ilgi alanım. ::: I'm a third-year computer engineering student. I use AI not to chat but to build systems that get work done: agents I write code with, tools that report back on their own, apps that run on open data. Cybersecurity is also an interest of mine.
+Okuyor ::: Studying
+Bilgisayar mühendisliği, 3. sınıf ::: Computer engineering, 3rd year
+İlgi alanı ::: Interest
+Yapay zeka ::: Artificial intelligence
+Son işi ::: Latest work
+SkyTrack: ilk dosyadan v0.7.9'a 9 gün, 208 commit ::: SkyTrack: from the first file to v0.7.9 in 9 days, 208 commits
+Açık kaynak ::: Open source
+Bağlantılar ::: Links
+Ne arıyorsun? ::: What are you looking for?
+Yaptıklarımı görmek ::: See what I've built
+Projeler, canlı demolar ve kodlar ::: Projects, live demos, and code
+AI'ı öğrenmek ::: Learn AI
+Sıfırdan anlatan, etkileşimli sunumlar ::: Interactive decks that explain it from scratch
+Birlikte çalışmak ::: Work together
+İş teklifi, ortak proje ya da soru ::: A job offer, a joint project, or a question
+Ne yapıyorum ::: What I do
+canlı demo · sessiz ekran kaydı ::: live demo · silent screen recording
+SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası ::: SkyTrack: live aircraft on a map, wind arrows, and the route of the selected flight
+./uygulamalar ::: ./apps
+Açık veriyle uygulamalar ::: Apps on open data
+SkyTrack: canlı uçak takibi, türbülans uyarısı, 15 dil. Windows, macOS ve Linux. ::: SkyTrack: live flight tracking, turbulence alerts, 15 languages. Windows, macOS, and Linux.
+canlı önizleme · piksel animasyonu ::: live preview · pixel animation
+Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler ::: Frames of an orange pixel character running, jumping, and waving a green flag
+./otomasyon ::: ./automation
+AI ajanlarına araç ve otomasyon ::: Tools and automation for AI agents
+Claude Code hook'u ve Codex bildirimiyle: ajan işini bitirince bilgisayar kendiliğinden haber verir. ::: With a Claude Code hook and Codex notifications, the computer tells you on its own when an agent finishes.
+canlı çizim · sunum ::: live drawing · deck
+Şahin bir sunum perdesine bakıyor; slaytlar çizilip değişiyor ::: The falcon looks at a projection screen; slides are drawn and swapped
+./ogretmek ::: ./teaching
+Öğretmek ::: Teaching
+Nasıl çalışıyorum ::: How I work
+sen ::: you
+AI hızlandırır, kararı ben veririm. ::: AI speeds things up; I make the decisions.
+Neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi. ::: Spotting what is wrong and setting the rule is a human's job.
+Test yazdırırım. ::: I have it write tests.
+AI'ın yaptığı bir hata bir kez düzelir; test sayesinde bir daha gelmez. ::: A mistake the AI makes gets fixed once; thanks to a test, it never comes back.
+Kaynağa dayanırım. ::: I rely on sources.
+Bu sitedeki her sayı ve iddia bir README'ye ya da commit geçmişine dayanıyor. ::: Every number and claim on this site is backed by a README or the commit history.
+Araçlar ::: Tools
+Kanatlarını açıp kapatan şahin çizimi (animasyon) ::: Drawing of the falcon opening and closing its wings (animation)
+Birlikte bir şey kuralım. ::: Let's build something together.
+İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım. ::: A job offer, a joint project, or just a question: write, and let's talk.
+iletişime geç → ::: get in touch →
+
+# ===== Ana sayfadaki kod yağmuru (arka plan süsü; kod olduğu için değişmez) =====
+= const ajan = baslat();
+= await ajan.bak();
+= await ajan.karar();
+= await ajan.yap();
+= ajan.kontrol();
+= // hook: Stop
+= powershell -File
+= claude-done.ps1
+= piksel.oynat();
+= bayrak.salla();
+= git add -A
+= git commit -m "test"
+= git push origin main
+= npm test
+= # pass 85
+= # fail 0
+= if (!gecti) {
+= duzelt();
+= deploy: built ✓
+= GET /adsb/live
+= 200 OK
+{ "uçak": 312 } ::: { "aircraft": 312 }
+= turbulans(rota);
+= uyar(7700);
+// 45 sn kuralı ::: // 45 s rule
+= harita.ciz(ucaklar);
+= leaflet.setView();
+= dil: 15
+= electron.baslat();
+= slayt.git(i + 1);
+= video.play();
+= const sunum = [];
+= sunum.push(slayt);
+= window.print();
+= ilerleme.kaydet();
+
+# ===== Projeler =====
+Projeler · Samet Duhan ::: Projects · Samet Duhan
+SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan'ın AI ile kurduğu projeler, demoları ve kodları. ::: SkyTrack, claude-done-pixel, and chatgpt-done-pixel: the projects Samet Duhan built with AI, with their demos and code.
+01 FİKİR ::: 01 IDEA
+02 KOD ::: 02 CODE
+03 SİSTEM ::: 03 SYSTEM
+fikir ? ::: idea ?
+</> kod ::: </> code
+SKYTRACK ::: SKYTRACK
+PİKSEL ::: PIXEL
+AJAN ::: AGENT
+DESTE ::: DECK
+ÜRETİM HATTI — FİKİR → KOD → ÇALIŞAN SİSTEM ::: PRODUCTION LINE — IDEA → CODE → WORKING SYSTEM
+Şahin üretim listesine bakıyor; projeler tek tek işaretleniyor ::: The falcon looks at the production list; projects are checked off one by one
+ÜRETİM LİSTESİ ::: PRODUCTION LIST
+ÜRETİM HATTI ::: PRODUCTION LINE
+HEPSİ AÇIK KAYNAK ::: ALL OPEN SOURCE
+Hepsinin kodu GitHub'da, nasıl yapıldığı slaytlarda. ::: All the code is on GitHub; how it was built is in the slides.
+Rakamlarla ::: In numbers
+açık kaynak proje ::: open-source projects
+commit, SkyTrack ::: commits, SkyTrack
+Claude ile ortak yazıldı ::: co-written with Claude
+dil desteği, SkyTrack ::: languages supported, SkyTrack
+Proje görünümü ::: Project view
+Büyük ::: Large
+Küçük ::: Small
+= ./skytrack
+= ./claude-done-pixel
+= ./chatgpt-done-pixel
+Uygulama ::: App
+Açık veri ::: Open data
+AI aracı ::: AI tool
+Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir. ::: Live flight tracking with open ADS-B data. It needs no account or API key; it shows turbulence along the route, alerts you for the flight you follow, and suggests a seat based on which side the sun is on.
+Windows, macOS ve Linux; Electron ve Leaflet ile ::: Windows, macOS, and Linux; built with Electron and Leaflet
+15 dil ve tarayıcıda çalışan bir web demosu ::: 15 languages and a web demo that runs in the browser
+Her push'ta GitHub Actions ile testler ::: Tests run with GitHub Actions on every push
+208 commit'in 191'i Claude ile ortak yazıldı ::: 191 of 208 commits were co-written with Claude
+projeyi keşfet → ::: explore the project →
+SkyTrack sitesi ↗ ::: SkyTrack site ↗
+= GitHub ↗
+= ▶ web demo
+= ▶ Web demo
+nasıl yaptım → ::: how I built it →
+Nasıl yaptım → ::: How I built it →
+Claude Code işini bitirince ekranın köşesinde bir piksel karakter koşup zıplar ve yeşil bayrak sallar; terminali kontrol etmeye son. ::: When Claude Code finishes its job, a pixel character runs and jumps in the corner of your screen and waves a green flag: no more checking the terminal.
+Claude Code'un Stop hook'u ile çalışır ::: Runs on Claude Code's Stop hook
+Windows; PowerShell, ek paket gerektirmez ::: Windows; PowerShell, no extra packages needed
+Tıklamaları geçirir, klavye odağını çalmaz ::: Lets clicks through and never steals keyboard focus
+Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama ::: Pixel logo frames: arrival, two jumps, two flags, celebration
+Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar. ::: The same idea for Codex: when the job finishes, a pixel logo jumps twice above the clock and waves two green flags.
+Codex'in agent-turn-complete bildirimiyle çalışır ::: Runs on Codex's agent-turn-complete notification
+Windows ve WSL ::: Windows and WSL
+Ağ isteği yapmaz, sohbet metnini kaydetmez ::: Makes no network requests and doesn't save chat text
+Daha fazlası GitHub'da. ::: There is more on GitHub.
+Yeni projeler önce orada görünür. ::: New projects show up there first.
+claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anthropic ve OpenAI ile bağlantısı yok. ::: claude-done-pixel and chatgpt-done-pixel are unofficial fan projects; they are not affiliated with Anthropic or OpenAI.
+
+# ===== Slaytlar (liste) =====
+Slaytlar · Samet Duhan ::: Slides · Samet Duhan
+AI'ı sıfırdan öğreten, Samet Duhan'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez. ::: Interactive decks that teach AI from scratch, with examples from Samet Duhan's projects. They open in the browser and need no setup.
+DERS NOTLARI ::: LECTURE NOTES
+KURULUM YOK ::: NO SETUP
+→ ve ← ile gez · F tam ekran · telefonda kaydır · kaldığın yer bu tarayıcıda hatırlanır ::: Use → and ← to move · F for full screen · swipe on a phone · your place is remembered in this browser
+AI ajanı nedir? ::: What is an AI agent?
+Claude Code hook'u ile otomasyon ::: Automation with a Claude Code hook
+SkyTrack'i AI ile nasıl kurdum ::: How I built SkyTrack with AI
+H: Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla. ::: Pick a topic you're curious about. Every deck opens in the browser, needs no setup, and uses my own projects as examples. If you're new to AI, start with <a href="./ai-ajani-nedir/">What is an AI agent?</a>.
+
+# ===== İletişim =====
+İletişim · Samet Duhan ::: Contact · Samet Duhan
+Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn. ::: Contact Samet Duhan: email, GitHub, and LinkedIn for a job offer, a joint project, or a question.
+Şahin masasında oturuyor; önündeki döner kadranlı telefon çalıyor ::: The falcon sits at a desk; the rotary phone in front of it is ringing
+POSTA ::: MAIL
+MAİL · GITHUB · LINKEDIN ::: EMAIL · GITHUB · LINKEDIN
+Konuyu seç, mesajını yaz, gönder. Mail uygulaman açılmazsa mesajın kendiliğinden kopyalanır. ::: Pick a topic, write your message, send it. If your mail app doesn't open, the message is copied automatically.
+Doğrudan ::: Direct
+mail ::: email
+kopyala ::: copy
+Mesaj yaz ::: Write a message
+Konu ::: Topic
+İş teklifi ::: Job offer
+Ortak proje ::: Joint project
+Soru ya da öneri ::: Question or suggestion
+Diğer ::: Other
+Mesajın ::: Your message
+Kime ::: To
+Mail uygulamasında aç → ::: Open in mail app →
+Gmail'de aç ↗ ::: Open in Gmail ↗
+Metni kopyala ::: Copy text
+
+# ===== Proje sayfaları: ortak =====
+= chatgpt-done-pixel · Samet Duhan
+= claude-done-pixel · Samet Duhan
+= SkyTrack · Samet Duhan
+← Tüm projeler ::: ← All projects
+tüm projeler → ::: all projects →
+Kaynak kod ↗ ::: Source code ↗
+İlgili sunum → ::: Related deck →
+Nasıl çalışıyor? ::: How does it work?
+Veri ve olay akışı ::: Data and event flow
+Geliştirme hikâyesi ::: Development story
+Verdiğim karar ::: A decision I made
+Sorunlar ve kontroller ::: Issues and checks
+AI'ın rolü ::: The AI's role
+Bir sonraki geliştirme için ::: For the next iteration
+Kaynaklar ve devamı ::: Sources and next steps
+Projenin güncel kurulum adımları, sürümleri ve değişiklikleri GitHub'da. ::: The project's current setup steps, releases, and changes are on GitHub.
+Değişiklik geçmişi ::: Change history
+Sürümler ::: Releases
+Soru veya öneri gönder ::: Send a question or suggestion
+Diğer projelere de göz at. ::: Have a look at the other projects too.
+Hepsinin kodu açık. ::: All of the code is open.
+Neler yapıyor? ::: What does it do?
+Animasyonun kareleri ::: Animation frames
+Geliştirme anlatımını oku → ::: Read the development walkthrough →
+
+# ===== chatgpt-done-pixel sayfası =====
+PROJE · PIKSEL BILDIRIM ::: PROJECT · PIXEL NOTIFICATION
+Rakamlarla chatgpt-done-pixel ::: chatgpt-done-pixel in numbers
+kez zıplar ::: jumps
+yeşil bayrak sallar ::: green flags waved
+animasyon karesi ::: animation frames
+adımlık akış ::: steps in the flow
+Codex bir turu tamamladığında, Windows masaüstünde saatin üzerinde kısa bir piksel animasyonuyla haber vermek. Proje Windows ve WSL kullanımını destekler. ::: Letting you know with a short pixel animation above the clock on the Windows desktop when Codex completes a turn. The project supports both Windows and WSL.
+Codex bir turu bitirince gelen bildirimle çalışır. ::: Runs on the notification sent when Codex finishes a turn.
+Saatin üstünde ::: Above the clock
+Piksel logo iki kez zıplar, iki yeşil bayrak sallar. ::: The pixel logo jumps twice and waves two green flags.
+Ağ isteği yapmaz ::: Makes no network requests
+Sohbet metnini kaydetmez. ::: Does not save chat text.
+İki ortamda da kullanılabilir. ::: Works in both environments.
+Gerçek proje görselindeki altı kare: geliş, iki zıplama, iki bayrak, kutlama. ::: The six frames from the real project image: arrival, two jumps, two flags, celebration.
+chatgpt-done-pixel animasyon kareleri: geliş, iki zıplama, iki bayrak, kutlama ::: chatgpt-done-pixel animation frames: arrival, two jumps, two flags, celebration
+Windows bildirimi ::: Windows notification
+Piksel animasyonu ::: Pixel animation
+Bildirim için sohbet metnini kaydetmeye veya ağ isteği göndermeye gerek yok. Proje, tamamlanma olayına odaklanır. ::: There is no need to save chat text or send a network request for the notification. The project focuses on the completion event.
+Bu sayfada doğrulanmamış bir hata hikâyesi üretmiyorum. Windows ve WSL arasındaki tetikleme yolu ile art arda tamamlanan görevlerin davranışı, proje incelenirken özellikle bakılabilecek noktalar. ::: I'm not making up an unverified bug story on this page. The trigger path between Windows and WSL and the behavior of back-to-back completed tasks are points worth looking at when reviewing the project.
+Claude sürümündeki temel fikir burada farklı bir tamamlanma olayına bağlanıyor. İki projeyi karşılaştırınca aynı arayüz fikrinin farklı ajanlarla nasıl çalıştırılabildiği görülebilir. ::: The core idea from the Claude version is tied here to a different completion event. Comparing the two projects shows how the same interface idea can run with different agents.
+Olay alma ve animasyon katmanlarını ayrı doğrulamak; farklı ortamları aynı küçük bildirim sözleşmesiyle birleştirmek değerlendirilebilir. ::: One could verify the event-capture and animation layers separately and unify the different environments under the same small notification contract.
+
+# ===== claude-done-pixel sayfası =====
+Rakamlarla claude-done-pixel ::: claude-done-pixel in numbers
+kez bayrak sallar ::: flag wave
+Claude Code uzun bir görevi bitirdiğinde terminali tekrar tekrar kontrol etme ihtiyacını azaltmak. Ekranın köşesindeki kısa bir piksel animasyonu işin tamamlandığını gösterir. ::: Reducing the need to check the terminal over and over when Claude Code finishes a long task. A short pixel animation in the corner of the screen shows that the work is done.
+Stop hook'u ile çalışır ::: Runs on the Stop hook
+Claude Code işini bitirince tetiklenir. ::: Triggered when Claude Code finishes its work.
+Koşar, zıplar, bayrak sallar ::: Runs, jumps, waves a flag
+Ekranın köşesinde turuncu piksel karakter, yeşil bayrak. ::: An orange pixel character and a green flag in the corner of the screen.
+Tıklamaları geçirir ::: Lets clicks through
+Klavye odağını çalmaz; yazdığın şey yarıda kalmaz. ::: Doesn't steal keyboard focus; what you're typing isn't interrupted.
+PowerShell, ek paket yok ::: PowerShell, no extra packages
+Windows'ta ek bir şey kurmadan çalışır. ::: Runs on Windows without installing anything extra.
+Gerçek proje görselindeki sekiz kare; vurgulanan kare animasyonun o anıdır. ::: The eight frames from the real project image; the highlighted frame is that moment of the animation.
+claude-done-pixel animasyon kareleri: turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı sekiz kare ::: claude-done-pixel animation frames: eight frames of an orange pixel character running, jumping, and waving a green flag
+= Stop hook
+Piksel bildirimi ::: Pixel notification
+Bildirimin odağı çalmaması ve tıklamaları engellememesi önemliydi. Görünür bir işaret verirken kullanıcının o sırada yaptığı işi kesmemesini hedefledim. ::: It was important that the notification not steal focus or block clicks. While giving a visible signal, I aimed for it not to interrupt what the user was doing at that moment.
+Burada SkyTrack’teki gibi belgelenmiş belirli bir hata öyküsü paylaşmıyorum. Tasarımda kontrol edilmesi gereken durumlar; ayarların korunması, art arda bildirimler ve pencerenin kullanıcı etkileşimine etkisi. ::: I'm not sharing a specific, documented bug story here like the one in SkyTrack. The cases to check in the design are preserving settings, back-to-back notifications, and the window's effect on user interaction.
+Bu projede önemli olan olay ile görüntüyü ayırmak: Stop hook olayı tetikler, PowerShell animasyonu gösterir. AI ile geliştirme anlatımında da ortaya çıkan dosyalar kadar bu bağlantıyı açıklıyorum. ::: What matters in this project is separating the event from the visuals: the Stop hook fires the event, and PowerShell shows the animation. In the AI development walkthrough I explain this connection as much as the files that came out of it.
+Bir sonraki adım olarak önce basit bir bildirimle olayın doğru yakalandığını doğrulayıp karakter animasyonunu daha sonra eklemek değerlendirilebilir. ::: As a next step, one could first confirm with a simple notification that the event is caught correctly, and add the character animation afterwards.
+
+# ===== SkyTrack sayfası =====
+PROJE · CANLI UÇAK TAKIBI ::: PROJECT · LIVE FLIGHT TRACKING
+Rakamlarla SkyTrack ::: SkyTrack in numbers
+commit ::: commits
+dil desteği ::: languages supported
+gün: ilk dosyadan v0.7.9'a ::: days: from the first file to v0.7.9
+Canlı uçuş verisini harita üzerinde anlaşılır bir deneyime dönüştürmek. Masaüstü uygulaması açık ADS-B verisiyle çalışır; tarayıcı demosu ise simüle edilmiş uçuşlar kullanır. ::: Turning live flight data into an experience that is easy to read on a map. The desktop app runs on open ADS-B data; the browser demo uses simulated flights.
+Canlı uçak takibi ::: Live flight tracking
+Açık ADS-B verisiyle; hesap ya da API anahtarı istemez. ::: Uses open ADS-B data; needs no account or API key.
+Türbülans ::: Turbulence
+Rota üzerindeki türbülansı gösterir. ::: Shows turbulence along the route.
+Uçuş uyarısı ::: Flight alert
+İzlenen uçuş için uyarı verir. ::: Alerts you for the flight you are following.
+Koltuk önerisi ::: Seat suggestion
+Güneşin hangi tarafta olduğuna göre koltuk önerir. ::: Suggests a seat based on which side the sun is on.
+15 dil ::: 15 languages
+Tarayıcıda çalışan bir web demosu da var. ::: There is also a web demo that runs in the browser.
+Her masaüstünde ::: On every desktop
+Windows, macOS ve Linux; Electron ve Leaflet ile. ::: Windows, macOS, and Linux; built with Electron and Leaflet.
+Uygulamayı yakından ::: A closer look at the app
+Aşağıdaki ekran görüntüsünde numaralı noktalar sırayla vurgulanır; birine tıklayınca durur. ::: In the screenshot below, the numbered points are highlighted in turn; click one to stop.
+SkyTrack ekran görüntüsü: harita üzerinde canlı uçaklar, seçili uçuşun rotası ve uçuş kartı ::: SkyTrack screenshot: live aircraft on a map, the route of the selected flight, and the flight card
+1. Uçuş kartı ::: 1. Flight card
+Uçuş kartı ::: Flight card
+2. Uçuş rotası ::: 2. Flight route
+Uçuş rotası ::: Flight route
+3. Harita katmanları ::: 3. Map layers
+Harita katmanları ::: Map layers
+4. Canlı ve geçmiş ::: 4. Live and history
+Canlı ve geçmiş ::: Live and history
+Seçilen uçuşun yüksekliği, hızı, yakıt tahmini ve koltuk ipucu bir kartta. ::: The selected flight's altitude, speed, fuel estimate, and seat tip on one card.
+Uçuşun nereden nereye gittiği haritada çizgi olarak görünür. ::: Where the flight is going from and to appears as a line on the map.
+Havalimanları, radar, türbülans, rüzgâr, bulut ve gece katmanları tek tıkla açılır. ::: Airports, radar, turbulence, wind, cloud, and night layers switch on with one click.
+Zaman çubuğuyla canlı görüntü ile geçmiş arasında gezinilir. ::: The timeline bar lets you move between the live view and the past.
+ADS-B verisi ::: ADS-B data
+Uçuş işleme ::: Flight processing
+Leaflet haritası ::: Leaflet map
+Electron arayüzü ::: Electron interface
+Bir acil durum kodunu görür görmez bildirim göndermek yerine, kodun 45 saniye kesintisiz sürmesini bekleyen bir kural seçtim. Böylece kısa süreli kod geçişlerinin yanlış alarm üretmesini azaltmayı hedefledim. ::: Instead of sending an alert the moment I saw an emergency code, I chose a rule that waits for the code to persist for 45 seconds without a break. That way I aimed to reduce false alarms from brief code flickers.
+Fotoğraf görüntüleyicideki bir yorum satırı açılışı bozdu. Düzeltmenin yanına bütün betiklerin sözdizimini kontrol eden bir test eklendi. Sunumda bu örneğin commit mesajını ve zaman çizelgesini inceleyebilirsin. ::: A comment line in the photo viewer broke startup. Alongside the fix, a test that checks the syntax of all scripts was added. In the deck you can look at this example's commit message and timeline.
+27 Ekim 2026 tarihli sayımda 208 commit’in 191’inde Claude ortak yazar kaydı var. Bu, kod satırlarının yüzde 92’sinin AI tarafından yazıldığı anlamına gelmez; ortak yazarlık kaydı olan commit sayısını gösterir. ::: In the count dated 27 October 2026, 191 of the 208 commits carry a Claude co-author record. This does not mean 92 percent of the lines of code were written by AI; it shows the number of commits that have a co-authorship record.
+Bir sonraki adım olarak önce veri akışını, hata durumlarını ve alarm davranışını küçük bir prototipte doğrulayıp dil ve masaüstü paketlerini bu temel üzerine eklemek değerlendirilebilir. ::: As a next step, one could first verify the data flow, error cases, and alert behavior in a small prototype, then add the language and desktop packages on top of that foundation.
+
+# ===== Hakkımda: eksik kalan tek cümle =====
+AI'ı sıfırdan anlatan, projelerimden örnek veren interaktif sunumlar. ::: Interactive decks that explain AI from scratch, with examples from my projects.
+
+# ===== Sunum 1: AI ajanı nedir? =====
+AI ajanı nedir? · Samet Duhan ::: What is an AI agent? · Samet Duhan
+Sohbet botuyla iş bitiren AI ajanı arasındaki fark, sıfırdan ve örneklerle. ::: The difference between a chatbot and an AI agent that gets work done, from scratch and with examples.
+İzle, dene ve adım adım keşfet. Samet Duhan’dan interaktif geliştirme anlatımı. ::: Watch, try, and explore step by step. An interactive development walkthrough from Samet Duhan.
+← slaytlar ::: ← slides
+Başlangıç · ~8 dakika ::: Beginner · ~8 minutes
+01 / KEŞFET ::: 01 / DISCOVER
+Bir cevapla başlayan şey, ::: What starts as an answer
+çalışan bir sisteme dönüşür. ::: turns into a working system.
+gözlem → karar → araç → sonuç ::: observe → decide → tool → result
+H: Bu sunumun sonunda bir <strong>sohbet botu</strong> ile <strong>ajan</strong> arasındaki farkı bilecek, ajanın nasıl "düşünüp iş yaptığını" görecek ve kendin bir tane deneyeceksin. ::: By the end of this deck you will know the difference between a <strong>chatbot</strong> and an <strong>agent</strong>, see how an agent "thinks and gets the work done," and try one yourself.
+→ tuşu, alttaki düğmeler ya da telefonda sola kaydırma ile ilerle. ::: Move forward with the → key, the buttons below, or by swiping left on a phone.
+1 · Önce bildiğin şey ::: 1 · What you already know
+Sohbet botu: soruyorsun, cevap veriyor ::: Chatbot: you ask, it answers
+H: ChatGPT ya da Claude ile sohbet ettiğinde yapay zekâ bir <strong>metin</strong> üretir. Ne kadar akıllı olursa olsun, işi yapan yine sensin: kodu kopyalarsın, dosyayı açarsın, sonucu kontrol edersin. ::: When you chat with ChatGPT or Claude, the AI produces <strong>text</strong>. However smart it is, you are still the one doing the work: you copy the code, open the file, and check the result.
+Şu dosyadaki hatayı nasıl düzeltirim? ::: How do I fix the bug in this file?
+H: Şunu dene: <code>sayi = sayi + 1</code> yazan satırı <code>sayi += 1</code> yap. ::: Try this: change the line that says <code>sayi = sayi + 1</code> to <code>sayi += 1</code>.
+bundan sonrası sende: ::: the rest is up to you:
+dosyayı aç ::: open the file
+yapıştır ::: paste
+test et ::: test it
+= Model (LLM):
+Çok büyük miktarda yazıyla eğitilmiş, bir sonraki kelimeyi tahmin ederek cevap üreten program. Claude ve GPT birer modeldir. ::: A program trained on a huge amount of text that produces answers by predicting the next word. Claude and GPT are models.
+2 · Fark ::: 2 · The difference
+Ajan: işi kendisi yapar ::: Agent: it does the work itself
+AJAN ATÖLYESİ / KENDİ KENDİNE ÇALIŞIR ::: AGENT WORKSHOP / WORKS ON ITS OWN
+Yerel simülasyon ::: Local simulation
+Görevi seç ::: Pick a task
+Kırık bağlantıyı düzelt ::: Fix the broken link
+Bir test hatasını düzelt ::: Fix a failing test
+Bir proje sayfası hazırla ::: Prepare a project page
+01 Gözlem ::: 01 Observe
+02 Plan ::: 02 Plan
+03 Araç ::: 03 Tool
+04 Kontrol ::: 04 Check
+$ görev bekleniyor… ::: $ waiting for a task…
+Bu bir anlatım simülasyonu; gerçek dosyalar değiştirilmez. ::: This is a demonstration simulation; no real files are changed.
+sohbet botu ::: chatbot
+ajan ::: agent
+"Şu dosyadaki hatayı nasıl düzeltirim?" → Sana bir açıklama ve örnek kod yazar. Gerisi sende. ::: "How do I fix the bug in this file?" → It writes you an explanation and example code. The rest is up to you.
+"Şu dosyadaki hatayı düzelt." → Dosyayı kendisi açar, hatayı bulur, düzeltir, testi çalıştırır ve sana ne yaptığını söyler. ::: "Fix the bug in this file." → It opens the file itself, finds the bug, fixes it, runs the test, and tells you what it did.
+H: Farkı yaratan şey <strong>araçlar</strong>: ajanın dosya okumasına, komut çalıştırmasına, internette aramasına izin veren küçük yetenekler. ::: What makes the difference is <strong>tools</strong>: small abilities that let the agent read files, run commands, and search the internet.
+dosya oku ::: read a file
+dosya yaz ::: write a file
+komut çalıştır ::: run a command
+internette ara ::: search the internet
+3 · Ajanın döngüsü ::: 3 · The agent loop
+Bak → karar ver → yap → kontrol et ::: Look → decide → do → check
+Bir ajan, iş bitene kadar bu dört adımı tekrar tekrar döner. Tur kendiliğinden döner; durdurup adım adım da izleyebilirsin: ::: An agent repeats these four steps over and over until the job is done. The loop runs by itself; you can also pause it and watch step by step:
+Ajan döngüsü: bak, karar ver, yap, kontrol et ::: Agent loop: look, decide, do, check
+1. bak ::: 1. look
+2. karar ver ::: 2. decide
+3. yap ::: 3. do
+4. kontrol et ::: 4. check
+Görev: "Sayfadaki kırık linki düzelt." ::: Task: "Fix the broken link on the page."
+duraklat ::: pause
+4 · Kontrol ::: 4 · Check
+Anladın mı? ::: Did you get it?
+Bir ajanı sohbet botundan ayıran en önemli şey hangisi? ::: What is the most important thing that separates an agent from a chatbot?
+Daha uzun cevaplar yazması ::: Writing longer answers
+Araç kullanarak işi kendisinin yapıp sonucu kontrol etmesi ::: Doing the work itself with tools and checking the result
+İnternete bağlı olması ::: Being connected to the internet
+H: Uzunluk ya da internet farkı yaratmaz. Ajanı ajan yapan şey, <strong>araç kullanması</strong> ve döngüyü iş bitene kadar sürdürmesi. ::: Length and internet access are not what makes the difference. What makes an agent an agent is that it <strong>uses tools</strong> and keeps the loop going until the job is done.
+5 · Gerçek bir örnek ::: 5 · A real example
+Claude Code: terminalde çalışan bir ajan ::: Claude Code: an agent that runs in the terminal
+H: <strong>Claude Code</strong>, bilgisayarındaki proje klasöründe dosya okuyup yazabilen, komut çalıştırabilen bir ajandır. Ona "şunu yap" dersin, döngüyü kendisi döner. ::: <strong>Claude Code</strong> is an agent that can read and write files and run commands in the project folder on your computer. You tell it "do this," and it runs the loop itself.
+H: Bir sorun var: iş uzun sürünce "bitti mi?" diye sürekli terminale bakıyorsun. Ben bunun için <strong>claude-done-pixel</strong>'i yaptım. Claude işini bitirince ekranın köşesine bir piksel karakter koşup zıplıyor ve yeşil bayrak sallıyor. ::: There is one problem: when a job takes long, you keep looking at the terminal asking "is it done?" I made <strong>claude-done-pixel</strong> for that. When Claude finishes its job, a pixel character runs and jumps in the corner of the screen and waves a green flag.
+claude-done-pixel: iş bitince ekranın köşesinde ::: claude-done-pixel: in the corner of the screen when the job is done
+Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı animasyon ::: Animation of an orange pixel character running, jumping, and waving a green flag
+Piksel karakter koşar, zıplar ve yeşil bayrak sallar. ::: The pixel character runs, jumps, and waves a green flag.
+H: Nasıl çalıştığı bir sonraki sunumda: <a href="../claude-code-hook/">Claude Code hook'u ile otomasyon →</a> ::: How it works is in the next deck: <a href="../claude-code-hook/">Automation with a Claude Code hook →</a>
+6 · Önemli kural ::: 6 · An important rule
+Son karar insanda ::: The final decision is the human's
+Ajan hızlıdır ama yanılabilir. İyi kurulmuş bir sistemde: ::: An agent is fast but can be wrong. In a well-built system:
+SİL · YAYINLA · HARCA ::: DELETE · PUBLISH · SPEND
+geri alınamaz: izin? ::: can't be undone: permission?
+SEN: tamam ✓ ::: YOU: OK ✓
+H: Ajan ne yaptığını <strong>söyler</strong>; sen okursun. ::: The agent <strong>tells</strong> you what it did; you read it.
+H: Geri alınamayan işlerden (bir şey silmek, yayınlamak, para harcamak) önce <strong>izin ister</strong>. ::: Before anything that can't be undone (deleting something, publishing, spending money), it <strong>asks permission</strong>.
+H: Yaptığı işin doğru olduğunu <strong>test</strong> ile gösterir, "oldu" demekle yetinmez. ::: It shows the work is correct with a <strong>test</strong> instead of settling for saying "done."
+AI'ı iyi kullanmak, ona her şeyi bırakmak değil; ona neyi bırakacağını bilmektir. ::: Using AI well is not leaving everything to it; it is knowing what to leave to it.
+7 · Sen de dene ::: 7 · Try it yourself
+İlk görevin ::: Your first task
+H: Ücretsiz bir AI sohbetini aç (Claude, ChatGPT…) ve aşağıdakini yapıştır. Sohbet botu olsa da ona bir ajan gibi <strong>adım adım düşünmeyi</strong> öğretmiş olacaksın: ::: Open a free AI chat (Claude, ChatGPT…) and paste the text below. Even though it is a chatbot, you will have taught it to <strong>think step by step</strong> like an agent:
+H: <a href="../claude-code-hook/">Claude Code hook'u ile otomasyon</a>: bir ajanın işi bitince otomatik bir şey çalıştırmak. ::: <a href="../claude-code-hook/">Automation with a Claude Code hook</a>: running something automatically when an agent finishes.
+H: <a href="../skytrack-nasil-kurdum/">SkyTrack'i AI ile nasıl kurdum</a>: gerçek bir uygulamanın AI ile yazılışı. ::: <a href="../skytrack-nasil-kurdum/">How I built SkyTrack with AI</a>: how a real app was written with AI.
+H: Bir ajan gibi çalış. Görev: haftalık yemek listemi ve market alışveriş listemi çıkar. Önce bana bilmen gereken 3 soruyu sor <mark>(bak)</mark>. Cevaplarıma göre bir plan yap ve planı göster <mark>(karar ver)</mark>. Listeyi yaz <mark>(yap)</mark>. Son olarak listeyi kendi planınla karşılaştırıp eksik bir şey var mı kontrol et <mark>(kontrol et)</mark>. ::: Work like an agent. Task: put together my weekly meal plan and grocery list. First ask me the 3 questions you need answered <mark>(look)</mark>. Based on my answers, make a plan and show it to me <mark>(decide)</mark>. Write the list <mark>(do)</mark>. Finally, compare the list against your own plan and check whether anything is missing <mark>(check)</mark>.
+Fark ettin mi? Döngünün dört adımını sen tarif ettin. Gerçek ajanlar bunu araçlarla, kendi başlarına yapar. ::: Did you notice? You described the four steps of the loop yourself. Real agents do this on their own, with tools.
+Bitti ::: Done
+Sırada ne var? ::: What's next?
+: soruların için yaz. ::: : write to me with your questions.
+J: '1. bak → Sayfayı okur, 4 link bulur. Birinin adresi /projeler yerine /projelr yazılmış.' ::: '1. look → Reads the page and finds 4 links. One has the address /projelr instead of /projeler.'
+J: '2. karar ver → "Doğru yol /projeler olmalı; çünkü klasörün adı bu."' ::: '2. decide → "The right path should be /projeler, because that is the folder name."'
+J: '3. yap → Dosyada /projelr yazısını /projeler ile değiştirir.' ::: '3. do → Replaces /projelr with /projeler in the file.'
+J: '4. kontrol et → Linki yeniden dener: çalışıyor. Görev bitti, sana ne yaptığını raporlar.' ::: '4. check → Tries the link again: it works. Task done; it reports to you what it did.'
+J: 'Görev: "Sayfadaki kırık linki düzelt."' ::: 'Task: "Fix the broken link on the page."'
+J: 'bir adım ilerle' ::: 'one step forward'
+J: 'duraklat' ::: 'pause'
+
+# ===== Sunum 2: Claude Code hook'u ile otomasyon =====
+Claude Code hook'u ile otomasyon · Samet Duhan ::: Automation with a Claude Code hook · Samet Duhan
+Claude Code hook'u nedir, Stop olayı nasıl kullanılır: claude-done-pixel örneğiyle. ::: What a Claude Code hook is and how to use the Stop event, with the claude-done-pixel example.
+Claude Code · ~8 dakika ::: Claude Code · ~8 minutes
+02 / BAĞLA ::: 02 / CONNECT
+İş biter. ::: The job ends.
+Ekran haber verir. ::: The screen tells you.
+Stop → hook → PowerShell → piksel ::: Stop → hook → PowerShell → pixel
+= Stop
+= hook
+piksel ::: pixel
+H: Bir AI ajanı işini bitirdiğinde bilgisayarının <strong>kendiliğinden</strong> bir şey yapmasını sağlayacağız. Örnek proje: <strong>claude-done-pixel</strong>. ::: We will make your computer do something <strong>on its own</strong> when an AI agent finishes its job. Example project: <strong>claude-done-pixel</strong>.
+H: AI ajanının ne olduğunu bilmiyorsan önce şuna bak: <a href="../ai-ajani-nedir/">AI ajanı nedir?</a> ::: If you don't know what an AI agent is, look at this first: <a href="../ai-ajani-nedir/">What is an AI agent?</a>
+1 · Sorun ::: 1 · The problem
+"Bitti mi?" diye terminale bakmak ::: Checking the terminal asking "is it done?"
+H: <strong>Claude Code</strong>, terminalde çalışan bir AI ajanı: kod yazar, dosya düzenler, komut çalıştırır. Bazı işler dakikalar sürer. ::: <strong>Claude Code</strong> is an AI agent that runs in the terminal: it writes code, edits files, and runs commands. Some jobs take minutes.
+O sırada başka bir pencerede çalışıyorsun ve her yarım dakikada bir terminale dönüp "bitti mi?" diye bakıyorsun. Hem dikkatin bölünüyor hem zaman kaybediyorsun. ::: Meanwhile you are working in another window, and every half minute you go back to the terminal to see "is it done?" Your attention gets split and you lose time.
+= claude
+> testleri çalıştır ve hataları düzelt ::: > run the tests and fix the errors
+çalışıyor ::: running
+bitti mi? ::: done yet?
+hâlâ mı? ::: still?
+H: İstediğimiz şey basit: <strong>Claude bitirince bana haber versin.</strong> ::: What we want is simple: <strong>Claude should tell me when it finishes.</strong>
+2 · Çözümün adı ::: 2 · The solution has a name
+Hook = "şu olunca, şunu çalıştır" ::: Hook = "when this happens, run that"
+OLAY AKIŞI / KENDİ KENDİNE ÇALIŞIR ::: EVENT FLOW / RUNS ON ITS OWN
+Stop hook bağlı ::: Stop hook connected
+Stop olayı ::: Stop event
+Bildirim ::: Notification
+Görev çalışıyor… ::: Task running…
+$ Stop olayını bekliyor… ::: $ waiting for the Stop event…
+Hook’u kapatıp yeniden dene: olay ile otomasyonun farkını gör. ::: Turn the hook off and try again: see the difference between an event and automation.
+Hook (kanca): ::: Hook:
+Bir programın belli bir anında, senin verdiğin bir komutu otomatik olarak çalıştırma kuralı. ::: A rule that automatically runs a command you give at a certain moment in a program.
+H: Claude Code'da hook'lar bir ayar dosyasına yazılır: <code>settings.json</code>. Her hook iki şey söyler: ::: In Claude Code, hooks are written in a settings file: <code>settings.json</code>. Each hook says two things:
+H: <strong>Ne zaman?</strong> Bir olayın adı. Bizim olayımız <code>Stop</code>: Claude bir cevabı bitirdiğinde. ::: <strong>When?</strong> The name of an event. Our event is <code>Stop</code>: when Claude finishes an answer.
+Ne yapılsın? ::: What should happen?
+Çalışacak komut. Bizim komutumuz: piksel animasyonu açan küçük bir betik. ::: The command to run. Ours is a small script that opens the pixel animation.
+3 · Ayar dosyası, satır satır ::: 3 · The settings file, line by line
+Hook nasıl yazılır? ::: How is a hook written?
+H: claude-done-pixel'in WSL kurulumunda <code>~/.claude/settings.json</code> dosyasına eklenen blok: ::: The block added to the <code>~/.claude/settings.json</code> file in claude-done-pixel's WSL setup:
+= "hooks": {
+= "Stop": [
+= { "hooks": [ {
+= "type": "command",
+= "command": "(powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File 'C:\\Users\\you\\claude-done\\claude-done.ps1' >/dev/null 2>&1 &)"
+4 · Canlı demo ::: 4 · Live demo
+Claude bitirince ne oluyor? ::: What happens when Claude finishes?
+Gerçekte bu karakter ekranının sağ altında, saatin hemen üstünde belirir. Burada tarayıcıda yeniden çizdim: ::: In reality this character appears at the bottom right of your screen, right above the clock. I redrew it here in the browser:
+Piksel karakter sağdan gelir, iki kez zıplar, yeşil bayrak sallar ve sağdan çıkar ::: The pixel character comes in from the right, jumps twice, waves a green flag, and leaves to the right
+↺ baştan ::: ↺ replay
+Sağdan koşarak gelir, iki kez zıplar, yeşil bayrağı iki kez sallar ve sağdan çıkar. Yaklaşık 6,5 saniye, sessiz. Pencere tıklamaları geçirir ve odağı çalmaz; yazdığın şey yarıda kalmaz. ::: It runs in from the right, jumps twice, waves the green flag twice, and leaves to the right. About 6.5 seconds, silent. The window lets clicks through and does not steal focus; what you are typing is not interrupted.
+5 · Aynı fikir, başka ajan ::: 5 · Same idea, different agent
+Codex için: chatgpt-done-pixel ::: For Codex: chatgpt-done-pixel
+H: OpenAI'ın kod ajanı <strong>Codex</strong>'te hook'un adı farklı ama fikir aynı: Codex, bir tur bitince <code>agent-turn-complete</code> bildirimi gönderir; ayar dosyasındaki <code>notify</code> komutu bu bildirimle çalışır. ::: In OpenAI's coding agent <strong>Codex</strong>, the hook has a different name but the idea is the same: when a turn ends, Codex sends an <code>agent-turn-complete</code> notification, and the <code>notify</code> command in the settings file runs on that notification.
+chatgpt-done-pixel: tur bitince saatin üstünde ::: chatgpt-done-pixel: above the clock when the turn ends
+Piksel logo animasyonu: geliş, iki zıplama, iki bayrak, kutlama ::: Pixel logo animation: arrival, two jumps, two flags, celebration
+oynat ::: play
+Ders: Araçlar değişir, kavram kalır. "Hangi olay var, o olayda ne çalıştırabilirim?" diye sormayı öğrendiysen her ajana uygulayabilirsin. ::: Lesson: tools change, the concept stays. If you have learned to ask "which events exist, and what can I run on that event?", you can apply it to any agent.
+6 · Kontrol ::: 6 · Check
+Küçük ama önemli bir ayrıntı ::: A small but important detail
+H: <code>Stop</code> hook'u ne zaman çalışır? ::: When does the <code>Stop</code> hook run?
+Yalnız uzun süren işler bitince ::: Only when long-running jobs finish
+Claude Code kapatılınca ::: When Claude Code is closed
+Claude her cevabı bitirdiğinde, kısa cevaplar dahil ::: Whenever Claude finishes any answer, short ones included
+H: <code>Stop</code> her cevaptan sonra çalışır; "merhaba" dediğinde bile karakter zıplar. Bu çok sıksa, Claude Code'un hook rehberinde ne zaman tetikleneceğini sınırlamanın yolları anlatılıyor. ::: <code>Stop</code> runs after every answer; the character jumps even when you just say "hello." If that is too frequent, Claude Code's hook guide explains ways to limit when it fires.
+Kendi bilgisayarına kur ::: Install it on your own computer
+Windows'ta, Claude Code kuruluysa PowerShell'de sırayla çalıştır: ::: On Windows, if Claude Code is installed, run these in order in PowerShell:
+= git clone https://github.com/SametDuhan/claude-done-pixel
+= cd claude-done-pixel
+= powershell -ExecutionPolicy Bypass -File install.ps1
+H: Kurulum betiği <code>settings.json</code>'a <code>Stop</code> hook'unu ekler ve eski ayarının yedeğini <code>settings.json.bak</code> olarak saklar. Claude Code'u yeniden başlat, bir şey sor, karakteri bekle. Kaldırmak için: <code>uninstall.ps1</code> ::: The install script adds the <code>Stop</code> hook to <code>settings.json</code> and saves a backup of your old settings as <code>settings.json.bak</code>. Restart Claude Code, ask something, and wait for the character. To remove it: <code>uninstall.ps1</code>
+Kodlar: ::: Code:
+H: <a href="../skytrack-nasil-kurdum/">SkyTrack'i AI ile nasıl kurdum</a>: bir uygulamanın tamamını AI ile yazmak. ::: <a href="../skytrack-nasil-kurdum/">How I built SkyTrack with AI</a>: writing an entire app with AI.
+Tüm slaytlar ::: All slides
+
+# ===== Sunum 3: SkyTrack'i AI ile nasıl kurdum =====
+SkyTrack'i AI ile nasıl kurdum · Samet Duhan ::: How I built SkyTrack with AI · Samet Duhan
+Canlı uçak takip uygulaması SkyTrack'in AI ile yazılışı, commit geçmişinden. ::: How the live flight tracking app SkyTrack was written with AI, from the commit history.
+Proje · ~10 dakika ::: Project · ~10 minutes
+03 / İNŞA ET ::: 03 / BUILD
+Açık veriden ::: From open data
+çalışan bir uygulamaya. ::: to a working app.
+veri → harita → karar → test ::: data → map → decision → test
+H: Bir masaüstü uygulamasının dokuz günde nasıl büyüdüğünü, uydurmadan, <strong>commit geçmişinden</strong> anlatıyorum: AI neyi hızlandırdı, hangi kararları ben verdim, AI nerede yanıldı. ::: I explain how a desktop app grew in nine days, without making anything up, <strong>from the commit history</strong>: what AI sped up, which decisions I made, and where the AI got it wrong.
+= Commit:
+Kodda yapılan bir değişikliğin kaydı. Her commit'in bir mesajı, tarihi ve yazarı vardır; projenin günlüğü gibi okunur. ::: A record of a change made to the code. Every commit has a message, a date, and an author; it reads like the project's diary.
+1 · Ne yapıyor? ::: 1 · What does it do?
+Haritada canlı uçaklar ::: Live aircraft on a map
+SkyTrack tarayıcı demosunun ekran kaydı ::: Screen recording of the SkyTrack browser demo
+Videoyu oynatamıyorsan sunumun sonundaki tarayıcı demosunu açabilirsin. ::: If you can't play the video, you can open the browser demo at the end of the deck.
+Ekran kaydı: tarayıcı demosu. Uçuşlar ve türbülans alanları simülasyondur; video sessizdir. ::: Screen recording: the browser demo. The flights and turbulence areas are simulated; the video is silent.
+SkyTrack, dünyadaki uçakları haritada canlı gösteren ücretsiz bir masaüstü uygulaması. Windows, macOS ve Linux'ta çalışır; hesap ya da API anahtarı istemez. ::: SkyTrack is a free desktop app that shows aircraft around the world live on a map. It runs on Windows, macOS, and Linux and needs no account or API key.
+= ADS-B:
+Uçakların konumlarını, irtifalarını ve hızlarını saniyede birkaç kez yayınladığı açık sinyal. Gönüllülerin alıcıları bu sinyali toplar; SkyTrack bu açık veriyi kullanır. ::: The open signal in which aircraft broadcast their position, altitude, and speed several times a second. Volunteers' receivers pick up this signal; SkyTrack uses this open data.
+2 · Sayılarla ::: 2 · In numbers
+Ne kadarını AI ile yazdım? ::: How much did I write with AI?
+toplam commit ::: total commits
+Claude ile ortak yazılmış ::: co-written with Claude
+9 gün ::: 9 days
+gün ::: days
+ilk dosyadan v0.7.9'a ::: from the first file to v0.7.9
+208 commit'in 191'i, yüzde 92'si, Claude ile ortak ::: 191 of 208 commits, 92 percent, co-written with Claude
+Geri kalan 17 commit: projenin ilk günlerinde elle yaptığım 7 değişiklik ve 10 birleştirme (merge) kaydı. ::: The remaining 17 commits: 7 changes I made by hand in the first days of the project and 10 merge records.
+H: Claude ile yazılan commit'lerin sonunda <code>Co-Authored-By: Claude</code> satırı var; saydığım şey bu satır. ::: Commits written with Claude end with a <code>Co-Authored-By: Claude</code> line; that line is what I counted.
+Ölçüm: github.com/SametDuhan/airock commit geçmişi, 27 Ekim 2026. ::: Measured from: the github.com/SametDuhan/airock commit history, 27 October 2026.
+3 · Zaman çizelgesi ::: 3 · Timeline
+Dokuz günde ne oldu? ::: What happened in nine days?
+Rota kendiliğinden ilerler; bir durağa tıklayıp durdurabilirsin. ::: The route advances by itself; click a stop to pause it.
+Zaman çizelgesi ::: Timeline
+4 · Bir kararı yakından ::: 4 · A closer look at one decision
+Sahte acil durum alarmları ::: False emergency alarms
+KARAR DENEYİ / ALARM EŞİĞİ ::: DECISION EXPERIMENT / ALARM THRESHOLD
+Örnek senaryo ::: Example scenario
+7700 · örnek sinyal ::: 7700 · sample signal
+Kodun kesintisiz sürdüğü süre: ::: How long the code persisted without a break:
+saniye ::: seconds
+Alarm eşiği ::: Alarm threshold
+Anında ::: Immediately
+15 saniye ::: 15 seconds
+45 saniye ::: 45 seconds
+Eşik büyüdükçe kısa sinyaller elenir; bildirim de gecikir. 45 saniye bu projede seçilmiş bir kuraldır. ::: As the threshold grows, brief signals are filtered out, but the notification is delayed too. 45 seconds is the rule chosen in this project.
+H: Uçaklar acil durumu bir kodla bildirir: <code>7500</code> kaçırılma, <code>7600</code> telsiz arızası, <code>7700</code> genel acil durum. SkyTrack bu kodları kırmızı halkayla gösterir ve bildirim gönderir. Sorunu commit'ler üzerinden satır satır izle: ::: Aircraft report an emergency with a code: <code>7500</code> hijacking, <code>7600</code> radio failure, <code>7700</code> general emergency. SkyTrack shows these codes with a red ring and sends a notification. Follow the problem line by line through the commits:
+6 Eki Explain squawk emergency codes (7500/7600/7700) in an in-app dialog ::: Oct 6 Explain squawk emergency codes (7500/7600/7700) in an in-app dialog
+6 Eki 0.7.3: only real emergencies (7500/7600/7700 or matching ADS-B status) are shown as emergencies ::: Oct 6 0.7.3: only real emergencies (7500/7600/7700 or matching ADS-B status) are shown as emergencies
+8 Eki Emergencies: a squawk 7500/7600/7700 counts only after 45 s without a break (knob transit no longer fires alerts) ::: Oct 8 Emergencies: a squawk 7500/7600/7700 counts only after 45 s without a break (knob transit no longer fires alerts)
+H: Kodu Claude yazdı. Ama "bu alarm neden yanlış?" diye sormak, sebebi bulmak ve 45 saniye gibi bir kurala karar vermek <strong>insanın işi</strong>. ::: Claude wrote the code. But asking "why is this alarm wrong?", finding the cause, and deciding on a rule like 45 seconds is <strong>a human's job</strong>.
+5 · AI de yanılır ::: 5 · AI gets it wrong too
+Bir yorum satırı, bütün açılışı bozdu ::: One comment line broke the whole startup
+7 Ekim'de fotoğraf görüntüleyicide bir açılış hatası çıktı. Commit mesajı şöyle diyor: ::: On October 7, a startup error showed up in the photo viewer. The commit message says:
+= baslat();
+// geçici not ::: // temporary note
+= fotografi_yukle(); pencereyi_ac();
+✗ yorum, satırın geri kalanını yuttu: açılış bozuldu ::: ✗ the comment swallowed the rest of the line: startup broke
+✓ yeni test: her betik hatasız okunuyor ::: ✓ new test: every script parses without errors
+= Fix start-up error in the photo viewer (a comment swallowed the rest of a line); test that every script parses
+H: Yani yanlış yere konmuş bir yorum, satırın geri kalanını "yorum" hâline getirmiş ve kod çalışmamış. Düzeltmenin ikinci yarısı daha önemli: <strong>bütün betiklerin hatasız okunabildiğini sınayan bir test</strong> eklendi. Aynı tür hata bir daha sessizce geçemez. ::: So a misplaced comment turned the rest of the line into a "comment" and the code didn't run. The second half of the fix is more important: <strong>a test that checks all scripts can be read without errors</strong> was added. The same kind of error can't slip through silently again.
+H: Ders: AI ile hızlı yazınca hata da hızlı gelir. Cevap AI'ı bırakmak değil, <strong>test</strong> yazdırmak. SkyTrack'in testleri her değişiklikte GitHub'da kendiliğinden çalışıyor. ::: Lesson: when you write fast with AI, mistakes also arrive fast. The answer is not to drop AI but to have it write <strong>tests</strong>. SkyTrack's tests run automatically on GitHub with every change.
+Sence hangisi? ::: Which do you think?
+AI kodda bir hata yaptı ve sen fark ettin. En iyi sonraki adım hangisi? ::: The AI made a mistake in the code and you noticed. What is the best next step?
+Hatayı düzelttirip aynı hatayı yakalayacak bir test de yazdırmak ::: Having it fix the bug and also write a test that would catch the same bug
+O kısmı bir daha AI'a yazdırmamak ::: Never having the AI write that part again
+Hatayı düzelttirmek ve devam etmek ::: Having it fix the bug and moving on
+Düzeltmek bugünkü sorunu çözer; test, aynı sorunun yarın sessizce geri gelmesini engeller. SkyTrack'teki "test that every script parses" commit'i tam olarak bu. ::: Fixing solves today's problem; a test keeps the same problem from quietly coming back tomorrow. The "test that every script parses" commit in SkyTrack is exactly that.
+Kurmadan dene, istersen kodu çalıştır ::: Try it without installing, or run the code if you like
+Tarayıcı demosu, simüle edilmiş uçuşlar ve türbülans alanlarıyla çalışır: ::: The browser demo runs with simulated flights and turbulence areas:
+▶ web demoyu yeni sekmede aç ::: ▶ open the web demo in a new tab
+Kodu kendi bilgisayarında çalıştırmak için Node.js 18 ya da daha yenisi gerekir: ::: To run the code on your own computer you need Node.js 18 or newer:
+= git clone https://github.com/SametDuhan/airock.git
+= cd airock
+= npm install
+= npm start
+Testleri görmek için: ::: To see the tests:
+Bu projeden kalan ::: What stays from this project
+AI hızlandırır: ::: AI speeds things up:
+208 commit'in 191'i dokuz günde Claude ile yazıldı. ::: 191 of the 208 commits were written with Claude in nine days.
+Kararları sen verirsin: ::: You make the decisions:
+neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi. ::: spotting what is wrong and setting the rule is a human's job.
+Testler seni korur: ::: Tests protect you:
+AI'ın hatası bir kere düzelir, test sayesinde bir daha gelmez. ::: The AI's mistake gets fixed once; thanks to a test, it never comes back.
+SkyTrack GitHub ::: SkyTrack GitHub
+J: '30 Eyl' ::: 'Sep 30'
+J: '2 Eki' ::: 'Oct 2'
+J: '6 Eki' ::: 'Oct 6'
+J: '7 Eki' ::: 'Oct 7'
+J: '8 Eki' ::: 'Oct 8'
+J: 'İlk dosyalar' ::: 'First files'
+J: 'Proje elle başladı: ilk dosyalar yüklendi; ertesi gün harita OpenStreetMap ve Leaflet\'e bağlandı.' ::: 'The project started by hand: the first files were uploaded; the next day the map was connected to OpenStreetMap and Leaflet.'
+J: 'İlk AI commit\'i' ::: 'First AI commit'
+J: 'Claude ile ortak yazılan ilk commit: uçuşların nereden nereye gittiği ve v0.2 özellikleri.' ::: 'The first commit co-written with Claude: where flights go from and to, and the v0.2 features.'
+J: 'Uçuş rotası (nereden → nereye) ve v0.2 özellikleri' ::: 'Flight route (from → to) and v0.2 features'
+J: 'Türbülans' ::: 'Turbulence'
+J: 'Uçak kartına "önünde türbülans var mı" satırı, rüzgar, yakıt/CO₂ tahmini ve harita katmanları.' ::: 'A "is there turbulence ahead" line on the aircraft card, wind, fuel/CO₂ estimate, and map layers.'
+J: 'Bir günde büyük sürüm: beş dil, uçuş günlüğü, macOS ve Linux paketleri.' ::: 'A big release in one day: five languages, a flight diary, and macOS and Linux packages.'
+J: 'Uygulamayı kurmadan denemek için tarayıcı demosu eklendi.' ::: 'A browser demo was added so people can try the app without installing it.'
+J: 'Arapça (sağdan sola)' ::: 'Arabic (right to left)'
+J: 'Arapça, Çince, Japonca, Korece; sağdan sola yazılan dil için arayüz düzeltmeleri.' ::: 'Arabic, Chinese, Japanese, Korean; interface fixes for the right-to-left language.'
+J: 'Son sürüm: havalimanı servis araçları uçaktan ayrıldı, acil durum alarmı 45 saniye kuralına bağlandı.' ::: 'Latest release: airport service vehicles were separated from aircraft, and the emergency alarm was tied to the 45-second rule.'

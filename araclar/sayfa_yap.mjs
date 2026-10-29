@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { PROJELER, projeVitrinHTML, sayacHTML, medyaHTML } from '../js/projeler.js';
 import { FABRIKA_SVG } from './fabrika.mjs';
 import { SAHNELER } from './sahneler.mjs';
+import { dilSecici, dilEtiketleri } from './dil-baglanti.mjs';
 
 const KOK = fileURLToPath(new URL('../', import.meta.url));
 const KONTROL = process.argv.includes('--kontrol');
@@ -27,7 +28,7 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '', kapak = y
   <meta property="og:image" content="${URL_KOK}img/paylasim/${kapak}.png">
   <meta name="theme-color" content="#f2e8d5">
   <meta name="twitter:card" content="summary_large_image">
-  ${IKON}
+  ${yol === '404.html' ? '' : `${dilEtiketleri(yol)}\n  `}${IKON}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
@@ -45,12 +46,13 @@ const BOLUMLER = [
   ['slaytlar', 'Slaytlar', 'AI\'ı sıfırdan öğren', 'bakir', '<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8M7 9h6M7 12h9"/>'],
   ['iletisim', 'İletişim', 'iş, proje ya da soru', 'kiremit', '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/>'],
 ];
-export const menu = (aktif, onek = '../') => `
+export const menu = (aktif, onek = '../', yol = aktif ? `${aktif}/` : null) => `
   <nav class="yan-menu" aria-label="Site">
     <a class="logo" href="${onek}"><img src="${onek}img/sahin/logo.webp" alt="" width="40" height="40"><span><b>SAMET<br>DUHAN</b></span></a>
     <div class="menu-linkler">
 ${BOLUMLER.map(([h, ad, alt, pig, ikon], i) => `      <a class="p-${pig}" href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${ikon}</svg><span class="m-ad"><i>0${i + 1}</i>${ad}</span><small>${alt}</small></a>`).join('\n')}
     </div>
+    ${yol ? dilSecici(yol, 'tr') : ''}
   </nav>`;
 
 // Sayfa başı: numaralı etiket + damga, serif başlık, tanıtım ve sayfanın şahin pozu.

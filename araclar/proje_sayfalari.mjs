@@ -129,7 +129,7 @@ for (const p of PROJELER) {
       </div>`;
   }
 
-  const govde = `${bas({ baslik: `${p.ad} · Samet Duhan`, aciklama: p.ozet, yol, onek: k, kapak: slug, ekCss: '\n  <link rel="stylesheet" href="../../css/vitrin.css">\n  <link rel="stylesheet" href="../../css/proje.css">' })}${menu('projeler', k)}
+  const govde = `${bas({ baslik: `${p.ad} · Samet Duhan`, aciklama: p.ozet, yol, onek: k, kapak: slug, ekCss: '\n  <link rel="stylesheet" href="../../css/vitrin.css">\n  <link rel="stylesheet" href="../../css/proje.css">' })}${menu('projeler', k, yol)}
   <main id="icerik" data-sayfalama="kaydir">
     <a class="geri-baglanti" href="../">← Tüm projeler</a>
 
