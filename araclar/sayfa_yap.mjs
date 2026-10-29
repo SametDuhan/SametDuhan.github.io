@@ -252,6 +252,7 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
       const s = sayfala(liste, sayfa);
       sayfa = s.sayfa;
       kutu.innerHTML = s.ogeler.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) kutu.querySelectorAll('.mini-gorsel svg').forEach((v) => v.pauseAnimations());
       gezinme(s);
       cipler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
       sayac.textContent = \`\${liste.length} sunum\`;
