@@ -92,6 +92,8 @@
   width: 24px; height: 24px; border-color: var(--p);
 }
 .kare:focus-visible { outline: 2px solid var(--p); outline-offset: 4px; }
+/* kartların çevresinde ince koyu şerit */
+.kareler .kare { border: 1.5px solid var(--yazi); }
 /* hover dekoru (silik): Projeler'de sağ üst köşeden taşan, birbirine geçen iki dişli; İletişim'de telefonun sağında düşen mektuplar.
    Yalnız üzerine gelince ya da odaklanınca belirir ve döner/düşer; köşeden taşan kısım kutu kenarında kırpılır (.dekor-kutu). */
 .dekor-kutu { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .35s ease; }
