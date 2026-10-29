@@ -1,0 +1,48 @@
+/* "Claude Code hook'u" sunumu: kapak zinciri, bekleme sahnesi, ayar dosyası. */
+
+/* ---- kapak: Stop → hook → PowerShell → piksel ---- */
+.kapak-sahne.zincirli { position: relative; }
+.kapak-sahne.zincirli > div { position: relative; z-index: 1; max-width: min(400px, 48%); }
+.zincir-cizim { position: absolute; right: clamp(120px, 15%, 190px); top: 50%; width: min(310px, 40%); translate: 0 -50%; pointer-events: none; overflow: visible; }
+.zincir-cizim rect { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.8; animation: kutu-yan 6s ease-in-out infinite; }
+.zincir-cizim g:nth-of-type(2) rect { animation-delay: 1.5s; }
+.zincir-cizim g:nth-of-type(3) rect { animation-delay: 3s; }
+.zincir-cizim g:nth-of-type(4) rect { animation-delay: 4.5s; }
+.zincir-cizim text { font: 600 9.5px var(--mono); fill: var(--yazi); text-anchor: middle; }
+.zincir-cizim .ok { fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-dasharray: 4 5; animation: rota-akis 1.2s linear infinite; }
+.zincir-cizim .tasiyici { fill: var(--vurgu); stroke: var(--zemin); stroke-width: 1.5; }
+@keyframes kutu-yan { 0%, 24%, 100% { fill: var(--zemin); } 6%, 18% { fill: color-mix(in srgb, var(--vurgu) 45%, var(--zemin)); } }
+@keyframes rota-akis { to { stroke-dashoffset: -18; } }
+.slayt img.kapak-sahin { position: absolute; right: clamp(8px, 2%, 28px); bottom: 0; height: min(96%, 190px); width: auto; max-height: none; border: 0; border-radius: 0; }
+@media (max-width: 760px) { .zincir-cizim { display: none; } .kapak-sahne.zincirli > div { max-width: 100%; } .slayt img.kapak-sahin { height: 110px; opacity: .9; } }
+
+/* ---- 1 · "bitti mi?" bekleme sahnesi ---- */
+.bekleme { display: flex; align-items: flex-end; gap: 22px; margin: 10px 0; }
+.pencere { flex: 1 1 360px; max-width: 520px; border: 1.5px solid var(--yazi); border-radius: 8px; background: var(--yazi); overflow: hidden; }
+.pencere-bas { display: flex; align-items: center; gap: 6px; padding: 7px 10px; background: #4a3827; }
+.pencere-bas i { width: 9px; height: 9px; border-radius: 50%; background: #b9a587; }
+.pencere-bas span { margin-left: 6px; font: 12px var(--mono); color: #e7d9bf; }
+.pencere-ic { padding: 12px 14px 14px; font: 13px/1.7 var(--mono); color: #f2e8d5; }
+.pencere-ic p { margin: 0; font: inherit; color: inherit; }
+.pencere-ic .komut { color: #e9b982; }
+.pencere-ic .calisiyor::after { content: ''; animation: uc-nokta 1.4s steps(4) infinite; }
+.belirsiz { position: relative; height: 5px; margin-top: 10px; background: #4a3827; border-radius: 3px; overflow: hidden; }
+.belirsiz i { position: absolute; top: 0; bottom: 0; width: 35%; background: #e9b982; border-radius: 3px; animation: belirsiz 1.6s ease-in-out infinite; }
+@keyframes uc-nokta { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75%, 100% { content: '...'; } }
+@keyframes belirsiz { 0% { left: -35%; } 100% { left: 100%; } }
+.bakan { position: relative; flex: none; width: 150px; height: 150px; }
+.slayt .bakan img { height: 150px; width: auto; max-height: none; border: 0; border-radius: 0; }
+.bakan b { position: absolute; left: -26px; top: 0; font: 600 13px var(--mono); background: var(--zemin); color: var(--yazi); border: 1.5px solid var(--yazi); border-radius: 12px 12px 12px 2px; padding: 4px 10px; opacity: 0; animation: bitti-mi 7.5s ease-out infinite; white-space: nowrap; }
+.bakan b:nth-of-type(2) { top: 34px; left: -56px; animation-delay: -2.5s; }
+.bakan b:nth-of-type(3) { top: -20px; left: 14px; animation-delay: -5s; }
+@keyframes bitti-mi { 0% { opacity: 0; transform: translateY(10px) scale(.9); } 8%, 30% { opacity: 1; transform: none; } 38%, 100% { opacity: 0; transform: translateY(-8px); } }
+@media (max-width: 600px) { .bakan { display: none; } }
+
+/* ---- 4 · ayar dosyası: otomatik satır satır ---- */
+.adim-kod .satir.simdi { transition: background .3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zincir-cizim rect, .zincir-cizim .ok, .pencere-ic .calisiyor::after, .belirsiz i, .bakan b { animation: none !important; }
+  .bakan b { opacity: 1; position: static; display: inline-block; margin: 0 4px 4px 0; }
+  .pencere-ic .calisiyor::after { content: '...'; }
+}

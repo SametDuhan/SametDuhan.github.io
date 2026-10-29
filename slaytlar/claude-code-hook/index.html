@@ -15,6 +15,7 @@
 <meta property="og:title" content="Claude Code hook&#x27;u ile otomasyon · Samet Duhan"><meta property="og:description" content="İzle, dene ve adım adım keşfet. Samet Duhan’dan interaktif geliştirme anlatımı."><meta property="og:type" content="article"><meta property="og:url" content="https://sametduhan.github.io/slaytlar/claude-code-hook/"><meta property="og:image" content="https://sametduhan.github.io/img/paylasim/claude-code-hook.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="../../css/atolye.css">
 <link rel="stylesheet" href="../../css/deste-gorsel.css">
+<link rel="stylesheet" href="../../css/hook-gorsel.css">
 <link rel="stylesheet" href="../../css/ekran.css">
 </head>
 <body>
@@ -27,7 +28,17 @@
 
     <section class="slayt">
       <p class="kucuk-baslik">Claude Code · ~8 dakika</p>
-      <h1>Claude Code hook'u ile otomasyon</h1><div class="kapak-sahne"><span class="orb turuncu">↯</span><div><small>02 / BAĞLA</small><strong>İş biter.<br>Ekran haber verir.</strong><span class="akis">Stop → hook → PowerShell → piksel</span></div></div>
+      <h1>Claude Code hook'u ile otomasyon</h1><div class="kapak-sahne zincirli"><span class="orb turuncu">↯</span><div><small>02 / BAĞLA</small><strong>İş biter.<br>Ekran haber verir.</strong><span class="akis">Stop → hook → PowerShell → piksel</span></div>
+        <svg class="zincir-cizim" viewBox="0 0 320 70" aria-hidden="true">
+          <path id="zincir-yol" class="ok" d="M36 35H284"/>
+          <g><rect x="2" y="17" width="68" height="36" rx="6"/><text x="36" y="39">Stop</text></g>
+          <g><rect x="92" y="17" width="68" height="36" rx="6"/><text x="126" y="39">hook</text></g>
+          <g><rect x="170" y="17" width="82" height="36" rx="6"/><text x="211" y="39">PowerShell</text></g>
+          <g><rect x="262" y="17" width="56" height="36" rx="6"/><text x="290" y="39">piksel</text></g>
+          <circle class="tasiyici" r="5"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#zincir-yol"/></animateMotion></circle>
+        </svg>
+        <img class="kapak-sahin" src="../../img/sahin/ceyrek.webp" alt="" width="210" height="210">
+      </div>
       <p>Bir AI ajanı işini bitirdiğinde bilgisayarının <strong>kendiliğinden</strong> bir şey yapmasını sağlayacağız. Örnek proje: <strong>claude-done-pixel</strong>.</p>
       <p>AI ajanının ne olduğunu bilmiyorsan önce şuna bak: <a href="../ai-ajani-nedir/">AI ajanı nedir?</a></p>
     </section>
@@ -37,6 +48,11 @@
       <h2>"Bitti mi?" diye terminale bakmak</h2>
       <p><strong>Claude Code</strong>, terminalde çalışan bir AI ajanı: kod yazar, dosya düzenler, komut çalıştırır. Bazı işler dakikalar sürer.</p>
       <p>O sırada başka bir pencerede çalışıyorsun ve her yarım dakikada bir terminale dönüp "bitti mi?" diye bakıyorsun. Hem dikkatin bölünüyor hem zaman kaybediyorsun.</p>
+      <div class="bekleme" aria-hidden="true">
+        <div class="pencere"><div class="pencere-bas"><i></i><i></i><i></i><span>claude</span></div>
+          <div class="pencere-ic"><p class="komut">&gt; testleri çalıştır ve hataları düzelt</p><p class="calisiyor">çalışıyor</p><div class="belirsiz"><i></i></div></div></div>
+        <div class="bakan"><b>bitti mi?</b><b>bitti mi?</b><b>hâlâ mı?</b><img src="../../img/sahin/sol.webp" alt="" width="150" height="150"></div>
+      </div>
       <p>İstediğimiz şey basit: <strong>Claude bitirince bana haber versin.</strong></p>
     </section>
 
@@ -67,7 +83,7 @@
       <p>Gerçekte bu karakter ekranının sağ altında, saatin hemen üstünde belirir. Burada tarayıcıda yeniden çizdim:</p>
       <div class="demo">
         <canvas id="piksel" width="720" height="220" aria-label="Piksel karakter sağdan gelir, iki kez zıplar, yeşil bayrak sallar ve sağdan çıkar"></canvas>
-        <button type="button" class="dugme demo-dugme" id="piksel-dugme" style="cursor:pointer">↺ tekrar oynat</button>
+        <button type="button" class="dugme demo-dugme" id="piksel-dugme" style="cursor:pointer">↺ baştan</button>
       </div>
       <p>Sağdan koşarak gelir, iki kez zıplar, yeşil bayrağı iki kez sallar ve sağdan çıkar. Yaklaşık 6,5 saniye, sessiz. Pencere tıklamaları geçirir ve odağı çalmaz; yazdığın şey yarıda kalmaz.</p>
     </section>
@@ -76,7 +92,7 @@
       <p class="kucuk-baslik">5 · Aynı fikir, başka ajan</p>
       <h2>Codex için: chatgpt-done-pixel</h2>
       <p>OpenAI'ın kod ajanı <strong>Codex</strong>'te hook'un adı farklı ama fikir aynı: Codex, bir tur bitince <code>agent-turn-complete</code> bildirimi gönderir; ayar dosyasındaki <code>notify</code> komutu bu bildirimle çalışır.</p>
-      <img src="../../img/chatgpt-done.png" alt="Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama" width="1920" height="308" style="image-rendering:pixelated">
+      <div class="piksel-demo" data-piksel-demo="codex" data-otomatik><p>chatgpt-done-pixel: tur bitince saatin üstünde</p><canvas width="640" height="270" role="img" aria-label="Piksel logo animasyonu: geliş, iki zıplama, iki bayrak, kutlama"></canvas><button class="dugme" type="button" hidden>oynat</button></div>
       <p>Ders: Araçlar değişir, kavram kalır. "Hangi olay var, o olayda ne çalıştırabilirim?" diye sormayı öğrendiysen her ajana uygulayabilirsin.</p>
     </section>
 
@@ -93,6 +109,7 @@
         <p class="sonuc" aria-live="polite"></p>
         <p class="aciklama"><code>Stop</code> her cevaptan sonra çalışır; "merhaba" dediğinde bile karakter zıplar. Bu çok sıksa, Claude Code'un hook rehberinde ne zaman tetikleneceğini sınırlamanın yolları anlatılıyor.</p>
       </div>
+      <div class="dusunen" aria-hidden="true"><b>?</b><b>?</b><b>?</b><img src="../../img/sahin/sol.webp" alt="" width="150" height="150"></div>
     </section>
 
     <section class="slayt">
@@ -100,9 +117,9 @@
       <h2>Kendi bilgisayarına kur</h2>
       <p>Windows'ta, Claude Code kuruluysa PowerShell'de sırayla çalıştır:</p>
       <div class="dene">
-        <code>git clone https://github.com/SametDuhan/claude-done-pixel
-cd claude-done-pixel
-powershell -ExecutionPolicy Bypass -File install.ps1</code>
+        <code><span class="tl" style="--i:0">git clone https://github.com/SametDuhan/claude-done-pixel</span>
+<span class="tl" style="--i:1">cd claude-done-pixel</span>
+<span class="tl" style="--i:2">powershell -ExecutionPolicy Bypass -File install.ps1</span></code>
         <button type="button">kopyala</button>
       </div>
       <p>Kurulum betiği <code>settings.json</code>'a <code>Stop</code> hook'unu ekler ve eski ayarının yedeğini <code>settings.json.bak</code> olarak saklar. Claude Code'u yeniden başlat, bir şey sor, karakteri bekle. Kaldırmak için: <code>uninstall.ps1</code>.</p>
@@ -116,6 +133,7 @@ powershell -ExecutionPolicy Bypass -File install.ps1</code>
         <li><a href="../skytrack-nasil-kurdum/">SkyTrack'i AI ile nasıl kurdum</a>: bir uygulamanın tamamını AI ile yazmak.</li>
         <li><a href="../">Tüm slaytlar</a> · <a href="../../projeler/">Projeler</a> · <a href="../../iletisim/">İletişim</a></li>
       </ul>
+      <div class="bitti-sahne" aria-hidden="true"><img src="../../img/sahin/kanat-kucuk.webp" alt="" width="140" height="140"><i style="--x:8%;--c:#d07a2a;--d:3.1s;--g:0s"></i><i style="--x:18%;--c:#2f4a6b;--d:2.7s;--g:.6s"></i><i style="--x:30%;--c:#4f7d6e;--d:3.4s;--g:1.1s"></i><i style="--x:42%;--c:#a8432a;--d:2.9s;--g:.3s"></i><i style="--x:58%;--c:#d07a2a;--d:3.2s;--g:1.4s"></i><i style="--x:70%;--c:#2f4a6b;--d:2.6s;--g:.9s"></i><i style="--x:82%;--c:#4f7d6e;--d:3.3s;--g:.2s"></i><i style="--x:92%;--c:#a8432a;--d:2.8s;--g:1.7s"></i></div>
     </section>
   </div>
 
@@ -126,9 +144,19 @@ powershell -ExecutionPolicy Bypass -File install.ps1</code>
     const tuval = document.getElementById('piksel');
     const slayt = tuval.closest('section.slayt');
     ciz(tuval, 0);
-    slayt.addEventListener('goster', () => oynat(tuval));
-    slayt.addEventListener('gizle', durdur);
-    document.getElementById('piksel-dugme').addEventListener('click', () => oynat(tuval));
+    // Animasyon slayt açılınca kendiliğinden oynar ve döngüde tekrarlanır; düğme baştan başlatır.
+    let jeton = 0;
+    const dongu = async () => {
+      const ben = ++jeton;
+      while (ben === jeton) {
+        await oynat(tuval);
+        if (ben !== jeton || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        await new Promise((bitti) => setTimeout(bitti, 1400));
+      }
+    };
+    slayt.addEventListener('goster', dongu);
+    slayt.addEventListener('gizle', () => { jeton++; durdur(); });
+    document.getElementById('piksel-dugme').addEventListener('click', dongu);
 
     bagla(document.getElementById('deste'));
   </script>
