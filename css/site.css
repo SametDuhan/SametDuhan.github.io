@@ -115,13 +115,12 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .mini-iz { fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-dasharray: 4 5; }
 .mini-dugum { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.6; }
 .mini-kutu { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.6; }
-/* çizimler boşta durur; üzerine gelince ya da odaklanınca çalışır */
-.deste-karti:hover .mini-iz, .deste-karti:focus-visible .mini-iz { animation: bant-serit 1.4s linear infinite; }
-.deste-karti:hover .mini-dugum, .deste-karti:focus-visible .mini-dugum { animation: mini-yan 3.2s ease-in-out infinite; }
-.deste-karti:hover .mini-kutu, .deste-karti:focus-visible .mini-kutu { animation: mini-yan 3.2s ease-in-out infinite; }
-.mini-dugum.d2, .mini-kutu.k2 { animation-delay: .8s !important; }
-.mini-dugum.d3, .mini-kutu.k3 { animation-delay: 1.6s !important; }
-.mini-dugum.d4, .mini-kutu.k4 { animation-delay: 2.4s !important; }
+/* çizimler kendiliğinden döner (küçük SVG'ler, hafif); hareketi azaltınca durur */
+.mini-iz { animation: bant-serit 1.4s linear infinite; }
+.mini-dugum, .mini-kutu { animation: mini-yan 3.2s ease-in-out infinite; }
+.mini-dugum.d2, .mini-kutu.k2 { animation-delay: .8s; }
+.mini-dugum.d3, .mini-kutu.k3 { animation-delay: 1.6s; }
+.mini-dugum.d4, .mini-kutu.k4 { animation-delay: 2.4s; }
 @keyframes mini-yan { 0%, 30%, 100% { fill: var(--zemin); } 8%, 22% { fill: var(--vurgu); } }
 .mini-nokta { fill: var(--vurgu); stroke: var(--zemin); stroke-width: 1.2; }
 .mini-ucak { fill: var(--civit); stroke: var(--zemin); stroke-width: 1; }
