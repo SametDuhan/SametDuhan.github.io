@@ -1,0 +1,110 @@
+/* "AI ajanı nedir?" sunumu: kapak döngüsü, sohbet balonları, araç çipleri, izin kapısı, ipucu vurguları. */
+
+/* ---- kapak: dört adımlı halka ---- */
+.kapak-sahne.halkali { position: relative; }
+.kapak-sahne.halkali > div { position: relative; z-index: 1; max-width: min(430px, 52%); }
+.halka-cizim { position: absolute; right: clamp(150px, 19%, 230px); top: 50%; width: min(170px, 22%); translate: 0 -50%; pointer-events: none; overflow: visible; }
+.halka-cizim .iz { fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-dasharray: 4 6; animation: rota-akis 1.6s linear infinite; }
+.halka-cizim .dugum circle { fill: var(--zemin); stroke: var(--yazi); stroke-width: 1.8; transform-box: fill-box; transform-origin: center; animation: dugum-nabiz 6s ease-in-out infinite; }
+.halka-cizim .dugum:nth-of-type(2) circle { animation-delay: 1.5s; }
+.halka-cizim .dugum:nth-of-type(3) circle { animation-delay: 3s; }
+.halka-cizim .dugum:nth-of-type(4) circle { animation-delay: 4.5s; }
+.halka-cizim text { font: 600 10px var(--mono); fill: var(--yazi); text-anchor: middle; }
+.halka-cizim .tasiyici { fill: var(--vurgu); stroke: var(--zemin); stroke-width: 1.5; }
+@keyframes dugum-nabiz { 0%, 22%, 100% { transform: scale(1); fill: var(--zemin); } 6%, 14% { transform: scale(1.35); fill: var(--vurgu); } }
+@keyframes rota-akis { to { stroke-dashoffset: -20; } }
+.slayt img.kapak-sahin { position: absolute; right: clamp(8px, 2%, 28px); bottom: 0; height: min(96%, 190px); width: auto; max-height: none; border: 0; border-radius: 0; }
+@media (max-width: 760px) { .halka-cizim { display: none; } .kapak-sahne.halkali > div { max-width: 100%; } .slayt img.kapak-sahin { height: 110px; opacity: .9; } }
+
+/* ---- 1 · sohbet balonları ---- */
+.sohbet { position: relative; display: flex; flex-direction: column; gap: 8px; margin: 10px 0 4px; min-height: 196px; }
+.balon { max-width: min(520px, 90%); padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.5; border: 1px solid var(--kenar); opacity: 0; }
+.balon.kullanici { align-self: flex-end; background: color-mix(in srgb, var(--vurgu) 16%, var(--zemin)); border-bottom-right-radius: 4px; }
+.balon.bot { align-self: flex-start; background: var(--panel-cam); border-bottom-left-radius: 4px; }
+.balon code { font-size: .88em; }
+.yaziyor { display: flex; gap: 5px; padding: 14px 16px; position: absolute; top: 52px; left: 0; }
+.yaziyor i { width: 7px; height: 7px; border-radius: 50%; background: var(--soluk); animation: nokta-zip .9s ease-in-out infinite; }
+.yaziyor i:nth-child(2) { animation-delay: .15s; }
+.yaziyor i:nth-child(3) { animation-delay: .3s; }
+@keyframes nokta-zip { 50% { transform: translateY(-5px); opacity: .5; } }
+.sen-isi { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 2px; }
+.sen-isi small { font: 600 12px var(--mono); color: var(--vurgu-koyu); opacity: 0; }
+.sen-isi span { font: 13px var(--mono); border: 1px dashed var(--vurgu-koyu); border-radius: 20px; padding: 4px 12px; background: var(--zemin); opacity: 0; }
+.canli .sohbet .kullanici { animation: sohbet-gir 12s linear infinite both; }
+.canli .sohbet .yaziyor { animation: sohbet-yaz 12s linear infinite both; }
+.canli .sohbet .cevap { animation: sohbet-cevap 12s linear infinite both; }
+.canli .sohbet .sen-isi small { animation: sohbet-sen 12s linear infinite both; }
+@keyframes sohbet-gir { 0% { opacity:0;transform:translateY(10px) } 4%, 92% { opacity:1;transform:none } 97%, 100% { opacity:0 } }
+@keyframes sohbet-yaz { 0%, 8% { opacity:0 } 10%, 24% { opacity:1 } 26%, 100% { opacity:0 } }
+@keyframes sohbet-cevap { 0%, 26% { opacity:0;transform:translateY(10px) } 30%, 92% { opacity:1;transform:none } 97%, 100% { opacity:0 } }
+@keyframes sohbet-sen { 0%, 44% { opacity:0 } 48%, 92% { opacity:1 } 97%, 100% { opacity:0 } }
+.canli .sohbet .sen-isi span:nth-of-type(1) { animation: sohbet-cip1 12s linear infinite both; }
+@keyframes sohbet-cip1 { 0%, 50% { opacity:0;transform:translateY(8px) scale(.9) } 54%, 92% { opacity:1;transform:none } 97%, 100% { opacity:0 } }
+.canli .sohbet .sen-isi span:nth-of-type(2) { animation: sohbet-cip2 12s linear infinite both; }
+@keyframes sohbet-cip2 { 0%, 58% { opacity:0;transform:translateY(8px) scale(.9) } 62%, 92% { opacity:1;transform:none } 97%, 100% { opacity:0 } }
+.canli .sohbet .sen-isi span:nth-of-type(3) { animation: sohbet-cip3 12s linear infinite both; }
+@keyframes sohbet-cip3 { 0%, 66% { opacity:0;transform:translateY(8px) scale(.9) } 70%, 92% { opacity:1;transform:none } 97%, 100% { opacity:0 } }
+.canli .sohbet .sen-isi span:nth-of-type(4) { animation: sohbet-cip4 12s linear infinite both; }
+@keyframes sohbet-cip4 { 0%, 74% { opacity:0;transform:translateY(8px) scale(.9) } 78%, 92% { opacity:1;transform:none } 97%, 100% { opacity:0 } }
+.deste:not(.js-hazir) .balon, .deste:not(.js-hazir) .sen-isi span, .deste:not(.js-hazir) .sen-isi small { opacity: 1; }
+.deste:not(.js-hazir) .yaziyor { display: none; }
+
+/* ---- 2 · araç çipleri ---- */
+.arac-cipleri { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.arac-cipleri span { font: 13px var(--mono); border: 1.5px solid var(--yazi); background: var(--zemin); border-radius: 6px; padding: 5px 11px; box-shadow: 3px 3px 0 var(--kenar); }
+.canli .arac-cipleri span { animation: cip-gir .5s cubic-bezier(.2, .8, .3, 1.3) both; }
+.canli .arac-cipleri span:nth-child(1) { animation-delay: .9s; }
+.canli .arac-cipleri span:nth-child(2) { animation-delay: 1.1s; }
+.canli .arac-cipleri span:nth-child(3) { animation-delay: 1.3s; }
+.canli .arac-cipleri span:nth-child(4) { animation-delay: 1.5s; }
+@keyframes cip-gir { from { opacity: 0; transform: translateY(10px) scale(.85); } to { opacity: 1; transform: none; } }
+
+/* ---- 3 · döngü okları ---- */
+.dongu path { stroke-dasharray: 6 6; animation: rota-akis 1s linear infinite; }
+.dongu path.aktif { stroke: var(--vurgu-koyu); stroke-width: 2.2; }
+
+/* ---- 6 · izin kapısı ---- */
+.kapi { width: 100%; max-width: 640px; height: auto; margin: 8px 0; overflow: visible; }
+.kapi .yer { stroke: var(--yazi); stroke-width: 1.5; }
+.kapi .direk { fill: var(--zemin); stroke: var(--yazi); stroke-width: 2; }
+.kapi .bariyer { fill: var(--kiremit); stroke: var(--yazi); stroke-width: 1.5; transform-origin: 360px 92px; animation: bariyer 10s ease-in-out infinite; }
+.kapi .ajan-kutu rect { fill: var(--civit); stroke: var(--yazi); stroke-width: 1.8; }
+.kapi .ajan-kutu text { font: 700 12px var(--mono); fill: #f2e8d5; text-anchor: middle; }
+.kapi .ajan-kutu { animation: ajan-yuru 10s linear infinite; }
+.kapi .yazi { font: 600 11px var(--mono); fill: var(--yazi); }
+.kapi .soru-balon { animation: kapi-soru 10s linear infinite; }
+.kapi .onay { animation: kapi-onay 10s linear infinite; }
+.kapi .soru-balon rect { fill: var(--zemin); stroke: var(--kiremit); stroke-width: 1.6; }
+.kapi .onay rect { fill: var(--iyi); }
+.kapi .onay text { font: 700 12px var(--mono); fill: #f2e8d5; text-anchor: middle; }
+.kapi .tabela-yazi { font: 700 10px var(--mono); fill: var(--kiremit); text-anchor: start; letter-spacing: .08em; }
+@keyframes ajan-yuru { 0% { transform:translateX(0);opacity:0 } 4% { opacity:1 } 30%, 50% { transform:translateX(250px);opacity:1 } 78% { transform:translateX(480px);opacity:1 } 84%, 100% { transform:translateX(480px);opacity:0 } }
+@keyframes bariyer { 0%, 50% { transform:rotate(0) } 56%, 80% { transform:rotate(-78deg) } 88%, 100% { transform:rotate(0) } }
+@keyframes kapi-soru { 0%, 30% { opacity:0 } 34%, 46% { opacity:1 } 50%, 100% { opacity:0 } }
+@keyframes kapi-onay { 0%, 47% { opacity:0;transform:translateY(6px) } 52%, 76% { opacity:1;transform:none } 82%, 100% { opacity:0 } }
+
+/* ---- 7 · prompt'taki dört adım ---- */
+.dene code mark { background: transparent; color: inherit; border-radius: 3px; padding: 0 2px; }
+.canli .dene code mark { animation: vurgu-ac .5s ease forwards; }
+.canli .dene code mark:nth-of-type(1) { animation-delay: .8s; }
+.canli .dene code mark:nth-of-type(2) { animation-delay: 1.8s; }
+.canli .dene code mark:nth-of-type(3) { animation-delay: 2.8s; }
+.canli .dene code mark:nth-of-type(4) { animation-delay: 3.8s; }
+@keyframes vurgu-ac { to { background: color-mix(in srgb, var(--vurgu) 38%, transparent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--vurgu) 38%, transparent); } }
+.deste:not(.js-hazir) .dene code mark { background: color-mix(in srgb, var(--vurgu) 38%, transparent); }
+
+/* ---- 8 · yol ---- */
+.yol-sahne { position: relative; display: flex; align-items: flex-end; gap: 14px; height: 130px; margin-top: 6px; border-bottom: 2px solid var(--yazi); }
+.slayt .yol-sahne img { height: 128px; width: auto; max-height: none; border: 0; border-radius: 0; }
+.yol-sahne b { font: 800 44px var(--serif); color: var(--vurgu-koyu); animation: yol-ok 1.4s ease-in-out infinite; margin-bottom: 40px; }
+@keyframes yol-ok { 0%, 100% { transform: translateX(0); opacity: .5; } 50% { transform: translateX(14px); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .halka-cizim .iz, .halka-cizim .dugum circle, .yaziyor i, .dongu path, .kapi *, .yol-sahne b, .canli .sohbet *, .canli .arac-cipleri span, .canli .dene code mark { animation: none !important; }
+  .balon, .sen-isi span, .sen-isi small { opacity: 1 !important; transform: none !important; }
+  .yaziyor { display: none; }
+  .kapi .ajan-kutu { transform: translateX(480px); }
+  .kapi .bariyer { transform: rotate(-78deg); }
+  .kapi .soru-balon, .kapi .onay { opacity: 0; }
+  .dene code mark { background: color-mix(in srgb, var(--vurgu) 38%, transparent); }
+}
