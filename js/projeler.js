@@ -9,6 +9,8 @@ export const PROJELER = [
     srcset: 'img/skytrack-960.jpg 960w, img/skytrack-1440.jpg 1440w, img/skytrack.jpg 2880w',
     alt: 'SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası',
     piksel: false,
+    medya: 'video',
+    video: 'video/skytrack-demo.webm',
     etiketler: ['Uygulama', 'Açık veri'],
     bilgiler: [
       'Windows, macOS ve Linux; Electron ve Leaflet ile',
@@ -28,6 +30,7 @@ export const PROJELER = [
     gorsel: 'img/claude-done.png',
     alt: 'Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler',
     piksel: true,
+    medya: 'claude',
     etiketler: ['AI aracı', 'Claude Code'],
     bilgiler: [
       'Claude Code\'un Stop hook\'u ile çalışır',
@@ -45,6 +48,7 @@ export const PROJELER = [
     gorsel: 'img/chatgpt-done.png',
     alt: 'Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama',
     piksel: true,
+    medya: 'codex',
     etiketler: ['AI aracı', 'Codex'],
     bilgiler: [
       'Codex\'in agent-turn-complete bildirimiyle çalışır',
@@ -57,26 +61,44 @@ export const PROJELER = [
 
 const kacis = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
-export function projeleriSuz(liste, etiket) {
-  return etiket === 'hepsi' ? liste : liste.filter((p) => p.etiketler.includes(etiket));
+// Sayfanın üstündeki sayaçlar: her sayı SkyTrack README'sinden ve commit geçmişinden (bkz. slaytlar/skytrack-nasil-kurdum).
+export const SAYACLAR = [
+  { say: PROJELER.length, etiket: 'açık kaynak proje' },
+  { say: 208, etiket: 'commit, SkyTrack' },
+  { say: 191, etiket: 'Claude ile ortak yazıldı' },
+  { say: 15, etiket: 'dil desteği, SkyTrack' },
+];
+
+export const sayacHTML = (liste = SAYACLAR) => liste.map((c) => `<div class="sayac"><b data-say="${c.say}">${c.say}</b><span>${kacis(c.etiket)}</span></div>`).join('');
+
+// Her proje büyük bir vitrin satırı: solda canlı medya (video ya da canlı piksel animasyonu), sağda yazı. Satırlar sırayla yer değiştirir.
+const MEDYA_ETIKET = { video: 'canlı demo · sessiz ekran kaydı', claude: 'canlı önizleme · piksel animasyonu', codex: 'canlı önizleme · piksel animasyonu' };
+
+export function medyaHTML(p, kok = '') {
+  const cerceve = (ic) => `<div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>${kacis(MEDYA_ETIKET[p.medya] ?? p.ad)}</span></div>${ic}</div>`;
+  if (p.medya === 'video') {
+    return cerceve(`<video class="v-ekran" muted loop playsinline preload="metadata" poster="${kacis(kok + p.gorsel)}" aria-label="${kacis(p.alt)}"><source src="${kacis(kok + p.video)}" type="video/webm"></video>`);
+  }
+  return cerceve(`<canvas class="v-ekran v-piksel" width="640" height="400" role="img" aria-label="${kacis(p.alt)}"></canvas>`);
 }
 
-export function projeKartiHTML(p, kok = '') {
-  const linkler = [
-    `<a class="dugme" href="${kacis(kok + 'projeler/' + p.ad.toLowerCase() + '/')}">projeyi keşfet →</a>`,
-    p.demo ? `<a class="dugme" href="${kacis(p.demo)}">▶ tarayıcı demosu (simülasyon)</a>` : '',
-    `<a class="dugme" href="${kacis(p.github)}">GitHub</a>`,
-    p.deste ? `<a class="dugme" href="${kacis(kok + p.deste)}">nasıl yaptım →</a>` : '',
-  ].join('');
-  return `<article class="kart kose p-${kacis(p.pigment)}" id="${kacis(p.ad.toLowerCase())}" data-ad="${kacis(p.ad)}"><i class="k2"></i><i class="k3"></i>
-  <img${p.piksel ? ' class="piksel"' : ''} src="${kacis(kok + p.gorsel)}"${p.srcset ? ` srcset="${kacis(p.srcset.split(', ').map((g) => kok + g).join(', '))}" sizes="(max-width: 700px) 100vw, 340px"` : ''} alt="${kacis(p.alt)}" loading="lazy">
-  <div class="kart-govde">
-    <p class="kart-komut">${kacis(p.komut)}</p>
+export function projeVitrinHTML(p, kok = '') {
+  const ikincil = [
+    p.demo ? `<a href="${kacis(p.demo)}">▶ web demo</a>` : '',
+    p.deste ? `<a href="${kacis(kok + p.deste)}">nasıl yaptım →</a>` : '',
+  ].filter(Boolean).join('');
+  return `<article class="vitrin belir p-${kacis(p.pigment)}" id="${kacis(p.ad.toLowerCase())}" data-ad="${kacis(p.ad)}">
+  <div class="v-medya" data-medya="${kacis(p.medya)}">${medyaHTML(p, kok)}</div>
+  <div class="v-govde">
+    <p class="v-komut">${kacis(p.komut)}</p>
     <h2>${kacis(p.ad)}</h2>
-    <p class="etiketler">${p.etiketler.map((e) => `<span>${kacis(e)}</span>`).join('')}</p>
-    <p>${kacis(p.ozet)}</p>
-    <ul class="bilgiler">${p.bilgiler.map((b) => `<li>${kacis(b)}</li>`).join('')}</ul>
-    <div class="linkler">${linkler}</div>
+    <p class="v-etiketler">${p.etiketler.map((e) => `<span>${kacis(e)}</span>`).join('')}</p>
+    <p class="v-ozet">${kacis(p.ozet)}</p>
+    <ul class="v-bilgiler">${p.bilgiler.map((b) => `<li>${kacis(b)}</li>`).join('')}</ul>
+    <div class="linkler">
+      <a class="dugme ana" href="${kacis(kok + 'projeler/' + p.ad.toLowerCase() + '/')}">projeyi keşfet →</a>
+      <a class="dugme" href="${kacis(p.github)}">GitHub ↗</a>
+    </div>${ikincil ? `\n    <p class="v-ek">${ikincil}</p>` : ''}
   </div>
 </article>`;
 }
