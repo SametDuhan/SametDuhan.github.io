@@ -87,3 +87,17 @@ test('hakkımda sahnesi: mühür vurulunca damga solup kaybolur, iz kalır; hare
   assert.match(css, /\.hk-damga \{ transform: translate\(166px, 130px\) rotate\(5deg\); opacity: 0; \}/);
   assert.match(css, /\.hk-iz \{ opacity: \.92; \}/, 'mühür izi hareketi azaltınca kalır');
 });
+
+test('hakkımda sahnesi: araç çantası açık çantadır; çipler içine düşer, hepsi girince kapak kapanır; hareketi azaltınca çipler içeride ve kapak açık durur', () => {
+  const html = oku('hakkimda/index.html');
+  assert.equal((html.match(/class="hk-cip hk-cip\d"/g) || []).length, 6, 'altı çip');
+  assert.match(html, /class="hk-lid-ac"/);
+  assert.match(html, /class="hk-lid-kapali"/);
+  // çipler iç hacimde (arka duvar y=160, ön duvar y=186): iki sıra da bu aralıkta
+  for (const [, y] of html.matchAll(/class="hk-cip hk-cip\d"><rect x="[\d.]+" y="(\d+)"/g)) assert.ok(Number(y) >= 160 && Number(y) + 10 <= 186, `çip y=${y} çantanın dışında`);
+  const css = oku('css/site.css');
+  for (let i = 1; i <= 6; i++) assert.match(css, new RegExp(`@keyframes hk-cip${i} `));
+  assert.match(css, /@keyframes hk-lid-kapali/);
+  assert.match(css, /\.hk-lid-kapali \{ opacity: 0;/, 'kapalı kapak başta görünmez (hareketi azaltınca açık çanta kalır)');
+  assert.doesNotMatch(css, /translateY\(-96px\)/, 'eski çip düşüşü kalmadı');
+});

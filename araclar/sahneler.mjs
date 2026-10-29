@@ -78,7 +78,17 @@ ${icerik}
 
 // Hakkımda: şahin sunum perdesine bakar; perdede dört kart sırayla döner (css .hk-k1…4, 28 sn):
 // kimlik kartı mühürlenir, araçlar çantaya düşer, kilit açılıp kapanır, ajan döngüsü döner.
-const HK_CIP = [['Claude Code', 52, 180, 52, '#d07a2a'], ['Codex', 108, 180, 34, '#4f7d6e'], ['Node.js', 146, 180, 40, '#2f4a6b'], ['Python', 56, 192, 40, '#a8432a'], ['Go', 100, 192, 24, '#c9893a'], ['Git', 128, 192, 28, '#5b3a21']];
+// Araç çantası: iki sıra çip (sıra, ad, genişlik, renk); sıralar çantanın içinde ortalanır, ikinci sıra öne biner.
+const HK_CIP = [[0, 'Claude Code', 48, '#d07a2a'], [0, 'Codex', 32, '#4f7d6e'], [0, 'Node.js', 36, '#2f4a6b'], [1, 'Python', 36, '#a8432a'], [1, 'Go', 22, '#c9893a'], [1, 'Git', 26, '#5b3a21']];
+const HK_CIP_SVG = (() => {
+  const bosluk = 5, ic = [60, 184], y = [163, 175];
+  const toplam = [0, 1].map((r) => HK_CIP.filter((c) => c[0] === r).reduce((t, c) => t + c[2], 0) + bosluk * (HK_CIP.filter((c) => c[0] === r).length - 1));
+  const imlec = [ic[0] + (ic[1] - ic[0] - toplam[0]) / 2, ic[0] + (ic[1] - ic[0] - toplam[1]) / 2];
+  return HK_CIP.map(([sira, ad, w, renk], i) => {
+    const x = imlec[sira]; imlec[sira] += w + bosluk;
+    return `<g class="hk-cip hk-cip${i + 1}"><rect x="${x}" y="${y[sira]}" width="${w}" height="10" rx="5" fill="${renk}" stroke="#33261a" stroke-width="1.3"/>${YAZI(x + w / 2, y[sira] + 7.2, ad, 5, 'fill="#f7f0e0" text-anchor="middle"')}</g>`;
+  }).join('\n    ');
+})();
 const HK_BASLIK = (metin) => `<rect x="36" y="80" width="172" height="17" fill="#33261a"/>${YAZI(44, 92, metin, 8, 'fill="#f2e8d5"')}`;
 export const hakkimdaSahnesi = (onek) => SVG('Şahin bir sunum perdesine bakıyor; perdede sırayla kimlik kartı mühürleniyor, araçlar çantaya doluyor, yapay zeka çipi onaylanıyor ve ajan döngüsü dönüyor', `
   <defs>
@@ -114,11 +124,15 @@ export const hakkimdaSahnesi = (onek) => SVG('Şahin bir sunum perdesine bakıyo
     </g>
   </g>
 
-  <!-- 2 · araç çantası -->
+  <!-- 2 · araç çantası: açık çantaya çipler düşer, ön duvarın arkasında kalır, kapak kapanır -->
   <g class="hk hk-k2">
     ${HK_BASLIK('ARAÇ ÇANTASI')}
-    ${HK_CIP.map(([ad, x, y, w, renk], i) => `<g class="hk-cip hk-cip${i + 1}"><rect x="${x}" y="${y}" width="${w}" height="10" rx="5" fill="${renk}" stroke="#33261a" stroke-width="1.3"/>${YAZI(x + w / 2, y + 7.3, ad, 5.4, 'fill="#f7f0e0" text-anchor="middle"')}</g>`).join('\n    ')}
-    <g class="hk-canta" stroke="#33261a" stroke-width="2"><path d="M96 168Q96 156 122 156Q148 156 148 168" fill="none" stroke-width="3.4" stroke-linecap="round"/><rect x="46" y="202" width="152" height="30" rx="3" fill="#d3b987"/><rect x="46" y="202" width="152" height="30" rx="3" fill="url(#sTar2)" opacity=".28" stroke="none"/><path d="M46 211H198" stroke-width="1.4"/><rect x="113" y="207" width="18" height="9" rx="1.5" fill="#c9893a" stroke-width="1.4"/></g>
+    <g class="hk-lid-ac" stroke="#33261a" stroke-width="2"><rect x="52" y="128" width="140" height="32" rx="3" fill="#d3b987"/><rect x="52" y="128" width="140" height="32" rx="3" fill="url(#sTar2)" opacity=".28" stroke="none"/><path d="M60 136H184" stroke="#cdb894" stroke-width="1.4" fill="none"/></g>
+    <g class="hk-canta" stroke="#33261a" stroke-width="2"><path d="M52 186L58 160H186L192 186Z" fill="#9c7a4e" stroke-linejoin="round"/><path d="M58 160H186" stroke="#33261a" stroke-width="2.4"/></g>
+    ${HK_CIP_SVG}
+    <g class="hk-canta" stroke="#33261a" stroke-width="2"><rect x="46" y="186" width="152" height="46" rx="3" fill="#d3b987"/><rect x="46" y="186" width="152" height="46" rx="3" fill="url(#sTar2)" opacity=".28" stroke="none"/><path d="M46 196H198" stroke-width="1.4" fill="none"/><rect x="113" y="190" width="20" height="10" rx="2" fill="#c9893a" stroke-width="1.4"/><rect x="119.5" y="193" width="7" height="4" rx="1" fill="#5b3a21" stroke="none"/>
+      <g class="hk-lid-kapali"><path d="M50 187L58 158H186L194 187Z" fill="#d9bf8d" stroke-linejoin="round"/><path d="M50 187L58 158H186L194 187Z" fill="url(#sTar2)" opacity=".26" stroke="none"/><path d="M104 170Q104 150 122 150Q140 150 140 170" fill="none" stroke-width="3.4" stroke-linecap="round"/></g>
+    </g>
   </g>
 
   <!-- 3 · yapay zeka: çip, veri akışı ve onay -->
