@@ -76,9 +76,10 @@ test('alt sayfa şahini yalnız nefes alır ve hareketi azaltınca durur', () =>
 });
 
 test('fabrika bandı: tuğla fabrika, çalışan saat, tek duman grubu, dişli yok', () => {
-  assert.equal((FABRIKA_SVG.match(/<animateTransform /g) || []).length, 2);
+  // saatin iki ibresi + bant üstündeki hareketli tırnak deseni
+  assert.equal((FABRIKA_SVG.match(/<animateTransform /g) || []).length, 3);
   assert.doesNotMatch(FABRIKA_SVG, /disli|dondur|fab-b|Demir-cam/);
-  for (const ad of ['SKYTRACK', 'PİKSEL', 'AJAN', 'DESTE', 'ATÖLYE Nº 1', 'ÜRETİM HATTI']) assert.ok(FABRIKA_SVG.includes(ad), ad);
+  for (const ad of ['SKYTRACK', 'PİKSEL', 'AJAN', 'DESTE', 'ATÖLYE Nº 1', 'ÜRETİM HATTI', '01 FİKİR', '02 KOD', '03 SİSTEM']) assert.ok(FABRIKA_SVG.includes(ad), ad);
   assert.equal((FABRIKA_SVG.match(/<g class="duman/g) || []).length, 1);
   assert.ok(oku('projeler/index.html').includes('ATÖLYE Nº 1'));
 });
@@ -139,7 +140,7 @@ test('hareketi azaltınca sandıklar bantta yerinde durur', () => {
   const sandiklar = FABRIKA_SVG.match(/<g class="sandik" style="[^"]*"/g) || [];
   assert.equal(sandiklar.length, 4);
   for (const s of sandiklar) assert.match(s, /--x:\s*\d+px/);
-  assert.match(oku('css/site.css'), /\.sandik\s*\{[^}]*transform:\s*translate\(var\(--x\),\s*850px\)/);
+  assert.match(oku('css/site.css'), /\.sandik\s*\{[^}]*transform:\s*translate\(var\(--x\),\s*846px\)/);
 });
 
 test('ana sayfadaki süs yazıları ekran okuyucudan gizli', () => {

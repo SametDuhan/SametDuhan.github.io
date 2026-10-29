@@ -71,6 +71,24 @@ export function medyaBagla(kutu) {
   }, () => { jeton++; });
 }
 
+// Büyük / küçük görünüm düğmesi: seçim bu tarayıcıda hatırlanır (depo yoksa her açılışta büyük).
+const GORUNUM_ANAHTARI = 'proje-gorunum';
+export function gorunumBagla(liste, dugmeler) {
+  let depo = null;
+  try { depo = localStorage; } catch { /* depo kapalı */ }
+  const uygula = (g) => {
+    liste.dataset.gorunum = g;
+    dugmeler.forEach((d) => d.setAttribute('aria-pressed', String(d.dataset.gorunum === g)));
+  };
+  let ilk = 'buyuk';
+  try { if (depo?.getItem(GORUNUM_ANAHTARI) === 'kucuk') ilk = 'kucuk'; } catch { /* okunamadı */ }
+  uygula(ilk);
+  dugmeler.forEach((d) => d.addEventListener('click', () => {
+    uygula(d.dataset.gorunum);
+    try { depo?.setItem(GORUNUM_ANAHTARI, d.dataset.gorunum); } catch { /* yazılamadı */ }
+  }));
+}
+
 export function baslat() {
   const kok = document.getElementById('icerik');
   if (!kok) return;
@@ -83,4 +101,7 @@ export function baslat() {
   gozle('.belir', (e) => e.classList.add('gorundu'));
   gozle('.sayaclar', (e) => { e.classList.add('gorundu'); e.querySelectorAll('[data-say]').forEach((b) => sayiSay(b)); }, 0.5);
   document.querySelectorAll('.v-medya').forEach(medyaBagla);
+  const liste = document.getElementById('projeler');
+  const dugmeler = [...document.querySelectorAll('.gorunum-dugme')];
+  if (liste && dugmeler.length) gorunumBagla(liste, dugmeler);
 }

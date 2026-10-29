@@ -47,7 +47,7 @@ const BOLUMLER = [
 ];
 export const menu = (aktif, onek = '../') => `
   <nav class="yan-menu" aria-label="Site">
-    <a class="logo" href="${onek}"><img src="${onek}img/sahin/logo.webp" alt="" width="40" height="40"><span><b>ŞAHİN</b><small>AÇIKTA KURULUR</small></span></a>
+    <a class="logo" href="${onek}"><img src="${onek}img/sahin/logo.webp" alt="" width="40" height="40"><span><b>SAMET<br>DUHAN</b></span></a>
     <div class="menu-linkler">
 ${BOLUMLER.map(([h, ad, alt, pig, ikon], i) => `      <a class="p-${pig}" href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${ikon}</svg><span class="m-ad"><i>0${i + 1}</i>${ad}</span><small>${alt}</small></a>`).join('\n')}
     </div>
@@ -171,6 +171,10 @@ yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama:
 ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'calisan', sahne: 'projeler', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsinin kodu GitHub\'da, nasıl yapıldığı slaytlarda.' })}
     <div class="sayaclar" aria-label="Rakamlarla">${sayacHTML()}</div>
+    <div class="gorunum" role="group" aria-label="Proje görünümü">
+      <button type="button" class="gorunum-dugme" data-gorunum="buyuk" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="6" rx="1"/><rect x="3" y="13" width="18" height="6" rx="1"/></svg>Büyük</button>
+      <button type="button" class="gorunum-dugme" data-gorunum="kucuk" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="7" rx="1"/><rect x="9.5" y="4" width="5" height="7" rx="1"/><rect x="16" y="4" width="5" height="7" rx="1"/><rect x="3" y="13" width="5" height="7" rx="1"/><rect x="9.5" y="13" width="5" height="7" rx="1"/></svg>Küçük</button>
+    </div>
     <div class="vitrinler" id="projeler">
 ${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
     </div>
