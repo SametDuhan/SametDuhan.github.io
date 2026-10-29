@@ -41,7 +41,6 @@
       <g fill="#33261a"><circle cx="310" cy="690" r="5"/><circle cx="1010" cy="600" r="5"/><circle cx="1290" cy="520" r="5"/><circle cx="760" cy="740" r="4"/></g>
       <g font-family="IBM Plex Mono" font-size="13" fill="#33261a" stroke="none">
         <text x="250" y="715">IST</text><text x="1020" y="625">ESB</text><text x="1300" y="545">AYT</text><text x="770" y="762">ADB</text>
-        <text x="40" y="880">SEYİR HARİTASI · ŞHN-03 · 41°N 29°E</text>
       </g>
       <!-- haritada küçük atölye işareti -->
       <g class="atolye-kat" transform="translate(520 838)">
@@ -109,12 +108,6 @@
         <path d="M1010 1200 a90 90 0 0 0 -60 -85" />
         <path d="M200 1290h130M200 1282v16M330 1282v16"/>
       </g>
-      <g class="olcu-yazi" aria-hidden="true">
-        <text x="1030" y="1180">30°</text>
-        <text x="215" y="1320">R 400</text>
-        <text x="1060" y="120">+ 45°</text>
-        <text x="120" y="140">ŞHN-01 / ön görünüş</text>
-      </g>
 
       <!-- el boyaması: sulu boya lekeleri -->
       <g class="boya-kat" aria-hidden="true" filter="url(#sulu)" style="mix-blend-mode:multiply">
@@ -180,48 +173,59 @@
         </g></svg>
       <small>SAMET DUHAN · AI İLE SİSTEM KURAN GELİŞTİRİCİ</small>
       <h1>ŞAHİN</h1>
-      <p class="alt"><b>&gt;</b> SYSTEMS. BUILT IN THE OPEN.</p>
+      <p class="alt"><b>&gt;</b> <span class="daktilo">SYSTEMS. BUILT IN THE OPEN.</span></p>
       <p class="tanit">Ajanlar, açık kaynak araçlar ve günlük hayatta karşılığı olan uygulamalar. Her şey açık repoda, her adım izlenebilir.</p>
     </div>
 
     <nav class="kareler" aria-label="Bölümler">
-      <a class="kare kose p-kehribar" href="hakkimda/"><i class="k2"></i><i class="k3"></i>
+      <a class="kare kose p-kehribar" href="hakkimda/" style="--i:0"><i class="k2"></i><i class="k3"></i>
         <span class="no">01</span>
-        <span class="ikon"><svg viewBox="0 0 100 80">
-          <rect x="20" y="8" width="60" height="64"/><circle class="oyna" cx="38" cy="30" r="9"/><path class="oyna" d="M27 50c3-8 19-8 22 0"/>
-          <path class="ciz" d="M56 26h16M56 34h12M28 60h44"/></svg></span>
+        <span class="ikon canli"><svg class="mini" viewBox="0 -16 160 116" aria-hidden="true">
+          <rect class="ka" x="32" y="10" width="96" height="76" rx="4"/><rect class="kb" x="32" y="10" width="96" height="15" rx="4"/><rect class="kb" x="32" y="18" width="96" height="7"/>
+          <text class="mt" x="39" y="21">KİMLİK KARTI</text>
+          <rect class="ka" x="41" y="32" width="30" height="36"/><image href="img/sahin/logo.webp" x="44" y="36" width="24" height="24"/>
+          <path class="ln" d="M80 38h38M80 46h30M80 54h36"/><path class="ln ince" d="M41 76v6M45 76v6M48 76v6M53 76v6M56 76v6M62 76v6"/>
+          <g class="m-iz" transform="translate(108 66) rotate(-14)"><circle r="15" class="m-halka"/><circle r="10.5" class="m-halka ince"/><text class="mm" y="2.6" text-anchor="middle">ŞHN</text></g>
+          <g class="m-damga" transform="translate(108 66)"><rect x="-17" y="-12" width="34" height="11" rx="3" class="m-ahsap"/><rect x="-15" y="-2" width="30" height="4" rx="1.5" class="m-lastik"/><path class="m-sap" d="M-5 -12v-20h10v20"/><ellipse class="m-ahsap" cy="-34" rx="11" ry="6"/></g>
+        </svg></span>
         <span class="ad">Hakkımda</span><span class="aciklama">ben kimim, ne yapıyorum.</span></a>
 
-      <a class="kare kose p-civit" href="projeler/"><i class="k2"></i><i class="k3"></i>
+      <a class="kare kose p-civit" href="projeler/" style="--i:1"><i class="k2"></i><i class="k3"></i>
         <span class="no">02</span>
-        <span class="ikon"><svg viewBox="0 0 100 80">
-          <rect x="42" y="4" width="16" height="12"/><path class="ciz" d="M50 16v12M24 28h52M24 28v12M76 28v12M50 28v12"/>
-          <rect x="16" y="40" width="16" height="12"/><rect class="oyna dolu" x="42" y="40" width="16" height="12"/><rect x="68" y="40" width="16" height="12"/>
-          <path d="M24 52v10M14 62h20M76 52v10M66 62h20" stroke-dasharray="2 3"/></svg></span>
-        <span class="ad">Projeler</span><span class="aciklama">SkyTrack, piksel bildirimler, açık kaynak.</span></a>
+        <span class="ikon canli"><svg class="mini" viewBox="0 -16 160 116" aria-hidden="true">
+          <path class="ka" d="M12 62V34h36V62z"/><path class="ka" d="M8 34l22-14 22 14z"/><rect class="ka" x="56" y="14" width="9" height="48"/><path class="st" d="M54 14h13"/>
+          <g class="m-duman"><circle cx="60" cy="10" r="4"/><circle cx="60" cy="10" r="4"/><circle cx="60" cy="10" r="4"/></g>
+          <circle class="ka" cx="30" cy="31" r="5.5"/><path class="st" d="M30 31v-3M30 31h2.5"/>
+          <rect class="ka" x="20" y="46" width="8" height="16"/><rect class="ka" x="34" y="46" width="8" height="10"/>
+          <rect class="kb" x="4" y="78" width="152" height="7" rx="3.5"/><path class="m-bant" d="M4 81.5H156"/>
+          <g class="m-sandik s1"><rect x="0" y="58" width="22" height="19" class="m-c1"/><path d="M0 64h22M11 58v6" class="st ince"/></g>
+          <g class="m-sandik s2"><rect x="0" y="58" width="22" height="19" class="m-c2"/><path d="M0 64h22M11 58v6" class="st ince"/></g>
+          <g class="m-sandik s3"><rect x="0" y="58" width="22" height="19" class="m-c3"/><path d="M0 64h22M11 58v6" class="st ince"/></g>
+          <path class="st" d="M20 85l-6 10M140 85l6 10"/>
+        </svg></span>
+        <span class="ad">Projeler</span><span class="aciklama">canlı demolar, açık kaynak.</span></a>
 
-      <a class="kare kose p-bakir" href="slaytlar/"><i class="k2"></i><i class="k3"></i>
+      <a class="kare kose p-bakir" href="slaytlar/" style="--i:2"><i class="k2"></i><i class="k3"></i>
         <span class="no">03</span>
-        <span class="ikon"><svg viewBox="0 0 100 80">
-          <rect x="30" y="6" width="54" height="38" stroke-dasharray="3 3"/><rect x="22" y="14" width="54" height="38"/>
-          <rect x="14" y="22" width="54" height="38"/><path class="ciz oyna" d="M30 41h22M45 34l7 7-7 7"/>
-          <circle class="dolu" cx="30" cy="70" r="2.5"/><circle cx="41" cy="70" r="2.5"/><circle cx="52" cy="70" r="2.5"/></svg></span>
-        <span class="ad">Slaytlar</span><span class="aciklama">AI'ı sıfırdan, adım adım.</span></a>
+        <span class="ikon canli"><svg class="mini" viewBox="0 -16 160 116" aria-hidden="true">
+          <path class="st" d="M80 70v14M80 84L62 96M80 84l18 12"/>
+          <rect class="ka" x="24" y="8" width="112" height="62" rx="3"/><rect class="kb" x="24" y="8" width="112" height="6"/>
+          <g class="m-sl-a"><path class="m-yazi kalin" d="M36 26h44"/><path class="m-yazi" d="M40 38h70M40 48h56M40 58h62"/><circle class="m-nokta" cx="35" cy="38" r="1.8"/><circle class="m-nokta" cx="35" cy="48" r="1.8"/><circle class="m-nokta" cx="35" cy="58" r="1.8"/></g>
+          <g class="m-sl-b"><path class="st" d="M38 62V24M38 62H124"/><rect class="m-cb c1" x="46" y="40" width="16" height="22"/><rect class="m-cb c2" x="70" y="30" width="16" height="32"/><rect class="m-cb c3" x="94" y="36" width="16" height="26"/></g>
+        </svg></span>
+        <span class="ad">Slaytlar</span><span class="aciklama">AI'ı sıfırdan öğren.</span></a>
 
-      <a class="kare kose p-kiremit" href="iletisim/"><i class="k2"></i><i class="k3"></i>
+      <a class="kare kose p-kiremit" href="iletisim/" style="--i:3"><i class="k2"></i><i class="k3"></i>
         <span class="no">04</span>
-        <span class="ikon"><svg viewBox="0 0 100 80">
-          <rect x="8" y="22" width="44" height="32"/><path d="M8 22l22 18 22-18"/>
-          <path class="ciz" d="M52 38c10 0 12-20 24-20M52 38h24M52 38c10 0 12 20 24 20"/>
-          <circle class="oyna" cx="80" cy="18" r="4"/><circle class="oyna dolu" cx="80" cy="38" r="4"/><circle class="oyna" cx="80" cy="58" r="4"/></svg></span>
-        <span class="ad">İletişim</span><span class="aciklama">mail, GitHub, LinkedIn.</span></a>
+        <span class="ikon canli"><svg class="mini" viewBox="0 -16 160 116" aria-hidden="true">
+          <path class="m-ring" d="M34 38q-9 12 0 24M25 32q-14 18 0 36M126 38q9 12 0 24M135 32q14 18 0 36"/>
+          <g class="m-cal"><path class="m-govde" d="M44 86l3-26q1-8 10-8h46q9 0 10 8l3 26z"/><path class="m-sap2" d="M62 52v-8h6v8M92 52v-8h6v8"/>
+            <circle class="ka" cx="80" cy="68" r="15"/><circle class="m-dis" cx="80" cy="68" r="5.5"/>
+            <circle class="m-delik" cx="80" cy="57" r="1.8"/><circle class="m-delik" cx="89" cy="60" r="1.8"/><circle class="m-delik" cx="93" cy="68" r="1.8"/><circle class="m-delik" cx="89" cy="76" r="1.8"/><circle class="m-delik" cx="80" cy="79" r="1.8"/><circle class="m-delik" cx="71" cy="76" r="1.8"/><circle class="m-delik" cx="67" cy="68" r="1.8"/><circle class="m-delik" cx="71" cy="60" r="1.8"/>
+            <g class="m-ahize"><path class="m-sap2 kalin" d="M52 44Q52 34 80 34Q108 34 108 44"/><rect class="m-govde" x="44" y="40" width="16" height="12" rx="5"/><rect class="m-govde" x="100" y="40" width="16" height="12" rx="5"/></g></g>
+        </svg></span>
+        <span class="ad">İletişim</span><span class="aciklama">iş, proje ya da soru.</span></a>
     </nav>
-    <p class="yonlendirme">
-      <span>işverensen → <a href="projeler/">projeler</a></span>
-      <span>AI öğrenmek istiyorsan → <a href="slaytlar/ai-ajani-nedir/">ilk sunum</a></span>
-      <span>birlikte çalışmak için → <a href="iletisim/">iletişim</a></span>
-    </p>
-    <p class="kisayol-ipucu">ipucu: <kbd>1</kbd>–<kbd>4</kbd> tuşlarıyla da açabilirsin</p>
   </section>
 </main>
 <footer class="giris-alt">samet duhan · 2026</footer>
