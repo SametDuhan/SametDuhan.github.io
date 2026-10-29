@@ -160,11 +160,15 @@
           <path d="M670 236 Q692 244 714 236" stroke="#2a1f16" stroke-width="3" fill="none"/>
         </g>
         </g>
-        <g class="poz" data-poz="kanat" transform="translate(629.5 1190) scale(1.2304) translate(-624 -1105)">
-          <image href="img/sahin/kanat.webp" x="0" y="0" width="1254" height="1254"/>
-          <g class="boya-kat" style="mix-blend-mode:multiply"><polygon points="490,455 520,435 600,440 680,432 745,440 752,480 750,560 752,700 770,860 760,875 700,860 665,860 652,800 655,700 650,600 648,540 600,530 540,530 500,525 488,490" fill="#b0481c" opacity=".5"/></g>
-        </g>
       </g>
+      <!-- 8 sn'de bir oynayan kanat videosu: şeffaf zeminli, ayaktaki şahinin üstüne birebir oturur (js/sahin.js) -->
+      <defs>
+        <linearGradient id="videoAltGrad" gradientUnits="userSpaceOnUse" x1="0" y1="658" x2="0" y2="773"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
+        <mask id="videoAlti" maskUnits="userSpaceOnUse" x="-300" y="-300" width="1900" height="1900"><rect x="-300" y="-300" width="1900" height="1900" fill="url(#videoAltGrad)"/></mask>
+      </defs>
+      <foreignObject class="video-kutu" x="-10" y="53" width="1280" height="720" aria-hidden="true">
+        <video class="sahin-video" id="sahinVideo" muted playsinline preload="auto" src="video/sahin-sahne.webm"></video>
+      </foreignObject>
     </svg>
   </div>
 

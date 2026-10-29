@@ -45,6 +45,11 @@
 /* nefes: şahin kendi katmanında, hareket donanımla hızlanır (yeniden boyama yok) */
 .sahin-kat { transform-origin: 50% 74%; will-change: transform; animation: nefes-kat 4.2s ease-in-out infinite; }
 @keyframes nefes-kat { 0%, 100% { transform: translateY(0) scaleY(1); } 45% { transform: translateY(-.45%) scaleY(1.012); } }
+/* 8 sn'de bir oynayan kanat videosu: oynarken ayaktaki şahin yalnız videonun alt kenarında belirir (maske #videoAlti) */
+.video-kutu { pointer-events: none; }
+.sahin-video { display: block; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
+.sahin-kat.video-oynuyor .sahin-video { opacity: 1; }
+.sahin-kat.video-oynuyor .poz.aktif { mask: url(#videoAlti); }
 .poz { opacity: 0; transition: opacity 0.16s ease; pointer-events: none; }
 .poz.aktif { opacity: 1; pointer-events: auto; }
 .kapak { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0); }
@@ -208,6 +213,7 @@
   .kare:hover .mini .ka, .kare:hover .mini .st { animation: none !important; stroke-dasharray: none; }
   .seyir-haritasi * { animation: none !important; }
   .poz { transition: none; }
+  .video-kutu { display: none; }
 }
 
 /* ---- sol kenardan akan çok soluk kod ---- */

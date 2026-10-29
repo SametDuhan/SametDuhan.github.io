@@ -15,7 +15,7 @@ const siteDosyalari = (dizin = KOK) => readdirSync(dizin, { withFileTypes: true 
 const oku = (yol) => readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
 
 test('şahin görselleri var ve web boyutunda', () => {
-  const sinir = { on: 260e3, kanat: 300e3, ceyrek: 90e3, sag: 90e3, sol: 90e3, arka: 90e3, 'kanat-kucuk': 90e3, logo: 12e3 };
+  const sinir = { on: 260e3, ceyrek: 90e3, sag: 90e3, sol: 90e3, arka: 90e3, 'kanat-kucuk': 90e3, logo: 12e3 };
   for (const [ad, enFazla] of Object.entries(sinir)) {
     const yol = new URL(`../img/sahin/${ad}.webp`, import.meta.url);
     assert.ok(existsSync(yol), `${ad}.webp yok`);
@@ -36,10 +36,10 @@ test('tema tokenları kâğıt paletinde', () => {
   assert.match(css, /'Fraunces'/);
 });
 
-test('ana sayfa: şahin önden başlar, kanat pozu gizli, klavyeyle erişilir', () => {
+test('ana sayfa: şahin önden başlar, kanat pozu yok (video var), klavyeyle erişilir', () => {
   const s = oku('index.html');
   assert.match(s, /<g class="poz aktif" data-poz="on">/);
-  assert.match(s, /<g class="poz" data-poz="kanat" transform="translate\(629\.5 1190\) scale\(1\.2304\)/);
+  assert.doesNotMatch(s, /data-poz="kanat"/);
   assert.doesNotMatch(s, /data-poz="(sol|sag|arka|ceyrek)/);
   assert.match(s, /id="sahin" tabindex="0" role="button" aria-label="[^"]+"/);
   assert.equal((s.match(/<a class="kare /g) || []).length, 4);

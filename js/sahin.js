@@ -6,18 +6,15 @@ export const ON = { ayakX: 629.5, alt: 1190, boy: 1100 };
 
 export const POZLAR = {
   on: { ...ON, dosya: 'on' },
-  kanat: { dosya: 'kanat', ayakX: 624, alt: 1105, boy: 894 },
 };
 
 // Atkının kiremit boyası için alanlar (her pozun kendi çiziminde).
 export const ATKI = {
   on: [[455, 345], [520, 318], [600, 345], [700, 328], [782, 352], [798, 420], [784, 470], [792, 560], [788, 700], [792, 850], [778, 918], [722, 884], [690, 822], [655, 700], [648, 600], [660, 482], [600, 470], [520, 462], [460, 422]],
-  kanat: [[490, 455], [520, 435], [600, 440], [680, 432], [745, 440], [752, 480], [750, 560], [752, 700], [770, 860], [760, 875], [700, 860], [665, 860], [652, 800], [655, 700], [650, 600], [648, 540], [600, 530], [540, 530], [500, 525], [488, 490]],
 };
 
-export const KANAT_MS = 1900;
-export const GECIS_MS = 160;
-const DEPO_ANAHTARI = 'sahin-kanat';
+// Kanat videosu (video/sahin-sahne.webm, ~5 sn, şeffaf zeminli) her 8 sn'de bir başlar; bitince şahin yine düz durur.
+export const VIDEO_ARALIK_MS = 8000;
 
 export function pozDonusumu(poz) {
   if (poz.ayakX === ON.ayakX && poz.alt === ON.alt && poz.boy === ON.boy) return '';
@@ -29,37 +26,33 @@ export const noktalar = (liste) => liste.map(([x, y]) => `${x},${y}`).join(' ');
 
 export const kirpmaGecikmesi = (r) => 2400 + r * 3800;
 export const ciftKirpar = (r) => r < 0.25;
-export const kendiligindenKanat = (az) => !az;
 
-// Kanat ilk açılışta oturum başına bir kez açılır; depo yoksa ya da hata verirse her açılışta.
-export function ilkKanatGerekli(depo) {
-  try {
-    if (!depo || depo.getItem(DEPO_ANAHTARI)) return !depo;
-    depo.setItem(DEPO_ANAHTARI, '1');
-    return true;
-  } catch {
-    return true;
-  }
+// Şeffaf zeminli WebM (VP9 alfa) Chrome, Edge ve Firefox'ta çalışır; Safari alfayı yok sayıp zemini siyah çizer, orada video hiç oynamaz.
+export function videoDestekliMi(ua, oynatilabilir) {
+  const safari = /safari/i.test(ua) && !/chrome|chromium|crios|fxios|edg|android/i.test(ua);
+  return Boolean(oynatilabilir) && !safari;
 }
 
 export function baslatSahin(kok, {
   az = matchMedia('(prefers-reduced-motion: reduce)').matches,
-  depo = (() => { try { return sessionStorage; } catch { return null; } })(),
+  ua = navigator.userAgent,
 } = {}) {
   const govde = kok.querySelector('#sahin');
-  const pozlar = Object.fromEntries([...kok.querySelectorAll('[data-poz]')].map((p) => [p.dataset.poz, p]));
+  const video = kok.querySelector('#sahinVideo');
   const kapaklar = [kok.querySelector('#kapakSol'), kok.querySelector('#kapakSag')].filter(Boolean);
-  let kanatta = false;
+  const videoVar = Boolean(video) && !az && videoDestekliMi(ua, video.canPlayType('video/webm; codecs="vp9"'));
+  let oynuyor = false;
 
-  const goster = (ad) => {
-    for (const [k, p] of Object.entries(pozlar)) p.classList.toggle('aktif', k === ad);
-  };
+  function videoBitti() {
+    kok.classList.remove('video-oynuyor');
+    oynuyor = false;
+  }
 
-  function kanatAc() {
-    if (kanatta || !pozlar.kanat) return;
-    kanatta = true;
-    goster('kanat');
-    setTimeout(() => { goster('on'); kanatta = false; }, KANAT_MS);
+  function videoOynat() {
+    if (!videoVar || oynuyor || document.hidden) return;
+    oynuyor = true;
+    video.currentTime = 0;
+    video.play().catch(videoBitti);
   }
 
   function kirp() {
@@ -68,7 +61,7 @@ export function baslatSahin(kok, {
 
   if (!az) {
     (function kirpDongu() {
-      if (!kanatta) {
+      if (!oynuyor) {
         kirp();
         if (ciftKirpar(Math.random())) setTimeout(kirp, 260);
       }
@@ -76,11 +69,17 @@ export function baslatSahin(kok, {
     })();
   }
 
-  if (kendiligindenKanat(az) && ilkKanatGerekli(depo)) setTimeout(kanatAc, 900);
+  if (videoVar) {
+    // İlk kare ekrana gelince ayaktaki şahin maskelenir; böylece boş kare görünmez.
+    video.addEventListener('playing', () => kok.classList.add('video-oynuyor'));
+    video.addEventListener('ended', videoBitti);
+    video.addEventListener('error', videoBitti);
+    setInterval(videoOynat, VIDEO_ARALIK_MS);
+  }
 
-  govde.addEventListener('click', kanatAc);
+  govde.addEventListener('click', videoOynat);
   govde.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); kanatAc(); }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); videoOynat(); }
   });
-  return { kanatAc };
+  return { videoOynat };
 }

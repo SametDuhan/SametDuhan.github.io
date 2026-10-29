@@ -23,7 +23,7 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 | `js/projeler.js` | Proje verisi ve kart HTML'i |
 | `js/desteler.js` | Deste listesi, arama |
 | `js/ilerleme.js` | "Kaldığın yer" (yalnız ziyaretçinin tarayıcısında) |
-| `js/sahin.js` | Şahin: poz verisi, göz kırpma ve kanat açma kararları, sahneye bağlama |
+| `js/sahin.js` | Şahin: poz verisi, göz kırpma ve 8 sn’de bir kanat videosu kararları, sahneye bağlama |
 | `js/piksel.js` | claude-done-pixel karakteri (`claude-done.ps1`'in birebir aktarımı) |
 | `css/tema.css` | Kâğıt teması: renk tokenları, yazı tipleri, kâğıt dokusu, ortak etiket/damga/düğme/köşe |
 | `css/giris.css`, `css/site.css`, `css/deste.css` | Ana sayfa, alt sayfalar, desteler |
