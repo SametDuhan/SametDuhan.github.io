@@ -80,7 +80,10 @@ test('dış bağlantılar (GitHub, LinkedIn, proje siteleri) yeni sekmede açıl
 
 test('hakkımda sahnesi: mühür vurulunca damga solup kaybolur, iz kalır; hareketi azaltınca damga görünmez', () => {
   const css = oku('css/site.css');
-  assert.match(css, /@keyframes hk-damga \{[^}]*15%, 100% \{[^}]*opacity:0/);
+  const damga = css.split('\n').find((satir) => satir.startsWith('@keyframes hk-damga'));
+  assert.ok(damga, 'hk-damga animasyonu yok');
+  assert.match(damga, /15%, 100% \{[^}]*opacity:0/, 'damga son karelerde görünmez');
+  assert.match(damga, /0%, 5% \{[^}]*opacity:1/, 'damga başta görünür');
   assert.match(css, /\.hk-damga \{ transform: translate\(166px, 130px\) rotate\(5deg\); opacity: 0; \}/);
   assert.match(css, /\.hk-iz \{ opacity: \.92; \}/, 'mühür izi hareketi azaltınca kalır');
 });
