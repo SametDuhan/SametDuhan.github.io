@@ -92,12 +92,12 @@
   width: 24px; height: 24px; border-color: var(--p);
 }
 .kare:focus-visible { outline: 2px solid var(--p); outline-offset: 4px; }
-/* hover dekoru (silik): Projeler'de sağ üst köşeden taşan, birbirine geçen dişliler; İletişim'de telefonun sağında düşen mektuplar.
+/* hover dekoru (silik): Projeler'de sağ üst köşeden taşan, birbirine geçen iki dişli; İletişim'de telefonun sağında düşen mektuplar.
    Yalnız üzerine gelince ya da odaklanınca belirir ve döner/düşer; köşeden taşan kısım kutu kenarında kırpılır (.dekor-kutu). */
 .dekor-kutu { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; opacity: 0; transition: opacity .35s ease; }
 .kare:hover .dekor-kutu, .kare:focus-visible .dekor-kutu { opacity: .42; }
 .kare .ikon { position: relative; z-index: 1; }
-.dekor-dislier svg { position: absolute; top: -3%; right: -4%; width: 58%; height: auto; overflow: visible; }
+.dekor-dislier svg { position: absolute; top: -3%; right: -4%; width: 46%; height: auto; overflow: visible; }
 .dis { transform: rotate(var(--r0)); transform-origin: 0 0; animation: dis-don var(--t) linear infinite paused; }
 .dis path, .dis circle { fill: none; stroke: var(--p); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
 .dis .dis-g { fill: color-mix(in srgb, var(--p) 16%, transparent); }
