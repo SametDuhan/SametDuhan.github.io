@@ -1,0 +1,84 @@
+/* Proje detay sayfaları: kahraman, özellik kartları, vurgulu görsel, akış, hikâye. Ortak parçalar css/vitrin.css'te;
+   renkler tema.css belirteçleri, her sayfa kendi pigmentini (.p-kehribar, .p-civit, .p-bakir) taşır. */
+
+.geri-baglanti { display: inline-block; margin: 0 0 clamp(14px, 3vh, 28px); font: 600 13px var(--mono); color: var(--ceviz); }
+
+/* ---- kahraman ---- */
+.p-kahraman { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(24px, 4vw, 56px); align-items: center; margin-bottom: clamp(28px, 6vh, 56px); }
+.p-kahraman h1 { font-size: clamp(34px, min(4.6vw, 64px), 64px); margin: 4px 0 10px; overflow-wrap: anywhere; hyphens: none; }
+.p-ozet { font-size: 17px; line-height: 1.65; max-width: 56ch; margin: 0 0 18px; }
+.p-kahraman .linkler { margin: 0; }
+.p-kahraman .dugme.ana, .bolum .dugme.ana, .vitrin-son .dugme.ana { background: var(--p-dolgu, var(--vurgu)); border-color: var(--p-dolgu, var(--vurgu)); color: var(--p-ust, var(--yazi)); }
+.p-kahraman .linkler a { text-decoration: none; }
+
+/* ---- özellik kartları ---- */
+.p-amac { max-width: 70ch; line-height: 1.7; margin: 0 0 18px; }
+.ozellikler { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.ozellikler li { position: relative; display: grid; gap: 4px; align-content: start; padding: 18px 18px 16px; border: 1.5px solid var(--yazi); border-top: 5px solid var(--p-dolgu, var(--vurgu)); background: var(--zemin); transition: transform .2s, box-shadow .2s; }
+.ozellikler li:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--p-dolgu, var(--vurgu)); }
+.ozellikler svg { width: 34px; height: 34px; margin-bottom: 6px; fill: none; stroke: var(--yazi); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s; }
+.ozellikler li:hover svg { transform: rotate(-8deg) scale(1.12); }
+.ozellikler b { font: 800 19px/1.2 var(--serif); }
+.ozellikler span { font-size: 14.5px; line-height: 1.5; color: var(--soluk); }
+.js-vitrin .ozellikler li { opacity: 0; transform: translateY(14px); }
+.js-vitrin .belir.gorundu .ozellikler li { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .2s; transition-delay: calc(var(--i) * 90ms); }
+.js-vitrin .belir.gorundu .ozellikler li:hover { transition-delay: 0s; transform: translate(-2px, -2px); }
+
+/* ---- vurgulu görsel ---- */
+.p-not { margin: 0 0 14px; font-size: 14.5px; color: var(--soluk); }
+.p-sahne { position: relative; border: 2px solid var(--yazi); background: var(--yazi); box-shadow: 8px 8px 0 var(--p-dolgu, var(--vurgu)); }
+.p-sahne img { display: block; width: 100%; height: auto; }
+.pin { position: absolute; left: calc(var(--x) * 100%); top: calc(var(--y) * 100%); width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; border: 2px solid var(--zemin); background: var(--yazi); color: var(--zemin); font: 800 14px var(--mono); cursor: pointer; display: grid; place-items: center; transition: transform .25s, background .25s; }
+.pin::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--p-dolgu, var(--vurgu)); opacity: 0; }
+.pin em { position: absolute; bottom: calc(100% + 10px); left: 50%; translate: -50% 0; width: max-content; max-width: 220px; padding: 4px 10px; background: var(--zemin); color: var(--yazi); border: 1.5px solid var(--yazi); font: 600 12px var(--mono); font-style: normal; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.pin[aria-current] { transform: scale(1.25); background: var(--p-dolgu, var(--vurgu)); color: var(--p-ust, var(--yazi)); }
+.pin[aria-current]::before { animation: pin-nabiz 1.6s ease-out infinite; }
+.pin[aria-current] em { opacity: 1; }
+@keyframes pin-nabiz { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+.pin-liste { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; counter-reset: pin; }
+.pin-liste li { counter-increment: pin; position: relative; display: grid; gap: 3px; padding: 12px 14px 12px 46px; border: 1.5px solid var(--kenar); background: var(--zemin); cursor: pointer; transition: border-color .25s, background .25s; }
+.pin-liste li::before { content: counter(pin); position: absolute; left: 12px; top: 12px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--yazi); color: var(--zemin); font: 800 12px var(--mono); }
+.pin-liste b { font: 800 16px/1.2 var(--serif); }
+.pin-liste span { font-size: 13.5px; line-height: 1.45; color: var(--soluk); }
+.pin-liste li[aria-current] { border-color: var(--yazi); background: color-mix(in srgb, var(--p-dolgu, var(--vurgu)) 14%, var(--zemin)); }
+.pin-liste li[aria-current]::before { background: var(--p-dolgu, var(--vurgu)); color: var(--p-ust, var(--yazi)); }
+.js-vitrin .pin-liste li { opacity: 1; }
+
+/* piksel kareleri */
+.p-kareler { position: relative; border: 2px solid var(--yazi); background: #1e1e1e; box-shadow: 8px 8px 0 var(--p-dolgu, var(--vurgu)); overflow: hidden; }
+.p-kareler img { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.kare-vurgu { position: absolute; left: calc(var(--ci, 0) * 100% / var(--c)); top: calc(var(--ri, 0) * 100% / var(--r)); width: calc(100% / var(--c)); height: calc(100% / var(--r)); border: 3px solid var(--p-dolgu, var(--vurgu)); box-shadow: 0 0 0 9999px rgba(30, 30, 30, .62); transition: left .2s steps(2), top .2s steps(2); }
+
+/* ---- akış ---- */
+.akis-yol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; counter-reset: ak; }
+.akis-yol li { position: relative; display: grid; gap: 6px; justify-items: start; align-content: start; padding: 16px 14px; margin-right: 26px; border: 1.5px solid var(--yazi); background: var(--zemin); font: 600 15px/1.3 var(--mono); transition: background .4s, box-shadow .4s; }
+.akis-yol li:last-child { margin-right: 0; }
+.akis-yol li::after { content: ''; position: absolute; left: 100%; top: 50%; width: 26px; border-top: 2px dashed var(--soluk); }
+.akis-yol li:last-child::after { display: none; }
+.akis-yol li::before { content: ''; position: absolute; left: calc(100% + 17px); top: calc(50% - 4px); width: 0; height: 0; border: 5px solid transparent; border-left: 8px solid var(--soluk); border-right: 0; }
+.akis-yol li:last-child::before { display: none; }
+.a-no { font: 900 26px/1 var(--serif); color: var(--p-metin, var(--vurgu-koyu)); }
+.belir.gorundu .akis-yol li { animation: ak-vurgu 6s ease-in-out infinite; animation-delay: calc(var(--i) * 1.5s); }
+@keyframes ak-vurgu { 0%, 30%, 100% { background: var(--zemin); box-shadow: none; } 6%, 22% { background: color-mix(in srgb, var(--p-dolgu, var(--vurgu)) 20%, var(--zemin)); box-shadow: 4px 4px 0 var(--p-dolgu, var(--vurgu)); } }
+
+/* ---- hikâye ---- */
+.p-notlar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.p-nota { position: relative; padding: 22px 22px 20px 92px; border: 1.5px solid var(--yazi); background: var(--zemin); box-shadow: 4px 4px 0 var(--kenar); }
+.nota-no { position: absolute; left: 20px; top: 16px; font: 900 40px/1 var(--serif); color: var(--p-metin, var(--vurgu-koyu)); }
+.p-nota h3 { margin: 2px 0 8px; font: 800 20px/1.2 var(--serif); }
+.p-nota p { margin: 0; font-size: 15px; line-height: 1.65; }
+
+@media (max-width: 1100px) {
+  .p-kahraman { grid-template-columns: 1fr; }
+  .p-notlar { grid-template-columns: 1fr; }
+  .akis-yol { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .akis-yol li { margin-right: 0; }
+  .akis-yol li::after, .akis-yol li::before { display: none; }
+}
+@media (max-width: 560px) { .akis-yol { grid-template-columns: 1fr; } .p-nota { padding-left: 20px; padding-top: 58px; } .pin { width: 26px; height: 26px; margin: -13px 0 0 -13px; font-size: 12px; } .pin em { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ozellikler li, .ozellikler svg, .pin, .pin-liste li, .kare-vurgu, .akis-yol li { transition: none !important; animation: none !important; }
+  .js-vitrin .ozellikler li { opacity: 1; transform: none; }
+  .pin[aria-current]::before { animation: none; }
+}
+@media print { .js-vitrin .ozellikler li { opacity: 1 !important; transform: none !important; } .p-sahne, .p-kareler { box-shadow: none; } }

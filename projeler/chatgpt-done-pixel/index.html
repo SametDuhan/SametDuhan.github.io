@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="../../css/tema.css">
   <link rel="stylesheet" href="../../css/site.css">
-<link rel="stylesheet" href="../../css/atolye.css">
+  <link rel="stylesheet" href="../../css/vitrin.css">
+  <link rel="stylesheet" href="../../css/proje.css">
   <link rel="stylesheet" href="../../css/ekran.css">
 </head>
 <body>
@@ -32,12 +33,84 @@
       <a href="../../iletisim/"><i>04</i>İletişim</a>
     </div>
   </nav>
-<main id="icerik"><a href="../">← Tüm projeler</a><div class="proje-kapak"><div><p class="komut">PROJE / GELİŞTİRME HİKÂYESİ</p><h1>chatgpt-done-pixel</h1><p class="tanitim">Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar.</p><div class="linkler"><a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel">Kaynak kod ↗</a><a class="dugme" href="../../slaytlar/claude-code-hook/">İlgili otomasyon sunumu →</a></div></div><img src="../../img/chatgpt-done.png" alt="Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama" width="960" height="540"></div>
-<section class="bolum"><h2>Neden yaptım?</h2><p>Codex bir turu tamamladığında, Windows masaüstünde saatin üzerinde kısa bir piksel animasyonuyla haber vermek. Proje Windows ve WSL kullanımını destekler.</p></section><div class="piksel-demo" data-piksel-demo="codex"><p>Proje animasyonunun hareketli önizlemesi</p><canvas width="720" height="220" role="img" aria-label="İş tamamlanma bildiriminin animasyonlu örneği">Piksel karakter koşar, zıplar ve bayrak sallar.</canvas><button class="dugme" type="button">▶ Animasyonu oynat</button><p class="not">Gerçek proje görselindeki animasyon karelerinden hazırlanmış önizleme.</p></div>
-<section class="bolum"><h2>Nasıl çalışıyor?</h2><div class="mimari" aria-label="Veri ve olay akışı"><span>Codex</span> → <span>agent-turn-complete</span> → <span>Windows bildirimi</span> → <span>Piksel animasyonu</span></div></section>
-<div class="proje-notlar bolum"><section><h2>Verdiğim karar</h2><p>Bildirim için sohbet metnini kaydetmeye veya ağ isteği göndermeye gerek yok. Proje, tamamlanma olayına odaklanır.</p></section><section><h2>Sorunlar ve kontroller</h2><p>Bu sayfada doğrulanmamış bir hata hikâyesi üretmiyorum. Windows ve WSL arasındaki tetikleme yolu ile art arda tamamlanan görevlerin davranışı, proje incelenirken özellikle bakılabilecek noktalar.</p></section><section><h2>AI’ın rolü</h2><p>Claude sürümündeki temel fikir burada farklı bir tamamlanma olayına bağlanıyor. İki projeyi karşılaştırınca aynı arayüz fikrinin farklı ajanlarla nasıl çalıştırılabildiği görülebilir.</p></section><section><h2>Bir sonraki geliştirme için</h2><p>Olay alma ve animasyon katmanlarını ayrı doğrulamak; farklı ortamları aynı küçük bildirim sözleşmesiyle birleştirmek değerlendirilebilir.</p></section></div>
-<section class="bolum"><h2>Kaynaklar ve devamı</h2><p>Projenin güncel kurulum adımları, sürümleri ve değişiklikleri GitHub’da.</p><div class="linkler"><a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel#readme">README</a><a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel/commits">Değişiklik geçmişi</a><a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel/releases">Sürümler</a><a class="dugme" href="../../iletisim/">Soru veya öneri gönder</a></div></section>
-</main>
+  <main id="icerik" data-sayfalama="kaydir">
+    <a class="geri-baglanti" href="../">← Tüm projeler</a>
+
+    <section class="p-kahraman belir p-bakir">
+      <div class="p-metin">
+        <p class="v-komut">PROJE · PIKSEL BILDIRIM</p>
+        <h1>chatgpt-done-pixel</h1>
+        <p class="v-etiketler"><span>AI aracı</span><span>Codex</span></p>
+        <p class="p-ozet">Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar.</p>
+        <div class="linkler">
+        <a class="dugme ana" href="https://github.com/SametDuhan/chatgpt-done-pixel">Kaynak kod ↗</a>
+        
+        
+        <a class="dugme" href="../../slaytlar/claude-code-hook/">İlgili sunum →</a>
+        </div>
+      </div>
+      <div class="v-medya" data-medya="codex"><div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı önizleme · piksel animasyonu</span></div><canvas class="v-ekran v-piksel" width="640" height="400" role="img" aria-label="Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama"></canvas></div></div>
+    </section>
+
+    <div class="sayaclar belir" aria-label="Rakamlarla chatgpt-done-pixel"><div class="sayac"><b data-say="2">2</b><span>kez zıplar</span></div><div class="sayac"><b data-say="2">2</b><span>yeşil bayrak sallar</span></div><div class="sayac"><b data-say="6">6</b><span>animasyon karesi</span></div><div class="sayac"><b data-say="4">4</b><span>adımlık akış</span></div></div>
+
+    <section class="bolum belir p-bakir" aria-labelledby="neler">
+      <h2 id="neler" class="bolum-baslik">Neler yapıyor?</h2>
+      <p class="p-amac">Codex bir turu tamamladığında, Windows masaüstünde saatin üzerinde kısa bir piksel animasyonuyla haber vermek. Proje Windows ve WSL kullanımını destekler.</p>
+      <ul class="ozellikler">
+        <li style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3v9a4 4 0 1 0 8 0V9M14 9h8M6 3h8"/></svg><b>agent-turn-complete</b><span>Codex bir turu bitirince gelen bildirimle çalışır.</span></li>
+        <li style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Saatin üstünde</b><span>Piksel logo iki kez zıplar, iki yeşil bayrak sallar.</span></li>
+        <li style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b>Ağ isteği yapmaz</b><span>Sohbet metnini kaydetmez.</span></li>
+        <li style="--i:3"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg><b>Windows ve WSL</b><span>İki ortamda da kullanılabilir.</span></li>
+      </ul>
+    </section>
+
+    <section class="bolum belir p-bakir" aria-labelledby="yakindan">
+      <h2 id="yakindan" class="bolum-baslik">Animasyonun kareleri</h2>
+      <p class="p-not">Gerçek proje görselindeki altı kare: geliş, iki zıplama, iki bayrak, kutlama.</p>
+      <div class="p-kareler" data-hucre="6x1" style="--c:6;--r:1">
+        <img class="piksel" src="../../img/chatgpt-done.png" alt="chatgpt-done-pixel animasyon kareleri: geliş, iki zıplama, iki bayrak, kutlama" width="1920" height="308" loading="lazy">
+        <i class="kare-vurgu" aria-hidden="true"></i>
+      </div>
+    </section>
+
+    <section class="bolum belir p-bakir" aria-labelledby="nasil">
+      <h2 id="nasil" class="bolum-baslik">Nasıl çalışıyor?</h2>
+      <ol class="akis-yol" aria-label="Veri ve olay akışı">
+        <li style="--i:0"><span class="a-no">01</span>Codex</li>
+        <li style="--i:1"><span class="a-no">02</span>agent-turn-complete</li>
+        <li style="--i:2"><span class="a-no">03</span>Windows bildirimi</li>
+        <li style="--i:3"><span class="a-no">04</span>Piksel animasyonu</li>
+      </ol>
+    </section>
+
+    <section class="bolum" aria-labelledby="hikaye">
+      <h2 id="hikaye" class="bolum-baslik">Geliştirme hikâyesi</h2>
+      <div class="p-notlar">
+        <article class="p-nota belir p-bakir"><span class="nota-no">01</span><h3>Verdiğim karar</h3><p>Bildirim için sohbet metnini kaydetmeye veya ağ isteği göndermeye gerek yok. Proje, tamamlanma olayına odaklanır.</p></article>
+        <article class="p-nota belir p-bakir"><span class="nota-no">02</span><h3>Sorunlar ve kontroller</h3><p>Bu sayfada doğrulanmamış bir hata hikâyesi üretmiyorum. Windows ve WSL arasındaki tetikleme yolu ile art arda tamamlanan görevlerin davranışı, proje incelenirken özellikle bakılabilecek noktalar.</p></article>
+        <article class="p-nota belir p-bakir"><span class="nota-no">03</span><h3>AI'ın rolü</h3><p>Claude sürümündeki temel fikir burada farklı bir tamamlanma olayına bağlanıyor. İki projeyi karşılaştırınca aynı arayüz fikrinin farklı ajanlarla nasıl çalıştırılabildiği görülebilir.</p></article>
+        <article class="p-nota belir p-bakir"><span class="nota-no">04</span><h3>Bir sonraki geliştirme için</h3><p>Olay alma ve animasyon katmanlarını ayrı doğrulamak; farklı ortamları aynı küçük bildirim sözleşmesiyle birleştirmek değerlendirilebilir.</p></article>
+      </div>
+    </section>
+
+    <section class="bolum" aria-labelledby="kaynak">
+      <h2 id="kaynak" class="bolum-baslik">Kaynaklar ve devamı</h2>
+      <p class="p-not">Projenin güncel kurulum adımları, sürümleri ve değişiklikleri GitHub'da.</p>
+      <div class="linkler">
+        <a class="dugme ana" href="https://github.com/SametDuhan/chatgpt-done-pixel#readme">README</a>
+        <a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel/commits">Değişiklik geçmişi</a>
+        <a class="dugme" href="https://github.com/SametDuhan/chatgpt-done-pixel/releases">Sürümler</a>
+        <a class="dugme" href="../../iletisim/">Soru veya öneri gönder</a>
+      </div>
+    </section>
+
+    <footer class="vitrin-son belir">
+      <div class="v-medya" data-medya="video"><video class="v-kapanis" muted loop playsinline preload="metadata" poster="../../img/sahin/video-poster.webp" aria-label="Kanatlarını açıp kapatan şahin çizimi (animasyon)"><source src="../../video/sahin.mp4" type="video/mp4"></video></div>
+      <p><strong>Diğer projelere de göz at.</strong> Hepsinin kodu açık.</p>
+      <a class="dugme ana" href="../">tüm projeler →</a>
+    </footer>
+  </main>
   <footer class="alt-bilgi">
     <span>samet duhan · 2026</span>
     <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../../iletisim/">iletişim</a></span>
@@ -45,4 +118,12 @@
   <script type="module">
     import { baslatSayfa } from '../../js/ekrana-sigdir.js';
     baslatSayfa();
-  </script><script type="module" src="../../js/atolye.js"></script></body></html>
+  </script>
+  <script type="module">
+    import { baslat } from '../../js/vitrin.js';
+    import { projeBaslat } from '../../js/proje.js';
+    baslat();
+    projeBaslat();
+  </script>
+</body>
+</html>

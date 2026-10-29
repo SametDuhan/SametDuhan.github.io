@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
   <link rel="stylesheet" href="../../css/tema.css">
   <link rel="stylesheet" href="../../css/site.css">
-<link rel="stylesheet" href="../../css/atolye.css">
+  <link rel="stylesheet" href="../../css/vitrin.css">
+  <link rel="stylesheet" href="../../css/proje.css">
   <link rel="stylesheet" href="../../css/ekran.css">
 </head>
 <body>
@@ -32,12 +33,96 @@
       <a href="../../iletisim/"><i>04</i>İletişim</a>
     </div>
   </nav>
-<main id="icerik"><a href="../">← Tüm projeler</a><div class="proje-kapak"><div><p class="komut">PROJE / GELİŞTİRME HİKÂYESİ</p><h1>SkyTrack</h1><p class="tanitim">Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.</p><div class="linkler"><a class="dugme" href="https://github.com/SametDuhan/airock">Kaynak kod ↗</a><a class="dugme" href="../../slaytlar/skytrack-nasil-kurdum/">İnteraktif anlatımı aç →</a></div></div><img src="../../img/skytrack-960.jpg" alt="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası" width="960" height="540"></div>
-<section class="bolum"><h2>Neden yaptım?</h2><p>Canlı uçuş verisini harita üzerinde anlaşılır bir deneyime dönüştürmek. Masaüstü uygulaması açık ADS-B verisiyle çalışır; tarayıcı demosu ise simüle edilmiş uçuşlar kullanır.</p></section><section class="bolum"><h2>Önce izle, sonra dene</h2><video class="proje-video" controls playsinline preload="none" poster="../../img/skytrack-960.jpg" aria-label="SkyTrack tarayıcı demosunun ekran kaydı; uçuşlar simülasyondur"><source src="../../video/skytrack-demo.webm" type="video/webm">Tarayıcın videoyu desteklemiyor. Aşağıdaki demo bağlantısını kullanabilirsin.</video><p>Tarayıcı demosunda simüle edilmiş uçuşlar ve türbülans alanları kullanılır.</p><a class="dugme ana" href="https://sametduhan.github.io/airock/app/">Tarayıcı demosunu aç ↗</a></section>
-<section class="bolum"><h2>Nasıl çalışıyor?</h2><div class="mimari" aria-label="Veri ve olay akışı"><span>ADS-B verisi</span> → <span>Uçuş işleme</span> → <span>Leaflet haritası</span> → <span>Electron arayüzü</span></div></section>
-<div class="proje-notlar bolum"><section><h2>Verdiğim karar</h2><p>Bir acil durum kodunu görür görmez bildirim göndermek yerine, kodun 45 saniye kesintisiz sürmesini bekleyen bir kural seçtim. Böylece kısa süreli kod geçişlerinin yanlış alarm üretmesini azaltmayı hedefledim.</p></section><section><h2>Sorunlar ve kontroller</h2><p>Fotoğraf görüntüleyicideki bir yorum satırı açılışı bozdu. Düzeltmenin yanına bütün betiklerin sözdizimini kontrol eden bir test eklendi. Sunumda bu örneğin commit mesajını ve zaman çizelgesini inceleyebilirsin.</p></section><section><h2>AI’ın rolü</h2><p>27 Ekim 2026 tarihli sayımda 208 commit’in 191’inde Claude ortak yazar kaydı var. Bu, kod satırlarının yüzde 92’sinin AI tarafından yazıldığı anlamına gelmez; ortak yazarlık kaydı olan commit sayısını gösterir.</p></section><section><h2>Bir sonraki geliştirme için</h2><p>Bir sonraki adım olarak önce veri akışını, hata durumlarını ve alarm davranışını küçük bir prototipte doğrulayıp dil ve masaüstü paketlerini bu temel üzerine eklemek değerlendirilebilir.</p></section></div>
-<section class="bolum"><h2>Kaynaklar ve devamı</h2><p>Projenin güncel kurulum adımları, sürümleri ve değişiklikleri GitHub’da.</p><div class="linkler"><a class="dugme" href="https://github.com/SametDuhan/airock#readme">README</a><a class="dugme" href="https://github.com/SametDuhan/airock/commits">Değişiklik geçmişi</a><a class="dugme" href="https://github.com/SametDuhan/airock/releases">Sürümler</a><a class="dugme" href="../../slaytlar/skytrack-nasil-kurdum/?gorunum=oku">Geliştirme anlatımını oku →</a><a class="dugme" href="../../iletisim/">Soru veya öneri gönder</a></div></section>
-</main>
+  <main id="icerik" data-sayfalama="kaydir">
+    <a class="geri-baglanti" href="../">← Tüm projeler</a>
+
+    <section class="p-kahraman belir p-kehribar">
+      <div class="p-metin">
+        <p class="v-komut">PROJE · CANLI UÇAK TAKIBI</p>
+        <h1>SkyTrack</h1>
+        <p class="v-etiketler"><span>Uygulama</span><span>Açık veri</span></p>
+        <p class="p-ozet">Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.</p>
+        <div class="linkler">
+        <a class="dugme ana" href="https://github.com/SametDuhan/airock">Kaynak kod ↗</a>
+        <a class="dugme" href="https://sametduhan.github.io/airock/">SkyTrack sitesi ↗</a>
+        <a class="dugme" href="https://sametduhan.github.io/airock/app/">▶ Web demo</a>
+        <a class="dugme" href="../../slaytlar/skytrack-nasil-kurdum/">Nasıl yaptım →</a>
+        </div>
+      </div>
+      <div class="v-medya" data-medya="video"><div class="v-pencere"><div class="v-bar"><i></i><i></i><i></i><span>canlı demo · sessiz ekran kaydı</span></div><video class="v-ekran" muted loop playsinline preload="metadata" poster="../../img/skytrack-960.jpg" aria-label="SkyTrack: harita üzerinde canlı uçaklar, rüzgar okları ve seçili uçuşun rotası"><source src="../../video/skytrack-demo.webm" type="video/webm"></video></div></div>
+    </section>
+
+    <div class="sayaclar belir" aria-label="Rakamlarla SkyTrack"><div class="sayac"><b data-say="208">208</b><span>commit</span></div><div class="sayac"><b data-say="191">191</b><span>Claude ile ortak yazıldı</span></div><div class="sayac"><b data-say="15">15</b><span>dil desteği</span></div><div class="sayac"><b data-say="9">9</b><span>gün: ilk dosyadan v0.7.9&#39;a</span></div></div>
+
+    <section class="bolum belir p-kehribar" aria-labelledby="neler">
+      <h2 id="neler" class="bolum-baslik">Neler yapıyor?</h2>
+      <p class="p-amac">Canlı uçuş verisini harita üzerinde anlaşılır bir deneyime dönüştürmek. Masaüstü uygulaması açık ADS-B verisiyle çalışır; tarayıcı demosu ise simüle edilmiş uçuşlar kullanır.</p>
+      <ul class="ozellikler">
+        <li style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 14l9-3 3-8 2 1-1 7 6 2-.5 2-7-1-4 5-2-.5 1.5-6z"/></svg><b>Canlı uçak takibi</b><span>Açık ADS-B verisiyle; hesap ya da API anahtarı istemez.</span></li>
+        <li style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8q3-4 5 0t5 0 5 0 5 0M2 13q3-4 5 0t5 0 5 0 5 0M2 18q3-4 5 0t5 0 5 0 5 0"/></svg><b>Türbülans</b><span>Rota üzerindeki türbülansı gösterir.</span></li>
+        <li style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 0 1 12 0v6l2 2H4zM10 21a2 2 0 0 0 4 0"/></svg><b>Uçuş uyarısı</b><span>İzlenen uçuş için uyarı verir.</span></li>
+        <li style="--i:3"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg><b>Koltuk önerisi</b><span>Güneşin hangi tarafta olduğuna göre koltuk önerir.</span></li>
+        <li style="--i:4"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3q-5 9 0 18M12 3q5 9 0 18"/></svg><b>15 dil</b><span>Tarayıcıda çalışan bir web demosu da var.</span></li>
+        <li style="--i:5"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg><b>Her masaüstünde</b><span>Windows, macOS ve Linux; Electron ve Leaflet ile.</span></li>
+      </ul>
+    </section>
+
+    <section class="bolum belir p-kehribar" aria-labelledby="yakindan">
+      <h2 id="yakindan" class="bolum-baslik">Uygulamayı yakından</h2>
+      <p class="p-not">Aşağıdaki ekran görüntüsünde numaralı noktalar sırayla vurgulanır; birine tıklayınca durur.</p>
+      <div class="p-sahne" data-pinler>
+        <img src="../../img/skytrack-1440.jpg" srcset="../../img/skytrack-960.jpg 960w, ../../img/skytrack-1440.jpg 1440w" sizes="(max-width: 900px) 100vw, 860px" alt="SkyTrack ekran görüntüsü: harita üzerinde canlı uçaklar, seçili uçuşun rotası ve uçuş kartı" width="1440" height="810" loading="lazy">
+        <button type="button" class="pin" data-i="0" style="--x:0.893;--y:0.6" aria-label="1. Uçuş kartı">1<em>Uçuş kartı</em></button>
+        <button type="button" class="pin" data-i="1" style="--x:0.57;--y:0.5" aria-label="2. Uçuş rotası">2<em>Uçuş rotası</em></button>
+        <button type="button" class="pin" data-i="2" style="--x:0.12;--y:0.52" aria-label="3. Harita katmanları">3<em>Harita katmanları</em></button>
+        <button type="button" class="pin" data-i="3" style="--x:0.58;--y:0.955" aria-label="4. Canlı ve geçmiş">4<em>Canlı ve geçmiş</em></button>
+      </div>
+      <ol class="pin-liste">
+        <li data-i="0"><b>Uçuş kartı</b><span>Seçilen uçuşun yüksekliği, hızı, yakıt tahmini ve koltuk ipucu bir kartta.</span></li>
+        <li data-i="1"><b>Uçuş rotası</b><span>Uçuşun nereden nereye gittiği haritada çizgi olarak görünür.</span></li>
+        <li data-i="2"><b>Harita katmanları</b><span>Havalimanları, radar, türbülans, rüzgâr, bulut ve gece katmanları tek tıkla açılır.</span></li>
+        <li data-i="3"><b>Canlı ve geçmiş</b><span>Zaman çubuğuyla canlı görüntü ile geçmiş arasında gezinilir.</span></li>
+      </ol>
+    </section>
+
+    <section class="bolum belir p-kehribar" aria-labelledby="nasil">
+      <h2 id="nasil" class="bolum-baslik">Nasıl çalışıyor?</h2>
+      <ol class="akis-yol" aria-label="Veri ve olay akışı">
+        <li style="--i:0"><span class="a-no">01</span>ADS-B verisi</li>
+        <li style="--i:1"><span class="a-no">02</span>Uçuş işleme</li>
+        <li style="--i:2"><span class="a-no">03</span>Leaflet haritası</li>
+        <li style="--i:3"><span class="a-no">04</span>Electron arayüzü</li>
+      </ol>
+    </section>
+
+    <section class="bolum" aria-labelledby="hikaye">
+      <h2 id="hikaye" class="bolum-baslik">Geliştirme hikâyesi</h2>
+      <div class="p-notlar">
+        <article class="p-nota belir p-kehribar"><span class="nota-no">01</span><h3>Verdiğim karar</h3><p>Bir acil durum kodunu görür görmez bildirim göndermek yerine, kodun 45 saniye kesintisiz sürmesini bekleyen bir kural seçtim. Böylece kısa süreli kod geçişlerinin yanlış alarm üretmesini azaltmayı hedefledim.</p></article>
+        <article class="p-nota belir p-kehribar"><span class="nota-no">02</span><h3>Sorunlar ve kontroller</h3><p>Fotoğraf görüntüleyicideki bir yorum satırı açılışı bozdu. Düzeltmenin yanına bütün betiklerin sözdizimini kontrol eden bir test eklendi. Sunumda bu örneğin commit mesajını ve zaman çizelgesini inceleyebilirsin.</p></article>
+        <article class="p-nota belir p-kehribar"><span class="nota-no">03</span><h3>AI'ın rolü</h3><p>27 Ekim 2026 tarihli sayımda 208 commit’in 191’inde Claude ortak yazar kaydı var. Bu, kod satırlarının yüzde 92’sinin AI tarafından yazıldığı anlamına gelmez; ortak yazarlık kaydı olan commit sayısını gösterir.</p></article>
+        <article class="p-nota belir p-kehribar"><span class="nota-no">04</span><h3>Bir sonraki geliştirme için</h3><p>Bir sonraki adım olarak önce veri akışını, hata durumlarını ve alarm davranışını küçük bir prototipte doğrulayıp dil ve masaüstü paketlerini bu temel üzerine eklemek değerlendirilebilir.</p></article>
+      </div>
+    </section>
+
+    <section class="bolum" aria-labelledby="kaynak">
+      <h2 id="kaynak" class="bolum-baslik">Kaynaklar ve devamı</h2>
+      <p class="p-not">Projenin güncel kurulum adımları, sürümleri ve değişiklikleri GitHub'da.</p>
+      <div class="linkler">
+        <a class="dugme ana" href="https://github.com/SametDuhan/airock#readme">README</a>
+        <a class="dugme" href="https://github.com/SametDuhan/airock/commits">Değişiklik geçmişi</a>
+        <a class="dugme" href="https://github.com/SametDuhan/airock/releases">Sürümler</a>
+        <a class="dugme" href="../../slaytlar/skytrack-nasil-kurdum/?gorunum=oku">Geliştirme anlatımını oku →</a>
+        <a class="dugme" href="../../iletisim/">Soru veya öneri gönder</a>
+      </div>
+    </section>
+
+    <footer class="vitrin-son belir">
+      <div class="v-medya" data-medya="video"><video class="v-kapanis" muted loop playsinline preload="metadata" poster="../../img/sahin/video-poster.webp" aria-label="Kanatlarını açıp kapatan şahin çizimi (animasyon)"><source src="../../video/sahin.mp4" type="video/mp4"></video></div>
+      <p><strong>Diğer projelere de göz at.</strong> Hepsinin kodu açık.</p>
+      <a class="dugme ana" href="../">tüm projeler →</a>
+    </footer>
+  </main>
   <footer class="alt-bilgi">
     <span>samet duhan · 2026</span>
     <span><a href="https://github.com/SametDuhan">GitHub</a> · <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn</a> · <a href="../../iletisim/">iletişim</a></span>
@@ -45,4 +130,12 @@
   <script type="module">
     import { baslatSayfa } from '../../js/ekrana-sigdir.js';
     baslatSayfa();
-  </script><script type="module" src="../../js/atolye.js"></script></body></html>
+  </script>
+  <script type="module">
+    import { baslat } from '../../js/vitrin.js';
+    import { projeBaslat } from '../../js/proje.js';
+    baslat();
+    projeBaslat();
+  </script>
+</body>
+</html>

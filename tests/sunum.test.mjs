@@ -101,3 +101,29 @@ test('projeler ve hakkımda sayfalarının altında şahin videosu (sessiz, dön
     assert.match(kapanis, /video\/sahin\.mp4/, yol);
   }
 });
+
+test('proje detay sayfaları: kahraman, sayaçlar, özellikler, görsel, akış ve hikâye; boş açılış yok', () => {
+  for (const slug of ['skytrack', 'claude-done-pixel', 'chatgpt-done-pixel']) {
+    const s = oku(`projeler/${slug}/index.html`);
+    assert.match(s, /<main id="icerik" data-sayfalama="kaydir">/, slug);
+    assert.match(s, /class="p-kahraman belir/, slug);
+    assert.match(s, /class="sayaclar belir"/, slug);
+    assert.ok((s.match(/<li style="--i:\d">\s*<svg/g) || []).length >= 4, `${slug}: özellik kartları`);
+    assert.equal((s.match(/class="p-nota belir/g) || []).length, 4, slug);
+    assert.match(s, /<ol class="akis-yol"/, slug);
+    assert.match(s, /data-pinler|data-hucre/, `${slug}: vurgulu görsel`);
+    assert.match(s, /css\/proje\.css/, slug);
+    assert.match(s, /js\/proje\.js/, slug);
+    assert.doesNotMatch(s, /liste-sayfalar|ekran-gezinme/, slug);
+  }
+  assert.equal((oku('projeler/skytrack/index.html').match(/class="pin"/g) || []).length, 4);
+  assert.ok(oku('projeler/skytrack/index.html').includes('href="https://sametduhan.github.io/airock/"'));
+});
+
+test('proje sayfası betiği: sıra döngüsü ve hareketi azaltınca durur', async () => {
+  const { sonraki } = await import('../js/proje.js');
+  assert.equal(sonraki(0, 4), 1);
+  assert.equal(sonraki(3, 4), 0);
+  assert.match(oku('js/proje.js'), /prefers-reduced-motion/);
+  assert.match(oku('css/proje.css'), /@media \(prefers-reduced-motion: reduce\)/);
+});
