@@ -10,7 +10,11 @@
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 45%);
   mask-image: linear-gradient(180deg, transparent 0%, #000 45%);
 }
-.seyir-haritasi svg { width: 100%; height: 100%; display: block; }
+.seyir-haritasi svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.seyir-haritasi svg.hareketli { will-change: transform; }
+/* sabit harita bir kez çizilir; rotalar ve atölye dumanı durağan, yalnız uçak ve pusula hareketli (ayrı katman) */
+.rotalar path, .seyir-haritasi .duman circle { animation: none; }
+.seyir-haritasi .duman circle { opacity: .35; }
 .rotalar path { animation: rota 1.6s linear infinite; }
 @keyframes rota { to { stroke-dashoffset: -26; } }
 .duman circle { transform-box: fill-box; transform-origin: center; opacity: 0; animation: duman 5s ease-out infinite; }
@@ -33,12 +37,14 @@
   overflow-x: clip;
 }
 
-.kus-alan svg { width: 90%; height: auto; display: block; max-height: 88vh; overflow: visible; }
+.kus-alan { display: grid; }
+.kus-alan svg { grid-area: 1 / 1; width: 90%; height: auto; display: block; max-height: 88vh; overflow: visible; }
 
 #sahin { cursor: pointer; outline: none; }
 #sahin:focus-visible .poz.aktif { filter: drop-shadow(0 0 6px var(--vurgu)); }
-.govde { transform-box: fill-box; transform-origin: 50% 100%; animation: nefes 4.2s ease-in-out infinite; }
-@keyframes nefes { 0%, 100% { transform: translateY(0) scaleY(1); } 45% { transform: translateY(-7px) scaleY(1.012); } }
+/* nefes: şahin kendi katmanında, hareket donanımla hızlanır (yeniden boyama yok) */
+.sahin-kat { transform-origin: 50% 74%; will-change: transform; animation: nefes-kat 4.2s ease-in-out infinite; }
+@keyframes nefes-kat { 0%, 100% { transform: translateY(0) scaleY(1); } 45% { transform: translateY(-.45%) scaleY(1.012); } }
 .poz { opacity: 0; transition: opacity 0.16s ease; pointer-events: none; }
 .poz.aktif { opacity: 1; pointer-events: auto; }
 .kapak { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(0); }
@@ -122,38 +128,37 @@
 .mini .ln { fill: none; stroke: var(--kenar); stroke-width: 2.4; stroke-linecap: round; }
 .mini .ln.ince { stroke: var(--yazi); stroke-width: 1; opacity: .6; }
 .mini .mt { font: 600 6.4px var(--mono); letter-spacing: .12em; fill: var(--zemin); }
-/* 01 hakkımda: damga basar, mühür belirir (6 sn) */
-.m-damga { animation: m-damga 6s ease-in-out infinite; }
-.m-iz { animation: m-iz 6s linear infinite; }
-.m-ahsap { fill: #8a5a33; stroke: var(--yazi); stroke-width: 1.4; stroke-linejoin: round; }
-.m-lastik { fill: var(--muhur); stroke: var(--yazi); stroke-width: 1; }
-.m-sap { fill: #8a5a33; stroke: var(--yazi); stroke-width: 1.4; stroke-linejoin: round; }
-.m-halka { fill: none; stroke: var(--muhur); stroke-width: 2.2; }
-.m-halka.ince { stroke-width: .9; }
-.mini .mm { font: 800 8px var(--serif); fill: var(--muhur); }
-@keyframes m-damga { 0%, 14% { transform: translate(108px, 34px) rotate(0); } 24% { transform: translate(108px, 70px); } 28% { transform: translate(108px, 72px) rotate(-3deg); } 40%, 100% { transform: translate(108px, 34px) rotate(4deg); } }
-@keyframes m-iz { 0%, 26% { opacity: 0; } 28%, 90% { opacity: .9; } 98%, 100% { opacity: 0; } }
-/* 02 projeler: sandıklar bantta akar, baca tüter */
-.m-sandik { animation: m-sandik 8s linear infinite; }
-.m-sandik.s2 { animation-delay: -2.7s; }
-.m-sandik.s3 { animation-delay: -5.4s; }
-.m-c1 { fill: var(--vurgu); stroke: var(--yazi); stroke-width: 1.4; }
-.m-c2 { fill: #8fa6c4; stroke: var(--yazi); stroke-width: 1.4; }
-.m-c3 { fill: #9bb9ab; stroke: var(--yazi); stroke-width: 1.4; }
-.m-bant { fill: none; stroke: var(--zemin); stroke-width: 2; stroke-dasharray: 8 8; animation: m-akis 1s linear infinite; }
-.m-duman circle { fill: var(--soluk); opacity: 0; transform-box: fill-box; transform-origin: center; animation: m-duman 4s ease-out infinite; }
-.m-duman circle:nth-child(2) { animation-delay: -1.3s; }
-.m-duman circle:nth-child(3) { animation-delay: -2.6s; }
-@keyframes m-sandik { from { transform: translateX(-34px); } to { transform: translateX(166px); } }
-@keyframes m-akis { to { stroke-dashoffset: -16; } }
-@keyframes m-duman { 0% { transform: translate(0, 0) scale(.6); opacity: .55; } 100% { transform: translate(-8px, -22px) scale(2); opacity: 0; } }
+/* 01 hakkımda: üzerine gelince kimlik kartına gerçek bilgiler yazılır (kapaklar sağa çekilir); boşta yazı gizli, yer tutucu çubuklar görünür */
+.mini .mt2 { font: 700 3.8px var(--mono); letter-spacing: .1em; fill: var(--yazi); }
+.h-yazi { font-family: var(--mono); font-weight: 400; fill: var(--yazi); }
+.h-yazi.kalin { font-family: var(--serif); font-weight: 800; letter-spacing: .02em; }
+.h-ort { fill: #f7f0e0; transform-box: fill-box; transform-origin: 100% 50%; transition: transform .75s steps(14) calc(var(--d) + .05s); }
+.h-yer { fill: var(--kenar); transition: opacity .25s; }
+.h-barkod { stroke: var(--yazi); opacity: .5; }
+.kare:hover .h-ort, .kare:focus-visible .h-ort { transform: scaleX(0); }
+.kare:hover .h-yer, .kare:focus-visible .h-yer { opacity: 0; }
+.kare:not(:hover):not(:focus-visible) .h-ort { transition-delay: 0s; transition-duration: .2s; }
+/* 02 projeler: yalnız fabrika; duman üzerine gelince çıkar */
+.m-tugla { fill: url(#mTugla); stroke: var(--yazi); stroke-width: 1.5; stroke-linejoin: round; }
+.mini .zemin { stroke-width: 1.5; }
+.m-duman circle { fill: var(--soluk); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.kare:hover .m-duman circle, .kare:focus-visible .m-duman circle { animation: m-duman 3.4s ease-out infinite; }
+.m-duman circle:nth-child(2) { animation-delay: -1.1s !important; }
+.m-duman circle:nth-child(3) { animation-delay: -2.2s !important; }
+.m-duman circle:nth-child(5) { animation-delay: -1.6s !important; }
+@keyframes m-duman { 0% { transform: translate(0, 0) scale(.6); opacity: .6; } 100% { transform: translate(-6px, -26px) scale(2.2); opacity: 0; } }
+@media (hover: none) { .h-ort { transform: scaleX(0); } .h-yer { opacity: 0; } }
+
 /* 03 slaytlar: yazılar çizilir, sonra grafik büyür (10 sn) */
-.m-sl-a { animation: m-sl-a 10s linear infinite; }
-.m-sl-b { animation: m-sl-b 10s linear infinite; }
-.m-yazi { fill: none; stroke: var(--soluk); stroke-width: 3; stroke-linecap: round; transform-box: fill-box; transform-origin: left; animation: m-yaz 10s linear infinite; }
+.m-sl-b { opacity: 0; }
+.kare:hover .m-sl-a, .kare:focus-visible .m-sl-a { animation: m-sl-a 10s linear infinite; }
+.kare:hover .m-sl-b, .kare:focus-visible .m-sl-b { animation: m-sl-b 10s linear infinite; }
+.m-yazi { fill: none; stroke: var(--soluk); stroke-width: 3; stroke-linecap: round; transform-box: fill-box; transform-origin: left; }
+.kare:hover .m-yazi, .kare:focus-visible .m-yazi { animation: m-yaz 10s linear infinite; }
 .m-yazi.kalin { stroke: var(--yazi); stroke-width: 5; }
 .m-nokta { fill: var(--vurgu); }
-.m-cb { stroke: var(--yazi); stroke-width: 1.4; transform-box: fill-box; transform-origin: bottom; animation: m-cb 10s ease-out infinite; }
+.m-cb { stroke: var(--yazi); stroke-width: 1.4; transform-box: fill-box; transform-origin: bottom; }
+.kare:hover .m-cb, .kare:focus-visible .m-cb { animation: m-cb 10s ease-out infinite; }
 .m-cb.c1 { fill: var(--vurgu); }
 .m-cb.c2 { fill: var(--civit); animation-delay: .25s; }
 .m-cb.c3 { fill: var(--bakir); animation-delay: .5s; }
@@ -162,8 +167,10 @@
 @keyframes m-yaz { 0% { transform: scaleX(0); } 14%, 100% { transform: scaleX(1); } }
 @keyframes m-cb { 0%, 50% { transform: scaleY(0); } 62%, 100% { transform: scaleY(1); } }
 /* 04 iletişim: telefon çalar (2,4 sn'de bir titreşim) */
-.m-cal { animation: m-cal 2.4s linear infinite; transform-box: fill-box; transform-origin: 50% 100%; }
-.m-ring { fill: none; stroke: var(--yazi); stroke-width: 2; stroke-linecap: round; opacity: 0; animation: m-ring 2.4s linear infinite; }
+.m-cal { transform-box: fill-box; transform-origin: 50% 100%; }
+.kare:hover .m-cal, .kare:focus-visible .m-cal { animation: m-cal 2.4s linear infinite; }
+.m-ring { fill: none; stroke: var(--yazi); stroke-width: 2; stroke-linecap: round; opacity: 0; }
+.kare:hover .m-ring, .kare:focus-visible .m-ring { animation: m-ring 2.4s linear infinite; }
 .m-govde { fill: #8c9669; stroke: var(--yazi); stroke-width: 1.5; stroke-linejoin: round; }
 .m-sap2 { fill: none; stroke: #8c9669; stroke-width: 6; stroke-linecap: round; }
 .m-sap2.kalin { stroke-width: 7; }
@@ -186,11 +193,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .govde, .kapak.kirp, .duman circle, .rotalar path, .kare:hover .ciz { animation: none !important; }
+  .govde, .sahin-kat, .kapak.kirp, .duman circle, .rotalar path, .kare:hover .ciz { animation: none !important; }
   .ust small, .ust h1, .ust .alt, .ust .tanit, .daktilo, .muhur-kat, .kare, .mini *, .mini { animation: none !important; transition: none !important; }
-  .m-iz { opacity: .9; }
-  .m-damga { transform: translate(108px, 34px) rotate(4deg); }
-  .m-sandik.s1 { transform: translateX(20px); } .m-sandik.s2 { transform: translateX(70px); } .m-sandik.s3 { transform: translateX(120px); }
+  .h-ort { transform: scaleX(0) !important; } .h-yer { opacity: 0; }
   .m-sl-b { opacity: 0; }
   .kare:hover, .kare:focus-visible { transform: none; }
   .kare:hover .mini .ka, .kare:hover .mini .st { animation: none !important; stroke-dasharray: none; }
@@ -199,12 +204,40 @@
 }
 
 /* ---- sol kenardan akan çok soluk kod ---- */
-.kod-yagmuru { position: fixed; left: 0; top: 0; bottom: 0; width: clamp(150px, 22vw, 330px); z-index: 0; pointer-events: none; overflow: hidden; display: flex; gap: 6px; opacity: .15; -webkit-mask-image: linear-gradient(90deg, #000 20%, transparent); mask-image: linear-gradient(90deg, #000 20%, transparent); }
+.kod-yagmuru { contain: strict; position: fixed; left: 0; top: 0; bottom: 0; width: clamp(150px, 22vw, 330px); z-index: 0; pointer-events: none; overflow: hidden; display: flex; gap: 6px; opacity: .15; -webkit-mask-image: linear-gradient(90deg, #000 20%, transparent); mask-image: linear-gradient(90deg, #000 20%, transparent); }
 .kolon { flex: 1 1 0; min-width: 0; overflow: hidden; position: relative; }
-.kolon > div { display: flex; flex-direction: column; font: 400 12px/2.1 var(--mono); color: var(--ceviz); white-space: nowrap; animation: kod-akis 60s linear infinite; }
+.kolon > div { will-change: transform; display: flex; flex-direction: column; font: 400 12px/2.1 var(--mono); color: var(--ceviz); white-space: nowrap; animation: kod-akis 60s linear infinite; }
 .kolon.k2 > div { animation-duration: 46s; animation-delay: -14s; }
 .kolon.k3 > div { animation-duration: 72s; animation-delay: -30s; }
 .kolon.k4 > div { animation-duration: 54s; animation-delay: -8s; }
 @keyframes kod-akis { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 @media (max-width: 860px) { .kod-yagmuru { width: 40vw; opacity: .12; } }
 @media (prefers-reduced-motion: reduce) { .kolon > div { animation: none !important; } }
+
+/* ana sayfa geniş ekranda kaydırılmaz: her şey tek ekranda */
+@media (min-width: 861px) {
+  html, body { height: 100svh; overflow: hidden; }
+  .giris-alt { display: none; }
+}
+
+/* telefon: aynı şekilde tek ekran; şahin üstte küçük, dört kutu altta sıkıştırılmış */
+@media (max-width: 860px) {
+  html, body { height: 100svh; overflow: hidden; }
+  .giris-alt { display: none; }
+  .giris { height: 100svh; min-height: 0; padding: 10px 14px 12px; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 30svh) minmax(0, 1fr); gap: 8px; align-items: stretch; }
+  .kus-alan { min-height: 0; height: 100%; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .kus-alan svg { height: 100%; width: auto; max-height: 100%; max-width: 100%; margin: 0; }
+  .sag { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; }
+  .ust { margin-bottom: 8px; }
+  .ust h1 { font-size: clamp(32px, 9.5vw, 52px); margin: 4px 0 4px; }
+  .ust .tanit { display: none; }
+  .ust .alt { margin-bottom: 0; font-size: 12px; }
+  .ust small { font-size: 10px; letter-spacing: .14em; }
+  .muhur-kat { top: -8px; width: 52px; }
+  .kareler { grid-template-rows: repeat(2, minmax(0, 1fr)); min-height: 0; gap: 8px; }
+  .kare { aspect-ratio: auto; min-height: 0; padding: 8px 10px; }
+  .kare .no { font-size: 10px; padding: 1px 5px; }
+  .ad { font-size: 16px; }
+  .aciklama { display: none; }
+  .kod-yagmuru { display: none; }
+}

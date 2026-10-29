@@ -35,7 +35,7 @@
       </g>
       <path d="M140 760 C 300 700 380 640 520 650 S 760 720 860 640 S 1100 520 1240 560 S 1380 640 1460 600" stroke-width="2" fill="url(#aTar2)" opacity=".5"/>
       <g class="rotalar" stroke-width="1.8" stroke-dasharray="6 7">
-        <path id="rota1" d="M310 690 Q 640 420 1010 600"/>
+        <path d="M310 690 Q 640 420 1010 600"/>
         <path id="rota2" d="M1010 600 Q 1150 420 1290 520"/>
         <path d="M310 690 Q 520 820 760 740" opacity=".6"/>
       </g>
@@ -48,22 +48,26 @@
         <path d="M0 0V-34l18-12v12l18-12v12l18-12v12l18-12V0z" fill="url(#aTar)" stroke="#33261a" stroke-width="1.6"/>
         <path d="M84 0V-62h12V0" fill="url(#aTar2)" stroke="#33261a" stroke-width="1.6"/><path d="M81 -62h18" stroke="#33261a" stroke-width="3"/>
         <g fill="#f2e8d5" stroke="#33261a"><rect x="8" y="-22" width="12" height="14"/><rect x="28" y="-22" width="12" height="14"/><rect x="48" y="-22" width="12" height="14"/></g>
-        <g class="duman kucuk" fill="#76624c" filter="url(#bulut)"><circle cx="90" cy="-68" r="6"/><circle cx="90" cy="-68" r="6"/><circle cx="90" cy="-68" r="6"/></g>
+        <g class="duman kucuk" fill="#76624c"><circle cx="90" cy="-68" r="6"/><circle cx="90" cy="-68" r="6"/><circle cx="90" cy="-68" r="6"/></g>
         <path d="M-10 0h120" stroke="#33261a" stroke-width="1.6"/>
         <text x="50" y="18" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#33261a" stroke="none" letter-spacing="1.5">ATÖLYE</text>
       </g>
       <path class="atolye-kat" d="M310 690 Q 420 790 520 830" stroke-width="1.6" stroke-dasharray="3 6"/>
+    </g>
+  </svg>
+  <svg class="hareketli" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+    <defs><pattern id="aTar3" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="4" stroke="#33261a" stroke-width=".9"/></pattern><path id="rota1" d="M310 690 Q 640 420 1010 600"/></defs>
+    <g fill="none" stroke="#33261a">
       <g class="ucak"><path d="M0 -3 L-16 -3 -20 -10 -24 -10 -21 -2 -26 0 -21 2 -24 10 -20 10 -16 3 0 3 6 0z" fill="#33261a" stroke="none"/>
         <animateMotion dur="22s" repeatCount="indefinite" rotate="auto"><mpath href="#rota1"/></animateMotion></g>
-      <filter id="bulut" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3"/></filter>
       <g transform="translate(1250 230)">
         <g>
           <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="90s" repeatCount="indefinite"/>
           <circle r="110" stroke-width="1.4"/><circle r="96" stroke-dasharray="2 4"/><circle r="40"/>
-          <path d="M0-120 L14-14 0 0z" fill="#33261a"/><path d="M0-120 L-14-14 0 0z" fill="url(#aTar2)"/>
-          <path d="M0 120 L14 14 0 0z" fill="url(#aTar2)"/><path d="M0 120 L-14 14 0 0z" fill="#33261a"/>
-          <path d="M120 0 L14 -14 0 0z" fill="#33261a"/><path d="M120 0 L14 14 0 0z" fill="url(#aTar2)"/>
-          <path d="M-120 0 L-14 14 0 0z" fill="#33261a"/><path d="M-120 0 L-14 -14 0 0z" fill="url(#aTar2)"/>
+          <path d="M0-120 L14-14 0 0z" fill="#33261a"/><path d="M0-120 L-14-14 0 0z" fill="url(#aTar3)"/>
+          <path d="M0 120 L14 14 0 0z" fill="url(#aTar3)"/><path d="M0 120 L-14 14 0 0z" fill="#33261a"/>
+          <path d="M120 0 L14 -14 0 0z" fill="#33261a"/><path d="M120 0 L14 14 0 0z" fill="url(#aTar3)"/>
+          <path d="M-120 0 L-14 14 0 0z" fill="#33261a"/><path d="M-120 0 L-14 -14 0 0z" fill="url(#aTar3)"/>
           <path d="M-70-70 L70 70M70-70 L-70 70" stroke-dasharray="3 4"/>
           <text y="-128" text-anchor="middle" font-family="Fraunces" font-weight="800" font-size="20" fill="#33261a" stroke="none">K</text>
         </g>
@@ -132,6 +136,8 @@
         <ellipse cx="627" cy="1556" rx="220" ry="10" fill="#33261a" opacity=".12"/>
       </g>
 
+    </svg>
+    <svg class="sahin-kat" viewBox="80 40 1100 1560">
       <!-- şahin: nefes alan gövde -->
       <g class="govde" id="sahin" tabindex="0" role="button" aria-label="Şahine dokun: kanatlarını açar">
         <g class="poz aktif" data-poz="on">
@@ -182,27 +188,32 @@
       <a class="kare kose p-kehribar" href="hakkimda/" style="--i:0"><i class="k2"></i><i class="k3"></i>
         <span class="no">01</span>
         <span class="ikon canli"><svg class="mini" viewBox="0 -16 160 116" aria-hidden="true">
-          <rect class="ka" x="32" y="10" width="96" height="76" rx="4"/><rect class="kb" x="32" y="10" width="96" height="15" rx="4"/><rect class="kb" x="32" y="18" width="96" height="7"/>
-          <text class="mt" x="39" y="21">KİMLİK KARTI</text>
-          <rect class="ka" x="41" y="32" width="30" height="36"/><image href="img/sahin/logo.webp" x="44" y="36" width="24" height="24"/>
-          <path class="ln" d="M80 38h38M80 46h30M80 54h36"/><path class="ln ince" d="M41 76v6M45 76v6M48 76v6M53 76v6M56 76v6M62 76v6"/>
-          <g class="m-iz" transform="translate(108 66) rotate(-14)"><circle r="15" class="m-halka"/><circle r="10.5" class="m-halka ince"/><text class="mm" y="2.6" text-anchor="middle">ŞHN</text></g>
-          <g class="m-damga" transform="translate(108 66)"><rect x="-17" y="-12" width="34" height="11" rx="3" class="m-ahsap"/><rect x="-15" y="-2" width="30" height="4" rx="1.5" class="m-lastik"/><path class="m-sap" d="M-5 -12v-20h10v20"/><ellipse class="m-ahsap" cy="-34" rx="11" ry="6"/></g>
+          <rect class="ka" x="14" y="-12" width="132" height="102" rx="4"/><path class="kb" d="M14 -8a4 4 0 0 1 4 -4h124a4 4 0 0 1 4 4V1H14z"/><text class="mt" x="21" y="-3.5">KİMLİK KARTI</text>
+          <rect class="ka" x="24" y="8" width="30" height="36"/><image href="img/sahin/logo.webp" x="27" y="12" width="24" height="24"/><path class="ln ince" d="M28 41h22"/>
+          <text class="h-yazi kalin" x="61" y="18" style="font-size:7.2px">SAMET DUHAN</text><text class="h-yazi" x="61" y="27" style="font-size:5.2px">AI ile sistem kuran</text><text class="h-yazi" x="61" y="35" style="font-size:5.2px">geliştirici</text><text class="h-yazi" x="25" y="54" style="font-size:5.4px">Bilgisayar müh., 3. sınıf</text><text class="h-yazi" x="25" y="63" style="font-size:5.4px">İlgi alanı: siber güvenlik</text><text class="h-yazi" x="25" y="72" style="font-size:5.4px">SkyTrack: 208 commit, 9 gün</text><text class="h-yazi" x="25" y="81" style="font-size:5.4px">3 açık kaynak proje</text>
+          <rect class="h-ort" x="60" y="10.3" width="68.8" height="10.7" style="--d:0.00s"/><rect class="h-ort" x="60" y="21.3" width="83.7" height="8.7" style="--d:0.16s"/><rect class="h-ort" x="60" y="29.3" width="52.2" height="8.7" style="--d:0.32s"/><rect class="h-ort" x="24" y="48.1" width="111.0" height="8.9" style="--d:0.48s"/><rect class="h-ort" x="24" y="57.1" width="115.0" height="8.9" style="--d:0.64s"/><rect class="h-ort" x="24" y="66.1" width="119.2" height="8.9" style="--d:0.80s"/><rect class="h-ort" x="24" y="75.1" width="86.5" height="8.9" style="--d:0.96s"/>
+          <rect class="h-yer" x="61" y="12.0" width="49.1" height="2.9" rx="1.1"/><rect class="h-yer" x="61" y="23.0" width="61.3" height="2.2" rx="1.1"/><rect class="h-yer" x="61" y="31.0" width="35.5" height="2.2" rx="1.1"/><rect class="h-yer" x="25" y="49.800000000000004" width="83.7" height="2.2" rx="1.1"/><rect class="h-yer" x="25" y="58.800000000000004" width="87.0" height="2.2" rx="1.1"/><rect class="h-yer" x="25" y="67.8" width="90.4" height="2.2" rx="1.1"/><rect class="h-yer" x="25" y="76.8" width="63.6" height="2.2" rx="1.1"/>
+          <path class="ln ince h-barkod" d="M24 86v3M28 86v3M31 86v3M36 86v3M39 86v3M45 86v3M48 86v3M54 86v3"/>
         </svg></span>
         <span class="ad">Hakkımda</span><span class="aciklama">ben kimim, ne yapıyorum.</span></a>
 
       <a class="kare kose p-civit" href="projeler/" style="--i:1"><i class="k2"></i><i class="k3"></i>
         <span class="no">02</span>
         <span class="ikon canli"><svg class="mini" viewBox="0 -16 160 116" aria-hidden="true">
-          <path class="ka" d="M12 62V34h36V62z"/><path class="ka" d="M8 34l22-14 22 14z"/><rect class="ka" x="56" y="14" width="9" height="48"/><path class="st" d="M54 14h13"/>
-          <g class="m-duman"><circle cx="60" cy="10" r="4"/><circle cx="60" cy="10" r="4"/><circle cx="60" cy="10" r="4"/></g>
-          <circle class="ka" cx="30" cy="31" r="5.5"/><path class="st" d="M30 31v-3M30 31h2.5"/>
-          <rect class="ka" x="20" y="46" width="8" height="16"/><rect class="ka" x="34" y="46" width="8" height="10"/>
-          <rect class="kb" x="4" y="78" width="152" height="7" rx="3.5"/><path class="m-bant" d="M4 81.5H156"/>
-          <g class="m-sandik s1"><rect x="0" y="58" width="22" height="19" class="m-c1"/><path d="M0 64h22M11 58v6" class="st ince"/></g>
-          <g class="m-sandik s2"><rect x="0" y="58" width="22" height="19" class="m-c2"/><path d="M0 64h22M11 58v6" class="st ince"/></g>
-          <g class="m-sandik s3"><rect x="0" y="58" width="22" height="19" class="m-c3"/><path d="M0 64h22M11 58v6" class="st ince"/></g>
-          <path class="st" d="M20 85l-6 10M140 85l6 10"/>
+          <defs><pattern id="mTugla" width="8" height="4" patternUnits="userSpaceOnUse"><rect width="8" height="4" fill="#ead9bc"/><path d="M0 .3H8M0 2.3H8M4 .3V2.3M0 2.3V4" stroke="#33261a" stroke-width=".4" opacity=".55" fill="none"/></pattern></defs>
+          <path class="st zemin" d="M4 88H156"/>
+          <path class="m-tugla" d="M38 38V24h6v14"/><path class="st" d="M36 24h10"/>
+          <path class="m-tugla" d="M108 58h30v30h-30z"/><path class="m-tugla" d="M108 58l7-9v9l7-9v9l7-9v9l7-9v9"/>
+          <rect class="ka" x="113" y="64" width="6" height="8"/><rect class="ka" x="124" y="64" width="6" height="8"/>
+          <path class="m-tugla" d="M126 58V10h9v48"/><path class="st" d="M124 10h13M126 22h9M126 36h9M126 48h9"/>
+          <path class="m-tugla" d="M26 88V46h82v42z"/>
+          <path class="m-tugla" d="M28 46L67 26l39 20z"/><path class="st" d="M24 46h86M26 49h82"/>
+          <circle class="ka" cx="67" cy="38" r="6"/><path class="st" d="M67 38v-4M67 38l3 2"/>
+          <text class="mt2" x="67" y="55" text-anchor="middle">ATÖLYE Nº 1</text>
+          <path class="ka" d="M32 85V68a4.5 4.5 0 0 1 9 0V85z"/><path class="ka" d="M45 85V68a4.5 4.5 0 0 1 9 0V85z"/>
+          <path class="ka" d="M59 88V72a8 8 0 0 1 16 0V88z"/><path class="st ince" d="M67 64v24M59 76h16"/>
+          <path class="ka" d="M80 85V68a4.5 4.5 0 0 1 9 0V85z"/><path class="ka" d="M93 85V68a4.5 4.5 0 0 1 9 0V85z"/>
+          <g class="m-duman"><circle cx="130.5" cy="8" r="4"/><circle cx="130.5" cy="8" r="4"/><circle cx="130.5" cy="8" r="4"/><circle cx="41" cy="22" r="3"/><circle cx="41" cy="22" r="3"/></g>
         </svg></span>
         <span class="ad">Projeler</span><span class="aciklama">canlı demolar, açık kaynak.</span></a>
 
@@ -233,9 +244,9 @@
 
 <script type="module">
   import { baslatSahin } from './js/sahin.js';
-  baslatSahin(document.querySelector('.kus-alan svg'));
+  baslatSahin(document.querySelector('.kus-alan .sahin-kat'));
   // hareketi azaltınca haritadaki SMIL animasyonları (uçak, pusula) da durur
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelector('.seyir-haritasi svg').pauseAnimations();
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.seyir-haritasi svg').forEach((v) => v.pauseAnimations());
   // 1–4: kutuları klavyeyle aç
   const kareler = [...document.querySelectorAll('.kare')];
   addEventListener('keydown', (e) => {
