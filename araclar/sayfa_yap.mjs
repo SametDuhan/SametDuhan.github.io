@@ -195,16 +195,6 @@ yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama:
 ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'sol', sahne: 'slaytlar',
       tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
     <p class="ipucu">→ ve ← ile gez · F tam ekran · telefonda kaydır · kaldığın yer bu tarayıcıda hatırlanır</p>
-    <div class="filtre" role="search">
-      <label class="arama"><span class="gizli">Sunumlarda ara</span><input type="search" id="ara" placeholder="ara: hook, ajan, SkyTrack…" autocomplete="off"></label>
-      <div class="cipler" role="group" aria-label="Konu">
-        <button type="button" data-etiket="hepsi" aria-pressed="true">hepsi</button>
-        <button type="button" data-etiket="Başlangıç" aria-pressed="false">başlangıç</button>
-        <button type="button" data-etiket="Claude Code" aria-pressed="false">Claude Code</button>
-        <button type="button" data-etiket="Proje" aria-pressed="false">proje</button>
-      </div>
-      <span class="sayac-yazi" id="deste-sayac" aria-live="polite"></span>
-    </div>
     <div class="desteler" id="desteler">
       <noscript>
         <a class="deste-karti" href="./ai-ajani-nedir/"><h2>AI ajanı nedir?</h2></a>
@@ -212,47 +202,17 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
         <a class="deste-karti" href="./skytrack-nasil-kurdum/"><h2>SkyTrack'i AI ile nasıl kurdum</h2></a>
       </noscript>
     </div>
-    <nav class="liste-sayfalar" aria-label="Sunum sayfaları" hidden></nav>
-    <p class="bos" id="bos" hidden>Bu aramayla eşleşen sunum yok. <button type="button" class="dugme" id="temizle">aramayı temizle</button></p>
   </main>${son()}
 
   <script type="module">
-    import { DESTELER, kartHTML, desteAra } from '../js/desteler.js';
+    import { DESTELER, kartHTML } from '../js/desteler.js';
     import { ilerlemeOku } from '../js/ilerleme.js';
-    import { sayfala, sayfaGezinmesi } from '../js/sayfala.js';
     let depo = null;
     try { depo = localStorage; } catch {}
-    const kutu = document.getElementById('desteler'), ara = document.getElementById('ara'), sayac = document.getElementById('deste-sayac'), bos = document.getElementById('bos');
-    const cipler = [...document.querySelectorAll('.cipler button')];
-    // Arama ve konu adreste durur: ?ara=…&konu=… ile paylaşılabilir.
-    const sorgu = new URLSearchParams(location.search);
-    let etiket = cipler.some((b) => b.dataset.etiket === sorgu.get('konu')) ? sorgu.get('konu') : 'hepsi';
-    ara.value = sorgu.get('ara') || '';
-    // Sayfa başına en fazla 5 sunum; fazlası sonraki sayfaya geçer (?sayfa=…).
-    let sayfa = sorgu.get('sayfa') || 1;
-    const gezinme = sayfaGezinmesi(document.querySelector('.liste-sayfalar'), (n) => { sayfa = n; goster(); adres(); });
-    function adres() {
-      const u = new URL(location.href);
-      if (ara.value.trim()) u.searchParams.set('ara', ara.value.trim()); else u.searchParams.delete('ara');
-      if (etiket !== 'hepsi') u.searchParams.set('konu', etiket); else u.searchParams.delete('konu');
-      if (sayfa > 1) u.searchParams.set('sayfa', sayfa); else u.searchParams.delete('sayfa');
-      history.replaceState(null, '', u);
-    }
-    function goster() {
-      const liste = desteAra(DESTELER, ara.value, etiket);
-      const s = sayfala(liste, sayfa);
-      sayfa = s.sayfa;
-      kutu.innerHTML = s.ogeler.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) kutu.querySelectorAll('.mini-gorsel svg').forEach((v) => v.pauseAnimations());
-      gezinme(s);
-      cipler.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.etiket === etiket)));
-      sayac.textContent = \`\${liste.length} sunum\`;
-      bos.hidden = liste.length > 0;
-    }
-    ara.addEventListener('input', () => { sayfa = 1; goster(); adres(); });
-    cipler.forEach((b) => b.addEventListener('click', () => { etiket = b.dataset.etiket; sayfa = 1; goster(); adres(); }));
-    document.getElementById('temizle').addEventListener('click', () => { ara.value = ''; etiket = 'hepsi'; sayfa = 1; goster(); adres(); ara.focus(); });
-    goster();
+    // Tüm sunumlar tek listede; kaldığın yer rozetiyle gelir.
+    const kutu = document.getElementById('desteler');
+    kutu.innerHTML = DESTELER.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) kutu.querySelectorAll('.mini-gorsel svg').forEach((v) => v.pauseAnimations());
   </script>
 </body>
 </html>
