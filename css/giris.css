@@ -73,7 +73,7 @@
   .sag .kareler .kare { aspect-ratio: auto; min-height: 0; overflow: hidden; }
 }
 @media (min-width: 861px) and (max-height: 760px) { .sag .aciklama { display: none; } .sag .kareler .kare { padding-block: 8px; } }
-@media (min-width: 861px) and (max-height: 560px) { .ad { font-size: 15px; } .ust small { display: none; } .ust h1 { font-size: 34px; margin: 2px 0; } .ust .terminal { min-height: 3em; } .ust { margin-bottom: 6px; } }
+@media (min-width: 861px) and (max-height: 560px) { .ad { font-size: 17px; } .ust small { display: none; } .ust h1 { font-size: 34px; margin: 2px 0; } .ust .terminal { min-height: 3em; } .ust { margin-bottom: 6px; } }
 @media (min-width: 861px) and (max-height: 720px) { .ust .tanit { display: none; } .ust { margin-bottom: 10px; } }
 
 /* ---- dört kutu ---- */
@@ -121,8 +121,8 @@
 .ikon svg:not(.mini) .oyna { stroke: var(--p); }
 .ikon svg:not(.mini) .dolu.oyna { fill: var(--p); }
 .kare:hover .ikon svg:not(.mini) * { stroke: var(--p); }
-.ad { font-family: var(--serif); font-weight: 800; font-size: clamp(18px, 1.8vw, 24px); }
-.aciklama { font-size: 12.5px; color: var(--soluk); margin-top: 2px; }
+.ad { font-family: var(--serif); font-weight: 900; font-size: clamp(22px, 2.2vw, 30px); }
+.aciklama { font-size: 14.5px; font-weight: 600; color: var(--soluk); margin-top: 2px; }
 .ciz { stroke-dasharray: 60; stroke-dashoffset: 0; }
 .kare:hover .ciz { animation: ciz 900ms ease-out; }
 @keyframes ciz { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
@@ -265,7 +265,7 @@
   .kareler { grid-template-rows: repeat(2, minmax(0, 1fr)); min-height: 0; gap: 8px; }
   .kare { aspect-ratio: auto; min-height: 0; padding: 8px 10px; }
   .kare .no { font-size: 10px; padding: 1px 5px; }
-  .ad { font-size: 16px; }
+  .ad { font-size: 18px; }
   .aciklama { display: none; }
   .kod-yagmuru { display: none; }
 }
