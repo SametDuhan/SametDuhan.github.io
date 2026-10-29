@@ -18,6 +18,7 @@ export const PROJELER = [
       'Her push\'ta GitHub Actions ile testler',
       '208 commit\'in 191\'i Claude ile ortak yazıldı',
     ],
+    site: 'https://sametduhan.github.io/airock/',
     github: 'https://github.com/SametDuhan/airock',
     demo: 'https://sametduhan.github.io/airock/app/',
     deste: 'slaytlar/skytrack-nasil-kurdum/',
@@ -96,7 +97,8 @@ export function projeVitrinHTML(p, kok = '') {
     <p class="v-ozet">${kacis(p.ozet)}</p>
     <ul class="v-bilgiler">${p.bilgiler.map((b) => `<li>${kacis(b)}</li>`).join('')}</ul>
     <div class="linkler">
-      <a class="dugme ana" href="${kacis(kok + 'projeler/' + p.ad.toLowerCase() + '/')}">projeyi keşfet →</a>
+      <a class="dugme ana" href="${kacis(kok + 'projeler/' + p.ad.toLowerCase() + '/')}">projeyi keşfet →</a>${p.site ? `
+      <a class="dugme" href="${kacis(p.site)}">${kacis(p.ad)} sitesi ↗</a>` : ''}
       <a class="dugme" href="${kacis(p.github)}">GitHub ↗</a>
     </div>${ikincil ? `\n    <p class="v-ek">${ikincil}</p>` : ''}
   </div>

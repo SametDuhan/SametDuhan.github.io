@@ -206,3 +206,10 @@ test('hakkımda ikiye bölünmez: tek sayfada kaydırılır', () => {
   assert.match(oku('hakkimda/index.html'), /<main id="icerik" data-sayfalama="kaydir">/);
   assert.match(oku('js/ekrana-sigdir.js'), /dataset\.sayfalama === 'kaydir'/);
 });
+
+test('SkyTrack vitrininde projeyi keşfetin yanında SkyTrack sitesine bağlantı var; siteyi olmayan projede yok', () => {
+  const sky = projeVitrinHTML(PROJELER[0], '../');
+  assert.ok(sky.indexOf('projeyi keşfet') < sky.indexOf('SkyTrack sitesi') && sky.indexOf('SkyTrack sitesi') < sky.indexOf('GitHub ↗'));
+  assert.ok(sky.includes('href="https://sametduhan.github.io/airock/"'));
+  for (const p of PROJELER.slice(1)) assert.doesNotMatch(projeVitrinHTML(p, '../'), /sitesi ↗/, p.ad);
+});
