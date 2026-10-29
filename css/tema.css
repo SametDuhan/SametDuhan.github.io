@@ -46,8 +46,7 @@ body {
 body::before, body::after { content: ''; position: fixed; inset: 0; pointer-events: none; }
 body::before {
   z-index: 50;
-  opacity: 0.45;
-  mix-blend-mode: multiply;
+  opacity: 0.3;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .33 0 0 0 0 .2 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 body::after {
