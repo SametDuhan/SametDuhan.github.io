@@ -53,7 +53,12 @@
 
 /* kapanış */
 .vitrin-son { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 24px; margin: clamp(40px, 7vh, 72px) 0 8px; padding: 18px 24px; border-top: 2px solid var(--yazi); }
-.vitrin-son img { width: 96px; height: auto; animation: nefes 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
+.vitrin-son { flex-wrap: nowrap; justify-content: flex-start; gap: 12px 32px; }
+.vitrin-son .v-medya { flex: 0 0 clamp(220px, 26vw, 340px); }
+.vitrin-son p { flex: 1 1 0; min-width: 0; }
+.vitrin-son .dugme { flex: none; }
+@media (max-width: 900px) { .vitrin-son { flex-wrap: wrap; } .vitrin-son .v-medya { flex: 1 1 100%; } .vitrin-son p { flex: 1 1 100%; } }
+.v-kapanis { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 2px solid var(--yazi); box-shadow: 5px 5px 0 var(--kenar); background: var(--zemin); cursor: pointer; }
 .vitrin-son p { margin: 0; font-size: 17px; }
 .vitrin-son .dugme { text-decoration: none; }
 
@@ -64,7 +69,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .js-vitrin .belir, .js-vitrin .vitrin .v-bilgiler li { opacity: 1; transform: none; transition: none; }
-  .sayaclar.gorundu .sayac, .vitrin-son img { animation: none; }
+  .sayaclar.gorundu .sayac { animation: none; }
   .v-pencere { transition: none; }
   .vitrin:hover .v-pencere { transform: none; }
 }

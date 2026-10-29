@@ -146,7 +146,7 @@ ${ARAC_LISTESI.map((a, i) => `        <li style="--i:${i}">${a}</li>`).join('\n'
     </section>
 
     <footer class="vitrin-son belir">
-      <img src="../img/sahin/kanat-kucuk.webp" alt="" width="120" height="120">
+      <div class="v-medya" data-medya="video"><video class="v-kapanis" muted loop playsinline preload="metadata" poster="../img/sahin/video-poster.webp" aria-label="Kanatlarını açıp kapatan şahin çizimi (animasyon)"><source src="../video/sahin.mp4" type="video/mp4"></video></div>
       <p><strong>Birlikte bir şey kuralım.</strong> İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım.</p>
       <a class="dugme ana" href="../iletisim/">iletişime geç →</a>
     </footer>
@@ -169,7 +169,7 @@ ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', 
 ${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
     </div>
     <footer class="vitrin-son belir">
-      <img src="../img/sahin/kanat-kucuk.webp" alt="" width="120" height="120">
+      <div class="v-medya" data-medya="video"><video class="v-kapanis" muted loop playsinline preload="metadata" poster="../img/sahin/video-poster.webp" aria-label="Kanatlarını açıp kapatan şahin çizimi (animasyon)"><source src="../video/sahin.mp4" type="video/mp4"></video></div>
       <p><strong>Daha fazlası GitHub'da.</strong> Yeni projeler önce orada görünür.</p>
       <a class="dugme ana" href="https://github.com/SametDuhan">github.com/SametDuhan ↗</a>
     </footer>

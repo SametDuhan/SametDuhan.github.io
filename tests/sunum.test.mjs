@@ -91,3 +91,13 @@ test('ana sayfa terminali dil değiştirerek döner ve komutu yazıp çıktısı
   assert.equal(gorunen(s, sure(s)).cikti, s.cikti);
   assert.match(oku('index.html'), /class="alt terminal"/);
 });
+
+test('projeler ve hakkımda sayfalarının altında şahin videosu (sessiz, döngü, kontrolsüz) oynar', () => {
+  for (const yol of ['projeler/index.html', 'hakkimda/index.html']) {
+    const s = oku(yol);
+    const kapanis = s.slice(s.indexOf('class="vitrin-son'));
+    assert.match(kapanis, /<video class="v-kapanis" muted loop playsinline/, yol);
+    assert.doesNotMatch(kapanis, /\bcontrols\b|kanat-kucuk/, yol);
+    assert.match(kapanis, /video\/sahin\.mp4/, yol);
+  }
+});
