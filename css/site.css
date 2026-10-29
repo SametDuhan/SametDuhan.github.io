@@ -296,6 +296,13 @@ body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * c
 .yazi-formu[hidden] { display: none; }
 .yazi-formu textarea { font: 400 15px/1.55 var(--sans); color: var(--yazi); background: var(--zemin); border: 1.5px solid var(--kenar); padding: 10px 12px; width: 100%; resize: vertical; }
 .yazi-formu textarea:focus { outline: 2px solid var(--vurgu); outline-offset: 1px; border-color: var(--yazi); }
+/* kaydırma çubuğu kâğıt temasında: ince, kenar rengi iz, soluk kahve tutamak */
+.yazi-formu textarea { scrollbar-width: thin; scrollbar-color: var(--soluk) var(--zemin); }
+.yazi-formu textarea::-webkit-scrollbar { width: 10px; }
+.yazi-formu textarea::-webkit-scrollbar-track { background: var(--zemin); border-left: 1px solid var(--kenar); }
+.yazi-formu textarea::-webkit-scrollbar-thumb { background: var(--kenar); border: 2px solid var(--zemin); border-radius: 6px; }
+.yazi-formu textarea::-webkit-scrollbar-thumb:hover { background: var(--soluk); }
+.yazi-formu textarea::-webkit-scrollbar-corner { background: var(--zemin); }
 .kime { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding: 10px 12px; border: 1.5px dashed var(--yazi); }
 .kime span { font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--soluk); }
 .kime output { font: 800 clamp(16px, 1.5vw, 19px)/1.2 var(--serif); color: var(--yazi); overflow-wrap: anywhere; user-select: all; }
