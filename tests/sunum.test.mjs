@@ -127,3 +127,15 @@ test('proje sayfası betiği: sıra döngüsü ve hareketi azaltınca durur', as
   assert.match(oku('js/proje.js'), /prefers-reduced-motion/);
   assert.match(oku('css/proje.css'), /@media \(prefers-reduced-motion: reduce\)/);
 });
+
+test('sol menü: ikonlu bağlantılar, hover açıklaması, alt bölümde şahin ve hızlı bağlantılar; hareketi azaltınca durur', () => {
+  for (const yol of ['hakkimda/index.html', 'projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html', '404.html']) {
+    const s = oku(yol);
+    assert.equal((s.match(/<a class="p-(kehribar|civit|bakir|kiremit)" href="[^"]*(hakkimda|projeler|slaytlar|iletisim)\/"[^>]*><svg/g) || []).length, 4, yol);
+    assert.match(s, /class="menu-alt"/, yol);
+    assert.match(s, /class="menu-hizli"/, yol);
+  }
+  const css = oku('css/site.css');
+  assert.match(css, /\.menu-linkler a:hover small/);
+  assert.ok(css.slice(css.indexOf('prefers-reduced-motion')).includes('.menu-sahin'));
+});

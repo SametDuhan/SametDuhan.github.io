@@ -38,12 +38,23 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '', kapak = y
 <body>
   <a class="atla" href="#icerik">İçeriğe geç</a>`;
 
-const BOLUMLER = [['hakkimda', 'Hakkımda'], ['projeler', 'Projeler'], ['slaytlar', 'Slaytlar'], ['iletisim', 'İletişim']];
+// Sol menü: ikonlu bağlantılar (üzerine gelince kısa açıklama açılır) + altta şahin, kısa tanım ve hızlı bağlantılar.
+const BOLUMLER = [
+  ['hakkimda', 'Hakkımda', 'ben kimim, ne yapıyorum', 'kehribar', '<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 18c1-3 9-3 10 0"/>'],
+  ['projeler', 'Projeler', 'canlı demolar, açık kaynak', 'civit', '<path d="M3 21V10l6-4v4l6-4v4l6-4v15zM8 21v-5h3v5"/>'],
+  ['slaytlar', 'Slaytlar', 'AI\'ı sıfırdan öğren', 'bakir', '<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M12 16v4M8 20h8M7 9h6M7 12h9"/>'],
+  ['iletisim', 'İletişim', 'iş, proje ya da soru', 'kiremit', '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/>'],
+];
 export const menu = (aktif, onek = '../') => `
   <nav class="yan-menu" aria-label="Site">
     <a class="logo" href="${onek}"><img src="${onek}img/sahin/logo.webp" alt="" width="40" height="40"><span><b>ŞAHİN</b><small>AÇIKTA KURULUR</small></span></a>
     <div class="menu-linkler">
-${BOLUMLER.map(([h, ad], i) => `      <a href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}><i>0${i + 1}</i>${ad}</a>`).join('\n')}
+${BOLUMLER.map(([h, ad, alt, pig, ikon], i) => `      <a class="p-${pig}" href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${ikon}</svg><span class="m-ad"><i>0${i + 1}</i>${ad}</span><small>${alt}</small></a>`).join('\n')}
+    </div>
+    <div class="menu-alt">
+      <img class="menu-sahin" src="${onek}img/sahin/on.webp" alt="" width="150" height="150" loading="lazy">
+      <p>AI ile sistem kuran geliştirici</p>
+      <div class="menu-hizli"><a href="https://github.com/SametDuhan">GitHub ↗</a><a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn ↗</a><a href="${onek}iletisim/">Yaz →</a></div>
     </div>
   </nav>`;
 

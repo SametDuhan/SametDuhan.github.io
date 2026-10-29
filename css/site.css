@@ -20,11 +20,27 @@
 .yan-menu .logo img { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--yazi); background: var(--panel); object-fit: cover; }
 .yan-menu .logo b { display: block; font: 900 20px/1 var(--serif); letter-spacing: 0.06em; }
 .yan-menu .logo small { font: 600 8.5px var(--mono); letter-spacing: 0.2em; color: var(--soluk); }
-.menu-linkler a { display: block; padding: 8px 10px; color: var(--yazi); text-decoration: none; font-size: 15px; }
+.yan-menu { display: flex; flex-direction: column; }
+.menu-linkler { display: grid; gap: 4px; }
+.menu-linkler a { position: relative; display: grid; grid-template-columns: 22px 1fr; column-gap: 12px; align-items: center; padding: 10px 12px 10px 14px; color: var(--yazi); text-decoration: none; font-size: 15px; border-left: 3px solid transparent; transition: background .25s ease, border-color .25s ease, padding-left .25s ease; }
+.menu-linkler a svg { width: 22px; height: 22px; fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: stroke .25s ease, transform .25s ease; }
 .menu-linkler a i { font: normal 10px var(--mono); color: var(--soluk); margin-right: 8px; }
-.menu-linkler a:hover { background: color-mix(in srgb, var(--yazi) 7%, transparent); }
-.menu-linkler a[aria-current="page"] { background: var(--yazi); color: var(--zemin); }
+/* kısa açıklama: üzerine gelince ya da odaklanınca yumuşakça açılır (satır yüksekliği animasyonu) */
+.menu-linkler a small { grid-column: 2; max-height: 0; overflow: hidden; opacity: 0; font: 400 12px/1.4 var(--sans); color: var(--soluk); transition: max-height .3s ease, opacity .3s ease; }
+.menu-linkler a:hover, .menu-linkler a:focus-visible { background: color-mix(in srgb, var(--p, var(--yazi)) 10%, transparent); border-left-color: var(--p, var(--yazi)); padding-left: 18px; }
+.menu-linkler a:hover svg, .menu-linkler a:focus-visible svg { stroke: var(--p, var(--yazi)); transform: scale(1.1); }
+.menu-linkler a:hover small, .menu-linkler a:focus-visible small, .menu-linkler a[aria-current="page"] small { max-height: 2.6em; opacity: 1; }
+.menu-linkler a[aria-current="page"] { background: var(--yazi); color: var(--zemin); border-left-color: var(--p-dolgu, var(--vurgu)); }
 .menu-linkler a[aria-current="page"] i { color: #e0a46a; }
+.menu-linkler a[aria-current="page"] svg { stroke: var(--zemin); }
+.menu-linkler a[aria-current="page"] small { color: color-mix(in srgb, var(--zemin) 72%, transparent); }
+/* alt bölüm: boş alanı doldurur; sakin, tek yavaş hareket */
+.menu-alt { margin-top: auto; padding-top: 18px; border-top: 1px dashed var(--kenar); text-align: center; }
+.menu-sahin { width: 130px; height: auto; max-width: 70%; transform-origin: 50% 100%; animation: nefes 5.2s ease-in-out infinite; }
+.menu-alt p { margin: 6px 0 12px; font: 600 11px var(--mono); letter-spacing: .1em; color: var(--soluk); text-transform: uppercase; }
+.menu-hizli { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; font: 600 12px var(--mono); }
+.menu-hizli a { color: var(--ceviz); text-decoration: none; padding: 2px 0; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
+.menu-hizli a:hover, .menu-hizli a:focus-visible { color: var(--vurgu-koyu); border-bottom-color: currentColor; }
 
 main { position: relative; z-index: 1; margin-left: 220px; padding: 56px clamp(20px, 5vw, 72px) 80px; max-width: 1240px; }
 .alt-bilgi { margin-left: 220px; padding: 18px clamp(20px, 5vw, 72px) 28px; border-top: 1px solid var(--kenar); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font: 400 12px var(--mono); color: var(--soluk); }
@@ -118,7 +134,9 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
   .yan-menu { position: static; width: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--kenar); }
   .yan-menu .logo { margin: 0; }
   .menu-linkler { display: flex; flex-wrap: wrap; gap: 2px; }
-  .menu-linkler a { padding: 12px 10px; min-height: 44px; }
+  .menu-linkler { display: flex; }
+  .menu-linkler a { padding: 12px 10px; min-height: 44px; border-left: 0; grid-template-columns: auto; }
+  .menu-linkler a svg, .menu-linkler a small, .menu-alt { display: none; }
   main, .alt-bilgi { margin-left: 0; }
   main { padding-top: 32px; }
   .sayfa-basi.bant { margin-top: -32px; padding-top: 32px; }
@@ -129,6 +147,7 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .menu-sahin, .menu-linkler a, .menu-linkler a svg, .menu-linkler a small { animation: none !important; transition: none !important; }
   .sayfa-sahin, .bant-cizim *, .mini-iz, .cal, .cal-ahize, .cal-isaret path, .tik, .slayt-a, .slayt-b, .sl, .cubuk, .tabela, .soru { animation: none !important; }
   .slayt-b { opacity: 0; }
   .cal-isaret path { opacity: 1; }
@@ -136,7 +155,7 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 }
 
 @media print {
-  .yan-menu, .alt-bilgi, .atla, .filtre, .sayfa-sahin, .bant-cizim, .cagri .linkler { display: none !important; }
+  .yan-menu, .menu-alt, .alt-bilgi, .atla, .filtre, .sayfa-sahin, .bant-cizim, .cagri .linkler { display: none !important; }
   html, body { background: #fff !important; color: #000 !important; }
   body::before, body::after { display: none !important; }
   main { margin: 0; padding: 0; max-width: none; }
