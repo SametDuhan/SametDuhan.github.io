@@ -17,7 +17,7 @@ export const iletisimSahnesi = (onek) => {
     <clipPath id="iKirp"><rect x="-120" y="-60" width="740" height="386"/></clipPath>
   </defs>
   <path d="M0 328H500" stroke="#33261a" stroke-width="1.5"/>
-  <g clip-path="url(#iKirp)"><g transform="translate(45 0) scale(.36)"><image href="${onek}img/sahin/on.webp" x="0" y="0" width="999" height="999"/></g></g>
+  <g clip-path="url(#iKirp)"><g transform="translate(45 0) scale(.36)"><image href="${onek}img/sahin/postaci.webp" x="0" y="0" width="999" height="999"/></g></g>
   <!-- masa -->
   <g class="masa" stroke="#33261a" stroke-width="2">
     <path d="M30 232H470l22 18H8z" fill="#e2cfa6"/>
@@ -148,7 +148,7 @@ export const hakkimdaSahnesi = (onek) => SVG('Şahin bir sunum perdesine bakıyo
 
 // Projeler: şahin üretim listesine bakar; kutular tek tek işaretlenir (css .tik).
 export const projelerSahnesi = (onek) => SVG('Şahin üretim listesine bakıyor; projeler tek tek işaretleniyor', `
-  ${SAHIN(onek, 'sag', 0)}
+  ${SAHIN(onek, 'calisan', 0)}
   <g stroke="#33261a" stroke-width="2.2">
     <path d="M382 286h14v26h-14z" fill="#d3b987"/>
     <rect x="300" y="92" width="178" height="196" rx="4" fill="#d3b987"/><rect x="300" y="92" width="178" height="196" rx="4" fill="url(#sTar)" opacity=".2" stroke="none"/>
@@ -163,7 +163,7 @@ export const projelerSahnesi = (onek) => SVG('Şahin üretim listesine bakıyor;
 
 // Slaytlar: şahin projeksiyon perdesine bakar; slaytlar çizilip değişir (css .slayt-a / .slayt-b).
 export const slaytlarSahnesi = (onek) => SVG('Şahin bir sunum perdesine bakıyor; slaytlar çizilip değişiyor', `
-  ${SAHIN(onek, 'sol', 215)}
+  ${SAHIN(onek, 'ogretmen', 215)}
   <g stroke="#33261a" stroke-width="2.4" stroke-linecap="round"><path d="M122 210V232M122 232L78 312M122 232L166 312M122 232V312" fill="none"/></g>
   <g stroke="#33261a"><rect x="24" y="68" width="196" height="136" rx="2" fill="#f7f0e0" stroke-width="2.6"/><path d="M24 68h196" stroke-width="5"/></g>
   <g class="slayt-a" fill="none" stroke-linecap="round">
