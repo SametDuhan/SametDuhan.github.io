@@ -148,7 +148,7 @@ test('sunum kartları: rozet akışta, çizimler yalnız hover/odakta çalışı
   assert.doesNotMatch(css, /\.deste-karti \.rozet \{[^}]*position: absolute/);
   assert.match(css, /\.deste-karti:hover, \.deste-karti:focus-visible \{ transform: translate/);
   assert.match(css, /\.deste-karti:hover \.mini-iz[^{]*\{ animation: bant-serit/);
-  assert.doesNotMatch(css, /\.mini-iz \{[^}]*animation:/, 'çizgi akışı boşta çalışmaz');
+  assert.doesNotMatch(css, /^\.mini-iz \{[^}]*animation:/m, 'çizgi akışı boşta çalışmaz');
   assert.match(oku('js/desteler.js'), /export function kartHareketi/);
   assert.doesNotMatch(oku('js/desteler.js'), /<animateMotion dur="(4\.5|5)s"/, 'halka ve zincirde SMIL noktası yok');
 });
