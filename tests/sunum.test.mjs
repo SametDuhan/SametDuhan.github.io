@@ -136,6 +136,7 @@ test('sol menü: ikonlu bağlantılar, hover açıklaması, alt bölümde şahin
     assert.match(s, /class="menu-hizli"/, yol);
   }
   const css = oku('css/site.css');
-  assert.match(css, /\.menu-linkler a:hover small/);
+  assert.match(css, /\.menu-linkler a:hover, \.menu-linkler a:focus-visible \{ color:/);
+  assert.doesNotMatch(css, /\.menu-linkler a:hover[^}]*(padding|transform|max-height)/, 'hover boyutu değiştirmez');
   assert.ok(css.slice(css.indexOf('prefers-reduced-motion')).includes('.menu-sahin'));
 });
