@@ -128,15 +128,14 @@ test('proje sayfası betiği: sıra döngüsü ve hareketi azaltınca durur', as
   assert.match(oku('css/proje.css'), /@media \(prefers-reduced-motion: reduce\)/);
 });
 
-test('sol menü: ikonlu bağlantılar, hover açıklaması, alt bölümde şahin ve hızlı bağlantılar; hareketi azaltınca durur', () => {
+test('sol menü: yalnız ikonlu dört bölüm bağlantısı; hover boyutu değiştirmez, hareketi azaltınca geçiş yok', () => {
   for (const yol of ['hakkimda/index.html', 'projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html', '404.html']) {
     const s = oku(yol);
     assert.equal((s.match(/<a class="p-(kehribar|civit|bakir|kiremit)" href="[^"]*(hakkimda|projeler|slaytlar|iletisim)\/"[^>]*><svg/g) || []).length, 4, yol);
-    assert.match(s, /class="menu-alt"/, yol);
-    assert.match(s, /class="menu-hizli"/, yol);
+    assert.doesNotMatch(s, /menu-alt|menu-sahin|menu-hizli/, `${yol}: menü alt bölümü kaldırıldı`);
   }
   const css = oku('css/site.css');
+  assert.doesNotMatch(css, /\.menu-alt|\.menu-sahin|\.menu-hizli/);
   assert.match(css, /\.menu-linkler a:hover, \.menu-linkler a:focus-visible \{ color:/);
   assert.doesNotMatch(css, /\.menu-linkler a:hover[^}]*(padding|transform|max-height)/, 'hover boyutu değiştirmez');
-  assert.ok(css.slice(css.indexOf('prefers-reduced-motion')).includes('.menu-sahin'));
 });

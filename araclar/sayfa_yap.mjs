@@ -51,11 +51,6 @@ export const menu = (aktif, onek = '../') => `
     <div class="menu-linkler">
 ${BOLUMLER.map(([h, ad, alt, pig, ikon], i) => `      <a class="p-${pig}" href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${ikon}</svg><span class="m-ad"><i>0${i + 1}</i>${ad}</span><small>${alt}</small></a>`).join('\n')}
     </div>
-    <div class="menu-alt">
-      <img class="menu-sahin" src="${onek}img/sahin/on.webp" alt="" width="150" height="150" loading="lazy">
-      <p>AI ile sistem kuran geliştirici</p>
-      <div class="menu-hizli"><a href="https://github.com/SametDuhan">GitHub ↗</a><a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/">LinkedIn ↗</a><a href="${onek}iletisim/">Yaz →</a></div>
-    </div>
   </nav>`;
 
 // Sayfa başı: numaralı etiket + damga, serif başlık, tanıtım ve sayfanın şahin pozu.
