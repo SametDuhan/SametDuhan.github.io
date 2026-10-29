@@ -79,3 +79,15 @@ test('hakkımda: ne arıyorsun yolları, canlı kartlar, ilkeler ve araçlar; t�
   assert.match(s, /css\/hakkimda\.css/);
   assert.match(oku('css/hakkimda.css'), /@media \(prefers-reduced-motion: reduce\)[^]*animation: none !important/);
 });
+
+test('ana sayfa terminali dil değiştirerek döner ve komutu yazıp çıktısını verir', async () => {
+  const { SATIRLAR, gorunen, sure, KOMUT_MS } = await import('../js/terminal.js');
+  assert.deepEqual(SATIRLAR.map((s) => s.dil), ['tr', 'en', 'tr', 'en']);
+  const s = SATIRLAR[0];
+  assert.deepEqual(gorunen(s, 0), { komut: '', cikti: '' });
+  assert.equal(gorunen(s, 3 * KOMUT_MS).komut, s.komut.slice(0, 3));
+  assert.equal(gorunen(s, 3 * KOMUT_MS).cikti, '');
+  assert.equal(gorunen(s, sure(s)).komut, s.komut);
+  assert.equal(gorunen(s, sure(s)).cikti, s.cikti);
+  assert.match(oku('index.html'), /class="alt terminal"/);
+});

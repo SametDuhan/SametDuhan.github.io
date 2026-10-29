@@ -180,7 +180,7 @@
         </g></svg>
       <small>AI İLE SİSTEM KURAN GELİŞTİRİCİ</small>
       <h1>SAMET DUHAN</h1>
-      <p class="alt"><b>&gt;</b> <span class="daktilo">SYSTEMS. BUILT IN THE OPEN.</span></p>
+      <p class="alt terminal" role="img" aria-label="Sistemler. Açıkta kurulur. Systems. Built in the open."><span class="istem">samet@sahin:~$</span> <span class="komut">echo "Systems. Built in the open."</span><i class="imlec"></i><span class="cikti">Systems. Built in the open.</span></p>
       <p class="tanit">Ajanlar, açık kaynak araçlar ve günlük hayatta karşılığı olan uygulamalar. Her şey açık repoda, her adım izlenebilir.</p>
     </div>
 
@@ -244,6 +244,8 @@
 
 <script type="module">
   import { baslatSahin } from './js/sahin.js';
+  import { baslat as baslatTerminal } from './js/terminal.js';
+  baslatTerminal(document.querySelector('.terminal'));
   baslatSahin(document.querySelector('.kus-alan .sahin-kat'));
   // hareketi azaltınca haritadaki SMIL animasyonları (uçak, pusula) da durur
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.seyir-haritasi svg').forEach((v) => v.pauseAnimations());
