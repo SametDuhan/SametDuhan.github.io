@@ -80,7 +80,7 @@ ${icerik}
 // kimlik kartı mühürlenir, araçlar çantaya düşer, kilit açılıp kapanır, ajan döngüsü döner.
 const HK_CIP = [['Claude Code', 52, 180, 52, '#d07a2a'], ['Codex', 108, 180, 34, '#4f7d6e'], ['Node.js', 146, 180, 40, '#2f4a6b'], ['Python', 56, 192, 40, '#a8432a'], ['Go', 100, 192, 24, '#c9893a'], ['Git', 128, 192, 28, '#5b3a21']];
 const HK_BASLIK = (metin) => `<rect x="36" y="80" width="172" height="17" fill="#33261a"/>${YAZI(44, 92, metin, 8, 'fill="#f2e8d5"')}`;
-export const hakkimdaSahnesi = (onek) => SVG('Şahin bir sunum perdesine bakıyor; perdede sırayla kimlik kartı mühürleniyor, araçlar çantaya doluyor, kilit açılıp kapanıyor ve ajan döngüsü dönüyor', `
+export const hakkimdaSahnesi = (onek) => SVG('Şahin bir sunum perdesine bakıyor; perdede sırayla kimlik kartı mühürleniyor, araçlar çantaya doluyor, yapay zeka çipi onaylanıyor ve ajan döngüsü dönüyor', `
   <defs>
     <filter id="hkKaba" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.7"/></filter>
     <path id="hkHalka" d="M0 -17a17 17 0 1 1 -.1 0"/>
@@ -121,16 +121,15 @@ export const hakkimdaSahnesi = (onek) => SVG('Şahin bir sunum perdesine bakıyo
     <g class="hk-canta" stroke="#33261a" stroke-width="2"><path d="M96 168Q96 156 122 156Q148 156 148 168" fill="none" stroke-width="3.4" stroke-linecap="round"/><rect x="46" y="202" width="152" height="30" rx="3" fill="#d3b987"/><rect x="46" y="202" width="152" height="30" rx="3" fill="url(#sTar2)" opacity=".28" stroke="none"/><path d="M46 211H198" stroke-width="1.4"/><rect x="113" y="207" width="18" height="9" rx="1.5" fill="#c9893a" stroke-width="1.4"/></g>
   </g>
 
-  <!-- 3 · siber güvenlik: kilit açılıp kapanır -->
+  <!-- 3 · yapay zeka: çip, veri akışı ve onay -->
   <g class="hk hk-k3">
-    ${HK_BASLIK('SİBER GÜVENLİK')}
+    ${HK_BASLIK('YAPAY ZEKA')}
     <g stroke="#cdb894" stroke-width="1.2" stroke-linecap="round" font-family="'IBM Plex Mono',monospace" fill="#cdb894"><text x="42" y="116" style="font-size:6px" stroke="none">A3 F1 09 7C</text><text x="42" y="130" style="font-size:6px" stroke="none">1F 4B E2 00</text><text x="42" y="144" style="font-size:6px" stroke="none">C8 5D 3A 91</text><text x="164" y="204" style="font-size:6px" stroke="none">0x7E 22 B0</text><text x="164" y="218" style="font-size:6px" stroke="none">D4 18 6F A5</text></g>
-    <path d="M122 106L152 118V146Q152 170 122 186Q92 170 92 146V118Z" fill="#e9dcc2" stroke="#33261a" stroke-width="2.6" stroke-linejoin="round"/><path d="M122 114L146 124V146Q146 165 122 179Q98 165 98 146V124Z" fill="none" stroke="#cdb894" stroke-width="1.4"/>
-    <g class="hk-kilit"><path d="M115 149V143a7 7 0 0 1 14 0V149" fill="none" stroke="#33261a" stroke-width="3.2" stroke-linecap="round"/></g>
-    <rect x="110" y="149" width="24" height="18" rx="3" fill="#33261a"/><circle cx="122" cy="157" r="2.6" fill="#f2e8d5"/><path d="M122 158v5" stroke="#f2e8d5" stroke-width="2"/>
+    <g stroke="#33261a" stroke-width="2" stroke-linecap="round"><path d="M104 122v-8M114 122v-8M124 122v-8M134 122v-8M144 122v-8M104 170v8M114 170v8M124 170v8M134 170v8M144 170v8M92 134h-8M92 146h-8M92 158h-8M152 134h8M152 146h8M152 158h8" fill="none"/><rect x="92" y="122" width="60" height="48" rx="6" fill="#e9dcc2"/><rect x="99" y="129" width="46" height="34" rx="3" fill="none" stroke="#cdb894" stroke-width="1.4"/></g>
+    ${YAZI(122, 153, 'AI', 17, 'text-anchor="middle" font-weight="800"')}
     <g class="hk-onay"><circle cx="158" cy="176" r="11" fill="#4f7d6e" stroke="#33261a" stroke-width="1.8"/><path d="M152.5 176l4 4 7-8" fill="none" stroke="#f2e8d5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
     <rect class="hk-tara" x="38" y="104" width="168" height="5" fill="#d07a2a" opacity=".55"/>
-    ${YAZI(122, 226, 'KİLİTLİ ✓ İLGİ ALANI', 6.6, 'text-anchor="middle" fill="#76624c"')}
+    ${YAZI(122, 226, 'İLGİ ALANI ✓', 6.6, 'text-anchor="middle" fill="#76624c"')}
   </g>
 
   <!-- 4 · AI ile sistem: bak → karar → yap → kontrol -->

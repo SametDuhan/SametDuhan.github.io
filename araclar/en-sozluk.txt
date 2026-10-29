@@ -67,7 +67,7 @@ KİMLİK KARTI ::: ID CARD
 AI ile sistem kuran ::: Developer who builds
 geliştirici ::: systems with AI
 Bilgisayar müh., 3. sınıf ::: Comp. eng., 3rd year
-İlgi alanı: siber güvenlik ::: Interest: cybersecurity
+İlgi alanı: yapay zeka ::: Interest: artificial intelligence
 SkyTrack: 208 commit, 9 gün ::: SkyTrack: 208 commits, 9 days
 3 açık kaynak proje ::: 3 open-source projects
 F → tam ekran ::: F → full screen
@@ -76,18 +76,18 @@ Ajan nedir? ::: What is an agent?
 # ===== Hakkımda =====
 Hakkımda · Samet Duhan ::: About · Samet Duhan
 Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar. ::: Samet Duhan: a developer who builds systems with AI and a computer engineering student. What gets built, how the work gets done, and the tools behind it.
-Şahin bir sunum perdesine bakıyor; perdede sırayla kimlik kartı mühürleniyor, araçlar çantaya doluyor, kilit açılıp kapanıyor ve ajan döngüsü dönüyor ::: The falcon looks at a presentation screen; on it, an ID card is stamped, tools drop into a bag, a lock opens and closes, and the agent loop turns, one after another
+Şahin bir sunum perdesine bakıyor; perdede sırayla kimlik kartı mühürleniyor, araçlar çantaya doluyor, yapay zeka çipi onaylanıyor ve ajan döngüsü dönüyor ::: The falcon looks at a presentation screen; on it, an ID card is stamped, tools drop into a bag, an AI chip is confirmed, and the agent loop turns, one after another
 AI İLE SİSTEM ::: SYSTEMS WITH AI
 KURAN GELİŞTİRİCİ ::: DEVELOPER
 ARAÇ ÇANTASI ::: TOOL BAG
-SİBER GÜVENLİK ::: CYBERSECURITY
-KİLİTLİ ✓ İLGİ ALANI ::: LOCKED ✓ INTEREST
+YAPAY ZEKA ::: ARTIFICIAL INTELLIGENCE
+İLGİ ALANI ✓ ::: INTEREST ✓
 bak ::: look
 karar ::: decide
 yap ::: do
 kontrol ::: check
 > AI ile sistem kuran geliştirici ::: > Developer who builds systems with AI
-Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan uygulamalar. Siber güvenlik de ilgi alanım. ::: I'm a third-year computer engineering student. I use AI not to chat but to build systems that get work done: agents I write code with, tools that report back on their own, apps that run on open data. Cybersecurity is also an interest of mine.
+Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan uygulamalar. Yapay zeka da ilgi alanım. ::: I'm a third-year computer engineering student. I use AI not to chat but to build systems that get work done: agents I write code with, tools that report back on their own, apps that run on open data. Artificial intelligence is also an interest of mine.
 Okuyor ::: Studying
 Bilgisayar mühendisliği, 3. sınıf ::: Computer engineering, 3rd year
 İlgi alanı ::: Interest

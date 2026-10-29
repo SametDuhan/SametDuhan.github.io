@@ -96,7 +96,7 @@ ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'AI İLE SİSTEM', basl
       ek: '\n        <p class="kimlik">&gt; AI ile sistem kuran geliştirici</p>',
       tanitim: `Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak
       için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan
-      uygulamalar. Siber güvenlik de ilgi alanım.`,
+      uygulamalar. Yapay zeka da ilgi alanım.`,
       alt: `
         <dl class="kimlik-bilgi">
           <div><dt>Okuyor</dt><dd>Bilgisayar mühendisliği, 3. sınıf</dd></div>
