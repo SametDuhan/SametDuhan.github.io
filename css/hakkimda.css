@@ -86,12 +86,10 @@
 
 /* ---- araçlar ---- */
 .aletler { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-.aletler li { font: 600 14px var(--mono); padding: 7px 14px; border: 1.5px solid var(--yazi); background: var(--zemin); box-shadow: 3px 3px 0 var(--kenar); transition: transform .15s, box-shadow .15s; }
-.aletler li:hover { transform: translate(-2px, -2px) rotate(-1deg); box-shadow: 5px 5px 0 var(--vurgu); }
+.aletler li { font: 600 14px var(--mono); padding: 6px 12px; border: 1.5px solid var(--kenar); background: var(--panel); }
 .js-vitrin .aletler.belir { transform: none; }
 .js-vitrin .aletler.belir li { opacity: 0; transform: translateY(10px) scale(.92); }
-.js-vitrin .aletler.belir.gorundu li { opacity: 1; transform: none; transition: opacity .4s ease, transform .4s cubic-bezier(.2, .8, .3, 1.3), box-shadow .15s; transition-delay: calc(var(--i) * 60ms); }
-.js-vitrin .aletler.belir.gorundu li:hover { transition-delay: 0s; transform: translate(-2px, -2px) rotate(-1deg); }
+.js-vitrin .aletler.belir.gorundu li { opacity: 1; transform: none; transition: opacity .4s ease, transform .4s cubic-bezier(.2, .8, .3, 1.3); transition-delay: calc(var(--i) * 60ms); }
 
 /* künyede durum satırı öne çıkar */
 .kimlik-bilgi .staj dd strong { color: var(--iyi); }
@@ -113,10 +111,15 @@
 .rota li.vurgu b { color: var(--vurgu-koyu); }
 .rota span { font-size: 14px; line-height: 1.45; color: var(--soluk); }
 
+/* araçlar: üç grup */
+.alet-gruplari { display: flex; flex-wrap: wrap; gap: 16px 40px; }
+.alet-grup h3 { margin: 0 0 8px; font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--soluk); }
+
 @media (max-width: 1100px) {
   .yollar, .yollar.iki, .yap-kartlar { grid-template-columns: 1fr; }
   .rota { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
   .rota::before { display: none; }
+  .alet-gruplari { flex-direction: column; }
   .yap-kart .v-pencere { max-width: 560px; }
 }
 @media (max-width: 700px) {

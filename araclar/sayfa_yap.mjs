@@ -85,7 +85,11 @@ const yaz = (yol, ham) => {
 };
 
 // --- Hakkımda
-const ARAC_LISTESI = ['Claude Code', 'Codex', 'JavaScript', 'Node.js', 'Electron', 'Python', 'PowerShell', 'Go', 'C', 'Bash', 'Git', 'GitHub Actions'];
+const ARAC_GRUPLARI = [
+  ['AI ile çalışma', ['Claude Code', 'Codex']],
+  ['Diller', ['JavaScript', 'Python', 'Go', 'C', 'Bash', 'PowerShell']],
+  ['Altyapı', ['Node.js', 'Electron', 'Git', 'GitHub Actions']],
+];
 // Rota: tarihler GitHub'daki ilk commit / sürüm tarihlerinden (AI başlangıcı Samet'in kendi beyanı).
 const ROTA = [
   { tarih: 'Eylül 2026', baslik: 'Python ve Go', metin: 'Ders depoları: btk-python-dersleri, go_daily_work.' },
@@ -158,9 +162,9 @@ ${ILKELER.map((i, n) => `        <li class="ilke belir">${i.cizim}<span class="i
 
     <section class="bolum" aria-labelledby="arac-baslik">
       <h2 id="arac-baslik" class="bolum-baslik">Araçlar</h2>
-      <ul class="aletler belir">
-${ARAC_LISTESI.map((a, i) => `        <li style="--i:${i}">${a}</li>`).join('\n')}
-      </ul>
+      <div class="alet-gruplari">
+${ARAC_GRUPLARI.map(([grup, liste], g) => `        <div class="alet-grup"><h3>${grup}</h3><ul class="aletler belir">${liste.map((a, i) => `<li style="--i:${i + g * 2}">${a}</li>`).join('')}</ul></div>`).join('\n')}
+      </div>
     </section>
     <section class="bolum" aria-labelledby="yol-baslik">
       <h2 id="yol-baslik" class="bolum-baslik">Ne arıyorsun?</h2>
