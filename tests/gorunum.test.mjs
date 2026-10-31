@@ -26,10 +26,12 @@ test('her sayfa modern.css ve gorunum-erken.js yükler (başlıkta, sayfa çizil
   }
 });
 
-test('görünüm seçici ana sayfada ve her menülü alt sayfada aynı; iki durak tarih sırasında', () => {
-  const tr = gorunumSecici();
-  assert.ok(oku('index.html').includes(tr), 'index.html elle değişmiş: araclar/gorunum-secici.mjs ile aynı olmalı');
-  for (const yol of ['hakkimda/index.html', 'projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html', 'projeler/skytrack/index.html', '404.html']) assert.ok(oku(yol).includes(tr), yol);
+test('görünüm seçici ana sayfada, her menülü alt sayfada ve sunumlarda aynı; iki durak tarih sırasında', () => {
+  // girinti sayfaya göre değişir; karşılaştırma boşluklar teke indirilerek
+  const sade = (m) => m.replace(/\s+/g, ' ');
+  const tr = sade(gorunumSecici());
+  assert.ok(sade(oku('index.html')).includes(tr), 'index.html elle değişmiş: araclar/gorunum-secici.mjs ile aynı olmalı');
+  for (const yol of ['hakkimda/index.html', 'projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html', 'projeler/skytrack/index.html', '404.html', 'slaytlar/ai-ajani-nedir/index.html', 'slaytlar/claude-code-hook/index.html', 'slaytlar/skytrack-nasil-kurdum/index.html']) assert.ok(sade(oku(yol)).includes(tr), yol);
   assert.deepEqual(GORUNUMLER.map((g) => g.kod), ['retro', 'modern']);
   assert.ok(GORUNUMLER[0].tarih < GORUNUMLER[1].tarih);
   assert.ok(oku('en/index.html').includes('data-gorunum-sec="modern"'));
@@ -100,4 +102,11 @@ test('modern görünüm hareketi azaltınca yıldızı durdurur; seçici yazdır
   const css = oku('css/modern.css');
   assert.match(css, /prefers-reduced-motion: reduce\) \{ & \.cc-yildiz[^}]*animation: none/);
   assert.match(css, /@media print \{ \.gorunum-ray, \.gorunum-sec \{ display: none !important; \} \}/);
+});
+
+test('sunumlarda seçici çalışır; telefonda "⋯" menüsüne taşınır', () => {
+  const js = oku('js/atolye.js');
+  assert.match(js, /import \{ baslatGorunum \} from '\.\/gorunum\.js'/);
+  assert.match(js, /matchMedia\('\(max-width: 700px\)'\)/);
+  assert.match(js, /more\.append\(secici\)/);
 });

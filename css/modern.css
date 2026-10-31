@@ -84,6 +84,25 @@ html[data-gorunum="modern"] [data-gorunum-sec="modern"] b { color: var(--yazi); 
 @media (max-width: 460px) {
   .yan-menu .logo span { display: none; }
 }
+/* sunumlar: üst çubukta yalnız iki önizleme (adlar ekran okuyucuda), telefonda "⋯" menüsünde adlarıyla (js/atolye.js taşır) */
+.deste-ust .gorunum-sec, .diger-menu .gorunum-sec { grid-auto-flow: column; align-items: center; gap: 8px; }
+.deste-ust .gs-baslik, .deste-ust .gs-akis::before, .deste-ust .gs-akis time, .deste-ust .gs-akis button::before,
+.diger-menu .gs-akis::before, .diger-menu .gs-akis time, .diger-menu .gs-akis button::before { display: none; }
+.deste-ust .gs-akis, .diger-menu .gs-akis { grid-auto-flow: column; gap: 6px; }
+.deste-ust .gs-akis button { grid-template-columns: 34px; min-height: 36px; padding: 0 2px; }
+.deste-ust .gs-onizleme, .diger-menu .gs-onizleme { width: 34px; height: 26px; }
+.deste-ust .gs-onizleme::before, .diger-menu .gs-onizleme::before { transform: scale(.72); transform-origin: 0 0; }
+.deste-ust .gs-onizleme::after, .diger-menu .gs-onizleme::after { transform: scale(.72); transform-origin: 0 100%; }
+html[data-gorunum] .deste-ust [data-gorunum-sec] .gs-onizleme, html[data-gorunum] .diger-menu [data-gorunum-sec] .gs-onizleme { outline-offset: 2px; }
+.deste-ust .gs-akis b { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.deste-ust .gorunum-sec { padding-right: 4px; }
+.diger-menu .gorunum-sec { display: grid; justify-items: start; padding: 10px 16px 12px; border-top: 1px solid var(--kenar); }
+.diger-menu .gs-baslik { grid-column: 1 / -1; }
+.diger-menu .gorunum-sec { grid-auto-flow: row; }
+.deste-ust .diger-menu .gs-baslik { display: flex; }
+.deste-ust .diger-menu .gs-akis button { grid-template-columns: 34px auto; column-gap: 8px; min-height: 40px; padding: 0 8px 0 2px; }
+.deste-ust .diger-menu .gs-akis b { position: static; width: auto; height: auto; overflow: visible; clip: auto; font-size: 13px; }
+
 @media (prefers-reduced-motion: reduce) { .gs-akis button::before, .gs-akis b, .gs-onizleme, .tema-ray::after, .tema-ray svg { transition: none; } .gs-akis button:hover .gs-onizleme { transform: none; } }
 @media print { .gorunum-ray, .gorunum-sec { display: none !important; } }
 
@@ -170,6 +189,11 @@ html[data-gorunum="modern"] {
   & .tema-dugme:hover { border-color: var(--vurgu); }
   & .tema-dugme:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) { & .gs-baslik::before { animation: none; } }
+  & .diger-menu .menu-oge { border: 0; border-radius: 0; background: none; font-weight: 500; }
+  & .diger-menu .menu-oge:hover { background: color-mix(in srgb, var(--yazi) 7%, transparent); transform: none; }
+  & .deste-ust .tema-dugme { width: 56px; height: 30px; }
+  & .deste-ust .tema-ray::after { width: 24px; height: 24px; }
+  & .deste-ust .tema-dugme[aria-pressed="true"] .tema-ray::after { transform: translateX(26px); }
   @media (max-width: 860px) {
     & .gorunum-ray .gorunum-sec { border-radius: 999px; padding: 4px 6px 4px 14px; }
   }

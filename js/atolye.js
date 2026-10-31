@@ -1,5 +1,6 @@
 import { ciz, oynat, durdur } from './piksel.js';
 import { t } from './dil.js';
+import { baslatGorunum } from './gorunum.js';
 
 export function alarmDurumu(sure, esik) { return Number(sure) >= Number(esik); }
 
@@ -37,6 +38,15 @@ if (deck) {
   // aynı anda tek menü açık
   for (const [a, b] of [[contents, more], [more, contents]]) a.addEventListener('toggle', () => { if (a.open) b.open = false; });
   toolbar.append(contents, more); (deck.querySelector('.deste-ust .sayac') ?? deck.querySelector('.deste-ust')).after(toolbar); mode();
+  // Görünüm seçici (kâğıt ↔ modern): geniş ekranda üst çubukta, telefonda yer yok, "⋯" menüsüne taşınır.
+  const secici = deck.querySelector('.deste-ust .gorunum-sec');
+  if (secici) {
+    const yer = document.createComment('gorunum-sec'); secici.before(yer);
+    const dar = matchMedia('(max-width: 700px)');
+    const tasi = () => (dar.matches ? more.append(secici) : yer.after(secici));
+    dar.addEventListener('change', tasi); tasi();
+    baslatGorunum();
+  }
 }
 
 const az = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
