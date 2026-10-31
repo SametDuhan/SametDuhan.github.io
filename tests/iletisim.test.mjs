@@ -19,6 +19,8 @@ test('konuBul kod, ad ve #hash ile bulur; bilinmeyen değer ilk konuya düşer',
   assert.equal(konuBul('ortak').ad, 'Ortak proje');
   assert.equal(konuBul('#soru').kod, 'soru');
   assert.equal(konuBul('İş teklifi').kod, 'is');
+  assert.equal(konuBul('staj').ad, 'Staj');
+  assert.equal(KONULAR[0].kod, 'staj', 'staj aranıyor: ilk ve varsayılan konu');
   assert.equal(konuBul('yok').kod, KONULAR[0].kod);
   assert.equal(konuBul(null).kod, KONULAR[0].kod);
 });
@@ -34,4 +36,9 @@ test('her konunun hazır şablonu "Merhaba Samet" ile başlar', () => {
 test('iletişim sayfasında mail adresi düz metin olarak durmaz', () => {
   const s = oku('iletisim/index.html') + oku('js/iletisim.js');
   assert.ok(!s.includes('16sametduhan16@gmail.com'));
+});
+
+test('hakkımdaki "staj için yaz" bağlantısı iletişimi Staj konusu seçili açar', () => {
+  assert.match(oku('hakkimda/index.html'), /href="\.\.\/iletisim\/\?konu=staj">staj için yaz →/);
+  assert.match(oku('iletisim/index.html'), /data-konu="Staj"/);
 });

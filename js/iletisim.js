@@ -24,6 +24,8 @@ export function bagla(el) {
 
 // ad: sayfadaki konu bağlantılarının data-konu değeri (arama anahtarı, hep Türkçe); baslik: mailin konu satırı (sayfanın diliyle)
 export const KONULAR = [
+  { kod: 'staj', ad: 'Staj', baslik: t('Staj', 'Internship'),
+    sablon: t('Merhaba Samet,\n\n[Şirket / ekip adı] olarak staj için yazıyorum.\n\n• Pozisyon: \n• Başlangıç tarihi: \n• Süre: \n• Çalışma şekli (uzaktan / yerinde): \n\nUygun olduğun bir zaman yazarsan görüşelim.', 'Hi Samet,\n\n[Company / team name] here, and I am writing to you about an internship.\n\n• Position: \n• Start date: \n• Duration: \n• Work arrangement (remote / on-site): \n\nIf you tell me a time that works for you, let us talk.') },
   { kod: 'is', ad: 'İş teklifi', baslik: t('İş teklifi', 'Job offer'),
     sablon: t('Merhaba Samet,\n\n[Şirket / ekip adı] olarak sana bir fırsat için yazıyorum.\n\n• Rol: \n• Süre: \n• Çalışma şekli (uzaktan / ofis): \n\nUygun olduğun bir zaman yazarsan görüşelim.', 'Hi Samet,\n\n[Company / team name] here, and I am writing to you about an opportunity.\n\n• Role: \n• Duration: \n• Work arrangement (remote / office): \n\nIf you tell me a time that works for you, let us talk.') },
   { kod: 'ortak', ad: 'Ortak proje', baslik: t('Ortak proje', 'Joint project'),

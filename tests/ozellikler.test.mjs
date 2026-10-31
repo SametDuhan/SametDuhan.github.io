@@ -144,7 +144,7 @@ test('JS kapalıyken deste içeriği gizlenmez ya da soluk kalmaz', () => {
 
 test('iletişim konu bağlantıları JS kapalıyken doğrudan iletişim bölümüne gider', () => {
   const s = oku('iletisim/index.html');
-  assert.equal((s.match(/data-konu="[^"]+" href="#dogrudan-baslik"/g) || []).length, 4);
+  assert.equal((s.match(/data-konu="[^"]+" href="#dogrudan-baslik"/g) || []).length, 5, 'Staj, İş teklifi, Ortak proje, Soru, Diğer');
 });
 
 test('alt sayfalar üreticiyle güncel (elle düzenleme yok; değişiklik araclar/sayfa_yap.mjs içinde)', async () => {

@@ -286,6 +286,7 @@ mail ::: email
 kopyala ::: copy
 Mesaj yaz ::: Write a message
 Konu ::: Topic
+Staj ::: Internship
 İş teklifi ::: Job offer
 Ortak proje ::: Joint project
 Soru ya da öneri ::: Question or suggestion

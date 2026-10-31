@@ -114,7 +114,7 @@ ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'STAJA AÇIK', baslik: 
       uygulamalar. Yapay zeka da ilgi alanım.`,
       alt: `
         <dl class="kimlik-bilgi">
-          <div class="staj"><dt>Durum</dt><dd><strong>Staj arıyorum, hemen başlayabilirim.</strong> <a href="../iletisim/">staj için yaz →</a></dd></div>
+          <div class="staj"><dt>Durum</dt><dd><strong>Staj arıyorum, hemen başlayabilirim.</strong> <a href="../iletisim/?konu=staj">staj için yaz →</a></dd></div>
           <div><dt>Çalışma</dt><dd>Uzaktan ya da yerinde</dd></div>
           <div><dt>Okuyor</dt><dd>Bilgisayar mühendisliği, 3. sınıf</dd></div>
           <div><dt>Diller</dt><dd>Türkçe (ana dil) · İngilizce (B1)</dd></div>
@@ -276,6 +276,7 @@ ${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', b
       <section class="yaz-kart" aria-labelledby="yaz-baslik">
         <h2 id="yaz-baslik" class="bolum-baslik">Mesaj yaz</h2>
         <div class="konular" id="konular" role="group" aria-label="Konu">
+          <a class="konu" data-konu="Staj" href="#dogrudan-baslik">Staj</a>
           <a class="konu" data-konu="İş teklifi" href="#dogrudan-baslik">İş teklifi</a>
           <a class="konu" data-konu="Ortak proje" href="#dogrudan-baslik">Ortak proje</a>
           <a class="konu" data-konu="Soru ya da öneri" href="#dogrudan-baslik">Soru ya da öneri</a>
