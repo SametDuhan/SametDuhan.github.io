@@ -137,6 +137,24 @@ staj için yaz → ::: get in touch →
 Uzaktan ya da yerinde ::: Remote or on-site
 Diller ::: Languages
 Türkçe (ana dil) · İngilizce (B1) ::: Turkish (native) · English (B1)
+Rota ::: Route
+Eylül 2026 ::: September 2026
+Python ve Go ::: Python and Go
+Ders depoları: btk-python-dersleri, go_daily_work. ::: Course repos: btk-python-dersleri, go_daily_work.
+30 Eylül ::: 30 September
+SkyTrack başladı ::: SkyTrack started
+İlk commit; canlı uçak takibi fikri. ::: First commit; the idea of live flight tracking.
+2 Ekim ::: 2 October
+AI öğrenmeye başladım ::: Started learning AI
+O günden beri projeler üretiyorum. ::: I have been building projects ever since.
+8 Ekim ::: 8 October
+= SkyTrack v0.7.9
+Aynı gün claude-done-pixel yayında. ::: claude-done-pixel shipped the same day.
+11 Ekim ::: 11 October
+Aynı fikir Codex için. ::: The same idea for Codex.
+27 Ekim ::: 27 October
+Bu site ::: This site
+Açık repoda, testleriyle. ::: In an open repo, with its tests.
 İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım. ::: A job offer, a joint project, or just a question: write, and let's talk.
 iletişime geç → ::: get in touch →
 

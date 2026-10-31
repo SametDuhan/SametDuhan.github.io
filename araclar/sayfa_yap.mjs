@@ -86,6 +86,15 @@ const yaz = (yol, ham) => {
 
 // --- Hakkımda
 const ARAC_LISTESI = ['Claude Code', 'Codex', 'JavaScript', 'Node.js', 'Electron', 'Python', 'PowerShell', 'Go', 'C', 'Bash', 'Git', 'GitHub Actions'];
+// Rota: tarihler GitHub'daki ilk commit / sürüm tarihlerinden (AI başlangıcı Samet'in kendi beyanı).
+const ROTA = [
+  { tarih: 'Eylül 2026', baslik: 'Python ve Go', metin: 'Ders depoları: btk-python-dersleri, go_daily_work.' },
+  { tarih: '30 Eylül', baslik: 'SkyTrack başladı', metin: 'İlk commit; canlı uçak takibi fikri.', link: '../projeler/#skytrack' },
+  { tarih: '2 Ekim', baslik: 'AI öğrenmeye başladım', metin: 'O günden beri projeler üretiyorum.', vurgu: true },
+  { tarih: '8 Ekim', baslik: 'SkyTrack v0.7.9', metin: 'Aynı gün claude-done-pixel yayında.', link: '../projeler/#claude-done-pixel' },
+  { tarih: '11 Ekim', baslik: 'chatgpt-done-pixel', metin: 'Aynı fikir Codex için.', link: '../projeler/#chatgpt-done-pixel' },
+  { tarih: '27 Ekim', baslik: 'Bu site', metin: 'Açık repoda, testleriyle.', link: 'https://github.com/SametDuhan/SametDuhan.github.io' },
+];
 const ILKELER = [
   { baslik: 'AI hızlandırır, kararı ben veririm.', metin: 'Neyin yanlış olduğunu fark etmek ve kuralı koymak insanın işi.', cizim: '<svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><text x="2" y="19">AI</text><rect class="iz" x="26" y="11" width="92" height="9" rx="4.5"/><rect class="hizli" x="26" y="11" width="92" height="9" rx="4.5"/><text x="2" y="51">sen</text><rect class="iz" x="26" y="43" width="92" height="9" rx="4.5"/><g class="karar"><circle cx="106" cy="47.5" r="10"/><path d="M101 47.5l4 4 8-9"/></g></svg>' },
   { baslik: 'Test yazdırırım.', metin: 'AI\'ın yaptığı bir hata bir kez düzelir; test sayesinde bir daha gelmez.', cizim: '<svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><g class="hata"><circle cx="16" cy="32" r="10"/><path d="M11 27l10 10M21 27l-10 10"/></g><g class="testler"><circle cx="42" cy="32" r="7"/><circle cx="62" cy="32" r="7"/><circle cx="82" cy="32" r="7"/><circle cx="102" cy="32" r="7"/></g><g class="tikler"><path d="M38 32l3 3 5-6"/><path d="M58 32l3 3 5-6"/><path d="M78 32l3 3 5-6"/><path d="M98 32l3 3 5-6"/></g></svg>' },
@@ -140,6 +149,13 @@ ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'STAJA AÇIK', baslik: 
           <p>AI'ı sıfırdan anlatan, projelerimden örnek veren interaktif sunumlar.</p>
         </article>
       </div>
+    </section>
+
+    <section class="bolum" aria-labelledby="rota-baslik">
+      <h2 id="rota-baslik" class="bolum-baslik">Rota</h2>
+      <ol class="rota belir">
+${ROTA.map((d) => `        <li${d.vurgu ? ' class="vurgu"' : ''}><time>${d.tarih}</time><b>${d.link ? `<a href="${d.link}">${d.baslik}</a>` : d.baslik}</b><span>${d.metin}</span></li>`).join('\n')}
+      </ol>
     </section>
 
     <section class="bolum" aria-labelledby="nasil-baslik">

@@ -97,14 +97,35 @@
 .kimlik-bilgi .staj dd strong { color: var(--iyi); }
 .kimlik-bilgi .staj dd strong::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--iyi); box-shadow: 0 0 0 3px color-mix(in srgb, var(--iyi) 22%, transparent); vertical-align: 1px; }
 
+/* rota: kesikli çizgi üzerinde tarihli duraklar (ana sayfadaki seyir haritası gibi) */
+.rota { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; position: relative; }
+.rota::before { content: ""; position: absolute; left: 6px; right: 6px; top: 7px; border-top: 2px dashed var(--soluk); }
+.rota li { position: relative; padding-top: 28px; display: grid; gap: 4px; align-content: start; }
+.rota li::before { content: ""; position: absolute; left: 0; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--zemin); border: 2px solid var(--yazi); }
+.rota li.vurgu::before { background: var(--vurgu); border-color: var(--vurgu-koyu); width: 16px; height: 16px; top: -2px; left: -2px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--vurgu) 25%, transparent); }
+.rota time { font: 600 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--soluk); }
+.rota b { font: 800 18px/1.2 var(--serif); }
+.rota b a { color: inherit; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.rota b a:hover { color: var(--vurgu-koyu); }
+.rota li.vurgu b { color: var(--vurgu-koyu); }
+.rota span { font-size: 14px; line-height: 1.45; color: var(--soluk); }
+
 @media (max-width: 1100px) {
   .yollar, .yap-kartlar { grid-template-columns: 1fr; }
+  .rota { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
+  .rota::before { display: none; }
   .yap-kart .v-pencere { max-width: 560px; }
 }
 @media (max-width: 700px) {
   /* telefonda önce başlık ve künye, sahne arkadan gelir */
   .sayfa-basi:has(.kimlik-bilgi) .sayfa-metin { order: -1; }
   .sayfa-basi:has(.kimlik-bilgi) .sayfa-sahne { width: min(100%, 320px); align-self: center; }
+  /* rota dikey: soldaki kesikli çizgi boyunca */
+  .rota { grid-template-columns: 1fr; gap: 18px; padding-left: 26px; }
+  .rota::before { display: block; left: 5px; right: auto; top: 6px; bottom: 6px; border-top: 0; border-left: 2px dashed var(--soluk); }
+  .rota li { padding-top: 0; }
+  .rota li::before { left: -26px; top: 3px; }
+  .rota li.vurgu::before { left: -28px; top: 1px; }
   .kimlik-bilgi div { grid-template-columns: 1fr; gap: 2px; }
   .ilke { grid-template-columns: 1fr; gap: 10px; padding: 16px; }
   .ilke-cizim { width: 120px; }
@@ -112,7 +133,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .kimlik-bilgi div { animation: none; }
-  .ilke-cizim *, .yol, .yol em, .aletler li { animation: none !important; transition: none !important; }
+  .ilke-cizim *, .yol, .yol em, .aletler li, .rota li { animation: none !important; transition: none !important; }
   .ilke-cizim .hizli { transform: none; }
   .ilke-cizim .hata { opacity: .25; transform: scale(.8); }
   .ilke-cizim .testler circle { fill: var(--bakir-koyu); stroke: var(--bakir-koyu); }
