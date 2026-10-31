@@ -6,7 +6,14 @@
 .deste .deste-ust .atolye-araclar .dugme, .deste .deste-ust .icerik-menusu summary { font-size: 12px; padding: 5px 10px; line-height: 1.4; }
 .deste .deste-ust .icerik-menusu summary { border: 1px solid var(--kenar); border-radius: var(--r); }
 .deste.js-hazir .deste-ust { align-items: center; }
-@media (max-width: 700px) { .deste .deste-ust .atolye-araclar .dugme, .deste .deste-ust .deste-adi { display: none; } }
+@media (max-width: 700px) { .deste .deste-ust .deste-adi, .deste .deste-ust .sayac { display: none; } .deste .deste-ust { gap: 8px; } }
+/* "⋯" menüsü: okuma görünümü ve bağlantı kopyalama */
+.deste .deste-ust .diger-menu summary { font-weight: 800; font-size: 15px; line-height: 1; padding: 6px 12px; list-style: none; }
+.deste .deste-ust .diger-menu summary::-webkit-details-marker { display: none; }
+.diger-menu .menu-oge { display: block; width: 100%; text-align: left; border: 0; border-radius: 0; background: none; padding: 8px 16px; font: 13px var(--sans); color: var(--yazi); cursor: pointer; white-space: nowrap; }
+.diger-menu .menu-oge:hover, .diger-menu .menu-oge:focus-visible { background: color-mix(in srgb, var(--yazi) 7%, transparent); }
+/* klavye kısayolları dokunmatikte ve dar ekranda anlamsız: "?" gizli, çubuk tek satır kalır */
+@media (hover: none) and (pointer: coarse), (max-width: 700px) { .deste .yardim-dugme { display: none; } }
 
 /* ---- üst çubuk: geri düğmesi ile sunum adı ayrı durur ---- */
 .deste .deste-ust { gap: 12px 16px; }

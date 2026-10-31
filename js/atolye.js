@@ -29,7 +29,14 @@ if (deck) {
     try { await navigator.clipboard.writeText(location.href); share.textContent = t('Bağlantı kopyalandı ✓', 'Link copied ✓'); }
     catch { share.textContent = t('Adres çubuğundaki bağlantıyı kopyala', 'Copy the link from the address bar'); }
   });
-  toolbar.append(contents, read, share); (deck.querySelector('.deste-ust .sayac') ?? deck.querySelector('.deste-ust')).after(toolbar); mode();
+  // Okuma görünümü ve bağlantı kopyalama "⋯" menüsünde: üst çubuk sade kalır, telefonda da erişilir.
+  const more = document.createElement('details'); more.className = 'icerik-menusu diger-menu';
+  more.innerHTML = `<summary aria-label="${t('Diğer seçenekler', 'More options')}">⋯</summary>`;
+  read.classList.add('menu-oge'); share.classList.add('menu-oge');
+  more.append(read, share);
+  // aynı anda tek menü açık
+  for (const [a, b] of [[contents, more], [more, contents]]) a.addEventListener('toggle', () => { if (a.open) b.open = false; });
+  toolbar.append(contents, more); (deck.querySelector('.deste-ust .sayac') ?? deck.querySelector('.deste-ust')).after(toolbar); mode();
 }
 
 const az = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
