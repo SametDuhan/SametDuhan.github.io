@@ -73,7 +73,8 @@ test('hakkımda: ne arıyorsun yolları, canlı kartlar, ilkeler ve araçlar; t�
   const s = oku('hakkimda/index.html');
   for (const h of ['../projeler/"', '../slaytlar/ai-ajani-nedir/"', '../iletisim/"']) assert.ok(s.includes(`class="yol belir`) && s.includes(`href="${h}`), h);
   assert.equal((s.match(/class="ilke belir"/g) || []).length, 3);
-  assert.equal((s.match(/<li style="--i:\d+">/g) || []).length, 12);
+  assert.equal((s.match(/<li(?: class="cc")? style="--i:\d+">/g) || []).length, 12);
+  assert.equal((s.match(/<li class="cc"/g) || []).length, 11, 'Codex dışındaki araçlarda Claude Code izi');
   assert.match(s, /data-medya="video"/);
   assert.match(s, /data-medya="claude"/);
   assert.match(s, /css\/hakkimda\.css/);

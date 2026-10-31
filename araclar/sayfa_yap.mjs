@@ -163,7 +163,7 @@ ${ILKELER.map((i, n) => `        <li class="ilke belir">${i.cizim}<span class="i
     <section class="bolum" aria-labelledby="arac-baslik">
       <h2 id="arac-baslik" class="bolum-baslik">Araçlar</h2>
       <div class="alet-gruplari">
-${ARAC_GRUPLARI.map(([grup, liste], g) => `        <div class="alet-grup"><h3>${grup}</h3><ul class="aletler belir">${liste.map((a, i) => `<li style="--i:${i + g * 2}">${a}</li>`).join('')}</ul></div>`).join('\n')}
+${ARAC_GRUPLARI.map(([grup, liste], g) => `        <div class="alet-grup"><h3>${grup}</h3><ul class="aletler belir">${liste.map((a, i) => `<li${a === 'Codex' ? '' : ' class="cc"'} style="--i:${i + g * 2}">${a}</li>`).join('')}</ul></div>`).join('\n')}
       </div>
     </section>
     <section class="bolum" aria-labelledby="yol-baslik">
