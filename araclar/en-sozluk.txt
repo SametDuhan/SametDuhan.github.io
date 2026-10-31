@@ -209,6 +209,7 @@ Her push'ta GitHub Actions ile testler ::: Tests run with GitHub Actions on ever
 projeyi keşfet → ::: explore the project →
 SkyTrack sitesi ↗ ::: SkyTrack site ↗
 = GitHub ↗
+= LinkedIn ↗
 = ▶ web demo
 = ▶ Web demo
 nasıl yaptım → ::: how I built it →

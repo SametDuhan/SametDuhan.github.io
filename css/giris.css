@@ -253,7 +253,7 @@
 @media (max-width: 860px) {
   html, body { height: 100svh; overflow: hidden; }
   .giris-alt { display: none; }
-  .giris { height: 100svh; min-height: 0; padding: 10px 14px 12px; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 30svh) minmax(0, 1fr); gap: 8px; align-items: stretch; }
+  .giris { height: 100svh; min-height: 0; padding: 48px 14px 12px; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 30svh) minmax(0, 1fr); gap: 8px; align-items: stretch; }
   .kus-alan { min-height: 0; height: 100%; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); justify-items: center; }
   .kus-alan svg { height: 100%; width: auto; max-height: 100%; max-width: 100%; margin: 0; }
   .sag { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; }
@@ -274,3 +274,9 @@
 
 /* ana sayfada sağ üst köşede dil seçici */
 .giris > .dil-sec { position: absolute; top: 14px; left: 18px; z-index: 5; }
+
+/* dil seçicinin yanında GitHub / LinkedIn */
+.giris > .hizli { position: absolute; top: 14px; left: 104px; z-index: 5; display: inline-flex; gap: 6px; font: 600 11px var(--mono); letter-spacing: .08em; }
+.hizli a { padding: 4px 9px; border: 1.5px solid var(--yazi); color: var(--yazi); text-decoration: none; background: var(--zemin); transition: background-color .2s, color .2s; }
+.hizli a:hover { background: var(--yazi); color: var(--zemin); }
+.hizli a:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
