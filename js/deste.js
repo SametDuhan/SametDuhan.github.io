@@ -270,11 +270,15 @@ export function bagla(kok) {
     let goruldu = false;
     try { goruldu = Boolean(depo.getItem('deste-ipucu')); depo.setItem('deste-ipucu', '1'); } catch { goruldu = true; }
     if (!goruldu) {
-      const ipucu = Object.assign(document.createElement('div'), { className: 'deste-ipucu', textContent: t('← → ile gez · F tam ekran · ? kısayollar', '← → to move · F full screen · ? shortcuts') });
+      const dokunmatik = matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const metin = dokunmatik ? t('Sola kaydırarak ilerle · kaldığın yer hatırlanır', 'Swipe left to move on · your place is remembered')
+        : t('← → ile gez · F tam ekran · ? kısayollar · kaldığın yer hatırlanır', '← → to move · F full screen · ? shortcuts · your place is remembered');
+      const ipucu = Object.assign(document.createElement('div'), { className: 'deste-ipucu', textContent: metin });
       ipucu.setAttribute('role', 'status');
       kok.append(ipucu);
-      const kaldir = () => { ipucu.remove(); removeEventListener('keydown', kaldir); };
+      const kaldir = () => { ipucu.remove(); removeEventListener('keydown', kaldir); removeEventListener('touchstart', kaldir); };
       addEventListener('keydown', kaldir);
+      addEventListener('touchstart', kaldir, { passive: true });
       setTimeout(kaldir, 6500);
     }
   }

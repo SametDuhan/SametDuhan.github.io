@@ -218,7 +218,6 @@ yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama:
   <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'ogretmen', sahne: 'slaytlar',
       tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
-    <p class="ipucu">→ ve ← ile gez · F tam ekran · telefonda kaydır · kaldığın yer bu tarayıcıda hatırlanır</p>
     <div class="desteler" id="desteler">
       <noscript>
         <a class="deste-karti" href="./ai-ajani-nedir/"><h2>AI ajanı nedir?</h2></a>

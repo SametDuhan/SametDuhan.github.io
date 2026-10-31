@@ -69,6 +69,7 @@
 /* ---- ilk açılış ipucu ---- */
 .demo .demo-dugme { background: var(--zemin); }
 .deste-ipucu { position: fixed; right: 20px; top: 58px; z-index: 6; background: var(--yazi); color: var(--zemin); font: 13px var(--mono); padding: 9px 16px; border-radius: 20px; white-space: nowrap; max-width: calc(100vw - 24px); overflow: hidden; text-overflow: ellipsis; animation: yuksel .5s both; }
+@media (max-width: 520px) { .deste-ipucu { left: 12px; right: 12px; white-space: normal; border-radius: 14px; text-align: center; } }
 
 /* ---- ortak · düşünen şahin ---- */
 .dusunen { position: relative; display: flex; justify-content: flex-end; height: 150px; margin-top: 8px; pointer-events: none; }

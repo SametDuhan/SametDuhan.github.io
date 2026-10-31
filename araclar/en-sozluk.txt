@@ -269,7 +269,6 @@ Slaytlar · Samet Duhan ::: Slides · Samet Duhan
 AI'ı sıfırdan öğreten, Samet Duhan'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez. ::: Interactive decks that teach AI from scratch, with examples from Samet Duhan's projects. They open in the browser and need no setup.
 DERS NOTLARI ::: LECTURE NOTES
 KURULUM YOK ::: NO SETUP
-→ ve ← ile gez · F tam ekran · telefonda kaydır · kaldığın yer bu tarayıcıda hatırlanır ::: Use → and ← to move · F for full screen · swipe on a phone · your place is remembered in this browser
 AI ajanı nedir? ::: What is an AI agent?
 Claude Code hook'u ile otomasyon ::: Automation with a Claude Code hook
 SkyTrack'i AI ile nasıl kurdum ::: How I built SkyTrack with AI
@@ -424,7 +423,8 @@ Bir cevapla başlayan şey, ::: What starts as an answer
 çalışan bir sisteme dönüşür. ::: turns into a working system.
 gözlem → karar → araç → sonuç ::: observe → decide → tool → result
 H: Bu sunumun sonunda bir <strong>sohbet botu</strong> ile <strong>ajan</strong> arasındaki farkı bilecek, ajanın nasıl "düşünüp iş yaptığını" görecek ve kendin bir tane deneyeceksin. ::: By the end of this deck you will know the difference between a <strong>chatbot</strong> and an <strong>agent</strong>, see how an agent "thinks and gets the work done," and try one yourself.
-→ tuşu, alttaki düğmeler ya da telefonda sola kaydırma ile ilerle. ::: Move forward with the → key, the buttons below, or by swiping left on a phone.
+→ tuşu ya da alttaki düğmelerle ilerle. ::: Move forward with the → key or the buttons below.
+Sola kaydır ya da alttaki düğmelerle ilerle. ::: Swipe left or use the buttons below to move forward.
 1 · Önce bildiğin şey ::: 1 · What you already know
 Sohbet botu: soruyorsun, cevap veriyor ::: Chatbot: you ask, it answers
 H: ChatGPT ya da Claude ile sohbet ettiğinde yapay zekâ bir <strong>metin</strong> üretir. Ne kadar akıllı olursa olsun, işi yapan yine sensin: kodu kopyalarsın, dosyayı açarsın, sonucu kontrol edersin. ::: When you chat with ChatGPT or Claude, the AI produces <strong>text</strong>. However smart it is, you are still the one doing the work: you copy the code, open the file, and check the result.

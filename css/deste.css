@@ -146,6 +146,9 @@
 }
 
 .ipucu { font-family: var(--mono); font-size: 13px; color: var(--soluk); }
+/* yönergeler cihaza göre: dokunmatikte tuş, klavyede kaydırma anlatılmaz */
+.ipucu-dokunma { display: none; }
+@media (hover: none) and (pointer: coarse) { .ipucu-klavye { display: none; } .ipucu-dokunma { display: inline; } }
 
 .deste-ilerleme { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--kenar); z-index: 5; }
 .deste-ilerleme i { display: block; height: 100%; width: 0; background: var(--vurgu); transition: width 0.25s; }
