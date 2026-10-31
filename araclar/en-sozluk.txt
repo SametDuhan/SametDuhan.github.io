@@ -129,6 +129,14 @@ Bu sitedeki her sayı ve iddia bir README'ye ya da commit geçmişine dayanıyor
 Araçlar ::: Tools
 Kanatlarını açıp kapatan şahin çizimi (animasyon) ::: Drawing of the falcon opening and closing its wings (animation)
 Birlikte bir şey kuralım. ::: Let's build something together.
+STAJA AÇIK ::: OPEN TO INTERNSHIPS
+Durum ::: Status
+Staj arıyorum, hemen başlayabilirim. ::: Looking for an internship, available now.
+staj için yaz → ::: get in touch →
+Çalışma ::: Work
+Uzaktan ya da yerinde ::: Remote or on-site
+Diller ::: Languages
+Türkçe (ana dil) · İngilizce (B1) ::: Turkish (native) · English (B1)
 İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım. ::: A job offer, a joint project, or just a question: write, and let's talk.
 iletişime geç → ::: get in touch →
 
