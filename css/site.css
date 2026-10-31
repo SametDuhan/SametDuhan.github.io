@@ -96,7 +96,16 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
 .bos { color: var(--soluk); }
 
 /* ---- sunum kartları ---- */
-.desteler { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+/* kartlar tüm genişliğe yayılır; önerilen sıra numarası ve aralarında ok (yeni başlayan soldan başlar) */
+.desteler { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px; counter-reset: deste; }
+.deste-karti { counter-increment: deste; }
+.deste-karti .kart-ust::before { content: counter(deste, decimal-leading-zero); font: 600 11px var(--mono); color: var(--zemin); background: var(--yazi); padding: 2px 6px; }
+.deste-karti:not(:last-child)::after { content: "→" / ""; position: absolute; right: -28px; top: 50%; transform: translateY(-50%); font: 800 22px var(--serif); color: var(--vurgu-koyu); pointer-events: none; }
+.deste-karti:nth-child(3n)::after { display: none; }
+@media (max-width: 1000px) {
+  .desteler { grid-template-columns: 1fr; gap: 30px; max-width: 620px; }
+  .deste-karti:not(:last-child)::after, .deste-karti:nth-child(3n):not(:last-child)::after { display: block; content: "↓" / ""; right: auto; left: 50%; top: auto; bottom: -28px; transform: translateX(-50%); }
+}
 .deste-karti { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px; color: var(--yazi); text-decoration: none; border: 1px solid rgba(118, 98, 76, 0.3); background: var(--zemin); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 /* hangi kartın üzerinde olduğun belli olur: kart hafif kalkar, koyu çerçeve ve renkli gölge, başlık ve ok renklenir */
 .deste-karti:hover, .deste-karti:focus-visible { transform: translate(-3px, -3px); border-color: var(--yazi); box-shadow: 6px 6px 0 var(--vurgu); }
