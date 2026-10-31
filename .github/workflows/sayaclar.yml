@@ -1,0 +1,51 @@
+# Projeler sayfasındaki commit sayaçlarını günde bir GitHub'dan sayar.
+# Sayılar değiştiyse sayfaları yeniden üretir, testleri koşar, commit'ler ve Pages yayınını ister.
+name: sayaclar
+
+on:
+  schedule:
+    - cron: '17 3 * * *'   # her gün 03:17 UTC (06:17 TSİ)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: sayaclar
+  cancel-in-progress: false
+
+jobs:
+  say:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Sayıları GitHub'dan al
+        run: node araclar/sayac_guncelle.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Değişiklik var mı (yalnız tarih değiştiyse commit yok)
+        id: fark
+        run: |
+          if git diff --quiet -I'"tarih"' -- js/sayilar.js; then echo "var=0" >> "$GITHUB_OUTPUT"; git checkout -- js/sayilar.js; else echo "var=1" >> "$GITHUB_OUTPUT"; fi
+      - name: Sayfaları üret ve test et
+        if: steps.fark.outputs.var == '1'
+        run: |
+          node araclar/sayfa_yap.mjs
+          node araclar/proje_sayfalari.mjs
+          node araclar/ingilizce.mjs
+          npm test
+      - name: Commit, push ve Pages yayını
+        if: steps.fark.outputs.var == '1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "sayaçlar: GitHub'dan günlük sayım"
+          git push
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages yayını istenemedi; bir sonraki push'ta yayınlanır"
+        env:
+          GH_TOKEN: ${{ github.token }}
