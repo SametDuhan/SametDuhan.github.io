@@ -72,7 +72,7 @@
   .kareler { grid-template-rows: repeat(2, minmax(0, 1fr)); min-height: 0; }
   .sag .kareler .kare { aspect-ratio: auto; min-height: 0; overflow: hidden; }
 }
-@media (min-width: 861px) and (max-height: 760px) { .sag .aciklama { display: none; } .sag .kareler .kare { padding-block: 8px; } }
+@media (min-width: 861px) and (max-height: 760px) { .sag .aciklama { font-size: 13px; } .sag .kareler .kare { padding-block: 8px; } }
 @media (min-width: 861px) and (max-height: 560px) { .ad { font-size: 17px; } .ust small { display: none; } .ust h1 { font-size: 34px; margin: 2px 0; } .ust .terminal { min-height: 3em; } .ust { margin-bottom: 6px; } }
 @media (min-width: 861px) and (max-height: 720px) { .ust .tanit { display: none; } .ust { margin-bottom: 10px; } }
 
@@ -268,7 +268,7 @@
   .kare { aspect-ratio: auto; min-height: 0; padding: 8px 10px; }
   .kare .no { font-size: 10px; padding: 1px 5px; }
   .ad { font-size: 18px; }
-  .aciklama { display: none; }
+  .aciklama { font-size: 11.5px; line-height: 1.3; }
   .kod-yagmuru { display: none; }
 }
 
