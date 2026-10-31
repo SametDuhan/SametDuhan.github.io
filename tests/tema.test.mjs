@@ -79,7 +79,7 @@ test('fabrika bandı: tuğla fabrika, çalışan saat, tek duman grubu, dişli y
   // saatin iki ibresi + bant üstündeki hareketli tırnak deseni
   assert.equal((FABRIKA_SVG.match(/<animateTransform /g) || []).length, 3);
   assert.doesNotMatch(FABRIKA_SVG, /disli|dondur|fab-b|Demir-cam/);
-  for (const ad of ['SKYTRACK', 'PİKSEL', 'AJAN', 'DESTE', 'ATÖLYE Nº 1', 'ÜRETİM HATTI', '01 FİKİR', '02 KOD', '03 SİSTEM']) assert.ok(FABRIKA_SVG.includes(ad), ad);
+  for (const ad of ['SKYTRACK', 'CLAUDE', 'CODEX', 'SIRADA ?', 'ATÖLYE Nº 1', 'ÜRETİM HATTI', '01 FİKİR', '02 KOD', '03 SİSTEM']) assert.ok(FABRIKA_SVG.includes(ad), ad);
   assert.equal((FABRIKA_SVG.match(/<g class="duman/g) || []).length, 1);
   assert.ok(oku('projeler/index.html').includes('ATÖLYE Nº 1'));
 });

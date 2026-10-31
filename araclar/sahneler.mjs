@@ -169,9 +169,9 @@ export const projelerSahnesi = (onek) => SVG('Şahin üretim listesine bakıyor;
     <rect x="365" y="82" width="48" height="20" rx="3" fill="#c9893a"/>
   </g>
   ${YAZI(326, 134, 'ÜRETİM LİSTESİ', 9)}
-  ${['SKYTRACK', 'PİKSEL', 'AJAN', 'DESTE'].map((ad, i) => {
+  ${['SKYTRACK', 'CLAUDE PİKSEL', 'CODEX PİKSEL', 'SIRADA…'].map((ad, i) => {
     const y = 162 + i * 30;
-    return `<rect x="326" y="${y - 12}" width="16" height="16" fill="none" stroke="#33261a" stroke-width="1.8"/>${YAZI(352, y, ad, 11)}<path class="tik tik${i + 1}" d="M329 ${y - 4}l5 6 10-13" fill="none" stroke="#3d6356" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="28"/>`;
+    return `<rect x="326" y="${y - 12}" width="16" height="16" fill="none" stroke="#33261a" stroke-width="1.8"/>${YAZI(352, y, ad, 11)}${i < 3 ? `<path class="tik tik${i + 1}" d="M329 ${y - 4}l5 6 10-13" fill="none" stroke="#3d6356" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="28"/>` : ''}`; // sonuncusu sıradaki iş: işaretsiz
   }).join('\n  ')}`);
 
 // Slaytlar: şahin projeksiyon perdesine bakar; slaytlar çizilip değişir (css .slayt-a / .slayt-b).

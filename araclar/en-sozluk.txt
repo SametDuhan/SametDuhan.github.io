@@ -211,6 +211,12 @@ SKYTRACK ::: SKYTRACK
 PİKSEL ::: PIXEL
 AJAN ::: AGENT
 DESTE ::: DECK
+= CLAUDE
+= CODEX
+SIRADA ? ::: NEXT ?
+CLAUDE PİKSEL ::: CLAUDE PIXEL
+CODEX PİKSEL ::: CODEX PIXEL
+SIRADA… ::: NEXT…
 ÜRETİM HATTI — FİKİR → KOD → ÇALIŞAN SİSTEM ::: PRODUCTION LINE — IDEA → CODE → WORKING SYSTEM
 Şahin üretim listesine bakıyor; projeler tek tek işaretleniyor ::: The falcon looks at the production list; projects are checked off one by one
 ÜRETİM LİSTESİ ::: PRODUCTION LIST
