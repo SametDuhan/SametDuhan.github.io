@@ -1,9 +1,11 @@
 // Projeler sayfasının verisi. Her bilgi ilgili reponun README'sinden ya da commit geçmişinden.
+// zaman: GitHub'daki ilk commit / sürüm (release) / son commit tarihleri.
 export const PROJELER = [
   {
     ad: 'SkyTrack',
     pigment: 'kehribar',
     komut: './skytrack',
+    zaman: '30 Eyl 2026’da başladı · son sürüm v0.7.9, 8 Eki 2026',
     ozet: 'Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; rota üzerindeki türbülansı gösterir, izlenen uçuş için uyarı verir, güneşin hangi tarafta olduğuna göre koltuk önerir.',
     gorsel: 'img/skytrack-960.jpg',
     srcset: 'img/skytrack-960.jpg 960w, img/skytrack-1440.jpg 1440w, img/skytrack.jpg 2880w',
@@ -27,6 +29,7 @@ export const PROJELER = [
     ad: 'claude-done-pixel',
     pigment: 'civit',
     komut: './claude-done-pixel',
+    zaman: 'Yayın: 8 Eki 2026',
     ozet: 'Claude Code işini bitirince ekranın köşesinde bir piksel karakter koşup zıplar ve yeşil bayrak sallar; terminali kontrol etmeye son.',
     gorsel: 'img/claude-done.png',
     alt: 'Turuncu piksel karakterin koşup zıpladığı ve yeşil bayrak salladığı kareler',
@@ -45,6 +48,7 @@ export const PROJELER = [
     ad: 'chatgpt-done-pixel',
     pigment: 'bakir',
     komut: './chatgpt-done-pixel',
+    zaman: 'Yayın: 11 Eki 2026 · son güncelleme 12 Eki 2026',
     ozet: 'Aynı fikir Codex için: iş bitince piksel logo saatin üstünde iki kez zıplar, iki yeşil bayrak sallar.',
     gorsel: 'img/chatgpt-done.png',
     alt: 'Piksel logo kareleri: geliş, iki zıplama, iki bayrak, kutlama',
@@ -96,7 +100,7 @@ export function projeVitrinHTML(p, kok = '') {
     <p class="v-komut">${kacis(p.komut)}</p>
     <h2>${kacis(p.ad)}</h2>
     <p class="v-etiketler">${p.etiketler.map((e) => `<span>${kacis(e)}</span>`).join('')}</p>
-    <p class="v-ozet">${kacis(p.ozet)}</p>
+${p.zaman ? `    <p class="v-zaman"><time>${kacis(p.zaman)}</time></p>\n` : ''}    <p class="v-ozet">${kacis(p.ozet)}</p>
     <ul class="v-bilgiler">${p.bilgiler.map((b) => `<li>${kacis(b)}</li>`).join('')}</ul>
     <div class="linkler">${p.demo ? `
       <a class="dugme ana" href="${kacis(p.demo)}">▶ web demoyu dene</a>

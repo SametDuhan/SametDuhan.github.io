@@ -55,6 +55,7 @@
 
 /* yazı */
 .v-komut { margin: 0; font: 600 11px var(--mono); letter-spacing: .2em; color: var(--soluk); }
+.v-zaman { margin: -4px 0 12px; font: 600 12px var(--mono); color: var(--soluk); }
 .v-govde h2 { font-size: clamp(28px, 2.9vw, 42px); margin: 6px 0 10px; overflow-wrap: anywhere; }
 .v-etiketler { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
 .v-etiketler span { font: 600 11px var(--mono); letter-spacing: .08em; color: var(--p-ust, var(--yazi)); background: var(--p-dolgu, var(--vurgu)); padding: 3px 8px; }
