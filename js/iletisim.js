@@ -43,6 +43,10 @@ export function konuBul(deger) {
 
 export const mesajGovdesi = (mesaj) => mesaj.replace(/\s+$/, '');
 
+// Kayıtlı taslaktan geri gelecek mesaj: yalnız elle yazılmış (kirli) metin geri gelir. Dokunulmamış şablon her açılışta
+// sayfanın dilindeki şablondan yeniden kurulur (Türkçe sayfada kalan şablon İngilizce sayfada Türkçe görünmesin).
+export const taslakMesaji = (taslak, konu) => (taslak?.kirli && taslak.mesaj ? taslak.mesaj : konu.sablon);
+
 async function kopyala(metin) {
   try { await navigator.clipboard.writeText(metin); return true; } catch { /* eski tarayıcı: aşağıdaki yedek */ }
   try {
@@ -81,7 +85,7 @@ export function baslat() {
 
   try {
     const taslak = JSON.parse(depo?.getItem(ANAHTAR) ?? 'null');
-    if (taslak && !urldenGeldi) { konu = konuBul(taslak.konu); mesaj.value = taslak.mesaj ?? ''; kirli = Boolean(taslak.kirli); }
+    if (taslak && !urldenGeldi) { konu = konuBul(taslak.konu); mesaj.value = taslakMesaji(taslak, konu); kirli = mesaj.value !== konu.sablon; }
   } catch { /* bozuk taslak yok sayılır */ }
   if (!mesaj.value) mesaj.value = konu.sablon;
 

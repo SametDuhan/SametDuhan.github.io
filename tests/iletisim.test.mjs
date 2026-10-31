@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { mailtoLinki, gmailLinki, konuBul, mesajGovdesi, KONULAR } from '../js/iletisim.js';
+import { mailtoLinki, gmailLinki, konuBul, mesajGovdesi, taslakMesaji, KONULAR } from '../js/iletisim.js';
 
 const oku = (yol) => readFileSync(new URL(`../${yol}`, import.meta.url), 'utf8');
 
@@ -41,4 +41,13 @@ test('iletişim sayfasında mail adresi düz metin olarak durmaz', () => {
 test('hakkımdaki "staj için yaz" bağlantısı iletişimi Staj konusu seçili açar', () => {
   assert.match(oku('hakkimda/index.html'), /href="\.\.\/iletisim\/\?konu=staj">staj için yaz →/);
   assert.match(oku('iletisim/index.html'), /data-konu="Staj"/);
+});
+
+test('taslak: elle yazılan mesaj geri gelir, dokunulmamış şablon sayfanın dilindeki şablondan kurulur', () => {
+  const staj = KONULAR[0];
+  // Türkçe sayfada kalmış, dokunulmamış şablon: o anki sayfanın şablonu gelir
+  assert.equal(taslakMesaji({ konu: 'staj', mesaj: 'Merhaba Samet,\n\n[Şirket / ekip adı] olarak staj için yazıyorum.', kirli: false }, staj), staj.sablon);
+  assert.equal(taslakMesaji({ konu: 'staj', mesaj: 'Kendi yazdığım mesaj', kirli: true }, staj), 'Kendi yazdığım mesaj');
+  assert.equal(taslakMesaji({ konu: 'staj', mesaj: '', kirli: true }, staj), staj.sablon);
+  assert.equal(taslakMesaji(null, staj), staj.sablon);
 });
