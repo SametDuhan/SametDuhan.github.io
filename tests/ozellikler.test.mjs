@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { PROJELER, projeVitrinHTML, sayacHTML, SAYACLAR } from '../js/projeler.js';
+import { SAYILAR } from '../js/sayilar.js';
 import { sayfala, SAYFA_BOYU } from '../js/sayfala.js';
 import { DESTELER, desteAra } from '../js/desteler.js';
 import { ilerlemeKaydet, ilerlemeOku, ilerlemeSifirla } from '../js/ilerleme.js';
@@ -29,7 +30,9 @@ test('projeVitrinHTML medya türüne göre video ya da canlı piksel tuvali veri
 test('sayaçlar projelerin sayısını ve üç projenin toplamlarını gösterir', () => {
   assert.equal(SAYACLAR[0].say, PROJELER.length);
   const html = sayacHTML();
-  for (const sayi of ['211', '192', '2']) assert.ok(html.includes(`data-say="${sayi}"`), sayi);
+  // sayılar elle yazılmaz: js/sayilar.js'teki repo sayımlarının toplamı
+  const toplam = (alan) => Object.values(SAYILAR.repolar).reduce((t, r) => t + r[alan], 0);
+  for (const sayi of [toplam('commit'), toplam('claude')]) assert.ok(html.includes(`data-say="${sayi}"`), String(sayi));
 });
 
 test('desteAra başlık, açıklama ve etikette büyük/küçük harf ve Türkçe karakter duyarsız arar', () => {

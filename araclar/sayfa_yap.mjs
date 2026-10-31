@@ -3,7 +3,7 @@
 //           node araclar/sayfa_yap.mjs --kontrol → yazmadan karşılaştırır (testler kullanır)
 import { writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { PROJELER, projeVitrinHTML, sayacHTML, medyaHTML } from '../js/projeler.js';
+import { PROJELER, projeVitrinHTML, sayacHTML, medyaHTML, SAYIM_TARIHI } from '../js/projeler.js';
 import { FABRIKA_SVG } from './fabrika.mjs';
 import { SAHNELER } from './sahneler.mjs';
 import { dilSecici, dilEtiketleri } from './dil-baglanti.mjs';
@@ -195,6 +195,7 @@ yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama:
 ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'calisan', sahne: 'projeler', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsinin kodu GitHub\'da, nasıl yapıldığı slaytlarda.' })}
     <div class="sayaclar ince" aria-label="Rakamlarla">${sayacHTML()}</div>
+    <p class="sayac-not">GitHub'dan her gün otomatik sayılır · son güncelleme <time datetime="${SAYIM_TARIHI}">${SAYIM_TARIHI}</time></p>
     <div class="vitrinler" id="projeler">
 ${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
     </div>

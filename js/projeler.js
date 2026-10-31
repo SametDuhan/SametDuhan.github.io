@@ -1,5 +1,6 @@
 // Projeler sayfasının verisi. Her bilgi ilgili reponun README'sinden ya da commit geçmişinden.
 // zaman: GitHub'daki ilk commit / sürüm (release) / son commit tarihleri.
+import { SAYILAR } from './sayilar.js';
 export const PROJELER = [
   {
     ad: 'SkyTrack',
@@ -18,7 +19,7 @@ export const PROJELER = [
       'Windows, macOS ve Linux; Electron ve Leaflet ile',
       '15 dil ve tarayıcıda çalışan bir web demosu',
       'Her push\'ta GitHub Actions ile testler',
-      '208 commit\'in 191\'i Claude ile ortak yazıldı',
+      'Commit\'lerin büyük çoğunluğu Claude ile ortak yazıldı',
     ],
     site: 'https://sametduhan.github.io/airock/',
     github: 'https://github.com/SametDuhan/airock',
@@ -66,12 +67,15 @@ export const PROJELER = [
 
 const kacis = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
-// Sayfanın üstündeki sayaçlar: üç projenin toplamı, GitHub commit geçmişinden (Ekim 2026):
-// airock 208 commit (191'i Co-Authored-By: Claude), claude-done-pixel 1 (1), chatgpt-done-pixel 2 (0).
+// Sayfanın üstündeki sayaçlar: projelerin toplamı. Sayılar js/sayilar.js'ten (GitHub Actions günde bir günceller).
+export const repoAdi = (p) => new URL(p.github).pathname.split('/')[2];
+export const repoSayisi = (p) => SAYILAR.repolar[repoAdi(p)] ?? { commit: 0, claude: 0 };
+const topla = (alan) => PROJELER.reduce((t, p) => t + repoSayisi(p)[alan], 0);
+export const SAYIM_TARIHI = SAYILAR.tarih;
 export const SAYACLAR = [
   { say: PROJELER.length, etiket: 'açık kaynak proje' },
-  { say: 211, etiket: 'commit, üç projede' },
-  { say: 192, etiket: 'Claude ile ortak yazıldı' },
+  { say: topla('commit'), etiket: `commit, ${PROJELER.length === 3 ? 'üç' : PROJELER.length} projede` },
+  { say: topla('claude'), etiket: 'Claude ile ortak yazıldı' },
   { say: 2, etiket: 'AI aracına bildirim' },
 ];
 

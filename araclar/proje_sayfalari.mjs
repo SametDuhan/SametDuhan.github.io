@@ -3,7 +3,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { bas, menu, son } from './sayfa_yap.mjs';
 import { disBaglantilar } from './dis-baglanti.mjs';
-import { PROJELER, medyaHTML, sayacHTML } from '../js/projeler.js';
+import { PROJELER, medyaHTML, sayacHTML, repoSayisi } from '../js/projeler.js';
 
 const stories = {
   skytrack: {
@@ -52,7 +52,7 @@ const IKON = {
 const EK = {
   skytrack: {
     kisa: 'Canlı uçak takibi',
-    sayilar: [{ say: 208, etiket: 'commit' }, { say: 191, etiket: 'Claude ile ortak yazıldı' }, { say: 15, etiket: 'dil desteği' }, { say: 9, etiket: 'gün: ilk dosyadan v0.7.9\'a' }],
+    sayilar: [{ say: repoSayisi(PROJELER[0]).commit, etiket: 'commit' }, { say: repoSayisi(PROJELER[0]).claude, etiket: 'Claude ile ortak yazıldı' }, { say: 15, etiket: 'dil desteği' }, { say: 9, etiket: 'gün: ilk dosyadan v0.7.9\'a' }],
     ozellikler: [
       ['ucak', 'Canlı uçak takibi', 'Açık ADS-B verisiyle; hesap ya da API anahtarı istemez.'],
       ['dalga', 'Türbülans', 'Rota üzerindeki türbülansı gösterir.'],

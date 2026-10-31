@@ -238,7 +238,8 @@ Açık ADS-B verisiyle canlı uçak takibi. Hesap ya da API anahtarı istemez; r
 Windows, macOS ve Linux; Electron ve Leaflet ile ::: Windows, macOS, and Linux; built with Electron and Leaflet
 15 dil ve tarayıcıda çalışan bir web demosu ::: 15 languages and a web demo that runs in the browser
 Her push'ta GitHub Actions ile testler ::: Tests run with GitHub Actions on every push
-208 commit'in 191'i Claude ile ortak yazıldı ::: 191 of 208 commits were co-written with Claude
+Commit'lerin büyük çoğunluğu Claude ile ortak yazıldı ::: Most commits were co-written with Claude
+GitHub'dan her gün otomatik sayılır · son güncelleme ::: Counted automatically from GitHub every day · last updated
 projeyi keşfet → ::: explore the project →
 SkyTrack sitesi ↗ ::: SkyTrack site ↗
 = GitHub ↗

@@ -34,6 +34,7 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 | `img/sahin/` | Şahin pozları (WebP); her alt sayfanın başında bir poz |
 | `araclar/ingilizce.mjs`, `araclar/en-sozluk.txt` | İngilizce sayfaları üretir; çeviri sözlüğü |
 | `js/dil.js` | Betik metinleri için `t(tr, en)` |
+| `js/sayilar.js`, `araclar/sayac_guncelle.mjs` | Projeler sayaçlarının commit sayıları; `.github/workflows/sayaclar.yml` her gün GitHub'dan sayar, değiştiyse sayfaları üretip commit'ler (elle: Actions → sayaclar → Run workflow) |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |
 
 ## İngilizce sürüm
