@@ -85,7 +85,7 @@
   text-decoration: none;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--p) 9%, transparent), transparent 60%), var(--zemin);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--p) 14%, transparent), transparent 60%), var(--zemin);
 }
 .kare:hover::before, .kare:hover::after, .kare:hover > i.k2, .kare:hover > i.k3,
 .kare:focus-visible::before, .kare:focus-visible::after, .kare:focus-visible > i.k2, .kare:focus-visible > i.k3 {
@@ -199,8 +199,8 @@
 .kare:hover .m-cal, .kare:focus-visible .m-cal { animation: m-cal 2.4s linear infinite; }
 .m-ring { fill: none; stroke: var(--yazi); stroke-width: 2; stroke-linecap: round; opacity: 0; }
 .kare:hover .m-ring, .kare:focus-visible .m-ring { animation: m-ring 2.4s linear infinite; }
-.m-govde { fill: #8c9669; stroke: var(--yazi); stroke-width: 1.5; stroke-linejoin: round; }
-.m-sap2 { fill: none; stroke: #8c9669; stroke-width: 6; stroke-linecap: round; }
+.m-govde { fill: color-mix(in srgb, var(--p, var(--kiremit)) 55%, #f2e8d5); stroke: var(--yazi); stroke-width: 1.5; stroke-linejoin: round; }
+.m-sap2 { fill: none; stroke: color-mix(in srgb, var(--p, var(--kiremit)) 55%, #f2e8d5); stroke-width: 6; stroke-linecap: round; }
 .m-sap2.kalin { stroke-width: 7; }
 .m-dis { fill: #f7f0e0; stroke: var(--yazi); stroke-width: 1.2; }
 .m-delik { fill: #e9dcc2; stroke: var(--yazi); stroke-width: .8; }
