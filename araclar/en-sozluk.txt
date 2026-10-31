@@ -247,6 +247,7 @@ SkyTrack sitesi ↗ ::: SkyTrack site ↗
 = GitHub ↗
 = LinkedIn ↗
 = ▶ web demo
+▶ web demoyu dene ::: ▶ try the web demo
 = ▶ Web demo
 nasıl yaptım → ::: how I built it →
 Nasıl yaptım → ::: How I built it →

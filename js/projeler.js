@@ -84,10 +84,12 @@ export function medyaHTML(p, kok = '') {
 }
 
 export function projeVitrinHTML(p, kok = '') {
+  // Web demosu olan projede ana düğme demo: ziyaretçi kurmadan dener. Proje sitesi ikincil bağlantıya iner.
   const ikincil = [
-    p.demo ? `<a href="${kacis(p.demo)}">▶ web demo</a>` : '',
+    p.demo && p.site ? `<a href="${kacis(p.site)}">${kacis(p.ad)} sitesi ↗</a>` : '',
     p.deste ? `<a href="${kacis(kok + p.deste)}">nasıl yaptım →</a>` : '',
   ].filter(Boolean).join('');
+  const kesfet = `${kacis(kok + 'projeler/' + p.ad.toLowerCase() + '/')}`;
   return `<article class="vitrin belir p-${kacis(p.pigment)}" id="${kacis(p.ad.toLowerCase())}" data-ad="${kacis(p.ad)}">
   <div class="v-medya" data-medya="${kacis(p.medya)}">${medyaHTML(p, kok)}</div>
   <div class="v-govde">
@@ -96,9 +98,11 @@ export function projeVitrinHTML(p, kok = '') {
     <p class="v-etiketler">${p.etiketler.map((e) => `<span>${kacis(e)}</span>`).join('')}</p>
     <p class="v-ozet">${kacis(p.ozet)}</p>
     <ul class="v-bilgiler">${p.bilgiler.map((b) => `<li>${kacis(b)}</li>`).join('')}</ul>
-    <div class="linkler">
-      <a class="dugme ana" href="${kacis(kok + 'projeler/' + p.ad.toLowerCase() + '/')}">projeyi keşfet →</a>${p.site ? `
-      <a class="dugme" href="${kacis(p.site)}">${kacis(p.ad)} sitesi ↗</a>` : ''}
+    <div class="linkler">${p.demo ? `
+      <a class="dugme ana" href="${kacis(p.demo)}">▶ web demoyu dene</a>
+      <a class="dugme" href="${kesfet}">projeyi keşfet →</a>` : `
+      <a class="dugme ana" href="${kesfet}">projeyi keşfet →</a>${p.site ? `
+      <a class="dugme" href="${kacis(p.site)}">${kacis(p.ad)} sitesi ↗</a>` : ''}`}
       <a class="dugme" href="${kacis(p.github)}">GitHub ↗</a>
     </div>${ikincil ? `\n    <p class="v-ek">${ikincil}</p>` : ''}
   </div>

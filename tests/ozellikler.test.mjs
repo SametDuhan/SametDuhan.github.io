@@ -207,9 +207,12 @@ test('hakkımda ikiye bölünmez: tek sayfada kaydırılır', () => {
   assert.match(oku('js/ekrana-sigdir.js'), /dataset\.sayfalama === 'kaydir'/);
 });
 
-test('SkyTrack vitrininde projeyi keşfetin yanında SkyTrack sitesine bağlantı var; siteyi olmayan projede yok', () => {
+test('SkyTrack vitrininde ana düğme web demosu; proje sitesi ikincil bağlantıda; siteyi olmayan projede yok', () => {
   const sky = projeVitrinHTML(PROJELER[0], '../');
-  assert.ok(sky.indexOf('projeyi keşfet') < sky.indexOf('SkyTrack sitesi') && sky.indexOf('SkyTrack sitesi') < sky.indexOf('GitHub ↗'));
+  assert.match(sky, /<a class="dugme ana" href="https:\/\/sametduhan\.github\.io\/airock\/app\/">▶ web demoyu dene<\/a>/);
+  assert.ok(sky.indexOf('web demoyu dene') < sky.indexOf('projeyi keşfet') && sky.indexOf('projeyi keşfet') < sky.indexOf('GitHub ↗'));
+  assert.ok(sky.indexOf('GitHub ↗') < sky.indexOf('SkyTrack sitesi'), 'site ikincil bağlantılarda');
+  for (const p of PROJELER.slice(1)) assert.match(projeVitrinHTML(p, '../'), /class="dugme ana"[^>]*>projeyi keşfet/, p.ad);
   assert.ok(sky.includes('href="https://sametduhan.github.io/airock/"'));
   for (const p of PROJELER.slice(1)) assert.doesNotMatch(projeVitrinHTML(p, '../'), /sitesi ↗/, p.ad);
 });
