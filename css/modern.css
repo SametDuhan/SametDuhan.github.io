@@ -1,0 +1,85 @@
+/* Görünüm seçici. Her sayfada en son yüklenir.
+   Site iki tasarım taşır: kâğıt (27 Ekim, tema.css'teki ilk tasarım) ve modern (31 Ekim). Seçim <html data-gorunum="retro|modern">;
+   ilk değeri js/gorunum-erken.js koyar, seçici araclar/gorunum-secici.mjs + js/gorunum.js. */
+
+/* ===================== görünüm seçici (iki görünümde de) ===================== */
+/* Tarih akışı: her durakta tasarımın küçük önizlemesi (kâğıt: krem kâğıt + serif "Aa"; modern: koyu kart + ✻), altta koyu/açık anahtarı. */
+.gorunum-sec { display: grid; gap: 12px; justify-items: start; font-family: var(--mono); }
+.gs-baslik { display: flex; align-items: center; gap: 8px; font: 600 10px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--soluk); }
+.gs-akis { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; position: relative; }
+/* iki durağı birleştiren çizgi (noktaların ortasından) */
+.gs-akis::before { content: ""; position: absolute; left: 5px; top: 24px; bottom: 24px; border-left: 2px dashed var(--soluk); }
+.gs-akis li { position: relative; }
+.gs-akis button { display: grid; grid-template-columns: 12px 50px auto; column-gap: 12px; align-items: center; padding: 2px 6px 2px 0; border: 0; background: none; color: var(--yazi); font: inherit; text-align: left; cursor: pointer; }
+.gs-akis button::before { content: ""; position: relative; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--yazi); background: var(--zemin); transition: background-color .25s, box-shadow .25s, transform .25s; }
+.gs-yazi { display: grid; gap: 1px; }
+.gs-akis time { font: 600 10px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--soluk); }
+.gs-akis b { font: 800 15px/1.15 var(--serif); transition: color .2s; }
+
+/* önizlemeler: iki temada da aynı (tasarımın kendisini gösterir) */
+.gs-onizleme { position: relative; display: block; width: 50px; height: 38px; box-sizing: border-box; opacity: .72; transition: opacity .25s, transform .25s cubic-bezier(.3, 1.4, .5, 1), box-shadow .25s; }
+.gs-onizleme::before, .gs-onizleme::after { content: ""; position: absolute; }
+[data-gorunum-sec="retro"] .gs-onizleme { background: #f2e8d5; border: 1.5px solid #33261a; border-radius: 3px; box-shadow: 2px 2px 0 #cdb894; }
+[data-gorunum-sec="retro"] .gs-onizleme::before { content: "Aa"; left: 6px; top: 4px; font: 900 15px/1 'Fraunces', Georgia, serif; color: #33261a; }
+[data-gorunum-sec="retro"] .gs-onizleme::after { left: 6px; right: 6px; bottom: 5px; height: 9px; background: linear-gradient(#d07a2a, #d07a2a) 0 0 / 40% 3px no-repeat, linear-gradient(#cdb894, #cdb894) 0 6px / 100% 3px no-repeat; }
+[data-gorunum-sec="modern"] .gs-onizleme { background: #1a1916; border: 1px solid #3a3833; border-radius: 9px; box-shadow: 0 6px 14px -8px rgb(0 0 0 / .6); }
+[data-gorunum-sec="modern"] .gs-onizleme::before { content: "✻"; left: 7px; top: 4px; font: 700 13px/1 system-ui, sans-serif; color: #d97757; }
+[data-gorunum-sec="modern"] .gs-onizleme::after { left: 7px; right: 7px; bottom: 6px; height: 9px; background: linear-gradient(#ede9df, #ede9df) 0 0 / 100% 3px no-repeat, linear-gradient(#6b675e, #6b675e) 0 6px / 55% 3px no-repeat; border-radius: 2px; }
+
+.gs-akis button:hover .gs-onizleme { opacity: 1; transform: translateY(-2px) rotate(-3deg); }
+.gs-akis button:hover b { color: var(--vurgu-koyu); }
+.gs-akis button:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; border-radius: 6px; }
+/* geçerli durak: aria-pressed JS'ten önce de doğru görünsün diye <html> özniteliğine bakar */
+html[data-gorunum="retro"] [data-gorunum-sec="retro"]::before,
+html[data-gorunum="modern"] [data-gorunum-sec="modern"]::before { background: var(--vurgu); border-color: var(--vurgu); box-shadow: 0 0 0 4px color-mix(in srgb, var(--vurgu) 28%, transparent); }
+html[data-gorunum="retro"] [data-gorunum-sec="retro"] .gs-onizleme,
+html[data-gorunum="modern"] [data-gorunum-sec="modern"] .gs-onizleme { opacity: 1; transform: none; outline: 2px solid var(--vurgu); outline-offset: 3px; }
+html[data-gorunum="retro"] [data-gorunum-sec="retro"],
+html[data-gorunum="modern"] [data-gorunum-sec="modern"] { cursor: default; }
+html[data-gorunum="retro"] [data-gorunum-sec="retro"] b,
+html[data-gorunum="modern"] [data-gorunum-sec="modern"] b { color: var(--yazi); }
+
+/* koyu/açık anahtarı: yalnız modern görünümde; topuz seçili simgenin altına kayar */
+.tema-dugme { display: none; }
+.tema-ray { position: relative; display: flex; align-items: center; justify-content: space-between; width: 100%; height: 100%; padding: 0 7px; box-sizing: border-box; }
+.tema-ray::after { content: ""; position: absolute; left: 3px; top: 3px; width: 26px; height: 26px; border-radius: 50%; background: var(--kart, var(--zemin)); box-shadow: 0 1px 3px rgb(0 0 0 / .25); transition: transform .3s cubic-bezier(.3, 1.3, .5, 1); }
+.tema-ray svg { position: relative; z-index: 1; width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; color: var(--soluk); transition: color .25s; }
+.tema-dugme:not([aria-pressed="true"]) .ikon-gunes, .tema-dugme[aria-pressed="true"] .ikon-ay { color: var(--vurgu-koyu); }
+.tema-dugme[aria-pressed="true"] .tema-ray::after { transform: translateX(28px); }
+
+/* ana sayfa: solda dikey panel */
+.gorunum-ray { position: fixed; z-index: 6; left: clamp(14px, 2vw, 32px); top: 50%; transform: translateY(-50%); }
+.gorunum-ray .gorunum-sec { padding: 14px 16px 16px 14px; border: 1.5px solid var(--yazi); background: var(--zemin); box-shadow: 4px 4px 0 var(--kenar); }
+@media (min-width: 861px) {
+  .giris { padding-left: max(clamp(8px, 5.2vw, 100px), 200px); }
+}
+/* yan menüde: dil seçicinin üstünde */
+.yan-menu .gorunum-sec { margin-top: auto; padding-top: 16px; }
+.yan-menu .gorunum-sec + .dil-sec { margin-top: 14px; }
+
+/* telefon: yatay; tarih, nokta ve çizgi yok, önizlemeler kalır */
+@media (max-width: 900px) {
+  .gorunum-sec { grid-auto-flow: column; align-items: center; gap: 10px; }
+  .gs-baslik, .gs-akis::before, .gs-akis time, .gs-akis button::before { display: none; }
+  .gs-akis { grid-auto-flow: column; gap: 8px; }
+  .gs-akis button { grid-template-columns: 34px auto; column-gap: 7px; min-height: 44px; padding: 0 2px; }
+  .gs-onizleme { width: 34px; height: 26px; }
+  .gs-onizleme::before { transform: scale(.72); transform-origin: 0 0; }
+  .gs-onizleme::after { transform: scale(.72); transform-origin: 0 100%; }
+  .gs-akis b { font-size: 13px; }
+  html[data-gorunum] [data-gorunum-sec] .gs-onizleme { outline-offset: 2px; }
+  .yan-menu .gorunum-sec { order: 2; margin: 0 0 0 auto; padding: 0; }
+  .yan-menu .gs-akis b { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .yan-menu .gs-akis button { grid-template-columns: 34px; }
+  nav.yan-menu .gorunum-sec + .dil-sec { margin: 0 0 0 4px; }
+}
+@media (max-width: 860px) {
+  .gorunum-ray { top: auto; bottom: 10px; left: 50%; transform: translateX(-50%); }
+  .gorunum-ray .gorunum-sec { padding: 4px 12px; white-space: nowrap; }
+  .giris { padding-bottom: 72px !important; }
+}
+@media (max-width: 460px) {
+  .yan-menu .logo span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .gs-akis button::before, .gs-akis b, .gs-onizleme, .tema-ray::after, .tema-ray svg { transition: none; } .gs-akis button:hover .gs-onizleme { transform: none; } }
+@media print { .gorunum-ray, .gorunum-sec { display: none !important; } }

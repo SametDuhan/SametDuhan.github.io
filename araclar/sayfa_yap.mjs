@@ -8,6 +8,7 @@ import { FABRIKA_SVG } from './fabrika.mjs';
 import { SAHNELER } from './sahneler.mjs';
 import { dilSecici, dilEtiketleri } from './dil-baglanti.mjs';
 import { disBaglantilar } from './dis-baglanti.mjs';
+import { gorunumSecici } from './gorunum-secici.mjs';
 
 const KOK = fileURLToPath(new URL('../', import.meta.url));
 const KONTROL = process.argv.includes('--kontrol');
@@ -32,10 +33,12 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '', kapak = y
   ${yol === '404.html' ? '' : `${dilEtiketleri(yol)}\n  `}${IKON}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&family=Geist:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="${onek}css/tema.css">
   <link rel="stylesheet" href="${onek}css/site.css">${ekCss}
   <link rel="stylesheet" href="${onek}css/ekran.css">
+  <link rel="stylesheet" href="${onek}css/modern.css">
+  <script src="${onek}js/gorunum-erken.js"></script>
 </head>
 <body>
   <a class="atla" href="#icerik">İçeriğe geç</a>`;
@@ -53,6 +56,7 @@ export const menu = (aktif, onek = '../', yol = aktif ? `${aktif}/` : null) => `
     <div class="menu-linkler">
 ${BOLUMLER.map(([h, ad, alt, pig, ikon], i) => `      <a class="p-${pig}" href="${onek}${h}/"${h === aktif ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${ikon}</svg><span class="m-ad"><i>0${i + 1}</i>${ad}</span><small>${alt}</small></a>`).join('\n')}
     </div>
+    ${gorunumSecici()}
     ${yol ? dilSecici(yol, 'tr') : ''}
   </nav>`;
 
@@ -75,7 +79,9 @@ export const son = (onek = '../') => `
   </footer>
   <script type="module">
     import { baslatSayfa } from '${onek}js/ekrana-sigdir.js';
+    import { baslatGorunum } from '${onek}js/gorunum.js';
     baslatSayfa();
+    baslatGorunum();
   </script>`;
 
 const yaz = (yol, ham) => {

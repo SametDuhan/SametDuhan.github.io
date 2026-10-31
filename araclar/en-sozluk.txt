@@ -693,3 +693,11 @@ J: 'Uygulamayı kurmadan denemek için tarayıcı demosu eklendi.' ::: 'A browse
 J: 'Arapça (sağdan sola)' ::: 'Arabic (right to left)'
 J: 'Arapça, Çince, Japonca, Korece; sağdan sola yazılan dil için arayüz düzeltmeleri.' ::: 'Arabic, Chinese, Japanese, Korean; interface fixes for the right-to-left language.'
 J: 'Son sürüm: havalimanı servis araçları uçaktan ayrıldı, acil durum alarmı 45 saniye kuralına bağlandı.' ::: 'Latest release: airport service vehicles were separated from aircraft, and the emergency alarm was tied to the 45-second rule.'
+
+# ===== Görünüm seçici (araclar/gorunum-secici.mjs) =====
+Görünüm ::: Design
+görünüm ::: design
+Kâğıt ::: Paper
+31 Ekim ::: 31 October
+= Modern
+Koyu tema ::: Dark theme
