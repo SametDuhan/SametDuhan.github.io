@@ -26,10 +26,10 @@ test('projeVitrinHTML medya türüne göre video ya da canlı piksel tuvali veri
   for (const p of PROJELER.slice(1)) assert.match(projeVitrinHTML(p, '../'), /<canvas class="v-ekran v-piksel"/, p.ad);
 });
 
-test('sayaçlar projelerin sayısını ve SkyTrack sayılarını gösterir', () => {
+test('sayaçlar projelerin sayısını ve üç projenin toplamlarını gösterir', () => {
   assert.equal(SAYACLAR[0].say, PROJELER.length);
   const html = sayacHTML();
-  for (const sayi of ['208', '191', '15']) assert.ok(html.includes(`data-say="${sayi}"`), sayi);
+  for (const sayi of ['211', '192', '2']) assert.ok(html.includes(`data-say="${sayi}"`), sayi);
 });
 
 test('desteAra başlık, açıklama ve etikette büyük/küçük harf ve Türkçe karakter duyarsız arar', () => {

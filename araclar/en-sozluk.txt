@@ -225,9 +225,9 @@ HEPSİ AÇIK KAYNAK ::: ALL OPEN SOURCE
 Hepsinin kodu GitHub'da, nasıl yapıldığı slaytlarda. ::: All the code is on GitHub; how it was built is in the slides.
 Rakamlarla ::: In numbers
 açık kaynak proje ::: open-source projects
-commit, SkyTrack ::: commits, SkyTrack
+commit, üç projede ::: commits across three projects
+AI aracına bildirim: Claude Code, Codex ::: AI tools with done alerts: Claude Code, Codex
 Claude ile ortak yazıldı ::: co-written with Claude
-dil desteği, SkyTrack ::: languages supported, SkyTrack
 = ./skytrack
 = ./claude-done-pixel
 = ./chatgpt-done-pixel

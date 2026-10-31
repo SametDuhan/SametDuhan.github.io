@@ -66,12 +66,13 @@ export const PROJELER = [
 
 const kacis = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
-// Sayfanın üstündeki sayaçlar: her sayı SkyTrack README'sinden ve commit geçmişinden (bkz. slaytlar/skytrack-nasil-kurdum).
+// Sayfanın üstündeki sayaçlar: üç projenin toplamı, GitHub commit geçmişinden (Ekim 2026):
+// airock 208 commit (191'i Co-Authored-By: Claude), claude-done-pixel 1 (1), chatgpt-done-pixel 2 (0).
 export const SAYACLAR = [
   { say: PROJELER.length, etiket: 'açık kaynak proje' },
-  { say: 208, etiket: 'commit, SkyTrack' },
-  { say: 191, etiket: 'Claude ile ortak yazıldı' },
-  { say: 15, etiket: 'dil desteği, SkyTrack' },
+  { say: 211, etiket: 'commit, üç projede' },
+  { say: 192, etiket: 'Claude ile ortak yazıldı' },
+  { say: 2, etiket: 'AI aracına bildirim: Claude Code, Codex' },
 ];
 
 export const sayacHTML = (liste = SAYACLAR) => liste.map((c) => `<div class="sayac"><b data-say="${c.say}">${c.say}</b><span>${kacis(c.etiket)}</span></div>`).join('');
