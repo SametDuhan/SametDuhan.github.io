@@ -279,7 +279,6 @@ H: Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez
 Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn. ::: Contact Samet Duhan: email, GitHub, and LinkedIn for a job offer, a joint project, or a question.
 Şahin masasında oturuyor; önündeki döner kadranlı telefon çalıyor ::: The falcon sits at a desk; the rotary phone in front of it is ringing
 POSTA ::: MAIL
-MAİL · GITHUB · LINKEDIN ::: EMAIL · GITHUB · LINKEDIN
 Konuyu seç, mesajını yaz, gönder. Mail uygulaman açılmazsa mesajın kendiliğinden kopyalanır. ::: Pick a topic, write your message, send it. If your mail app doesn't open, the message is copied automatically.
 Doğrudan ::: Direct
 mail ::: email
@@ -287,6 +286,8 @@ kopyala ::: copy
 Mesaj yaz ::: Write a message
 Konu ::: Topic
 Staj ::: Internship
+Genelde 1 gün içinde dönerim ::: I usually reply within a day
+Türkiye · GMT+3 ::: Türkiye · GMT+3
 İş teklifi ::: Job offer
 Ortak proje ::: Joint project
 Soru ya da öneri ::: Question or suggestion

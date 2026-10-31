@@ -244,8 +244,14 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
 // --- İletişim
 yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklama: 'Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.', yol: 'iletisim/' })}${menu('iletisim')}
   <main id="icerik" data-sayfalama="kendi">
-${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'MAİL · GITHUB · LINKEDIN', baslik: 'İletişim', poz: 'postaci', sahne: 'iletisim',
-      tanitim: 'Konuyu seç, mesajını yaz, gönder. Mail uygulaman açılmazsa mesajın kendiliğinden kopyalanır.' })}
+${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'STAJA AÇIK', baslik: 'İletişim', poz: 'postaci', sahne: 'iletisim',
+      tanitim: '<strong>Staj arıyorum, hemen başlayabilirim.</strong> Konuyu seç, mesajını yaz, gönder. Mail uygulaman açılmazsa mesajın kendiliğinden kopyalanır.',
+      alt: `
+        <ul class="iletisim-bilgi">
+          <li>Genelde 1 gün içinde dönerim</li>
+          <li>Türkiye · GMT+3</li>
+          <li>Uzaktan ya da yerinde</li>
+        </ul>` })}
 
     <div class="iletisim-yerlesim">
       <section class="kanal-kart" aria-labelledby="dogrudan-baslik">

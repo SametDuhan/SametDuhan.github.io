@@ -299,6 +299,8 @@ body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * c
 @keyframes soru { 0% { transform: translateY(14px); opacity: 0; } 20% { opacity: 1; } 80% { opacity: .7; } 100% { transform: translateY(-34px); opacity: 0; } }
 
 /* ---- iletişim: doğrudan kanallar (sol) + mesaj yaz (sağ) ---- */
+.iletisim-bilgi { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font: 600 12px var(--mono); color: var(--ceviz); }
+.iletisim-bilgi li::before { content: "·" / ""; margin-right: 8px; color: var(--vurgu-koyu); font-weight: 800; }
 .iletisim-yerlesim { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px; align-items: start; }
 @media (max-width: 1320px) { .iletisim-yerlesim { grid-template-columns: 1fr; } }
 .kanal-kart, .yaz-kart { position: relative; padding: 22px 24px 24px; background: var(--zemin); }
