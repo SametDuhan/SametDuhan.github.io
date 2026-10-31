@@ -98,6 +98,9 @@
   .yap-kart .v-pencere { max-width: 560px; }
 }
 @media (max-width: 700px) {
+  /* telefonda önce başlık ve künye, sahne arkadan gelir */
+  .sayfa-basi:has(.kimlik-bilgi) .sayfa-metin { order: -1; }
+  .sayfa-basi:has(.kimlik-bilgi) .sayfa-sahne { width: min(100%, 320px); align-self: center; }
   .kimlik-bilgi div { grid-template-columns: 1fr; gap: 2px; }
   .ilke { grid-template-columns: 1fr; gap: 10px; padding: 16px; }
   .ilke-cizim { width: 120px; }

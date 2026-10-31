@@ -147,6 +147,13 @@ h1 { font-weight: 900; font-size: clamp(44px, 6vw, 76px); margin: 14px 0 10px; }
   .menu-linkler { display: flex; }
   .menu-linkler a { padding: 12px 10px; min-height: 44px; }
   .menu-linkler a svg { display: none; }
+  /* menü tek satır: logo ve dil seçici üstte, bağlantılar altta yan yana */
+  nav.yan-menu { flex-direction: row; }
+  .yan-menu .logo { padding-bottom: 0; border-bottom: 0; }
+  nav.yan-menu .dil-sec { order: 2; margin: 0 0 0 auto; align-self: center; }
+  .menu-linkler { order: 3; flex: 1 0 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; border-bottom: 0; }
+  .menu-linkler a { flex: none; padding: 10px 9px; border-top: 0; }
+  .menu-linkler a i { display: none; }
   main, .alt-bilgi { margin-left: 0; }
   main { padding-top: 32px; }
   .sayfa-basi.bant { margin-top: -32px; padding-top: 32px; }
