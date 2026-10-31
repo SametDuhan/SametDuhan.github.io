@@ -1,5 +1,5 @@
-// Görünüm seçici: sitenin iki tasarımı bir tarih akışında (27 Ekim kâğıt, 31 Ekim modern); her durakta tasarımın küçük önizlemesi (CSS),
-// modern için koyu/açık anahtarı.
+// Görünüm seçici: sitenin iki tasarımı sırasıyla bir akışta (önce kâğıt, sonra modern); her durakta tasarımın küçük önizlemesi (CSS),
+// modern için koyu/açık anahtarı. Ana sayfadaki panel "−" ile küçülür (gorunumPaneli: kapat/aç düğmeleri yalnız orada).
 // Ana sayfada solda dikey şerit (index.html, elle; tests/gorunum.test.mjs aynı olduğunu denetler), alt sayfalarda sol menünün altında.
 // Seçimi js/gorunum.js uygular; sayfa çizilmeden önceki değer js/gorunum-erken.js'ten gelir.
 export const GORUNUMLER = [
@@ -13,7 +13,15 @@ const AY = '<svg class="ikon-ay" viewBox="0 0 24 24" aria-hidden="true"><path d=
 export const gorunumSecici = () => `<div class="gorunum-sec" role="group" aria-label="Görünüm">
       <span class="gs-baslik" aria-hidden="true">görünüm</span>
       <ol class="gs-akis">
-${GORUNUMLER.map((g) => `        <li><button type="button" data-gorunum-sec="${g.kod}"><span class="gs-onizleme" aria-hidden="true"></span><span class="gs-yazi"><time datetime="${g.tarih}">${g.gun}</time><b>${g.ad}</b></span></button></li>`).join('\n')}
+${GORUNUMLER.map((g) => `        <li><button type="button" data-gorunum-sec="${g.kod}"><span class="gs-onizleme" aria-hidden="true"></span><b>${g.ad}</b></button></li>`).join('\n')}
       </ol>
       <button type="button" class="tema-dugme" data-tema-dugme aria-label="Koyu tema"><span class="tema-ray" aria-hidden="true">${GUNES}${AY}</span></button>
     </div>`;
+
+// Ana sayfa paneli: seçici + gizle (−) + küçükken açma düğmesi (o anki tasarımın önizlemesi). Durum <html data-gorunum-panel="kapali">.
+const EKSI = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg>';
+export const gorunumPaneli = () => `<aside class="gorunum-ray">
+    ${gorunumSecici()}
+    <button type="button" class="gs-kapat" data-panel="gizle" aria-label="Görünüm panelini gizle">${EKSI}</button>
+    <button type="button" class="gs-ac" data-panel="goster" aria-label="Görünüm panelini aç"><span class="gs-onizleme" aria-hidden="true"></span></button>
+</aside>`;

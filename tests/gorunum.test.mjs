@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
-import { gorunumSecici, GORUNUMLER } from '../araclar/gorunum-secici.mjs';
+import { gorunumSecici, gorunumPaneli, GORUNUMLER } from '../araclar/gorunum-secici.mjs';
 
 const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
 const oku = (yol) => readFileSync(join(KOK, yol), 'utf8');
@@ -30,7 +30,8 @@ test('görünüm seçici ana sayfada, her menülü alt sayfada ve sunumlarda ayn
   // girinti sayfaya göre değişir; karşılaştırma boşluklar teke indirilerek
   const sade = (m) => m.replace(/\s+/g, ' ');
   const tr = sade(gorunumSecici());
-  assert.ok(sade(oku('index.html')).includes(tr), 'index.html elle değişmiş: araclar/gorunum-secici.mjs ile aynı olmalı');
+  assert.ok(sade(oku('index.html')).includes(sade(gorunumPaneli())), 'index.html elle değişmiş: araclar/gorunum-secici.mjs ile aynı olmalı');
+  assert.doesNotMatch(tr, /<time|Ekim/, 'seçicide tarih yazısı yok');
   for (const yol of ['hakkimda/index.html', 'projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html', 'projeler/skytrack/index.html', '404.html', 'slaytlar/ai-ajani-nedir/index.html', 'slaytlar/claude-code-hook/index.html', 'slaytlar/skytrack-nasil-kurdum/index.html']) assert.ok(sade(oku(yol)).includes(tr), yol);
   assert.deepEqual(GORUNUMLER.map((g) => g.kod), ['retro', 'modern']);
   assert.ok(GORUNUMLER[0].tarih < GORUNUMLER[1].tarih);
@@ -58,6 +59,8 @@ test('ilk açılış modern; saklanan seçim ve ?gorunum= adresi uygulanır', ()
   assert.equal(depo.gorunum, 'retro');
   assert.equal(erken({ tema: 'koyu' }).oz['data-tema'], 'koyu');
   assert.equal(erken({ tema: 'mor' }).oz['data-tema'], undefined);
+  assert.equal(erken({ gorunumPanel: 'kapali' }).oz['data-gorunum-panel'], 'kapali');
+  assert.equal(erken().oz['data-gorunum-panel'], undefined);
 });
 
 test('localStorage kapalıyken de sayfa modern açılır', () => {
@@ -109,4 +112,14 @@ test('sunumlarda seçici çalışır; telefonda "⋯" menüsüne taşınır', ()
   assert.match(js, /import \{ baslatGorunum \} from '\.\/gorunum\.js'/);
   assert.match(js, /matchMedia\('\(max-width: 700px\)'\)/);
   assert.match(js, /more\.append\(secici\)/);
+});
+
+test('ana sayfa paneli "−" ile gizlenir, küçük düğmeyle geri açılır; seçim saklanır', () => {
+  const p = gorunumPaneli();
+  assert.match(p, /class="gs-kapat" data-panel="gizle" aria-label="[^"]+"/);
+  assert.match(p, /class="gs-ac" data-panel="goster" aria-label="[^"]+"/);
+  const js = oku('js/gorunum.js');
+  assert.match(js, /sakla\('gorunumPanel'/);
+  assert.match(js, /\.focus\(\)/);
+  assert.match(oku('css/modern.css'), /html\[data-gorunum-panel="kapali"\] \.gs-ac \{ display: grid; \}/);
 });

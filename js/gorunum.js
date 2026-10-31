@@ -24,6 +24,14 @@ export function baslatGorunum() {
       sakla('gorunum', yeni);
       gec(() => { kok.dataset.gorunum = yeni; isaretle(); });
     }
+    const panel = e.target.closest('[data-panel]');
+    if (panel) {
+      const gizle = panel.dataset.panel === 'gizle';
+      sakla('gorunumPanel', gizle ? 'kapali' : 'acik');
+      if (gizle) kok.dataset.gorunumPanel = 'kapali'; else delete kok.dataset.gorunumPanel;
+      // odak kaybolmasın: kapatınca açma düğmesine, açınca kapatma düğmesine geçer
+      document.querySelector(`[data-panel="${gizle ? 'goster' : 'gizle'}"]`)?.focus();
+    }
     if (e.target.closest('[data-tema-dugme]')) {
       const yeni = koyuMu() ? 'acik' : 'koyu';
       sakla('tema', yeni);
