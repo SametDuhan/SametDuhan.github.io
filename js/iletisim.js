@@ -85,8 +85,10 @@ export function baslat() {
   } catch { /* bozuk taslak yok sayılır */ }
   if (!mesaj.value) mesaj.value = konu.sablon;
 
+  const boyla = () => { mesaj.style.height = 'auto'; mesaj.style.height = `${mesaj.scrollHeight + 4}px`; };
   const durumYaz = (metin, uyari = false) => { durum.textContent = metin; durum.classList.toggle('uyari', uyari); };
   function guncelle() {
+    boyla();
     chipler.forEach((c) => { c.setAttribute('role', 'button'); c.setAttribute('aria-pressed', String(c.dataset.konu === konu.ad)); });
     const govde = mesajGovdesi(mesaj.value);
     const link = mailtoLinki(adres, konu.baslik, govde);

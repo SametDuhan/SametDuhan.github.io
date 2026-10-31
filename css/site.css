@@ -300,15 +300,15 @@ body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * c
 
 /* ---- iletişim: doğrudan kanallar (sol) + mesaj yaz (sağ) ---- */
 .iletisim-bilgi { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font: 600 12px var(--mono); color: var(--ceviz); }
-.iletisim-bilgi li::before { content: "·" / ""; margin-right: 8px; color: var(--vurgu-koyu); font-weight: 800; }
-.iletisim-yerlesim { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px; align-items: start; }
+.iletisim-bilgi li::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--vurgu); vertical-align: 2px; }
+.iletisim-yerlesim { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px; align-items: stretch; }
 @media (max-width: 1320px) { .iletisim-yerlesim { grid-template-columns: 1fr; } }
 .kanal-kart, .yaz-kart { position: relative; padding: 22px 24px 24px; background: var(--zemin); }
 .kanal-kart::before, .yaz-kart::before { content: ''; position: absolute; top: -2px; left: -2px; width: 20px; height: 20px; border: solid var(--vurgu-koyu); border-width: 3px 0 0 3px; }
 .kanal-kart .bolum-baslik, .yaz-kart .bolum-baslik { font-size: clamp(28px, 3vw, 36px); margin: 0 0 14px; }
 /* Doğrudan: sayfanın ana kartı */
 .kanal-kart { container-type: inline-size; border: 2px solid var(--yazi); background: color-mix(in srgb, var(--vurgu) 9%, var(--zemin)); box-shadow: 6px 6px 0 var(--kenar); }
-.yaz-kart { border: 1px solid rgba(118, 98, 76, 0.4); }
+.yaz-kart { border: 2px solid var(--yazi); box-shadow: 6px 6px 0 var(--kenar); }
 .kanallar { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .kanallar li.kanal { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 14px; padding: 14px 16px; border: 1.5px solid var(--yazi); border-left-width: 6px; background: var(--zemin); transition: transform .15s, box-shadow .15s; }
 .kanal-mail { border-left-color: var(--vurgu); }
@@ -336,7 +336,7 @@ body.kendi-sayfa .sayfa-basi.bant { min-height: 360px; margin: -40px calc(-1 * c
 .konu[aria-pressed="true"] { border-color: var(--yazi); background: var(--yazi); color: var(--zemin); }
 .yazi-formu { display: grid; gap: 12px; }
 .yazi-formu[hidden] { display: none; }
-.yazi-formu textarea { font: 400 15px/1.55 var(--sans); color: var(--yazi); background: var(--zemin); border: 1.5px solid var(--kenar); padding: 10px 12px; width: 100%; resize: vertical; }
+.yazi-formu textarea { font: 400 15px/1.55 var(--sans); color: var(--yazi); background: var(--zemin); border: 1.5px solid var(--kenar); padding: 10px 12px; width: 100%; resize: vertical; min-height: 8em; overflow-y: hidden; }
 .yazi-formu textarea:focus { outline: 2px solid var(--vurgu); outline-offset: 1px; border-color: var(--yazi); }
 /* kaydırma çubuğu kâğıt temasında: ince, kenar rengi iz, soluk kahve tutamak */
 .yazi-formu textarea { scrollbar-width: thin; scrollbar-color: var(--soluk) var(--zemin); }
