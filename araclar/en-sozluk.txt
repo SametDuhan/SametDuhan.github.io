@@ -155,6 +155,8 @@ Aynı fikir Codex için. ::: The same idea for Codex.
 27 Ekim ::: 27 October
 Bu site ::: This site
 Açık repoda, testleriyle. ::: In an open repo, with its tests.
+Staj arıyorum. ::: I'm looking for an internship.
+Bir yer, bir proje ya da sadece bir soru: yaz, konuşalım. ::: A place, a project, or just a question: write and let's talk.
 İş teklifi, ortak proje ya da sadece bir soru: yaz, konuşalım. ::: A job offer, a joint project, or just a question: write, and let's talk.
 iletişime geç → ::: get in touch →
 
