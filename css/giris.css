@@ -61,7 +61,7 @@
 .terminal .imlec { display: inline-block; width: .55em; height: 1.05em; margin-left: 2px; vertical-align: text-bottom; background: var(--yazi); animation: imlec 1s steps(2, start) infinite; }
 @keyframes imlec { to { visibility: hidden; } }
 .ust .tanit { font-size: 15px; line-height: 1.6; max-width: 52ch; margin: 0; }
-.muhur-kat { position: absolute; right: 0; top: -26px; width: clamp(58px, 5.8vw, 86px); transform: rotate(-12deg); pointer-events: none; }
+.muhur-kat { position: absolute; right: 0; top: 0; width: clamp(58px, 5.8vw, 86px); transform: rotate(-12deg); pointer-events: none; }
 
 /* ---- tek ekran: dört kutu kaydırmadan görünür (geniş ekran) ---- */
 @media (min-width: 861px) {
@@ -263,7 +263,7 @@
   .ust .alt { margin-bottom: 0; font-size: 12px; }
   .ust .terminal { min-height: 3.4em; }
   .ust small { font-size: 10px; letter-spacing: .14em; }
-  .muhur-kat { top: -8px; width: 52px; }
+  .muhur-kat { top: 0; width: 52px; }
   .kareler { grid-template-rows: repeat(2, minmax(0, 1fr)); min-height: 0; gap: 8px; }
   .kare { aspect-ratio: auto; min-height: 0; padding: 8px 10px; }
   .kare .no { font-size: 10px; padding: 1px 5px; }
