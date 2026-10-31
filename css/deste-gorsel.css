@@ -19,6 +19,7 @@
 .kapak-sahne.haritali > .orb, .kapak-sahne.halkali > .orb, .kapak-sahne.zincirli > .orb { display: none; }
 .kapak-sahne.haritali > div, .kapak-sahne.halkali > div, .kapak-sahne.zincirli > div { flex: 1 1 0; min-width: 0; }
 .rota-cizim, .halka-cizim, .zincir-cizim { flex: 0 0 clamp(150px, 24cqw, 250px); width: clamp(150px, 24cqw, 250px); height: auto; }
+.zincir-cizim { flex-basis: clamp(220px, 34cqw, 360px); width: clamp(220px, 34cqw, 360px); }
 .slayt img.kapak-sahin { flex: none; align-self: flex-end; height: clamp(120px, 20cqw, 180px); width: auto; max-height: none; border: 0; border-radius: 0; margin-block: -8px -12px; }
 @container (max-width: 860px) { .rota-cizim, .halka-cizim, .zincir-cizim { display: none; } }
 @container (max-width: 560px) { .slayt img.kapak-sahin { display: none; } }

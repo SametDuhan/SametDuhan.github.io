@@ -6,7 +6,7 @@
 .zincir-cizim g:nth-of-type(2) rect { animation-delay: 1.5s; }
 .zincir-cizim g:nth-of-type(3) rect { animation-delay: 3s; }
 .zincir-cizim g:nth-of-type(4) rect { animation-delay: 4.5s; }
-.zincir-cizim text { font: 600 9.5px var(--mono); fill: var(--yazi); text-anchor: middle; }
+.zincir-cizim text { font: 600 11px var(--mono); fill: var(--yazi); text-anchor: middle; }
 .zincir-cizim .ok { fill: none; stroke: var(--soluk); stroke-width: 1.6; stroke-dasharray: 4 5; animation: rota-akis 1.2s linear infinite; }
 .zincir-cizim .tasiyici { fill: var(--vurgu); stroke: var(--zemin); stroke-width: 1.5; }
 @keyframes kutu-yan { 0%, 24%, 100% { fill: var(--zemin); } 6%, 18% { fill: color-mix(in srgb, var(--vurgu) 45%, var(--zemin)); } }
