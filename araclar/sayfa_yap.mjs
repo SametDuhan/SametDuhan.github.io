@@ -194,7 +194,7 @@ yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama:
   <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'calisan', sahne: 'projeler', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsinin kodu GitHub\'da, nasıl yapıldığı slaytlarda.' })}
-    <div class="sayaclar" aria-label="Rakamlarla">${sayacHTML()}</div>
+    <div class="sayaclar ince" aria-label="Rakamlarla">${sayacHTML()}</div>
     <div class="vitrinler" id="projeler">
 ${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
     </div>

@@ -72,7 +72,7 @@ export const SAYACLAR = [
   { say: PROJELER.length, etiket: 'açık kaynak proje' },
   { say: 211, etiket: 'commit, üç projede' },
   { say: 192, etiket: 'Claude ile ortak yazıldı' },
-  { say: 2, etiket: 'AI aracına bildirim: Claude Code, Codex' },
+  { say: 2, etiket: 'AI aracına bildirim' },
 ];
 
 export const sayacHTML = (liste = SAYACLAR) => liste.map((c) => `<div class="sayac"><b data-say="${c.say}">${c.say}</b><span>${kacis(c.etiket)}</span></div>`).join('');

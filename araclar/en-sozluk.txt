@@ -226,7 +226,7 @@ Hepsinin kodu GitHub'da, nasıl yapıldığı slaytlarda. ::: All the code is on
 Rakamlarla ::: In numbers
 açık kaynak proje ::: open-source projects
 commit, üç projede ::: commits across three projects
-AI aracına bildirim: Claude Code, Codex ::: AI tools with done alerts: Claude Code, Codex
+AI aracına bildirim ::: AI tools with done alerts
 Claude ile ortak yazıldı ::: co-written with Claude
 = ./skytrack
 = ./claude-done-pixel
