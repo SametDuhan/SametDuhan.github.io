@@ -51,14 +51,16 @@ html[data-gorunum="modern"] [data-gorunum-sec="modern"] b { color: var(--yazi); 
 /* ana sayfa: solda dikey panel */
 .gorunum-ray { position: fixed; z-index: 6; left: clamp(14px, 2vw, 32px); top: 50%; transform: translateY(-50%); }
 .gorunum-ray .gorunum-sec { gap: 9px; padding: 10px 12px 12px 10px; border: 1.5px solid var(--yazi); background: var(--zemin); box-shadow: 4px 4px 0 var(--kenar); }
-/* panel içeriği aynı, ölçüler küçük */
+/* panel içeriği aynı, ölçüler küçük (ana sayfa paneli ve alt sayfa menüsü aynı ölçüde) */
 .gorunum-ray .gs-baslik { padding-right: 26px; }
-.gorunum-ray .gs-akis { gap: 6px; }
-.gorunum-ray .gs-akis button { grid-template-columns: 12px 42px auto; column-gap: 10px; }
-.gorunum-ray .gs-onizleme { width: 42px; height: 32px; }
-.gorunum-ray .gs-onizleme::before { transform: scale(.85); transform-origin: 0 0; }
-.gorunum-ray .gs-onizleme::after { transform: scale(.85); transform-origin: 0 100%; }
-.gorunum-ray .gs-akis b { font-size: 14px; }
+.gorunum-ray .gs-akis, .yan-menu .gs-akis { gap: 6px; }
+.gorunum-ray .gs-akis button, .yan-menu .gs-akis button { grid-template-columns: 12px 42px auto; column-gap: 10px; }
+.gorunum-ray .gs-onizleme, .yan-menu .gs-onizleme { width: 42px; height: 32px; }
+.gorunum-ray .gs-onizleme::before, .yan-menu .gs-onizleme::before { transform: scale(.85); transform-origin: 0 0; }
+.gorunum-ray .gs-onizleme::after, .yan-menu .gs-onizleme::after { transform: scale(.85); transform-origin: 0 100%; }
+.gorunum-ray .gs-akis b, .yan-menu .gs-akis b { font-size: 14px; }
+/* önbellekten gelen eski sayfada kalmış tarih yazısı yeni görünümü bozmasın */
+.gs-akis time { display: none; }
 /* gizle (−) ve küçükken açma düğmesi: yalnız ana sayfa panelinde (araclar/gorunum-secici.mjs gorunumPaneli) */
 .gs-kapat { position: absolute; top: 5px; right: 5px; display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 8px; background: none; color: var(--soluk); cursor: pointer; transition: background-color .2s, color .2s; }
 .gs-kapat svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
@@ -98,6 +100,9 @@ html[data-gorunum-panel="kapali"] .gs-ac { display: grid; }
   .yan-menu .gorunum-sec { order: 2; margin: 0 0 0 auto; padding: 0; }
   .yan-menu .gs-akis b { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .yan-menu .gs-akis button { grid-template-columns: 34px; }
+  .yan-menu .gs-onizleme { width: 34px; height: 26px; }
+  .yan-menu .gs-onizleme::before { transform: scale(.72); }
+  .yan-menu .gs-onizleme::after { transform: scale(.72); }
   nav.yan-menu .gorunum-sec + .dil-sec { margin: 0 0 0 4px; }
 }
 @media (max-width: 860px) {
