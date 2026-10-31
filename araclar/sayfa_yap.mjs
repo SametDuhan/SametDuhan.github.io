@@ -195,10 +195,6 @@ yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama:
 ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'calisan', sahne: 'projeler', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsinin kodu GitHub\'da, nasıl yapıldığı slaytlarda.' })}
     <div class="sayaclar" aria-label="Rakamlarla">${sayacHTML()}</div>
-    <div class="gorunum" role="group" aria-label="Proje görünümü">
-      <button type="button" class="gorunum-dugme" data-gorunum="buyuk" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="6" rx="1"/><rect x="3" y="13" width="18" height="6" rx="1"/></svg>Büyük</button>
-      <button type="button" class="gorunum-dugme" data-gorunum="kucuk" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="5" height="7" rx="1"/><rect x="9.5" y="4" width="5" height="7" rx="1"/><rect x="16" y="4" width="5" height="7" rx="1"/><rect x="3" y="13" width="5" height="7" rx="1"/><rect x="9.5" y="13" width="5" height="7" rx="1"/></svg>Küçük</button>
-    </div>
     <div class="vitrinler" id="projeler">
 ${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
     </div>

@@ -154,15 +154,10 @@ test('sunum kartları: rozet akışta, çizimler kendiliğinden döner, hareketi
   assert.doesNotMatch(oku('js/desteler.js'), /<animateMotion dur="(4\.5|5)s"/, 'halka ve zincirde SMIL noktası yok');
 });
 
-test('projeler: büyük/küçük görünüm düğmesi, küçük görünümde satırda 3 proje, projeler arasında ayırıcı', () => {
-  const html = oku('projeler/index.html');
-  assert.match(html, /class="gorunum-dugme" data-gorunum="buyuk" aria-pressed="true"/);
-  assert.match(html, /class="gorunum-dugme" data-gorunum="kucuk" aria-pressed="false"/);
-  const css = oku('css/vitrin.css');
-  assert.match(css, /\.vitrinler\[data-gorunum="kucuk"\] \{ grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
-  assert.match(css, /\.vitrin \+ \.vitrin::before/);
-  assert.match(css, /\.js-vitrin \.gorunum \{ display: flex; \}/, 'düğme yalnız JS varken görünür');
-  assert.match(oku('js/vitrin.js'), /export function gorunumBagla/);
+test('projeler: görünüm düğmesi yok (az proje), projeler arasında ayırıcı', () => {
+  assert.doesNotMatch(oku('projeler/index.html'), /gorunum-dugme/);
+  assert.doesNotMatch(oku('js/vitrin.js'), /gorunumBagla/);
+  assert.match(oku('css/vitrin.css'), /\.vitrin \+ \.vitrin::before/);
 });
 
 test('sol menü: başlıkta Samet Duhan, altındaki yazı yok; sayfalar arasında kesikli çizgi', () => {

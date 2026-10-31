@@ -228,9 +228,6 @@ açık kaynak proje ::: open-source projects
 commit, SkyTrack ::: commits, SkyTrack
 Claude ile ortak yazıldı ::: co-written with Claude
 dil desteği, SkyTrack ::: languages supported, SkyTrack
-Proje görünümü ::: Project view
-Büyük ::: Large
-Küçük ::: Small
 = ./skytrack
 = ./claude-done-pixel
 = ./chatgpt-done-pixel
