@@ -112,7 +112,7 @@ const ILKELER = [
   { baslik: 'Kaynağa dayanırım.', metin: 'Bu sitedeki her sayı ve iddia bir README\'ye ya da commit geçmişine dayanıyor.', cizim: '<svg class="ilke-cizim" viewBox="0 0 120 64" aria-hidden="true"><rect class="satir" x="4" y="10" width="86" height="6" rx="3"/><rect class="vurgu-seridi" x="4" y="26" width="64" height="9" rx="2"/><rect class="satir kalin" x="4" y="28" width="64" height="5" rx="2.5"/><rect class="satir" x="4" y="46" width="72" height="6" rx="3"/><g class="kaynak"><rect x="74" y="22" width="44" height="17" rx="3"/><text x="96" y="34" text-anchor="middle">README</text></g></svg>' },
 ];
 
-yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama: 'Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.', yol: 'hakkimda/', ekCss: '\n  <link rel="stylesheet" href="../css/vitrin.css">\n  <link rel="stylesheet" href="../css/hakkimda.css">' })}${menu('hakkimda')}
+yaz('hakkimda/index.html', `${bas({ baslik: 'Hakkımda · Samet Duhan', aciklama: 'Samet Duhan: AI ile sistem kuran geliştirici, bilgisayar mühendisliği öğrencisi. Ne yaptığı, nasıl çalıştığı ve kullandığı araçlar.', yol: 'hakkimda/', ekCss: '\n  <link rel="stylesheet" href="../css/vitrin.css">\n  <link rel="stylesheet" href="../css/hakkimda.css">\n  <link rel="stylesheet" href="../css/piksel-hakkimda.css">' })}${menu('hakkimda')}
   <main id="icerik" data-sayfalama="kaydir">
 ${sayfaBasi({ no: '01', etiket: 'KİMLİK KARTI', damga: 'STAJA AÇIK', baslik: 'Hakkımda', poz: 'ceyrek', sahne: 'hakkimda',
       ek: '\n        <p class="kimlik">&gt; AI ile sistem kuran geliştirici</p>',
@@ -190,7 +190,9 @@ ${ARAC_GRUPLARI.map(([grup, liste], g) => `        <div class="alet-grup"><h3>${
   </main>${son()}
   <script type="module">
     import { baslat } from '../js/vitrin.js';
+    import { baslat as pikselHakkimda } from '../js/piksel-hakkimda.js';
     baslat();
+    pikselHakkimda();
   </script>
 </body>
 </html>

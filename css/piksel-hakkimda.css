@@ -1,0 +1,22 @@
+/* Piksel görünüm: Hakkımda'ya özel parçalar (js/piksel-hakkimda*.js ekler). Yalnız piksel görünümde etkili. */
+html[data-gorunum="piksel"] {
+  & .sayfa-basi:has(.px-sahne) { position: relative; }
+
+  /* büyük karakter sahnesi: sağda çerçeveli küçük "ekran" */
+  & .px-sahne { position: absolute; right: 0; top: 6px; width: 320px; height: 280px; padding: 0; border: 1px solid var(--kenar); background: #1c1a18; color: inherit; font: inherit; cursor: pointer; overflow: visible; transition: border-color .25s; }
+  & .px-sahne::before, & .px-sahne::after { content: ""; position: absolute; width: 20px; height: 20px; border: 3px solid var(--vurgu); pointer-events: none; }
+  & .px-sahne::before { left: -3px; top: -3px; border-right: 0; border-bottom: 0; }
+  & .px-sahne::after { right: -3px; bottom: -3px; border-left: 0; border-top: 0; }
+  & .px-sahne:hover, & .px-sahne:focus-visible { border-color: var(--vurgu); }
+  & .px-sahne canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+  & .px-sahne-etiket { position: absolute; left: 10px; top: 8px; z-index: 1; font: 500 11px var(--mono); color: var(--soluk); }
+  & .px-sahne-etiket::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 7px; background: #2ecc40; animation: px-nabiz 1.6s ease-in-out infinite; }
+  & .px-sahne-ipucu { position: absolute; right: 12px; top: 8px; z-index: 1; font: 500 11px var(--mono); color: var(--vurgu-koyu); animation: px-yan 1.4s steps(1) infinite; }
+  & .px-balon { position: absolute; left: 14px; right: 14px; top: 34px; z-index: 2; padding: 9px 12px; background: var(--vurgu); color: #1a1210; font: 700 14px/1.35 var(--sans); text-align: left; opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .35s cubic-bezier(.16, 1, .3, 1); pointer-events: none; }
+  & .px-balon.goster { opacity: 1; transform: none; }
+  & .px-balon::after { content: ""; position: absolute; left: 70px; bottom: -8px; border: 8px solid transparent; border-top-color: var(--vurgu); border-bottom: 0; }
+  @media (max-width: 1149px) { & .px-sahne { display: none; } }
+}
+@keyframes px-nabiz { 50% { opacity: .35; } }
+@keyframes px-yan { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-sahne-etiket::before, html[data-gorunum="piksel"] .px-sahne-ipucu { animation: none; } }

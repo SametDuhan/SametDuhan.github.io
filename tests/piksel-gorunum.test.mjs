@@ -58,3 +58,17 @@ test('piksel görünüm modern düzeniyle ortak: yerleşim blokları ikisine bir
   const modern = oku('css/modern.css');
   assert.ok((modern.match(/html:is\(\[data-gorunum="modern"\], \[data-gorunum="piksel"\]\) \{/g) ?? []).length >= 3);
 });
+
+test('piksel Hakkımda: etkileşimli katman yalnız Hakkımda sayfasında yüklenir; karakter sahnesi imleci izler, tıklayınca gerçek bilgi söyler', () => {
+  for (const yol of ['hakkimda/index.html', 'en/hakkimda/index.html']) {
+    const h = oku(yol);
+    assert.match(h, /piksel-hakkimda\.css/, yol);
+    assert.match(h, /import \{ baslat as pikselHakkimda \} from '\.\.\/(\.\.\/)?js\/piksel-hakkimda\.js'/, yol);
+  }
+  assert.doesNotMatch(oku('projeler/index.html'), /piksel-hakkimda/);
+  const sahne = oku('js/piksel-hakkimda-sahne.js');
+  assert.match(sahne, /imlec/);
+  assert.match(sahne, /SAYILAR\.repolar\.airock/);
+  assert.match(sahne, /prefers-reduced-motion: reduce/);
+  assert.match(oku('js/piksel-hakkimda.js'), /getElementById\('rota-baslik'\)/);
+});
