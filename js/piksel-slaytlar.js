@@ -3,9 +3,10 @@
 // Kartlar sayfada JS ile çizilir (js/desteler.js); parçalar kartlar gelene dek bekler.
 import { icindekilerKur } from './piksel-slaytlar-icindekiler.js';
 import { yolKur } from './piksel-slaytlar-yol.js';
+import { araKur } from './piksel-slaytlar-ara.js';
 
 const kok = document.documentElement;
-const PARCALAR = [icindekilerKur, yolKur];
+const PARCALAR = [icindekilerKur, yolKur, araKur];
 let kaldirlar = [];
 
 function guncelle() {

@@ -46,3 +46,25 @@ html[data-gorunum="piksel"] {
 }
 @keyframes px-simdi { 50% { box-shadow: inset 0 0 0 2px #7a4a38; } }
 @media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-iz-kareler i.simdi { animation: none; } }
+
+/* ---- arama ve süzgeç ---- */
+html[data-gorunum="piksel"] {
+  & .px-ara { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 0 0 18px; }
+  & .px-ara-kutu { display: flex; align-items: center; gap: 8px; min-width: min(100%, 300px); padding: 7px 12px; border: 1px solid var(--kenar); font: 500 13px var(--mono); color: var(--soluk); background: var(--kart); transition: border-color .2s, box-shadow .2s; }
+  & .px-ara-kutu:focus-within { border-color: var(--vurgu); box-shadow: 0 0 0 1px color-mix(in srgb, var(--vurgu) 40%, transparent); }
+  & .px-ara-kutu input { all: unset; flex: 1; min-width: 0; color: var(--yazi); caret-color: var(--vurgu); font: 500 14px var(--mono); }
+  & .px-ara-kutu input::placeholder { color: #8b7f75; }
+  & .px-ara-kutu kbd { font: 500 11px var(--mono); padding: 1px 6px; border: 1px solid var(--kenar); color: var(--yazi); }
+  & .px-ara-chipler { display: flex; flex-wrap: wrap; gap: 6px; }
+  & .px-ara-chipler button { all: unset; box-sizing: border-box; cursor: pointer; padding: 6px 12px; border: 1px solid var(--kenar); font: 500 12.5px var(--mono); color: var(--yazi); transition: border-color .2s, background .25s, transform .2s cubic-bezier(.16, 1, .3, 1); }
+  & .px-ara-chipler button:hover, & .px-ara-chipler button:focus-visible { border-color: var(--vurgu); transform: translateY(-2px); }
+  & .px-ara-chipler button[aria-pressed="true"] { background: var(--vurgu); border-color: var(--vurgu-koyu); color: #1a1210; font-weight: 600; }
+  & .px-ara-chipler button:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: 2px; }
+  & .px-ara-say { margin-left: auto; font: 500 12.5px var(--mono); color: var(--soluk); }
+  & .deste-karti.px-gizli { display: none; }
+  & .px-ara-bos { margin: 6px 0 0; padding: 18px 20px; border: 1px dashed var(--kenar); font: 500 13.5px var(--mono); color: var(--soluk); }
+  & .px-ara-bos[hidden] { display: none; }
+  & .px-ara-bos button { all: unset; cursor: pointer; margin-left: 12px; padding: 4px 10px; border: 1px solid var(--vurgu); color: var(--yazi); }
+  & .px-ara-bos button:hover, & .px-ara-bos button:focus-visible { background: var(--vurgu); color: #1a1210; }
+}
+@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] :is(.px-ara-kutu, .px-ara-chipler button) { transition: none; } }

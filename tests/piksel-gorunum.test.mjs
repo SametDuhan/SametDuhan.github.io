@@ -161,3 +161,16 @@ test('piksel Slaytlar: kaldığın yer yolu sunumların kullandığı gerçek il
   assert.match(y, /prefers-reduced-motion: reduce/);
   assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\byolKur\b[^\]]*\]/);
 });
+
+test('piksel Slaytlar: arama iki dilde, "/" ve 1-9 kısayolları, Escape; süzülen kart gizlenir ama silinmez; geri alınır', () => {
+  const a = oku('js/piksel-slaytlar-ara.js');
+  assert.match(a, /d\.en\?\.baslik/);                      // İngilizce alanlar da aranır
+  assert.match(a, /e\.key === '\/'/);
+  assert.match(a, /e\.key >= '1' && e\.key <= '9'/);
+  assert.match(a, /e\.key === 'Escape'/);
+  assert.match(a, /classList\.toggle\('px-gizli', !gor\)/);
+  assert.doesNotMatch(a, /\.remove\(\)[^;]*deste-karti|k\.remove\(\)/); // kartlar silinmez
+  assert.match(a, /return \(\) => \{ removeEventListener\('keydown', tus\)/);
+  assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\baraKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-slaytlar.css'), /\.deste-karti\.px-gizli \{ display: none; \}/);
+});
