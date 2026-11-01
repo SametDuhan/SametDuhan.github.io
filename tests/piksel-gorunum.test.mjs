@@ -263,3 +263,15 @@ test('piksel sunumlar: katman js/atolye.js üzerinden yüklenir (sunum HTML\'ine
   assert.doesNotMatch(yol, /location\.hash\s*=|history\./);        // gezinmeyi değiştirmez, yalnız izler
   assert.match(oku('js/piksel-deste.js'), /PARCALAR = \[[^\]]*\byolKur\b[^\]]*\]/);
 });
+
+test('piksel sunumlar geçiş: deste motorunun goster olayını dinler, kendi animasyonu olan öğelere dokunmaz, hareketi azaltınca kurulmaz, geri alınır', () => {
+  const g = oku('js/piksel-deste-gecis.js');
+  assert.match(g, /addEventListener\('goster'/);
+  assert.match(g, /animationName !== 'none'/);              // slaytların kendi çizimleri bozulmasın
+  assert.match(g, /if \(AZ\) return undefined/);
+  assert.match(g, /removeEventListener\('goster'/);
+  assert.match(g, /performance\.now\(\) - t0 < 300/);       // bağlanırken gelen olay sayılmaz, kullanıcının ilk değişimi yutulmaz
+  assert.match(oku('js/deste.js'), /dispatchEvent\(new CustomEvent\('goster'\)\)/);   // dinlediğimiz olayı motor gerçekten yollar
+  assert.match(oku('js/piksel-deste.js'), /PARCALAR = \[[^\]]*\bgecisKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-deste.css'), /\.slayt\.px-giris > \* \{ animation: none; \}/);   // hareketi azalt kuralı
+});

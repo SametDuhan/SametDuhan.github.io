@@ -2,9 +2,10 @@
 // piksel görünüm seçiliyken stil dosyası bağlanır ve parçalar eklenir, başka görünüme geçilince hepsi kaldırılır (js/piksel-hakkimda.js ile aynı kalıp).
 // js/atolye.js (tüm sunumlarda yüklü) bu modülü yükler; sayfa HTML'ine dokunulmaz.
 import { yolKur } from './piksel-deste-yol.js';
+import { gecisKur } from './piksel-deste-gecis.js';
 
 const kok = document.documentElement;
-const PARCALAR = [yolKur];
+const PARCALAR = [yolKur, gecisKur];
 let kaldirlar = [], css = null;
 
 function guncelle() {
