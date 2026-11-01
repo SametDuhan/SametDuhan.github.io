@@ -34,7 +34,7 @@ export function sahneKur() {
   const saatGuncelle = () => { const s = saatYazisi(); saatEl.innerHTML = `<b>${s.tr}</b> ${t('Türkiye', 'Turkey')} · GMT+3 · ${s.yakin}`; };
   saatGuncelle(); const saatZaman = setInterval(saatGuncelle, 20000);
 
-  let imlec = null, ustunde = false, sira = 0, mektup = null, bayrakAcik = 0, balonZaman, durdu = false, goruyor = true, kare = 0, gozKirp = 0;
+  let imlec = null, ustunde = false, hazir = false, sira = 0, mektup = null, bayrakAcik = 0, balonZaman, durdu = false, goruyor = true, kare = 0, gozKirp = 0;
   const takip = (e) => { imlec = { x: e.clientX, y: e.clientY }; };
   addEventListener('pointermove', takip);
   for (const [o, f] of [['pointerenter', true], ['pointerleave', false], ['focus', true], ['blur', false]]) kutu.addEventListener(o, () => { ustunde = f; });
@@ -45,6 +45,7 @@ export function sahneKur() {
     setTimeout(() => { balon.classList.add('goster'); bayrakAcik = performance.now() / 1000; }, AZ ? 0 : 900);
     balonZaman = setTimeout(() => { balon.classList.remove('goster'); bayrakAcik = 0; }, 4800);
   });
+  const hazirDinle = (e) => { hazir = Boolean(e.detail); }; addEventListener('px-mesaj-hazir', hazirDinle);   // mesaj hazırsa bayrak kalkık kalır
   const gozlem = new IntersectionObserver(([e]) => { goruyor = e.isIntersecting; }, { threshold: 0 }); gozlem.observe(kutu);
 
   const posta = (tt) => {
@@ -54,8 +55,9 @@ export function sahneKur() {
     c.fillStyle = '#8db1e3'; c.fillRect(KUTU.x, KUTU.y, KUTU.w, 8); c.fillStyle = '#35507a'; c.fillRect(KUTU.x, KUTU.y + KUTU.h - 6, KUTU.w, 6);
     c.fillStyle = '#161514'; c.fillRect(KUTU.x + 10, KUTU.y + 16, KUTU.w - 20, 6);               // mektup yuvası
     // bayrak: kalkınca yeşil, inikken kutuya yaslı
-    c.fillStyle = '#d0d0d0'; c.fillRect(KUTU.x + KUTU.w + 2, KUTU.y + (bayrakAcik ? -22 : 6), 4, bayrakAcik ? 34 : 16);
-    c.fillStyle = '#2ecc40'; c.fillRect(KUTU.x + KUTU.w + 6, KUTU.y + (bayrakAcik ? -22 : 6), 18, 12);
+    const yukari = Boolean(bayrakAcik) || hazir;
+    c.fillStyle = '#d0d0d0'; c.fillRect(KUTU.x + KUTU.w + 2, KUTU.y + (yukari ? -22 : 6), 4, yukari ? 34 : 16);
+    c.fillStyle = '#2ecc40'; c.fillRect(KUTU.x + KUTU.w + 6, KUTU.y + (yukari ? -22 : 6), 18, 12);
   };
   const zarf = (x, y) => { c.fillStyle = '#f4efe8'; c.fillRect(x, y, 26, 17); c.fillStyle = '#c4b8ad'; c.fillRect(x, y + 15, 26, 2); c.strokeStyle = '#8b7f75'; c.lineWidth = 2; c.beginPath(); c.moveTo(x + 1, y + 1); c.lineTo(x + 13, y + 10); c.lineTo(x + 25, y + 1); c.stroke(); c.fillStyle = '#d97757'; c.fillRect(x + 11, y + 8, 4, 4); };
 
@@ -87,5 +89,5 @@ export function sahneKur() {
   }
   if (AZ) requestAnimationFrame((n) => { ciz(n); durdu = true; }); else requestAnimationFrame(ciz);
 
-  return () => { durdu = true; removeEventListener('pointermove', takip); gozlem.disconnect(); clearInterval(saatZaman); clearTimeout(balonZaman); kutu.remove(); };
+  return () => { durdu = true; removeEventListener('px-mesaj-hazir', hazirDinle); removeEventListener('pointermove', takip); gozlem.disconnect(); clearInterval(saatZaman); clearTimeout(balonZaman); kutu.remove(); };
 }
