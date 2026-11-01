@@ -75,6 +75,10 @@ html[data-gorunum="piksel"] {
   & .alt-bilgi a:hover, & .tanitim a:hover, & .v-ek a:hover { background-size: 100% 2px; color: var(--yazi); }
   & .alt-bilgi { font-family: var(--mono); }
 
+  /* sunumlardaki sabit açık yazılı bileşenler (hook "claude" penceresi, ajan "onay" etiketi) koyu temada krem-üstüne-krem kalıyordu */
+  & .pencere { background: #141312; border-color: var(--kenar); }
+  & .kapi .onay text { fill: #10201a; }
+
   /* eski görünümlerin şahin çizimleri: sunum içinde piksel karakterle değişir; krem kapanış kartları ve pencere içi şahin gizlenir (piksel kimliğiyle çelişir) */
   & .slayt img[src*="img/sahin/"] { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Cpath fill='%23d97757' d='M8 8h16v12H8z M4 14h4v4H4z M24 14h4v4h-4z M10 20h2v4h-2z M14 20h2v4h-2z M18 20h2v4h-2z M22 20h2v4h-2z'/%3E%3Cpath fill='%23201816' d='M12 12h2v4h-2z M18 12h2v4h-2z'/%3E%3Cpath fill='%232ecc40' d='M26 6h2v10h-2z M28 6h3v3h-3z'/%3E%3C/svg%3E"); image-rendering: pixelated; filter: none; }
   & .vitrin-son .v-medya, & .yap-sahne image { display: none; }
