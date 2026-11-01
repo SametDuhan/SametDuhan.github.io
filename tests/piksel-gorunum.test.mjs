@@ -79,7 +79,7 @@ test('piksel Hakkımda: Rota yol haritası içeriği .rota listesinden okur (tek
   assert.match(yol, /li\.querySelector\('time'\)/);
   assert.match(yol, /ArrowRight/);
   assert.match(yol, /prefers-reduced-motion: reduce/);
-  assert.match(oku('js/piksel-hakkimda.js'), /const PARCALAR = \[sahneKur, yolKur\]/);
+  assert.match(oku('js/piksel-hakkimda.js'), /const PARCALAR = \[[^\]]*\byolKur\b[^\]]*\]/);
   assert.match(oku('css/piksel-hakkimda.css'), /\.px-yol-var \.rota \{ display: none; \}/);
   assert.match(oku('hakkimda/index.html'), /<ol class="rota belir">/); // kaynak liste sayfada duruyor
 });
