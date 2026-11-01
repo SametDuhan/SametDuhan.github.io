@@ -130,7 +130,7 @@ for (const p of PROJELER) {
       </div>`;
   }
 
-  const govde = `${bas({ baslik: `${p.ad} · Samet Duhan`, aciklama: p.ozet, yol, onek: k, kapak: slug, ekCss: '\n  <link rel="stylesheet" href="../../css/vitrin.css">\n  <link rel="stylesheet" href="../../css/proje.css">' })}${menu('projeler', k, yol)}
+  const govde = `${bas({ baslik: `${p.ad} · Samet Duhan`, aciklama: p.ozet, yol, onek: k, kapak: slug, ekCss: '\n  <link rel="stylesheet" href="../../css/vitrin.css">\n  <link rel="stylesheet" href="../../css/proje.css">\n  <link rel="stylesheet" href="../../css/piksel-proje.css">' })}${menu('projeler', k, yol)}
   <main id="icerik" data-sayfalama="kaydir">
     <a class="geri-baglanti" href="../">← Tüm projeler</a>
 
@@ -197,8 +197,10 @@ for (const p of PROJELER) {
   <script type="module">
     import { baslat } from '../../js/vitrin.js';
     import { projeBaslat } from '../../js/proje.js';
+    import { baslat as pikselProje } from '../../js/piksel-proje.js';
     baslat();
     projeBaslat();
+    pikselProje();
   </script>
 </body>
 </html>

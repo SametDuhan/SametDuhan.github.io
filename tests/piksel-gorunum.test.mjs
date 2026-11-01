@@ -260,3 +260,21 @@ test('piksel alt sayfalar: sayfa başındaki koşan karakterli devre şeridi yok
   assert.doesNotMatch(oku('js/gorunum.js'), /piksel-sayfa/);
   assert.doesNotMatch(oku('css/piksel.css'), /px-devre/);
 });
+
+test('piksel proje detay: katman yalnız proje detay sayfalarında (üç proje, iki dil); karakter yok; commit hattı ve clone komutu gerçek veriden', () => {
+  for (const proje of ['skytrack', 'claude-done-pixel', 'chatgpt-done-pixel']) {
+    for (const yol of [`projeler/${proje}/index.html`, `en/projeler/${proje}/index.html`]) {
+      const h = oku(yol);
+      assert.match(h, /piksel-proje\.css/, yol);
+      assert.match(h, /import \{ baslat as pikselProje \} from '\.\.\/\.\.\/(\.\.\/)?js\/piksel-proje\.js'/, yol);
+    }
+  }
+  assert.doesNotMatch(oku('projeler/index.html'), /piksel-proje\.css/);
+  for (const js of ['js/piksel-proje.js', 'js/piksel-proje-ray.js', 'js/piksel-proje-hat.js']) assert.doesNotMatch(oku(js), /pikselKarakter|from '\.\/piksel\.js'/, `${js}: bu sayfalarda karakter yok`);
+  const hat = oku('js/piksel-proje-hat.js');
+  assert.match(hat, /SAYILAR\.repolar\[repo\]/);
+  assert.match(hat, /git clone \$\{gh\.href/);
+  assert.match(oku('js/piksel-proje-ray.js'), /querySelectorAll\('main section\.bolum\[aria-labelledby\]'\)/);
+  assert.match(oku('js/piksel-proje.js'), /PARCALAR = \[[^\]]*\brayKur\b[^\]]*\bhatKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-proje.css'), /@media print \{ \.px-pray \{ display: none !important; \} \}/);
+});
