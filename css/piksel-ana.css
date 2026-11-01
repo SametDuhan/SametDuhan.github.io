@@ -38,6 +38,7 @@ h1 .satir{display:block;white-space:nowrap}
 h1 .satir:nth-child(2){color:var(--turuncu)}
 .terminal{margin:18px 0 12px;font-family:var(--kod);font-size:clamp(12px,1vw,14px);color:var(--ikincil);overflow-wrap:anywhere;min-height:1.4em}
 .terminal .istem{color:var(--yesil)}
+.terminal .cikti{display:block;min-height:1.5em;margin-top:4px;color:var(--yazi)}
 .imlec{display:inline-block;width:.6em;height:1.05em;background:var(--turuncu);vertical-align:-.2em;margin-left:3px;animation:yan 1.05s steps(1) infinite}
 @keyframes yan{50%{opacity:0}}
 .tanit{margin:0;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--yazi);max-width:44ch;animation:yuksel .9s var(--cikis) 1.5s both}
@@ -187,18 +188,19 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .gorunum button:hover,.gorunum button:focus-visible{color:var(--yazi);background:rgba(217,119,87,.16)}
 .gorunum button[aria-pressed="true"]{background:var(--turuncu);color:#1a1210;font-weight:600;cursor:default}
 .gorunum button:focus-visible{outline:3px solid var(--turuncu-acik);outline-offset:2px}
-.durum{display:flex;align-items:center;gap:10px;margin:14px 0 0;font-family:var(--kod);font-size:clamp(12px,.95vw,13.5px);color:var(--yazi);animation:yuksel .9s var(--cikis) 1.8s both}
+.durum{text-decoration:none;display:flex;width:fit-content;max-width:100%;align-items:center;gap:10px;margin:14px 0 0;font-family:var(--kod);font-size:clamp(12px,.95vw,13.5px);color:var(--yazi);animation:yuksel .9s var(--cikis) 1.8s both}
 .durum i{flex:none;width:10px;height:10px;background:var(--yesil);animation:nabiz 1.6s ease-in-out infinite}
 @keyframes nabiz{50%{box-shadow:0 0 0 6px rgba(46,204,64,0)} 0%{box-shadow:0 0 0 0 rgba(46,204,64,.5)}}
 
 /* Projeler üstüne gelince canlı önizleme penceresi */
-.onizleme{position:fixed;z-index:6;pointer-events:none;background:var(--levha);border:1px solid var(--turuncu);opacity:0;clip-path:inset(0 0 100% 0);transition:clip-path .45s var(--cikis),opacity .25s}
-.onizleme.goster{opacity:1;clip-path:inset(0)}
 .o-bar{display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-bottom:1px solid var(--cizgi);font-family:var(--kod);font-size:11.5px;color:var(--ikincil)}
 .o-bar i{width:9px;height:9px;background:#5a514a}.o-bar i:nth-child(1){background:#ff5f57}.o-bar i:nth-child(2){background:#febc2e}.o-bar i:nth-child(3){background:#28c840}
 .o-bar span{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.onizleme video{display:block;width:100%;aspect-ratio:16/9;background:#101010;object-fit:cover}
 @media (max-width:760px){.gorunum button{padding:5px 8px;font-size:12px}.durum{margin-top:12px}}
 @media (max-width:1100px){.serit .hizli{display:none}}
 @media (max-width:520px){.marka{display:none}.serit{justify-content:space-between}}
 @media (max-width:1100px){.kanit{width:auto}}
+
+.durum b{font-weight:400;color:var(--turuncu);transition:transform .2s}
+.durum:hover span,.durum:focus-visible span{text-decoration:underline;text-underline-offset:4px}
+.durum:hover b,.durum:focus-visible b{transform:translateX(4px)}

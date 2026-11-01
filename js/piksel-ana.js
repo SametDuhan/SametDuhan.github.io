@@ -36,9 +36,9 @@ const sablon = () => `
     <section class="levha">
       <small class="kicker">${t('AI İLE SİSTEM KURAN GELİŞTİRİCİ', 'DEVELOPER WHO BUILDS SYSTEMS WITH AI')}</small>
       <h1 aria-label="SAMET DUHAN"><span class="satir" aria-hidden="true">SAMET</span><span class="satir" aria-hidden="true">DUHAN</span></h1>
-      <p class="terminal" role="img" aria-label="${t('Sistemler. Açıkta kurulur. Systems. Built in the open.', 'Systems. Built in the open.')}"><span class="istem">samet@sahin:~$</span> <span class="komut" data-yaz>echo "Systems. Built in the open."</span><i class="imlec"></i></p>
-      <p class="tanit">${t('Ajanlar, açık kaynak araçlar ve günlük hayatta karşılığı olan uygulamalar. Her şey açık repoda, her adım izlenebilir.', 'Agents, open-source tools, and apps that solve everyday problems. Everything lives in an open repo, and every step can be traced.')}</p>
-      <p class="durum"><i aria-hidden="true"></i><span>${t('Staj arıyorum, hemen başlayabilirim.', 'Looking for an internship, available now.')}</span></p>
+      <p class="terminal" role="img" aria-label="${t('Samet Duhan Şahin, bilgisayar mühendisliği 3. sınıf, AI ile sistem kuran geliştirici', 'Samet Duhan Şahin, 3rd-year computer engineering student, developer who builds systems with AI')}"><span class="istem">samet@sahin:~$</span> <span class="komut" data-yaz></span><i class="imlec"></i><span class="cikti" data-cikti></span></p>
+      <p class="tanit">${t('Ben Samet Duhan Şahin, bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI ile sistem kuran bir geliştiriciyim: ajanlar, açık kaynak araçlar ve SkyTrack gibi günlük hayatta işe yarayan uygulamalar yazıyorum.', 'I am Samet Duhan Şahin, a 3rd-year computer engineering student. I am a developer who builds systems with AI: agents, open-source tools and everyday apps like SkyTrack.')}</p>
+      <a class="durum" href="${K}iletisim/?konu=staj"><i aria-hidden="true"></i><span>${t('Staj arıyorum, hemen başlayabilirim.', 'Looking for an internship, available now.')}</span><b aria-hidden="true">→</b></a>
     </section>
     <section class="konsol" aria-label="${t('Etkileşimli konsol', 'Interactive console')}">
       <div class="k-bar"><span class="k-baslik">claude-code · demo</span>
@@ -78,7 +78,7 @@ ${LIMANLAR.map(([yol, ad, aciklama, x, y, d], i) => `    <a class="liman" href="
   <p class="ipucu" aria-hidden="true"><kbd>1</kbd>–<kbd>4</kbd> ${t('bölümler', 'sections')} · <kbd>/</kbd> ${t('konsol', 'console')} · ${t('karakterlere tıkla', 'click the characters')}</p>
 </main>
 <div class="balon" id="balon" role="status" aria-live="polite"></div>
-<aside class="onizleme" id="onizleme" aria-hidden="true"><div class="o-bar"><i></i><i></i><i></i><span>${t('canlı demo · sessiz ekran kaydı', 'live demo · silent screen recording')}</span></div><video muted loop playsinline preload="none" poster="/img/skytrack-960.jpg"></video></aside>`;
+`;
 
 class PikselAna extends HTMLElement {
   connectedCallback() {

@@ -121,31 +121,38 @@ export function baslatKanvas(root, yollar) {
   const daktilo = (el, hiz = 38, gecikme = 900) => { if (AZ || !el) return; const metin = el.textContent; el.textContent = '';
     setTimeout(() => { let i = 0; const s = setInterval(() => { el.textContent = metin.slice(0, ++i); if (i >= metin.length) clearInterval(s); }, hiz); }, gecikme); };
 
-  /* ---------- Projeler üstüne gelince canlı önizleme (SkyTrack demosu) ---------- */
-  const onizleme = root.getElementById('onizleme'), video = onizleme.querySelector('video');
-  let onizlemeAcik = false;
-  function onizlemeAc(i) {
-    if (i !== 1 || innerWidth <= 1100) return;
-    const w = clamp(innerWidth * .22, 260, 340), h = w * 9 / 16 + 32, p = pads[1];
-    onizleme.style.width = w + 'px';
-    onizleme.style.left = Math.max(X0 + 28, p.x - w - 28) + 'px';
-    onizleme.style.top = Math.max(SERIT + 8, p.y - h / 2) + 'px';
-    if (!video.src) { video.src = '/video/skytrack-demo.webm'; }
-    onizleme.classList.add('goster'); onizlemeAcik = true;
-    if (!AZ) video.play().catch(() => {});
-  }
-  function onizlemeKapat() { if (!onizlemeAcik) return; onizleme.classList.remove('goster'); onizlemeAcik = false; video.pause(); }
-
   root.querySelectorAll('.liman').forEach((a, i) => {
     const b = a.querySelector('.baslik');
-    const gir = () => { sev(i); coz(b, 520); onizlemeAc(i); };
+    const gir = () => { sev(i); coz(b, 520); };
     a.addEventListener('pointerenter', gir); a.addEventListener('focus', gir);
-    a.addEventListener('pointerleave', onizlemeKapat); a.addEventListener('blur', onizlemeKapat);
   });
   const h1 = root.querySelector('h1'); h1.addEventListener('pointerenter', () => coz(h1, 700));
   setTimeout(() => coz(h1, 1100), 150);
   root.querySelectorAll('.baslik').forEach((b, i) => setTimeout(() => coz(b, 700), 600 + i * 200));
-  daktilo(root.querySelector('[data-yaz]'));
+  // terminal: kendimle ilgili gerçek bilgiler sırayla yazılır (komut yazılır, çıktısı gelir, silinir, sonrakine geçer)
+  const BILGI = [
+    ['whoami', t('Samet Duhan Şahin', 'Samet Duhan Şahin')],
+    ['cat okul.txt', t('bilgisayar mühendisliği · 3. sınıf', 'computer engineering · 3rd year')],
+    ['cat yapiyorum.txt', t('AI ile sistem kuruyorum: ajanlar, açık kaynak araçlar', 'I build systems with AI: agents, open-source tools')],
+    ['ls projeler/', 'skytrack  claude-done-pixel  chatgpt-done-pixel'],
+    ['cat durum.txt', t('staj arıyorum, hemen başlayabilirim', 'looking for an internship, available now')],
+  ];
+  const komutEl = root.querySelector('[data-yaz]'), ciktiEl = root.querySelector('[data-cikti]');
+  if (komutEl && ciktiEl) {
+    if (AZ) { komutEl.textContent = BILGI[0][0]; ciktiEl.textContent = BILGI[0][1]; }
+    else (async () => {
+      const dur = (ms) => new Promise((r) => setTimeout(r, ms));
+      await dur(900);
+      for (let i = 0; ; i = (i + 1) % BILGI.length) {
+        const [k, c] = BILGI[i];
+        for (let j = 1; j <= k.length; j++) { komutEl.textContent = k.slice(0, j); await dur(45); }
+        await dur(280); ciktiEl.textContent = c; await dur(3200);
+        ciktiEl.textContent = ''; for (let j = k.length; j >= 0; j--) { komutEl.textContent = k.slice(0, j); await dur(18); }
+        await dur(250);
+        while (document.hidden) await dur(500);
+      }
+    })();
+  }
 
   /* ---------- karakterlere tıkla: gerçek bilgilerle balon; klavye ---------- */
   const balon = root.getElementById('balon');
