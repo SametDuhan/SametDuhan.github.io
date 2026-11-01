@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&family=Geist:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/css/tema.css">
   <link rel="stylesheet" href="/css/site.css">
+  <link rel="stylesheet" href="/css/piksel-404.css">
   <link rel="stylesheet" href="/css/ekran.css">
   <link rel="stylesheet" href="/css/modern.css">
   <link rel="stylesheet" href="/css/piksel.css">
@@ -44,7 +45,7 @@
     </div>
     
   </nav>
-  <main id="icerik">
+  <main id="icerik" data-sayfa="404">
 
     <header class="sayfa-basi">
       <div class="sayfa-sahne" data-sahne="hata404"><svg viewBox="0 0 500 330" role="img" aria-label="Şahin sırtı dönük duruyor; tabela sallanıyor, başının üstünde soru işaretleri yükseliyor" preserveAspectRatio="xMidYMax meet">
@@ -77,6 +78,9 @@
     import { baslatGorunum } from '/js/gorunum.js';
     baslatSayfa();
     baslatGorunum();
+  </script>
+  <script type="module">
+    import('/js/piksel-404.js').then((m) => m.baslat());
   </script>
 </body>
 </html>

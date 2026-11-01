@@ -327,13 +327,16 @@ ${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'STAJA AÇIK', baslik: 'İletiş
 `);
 
 // --- 404
-yaz('404.html', `${bas({ baslik: 'Sayfa bulunamadı · Samet Duhan', aciklama: 'Aradığın sayfa yok. Ana sayfaya, projelere ya da slaytlara dön.', yol: '404.html', onek: '/' })}${menu('', '/')}
-  <main id="icerik">
+yaz('404.html', `${bas({ baslik: 'Sayfa bulunamadı · Samet Duhan', aciklama: 'Aradığın sayfa yok. Ana sayfaya, projelere ya da slaytlara dön.', yol: '404.html', onek: '/', ekCss: '\n  <link rel="stylesheet" href="/css/piksel-404.css">' })}${menu('', '/')}
+  <main id="icerik" data-sayfa="404">
 ${sayfaBasi({ no: '404', etiket: 'KAYIP SAYFA', damga: 'BULUNAMADI', baslik: '404', poz: 'arka', sahne: 'hata404', onek: '/',
       ek: '\n        <p class="kimlik">bash: cd: bu-sayfa: Böyle bir dosya ya da dizin yok</p>',
       tanitim: 'Aradığın sayfa taşınmış ya da hiç olmamış olabilir.' })}
     <div class="linkler"><a class="dugme ana" href="/">./ana-sayfa →</a><a class="dugme" href="/projeler/">projeler</a><a class="dugme" href="/slaytlar/">slaytlar</a></div>
   </main>${son('/')}
+  <script type="module">
+    import('/js/piksel-404.js').then((m) => m.baslat());
+  </script>
 </body>
 </html>
 `);
