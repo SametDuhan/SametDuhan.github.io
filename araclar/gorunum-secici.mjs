@@ -1,10 +1,11 @@
-// Görünüm seçici: sitenin iki tasarımı sırasıyla bir akışta (önce kâğıt, sonra modern); her durakta tasarımın küçük önizlemesi (CSS),
+// Görünüm seçici: sitenin iki tasarımı sırasıyla bir akışta (önce kâğıt, sonra modern, sonra piksel); her durakta tasarımın küçük önizlemesi (CSS),
 // modern için koyu/açık anahtarı. Ana sayfadaki panel "−" ile küçülür (gorunumPaneli: kapat/aç düğmeleri yalnız orada).
 // Ana sayfada solda dikey şerit (index.html, elle; tests/gorunum.test.mjs aynı olduğunu denetler), alt sayfalarda sol menünün altında.
 // Seçimi js/gorunum.js uygular; sayfa çizilmeden önceki değer js/gorunum-erken.js'ten gelir.
 export const GORUNUMLER = [
   { kod: 'retro', tarih: '2026-10-27', gun: '27 Ekim', ad: 'Kâğıt' },
   { kod: 'modern', tarih: '2026-10-31', gun: '31 Ekim', ad: 'Modern' },
+  { kod: 'piksel', tarih: '2026-11-01', gun: '1 Kasım', ad: 'Piksel' },
 ];
 
 const GUNES = '<svg class="ikon-gunes" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';

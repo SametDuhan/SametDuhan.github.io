@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { FABRIKA_SVG } from '../araclar/fabrika.mjs';
 
 const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ATLA = new Set(['tests', '.git', '.superpowers', 'node_modules']);
+const ATLA = new Set(['tests', '.git', '.superpowers', '.impeccable', 'node_modules']);
 const siteDosyalari = (dizin = KOK) => readdirSync(dizin, { withFileTypes: true }).flatMap((g) => {
   if (ATLA.has(g.name)) return [];
   const yol = join(dizin, g.name);

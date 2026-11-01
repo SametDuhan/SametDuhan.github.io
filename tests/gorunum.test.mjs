@@ -9,33 +9,35 @@ import { gorunumSecici, gorunumPaneli, GORUNUMLER } from '../araclar/gorunum-sec
 const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
 const oku = (yol) => readFileSync(join(KOK, yol), 'utf8');
 const htmller = (dizin = KOK) => readdirSync(dizin, { withFileTypes: true }).flatMap((g) => {
-  if (['tests', '.git', 'node_modules', '.superpowers'].includes(g.name)) return [];
+  if (['tests', '.git', 'node_modules', '.superpowers', '.impeccable'].includes(g.name)) return [];
   const yol = join(dizin, g.name);
   return g.isDirectory() ? htmller(yol) : g.name.endsWith('.html') ? [yol] : [];
 });
 
-test('her sayfa modern.css ve gorunum-erken.js yükler (başlıkta, sayfa çizilmeden)', () => {
+test('her sayfa modern.css, piksel.css ve gorunum-erken.js yükler (başlıkta, sayfa çizilmeden)', () => {
   for (const f of htmller()) {
     const bas = readFileSync(f, 'utf8').split('</head>')[0];
     const ad = relative(KOK, f);
     assert.match(bas, /href="[./]*css\/modern\.css"/, `${ad}: modern.css yok`);
     assert.match(bas, /<script src="[./]*js\/gorunum-erken\.js"><\/script>/, `${ad}: gorunum-erken.js yok`);
-    // modern.css son stil dosyası: aynı özgüllükte kâğıt kurallarını ezer
+    // modern.css sondan bir önceki, piksel.css son stil dosyası: aynı özgüllükte öncekileri ezer
     const stiller = [...bas.matchAll(/rel="stylesheet" href="([^"]+)"/g)].map((m) => m[1]);
-    assert.match(stiller.at(-1), /css\/modern\.css$/, `${ad}: modern.css en son yüklenmeli`);
+    assert.match(stiller.at(-1), /css\/piksel\.css$/, `${ad}: piksel.css en son yüklenmeli`);
+    assert.match(stiller.at(-2), /css\/modern\.css$/, `${ad}: modern.css piksel.css'ten hemen önce yüklenmeli`);
   }
 });
 
-test('görünüm seçici ana sayfada, her menülü alt sayfada ve sunumlarda aynı; iki durak tarih sırasında', () => {
+test('görünüm seçici ana sayfada, her menülü alt sayfada ve sunumlarda aynı; üç durak tarih sırasında', () => {
   // girinti sayfaya göre değişir; karşılaştırma boşluklar teke indirilerek
   const sade = (m) => m.replace(/\s+/g, ' ');
   const tr = sade(gorunumSecici());
   assert.ok(sade(oku('index.html')).includes(sade(gorunumPaneli())), 'index.html elle değişmiş: araclar/gorunum-secici.mjs ile aynı olmalı');
   assert.doesNotMatch(tr, /<time|Ekim/, 'seçicide tarih yazısı yok');
   for (const yol of ['hakkimda/index.html', 'projeler/index.html', 'slaytlar/index.html', 'iletisim/index.html', 'projeler/skytrack/index.html', '404.html', 'slaytlar/ai-ajani-nedir/index.html', 'slaytlar/claude-code-hook/index.html', 'slaytlar/skytrack-nasil-kurdum/index.html']) assert.ok(sade(oku(yol)).includes(tr), yol);
-  assert.deepEqual(GORUNUMLER.map((g) => g.kod), ['retro', 'modern']);
-  assert.ok(GORUNUMLER[0].tarih < GORUNUMLER[1].tarih);
+  assert.deepEqual(GORUNUMLER.map((g) => g.kod), ['retro', 'modern', 'piksel']);
+  assert.ok(GORUNUMLER[0].tarih < GORUNUMLER[1].tarih && GORUNUMLER[1].tarih < GORUNUMLER[2].tarih);
   assert.ok(oku('en/index.html').includes('data-gorunum-sec="modern"'));
+  assert.ok(oku('en/index.html').includes('data-gorunum-sec="piksel"'));
 });
 
 const erken = (depo = {}, arama = '') => {
@@ -50,10 +52,12 @@ const erken = (depo = {}, arama = '') => {
   return { oz, depo };
 };
 
-test('ilk açılış modern; saklanan seçim ve ?gorunum= adresi uygulanır', () => {
-  assert.equal(erken().oz['data-gorunum'], 'modern');
+test('ilk açılış piksel; saklanan seçim ve ?gorunum= adresi uygulanır', () => {
+  assert.equal(erken().oz['data-gorunum'], 'piksel');
   assert.equal(erken({ gorunum: 'retro' }).oz['data-gorunum'], 'retro');
-  assert.equal(erken({ gorunum: 'bozuk' }).oz['data-gorunum'], 'modern');
+  assert.equal(erken({ gorunum: 'modern' }).oz['data-gorunum'], 'modern');
+  assert.equal(erken({ gorunum: 'bozuk' }).oz['data-gorunum'], 'piksel');
+  assert.equal(erken({}, '?gorunum=piksel').oz['data-gorunum'], 'piksel');
   const { oz, depo } = erken({}, '?gorunum=retro');
   assert.equal(oz['data-gorunum'], 'retro');
   assert.equal(depo.gorunum, 'retro');
@@ -63,14 +67,14 @@ test('ilk açılış modern; saklanan seçim ve ?gorunum= adresi uygulanır', ()
   assert.equal(erken().oz['data-gorunum-panel'], undefined);
 });
 
-test('localStorage kapalıyken de sayfa modern açılır', () => {
+test('localStorage kapalıyken de sayfa piksel açılır', () => {
   const oz = {};
   vm.runInNewContext(oku('js/gorunum-erken.js'), {
     document: { documentElement: { setAttribute: (a, d) => { oz[a] = d; } } },
     location: { search: '' }, URLSearchParams,
     get localStorage() { throw new Error('engelli'); },
   });
-  assert.equal(oz['data-gorunum'], 'modern');
+  assert.equal(oz['data-gorunum'], 'piksel');
 });
 
 // WCAG kontrast

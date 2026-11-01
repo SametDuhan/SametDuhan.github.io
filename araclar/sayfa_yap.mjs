@@ -38,6 +38,7 @@ export const bas = ({ baslik, aciklama, yol, onek = '../', ekCss = '', kapak = y
   <link rel="stylesheet" href="${onek}css/site.css">${ekCss}
   <link rel="stylesheet" href="${onek}css/ekran.css">
   <link rel="stylesheet" href="${onek}css/modern.css">
+  <link rel="stylesheet" href="${onek}css/piksel.css">
   <script src="${onek}js/gorunum-erken.js"></script>
 </head>
 <body>

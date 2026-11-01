@@ -1,4 +1,4 @@
-// Görünüm seçici (araclar/gorunum-secici.mjs): Kâğıt ↔ Modern ve modern temada koyu/açık.
+// Görünüm seçici (araclar/gorunum-secici.mjs): Kâğıt, Modern, Piksel; modern temada koyu/açık (piksel her zaman koyu).
 // Başlangıç değerlerini js/gorunum-erken.js koyar; burada tıklamalar, kayıt ve aria-pressed.
 const kok = document.documentElement;
 const koyuSorgu = matchMedia('(prefers-color-scheme: dark)');
@@ -41,3 +41,7 @@ export function baslatGorunum() {
   koyuSorgu.addEventListener('change', isaretle);
   isaretle();
 }
+
+// Piksel görünümün ortak parçaları: sayfa geçişi perdesi ve alt sayfa başındaki devre yolu (yalnız piksel görünümde çalışırlar).
+import './piksel-gecis.js';
+import './piksel-sayfa.js';

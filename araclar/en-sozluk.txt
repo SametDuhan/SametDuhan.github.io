@@ -698,6 +698,7 @@ J: 'Son sürüm: havalimanı servis araçları uçaktan ayrıldı, acil durum al
 Görünüm ::: Design
 görünüm ::: design
 Kâğıt ::: Paper
+Piksel ::: Pixel
 Görünüm panelini gizle ::: Hide the design panel
 Görünüm panelini aç ::: Show the design panel
 = Modern

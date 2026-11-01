@@ -5,7 +5,7 @@ import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ATLA = new Set(['tests', '.git', '.superpowers', 'node_modules']);
+const ATLA = new Set(['tests', '.git', '.superpowers', '.impeccable', 'node_modules']);
 
 function dosyalar(dizin = KOK) {
   return readdirSync(dizin, { withFileTypes: true }).flatMap((g) => {
