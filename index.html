@@ -258,13 +258,23 @@
   import { baslat as baslatTerminal } from './js/terminal.js';
   import { baslatGorunum } from './js/gorunum.js';
   baslatGorunum();
-  baslatTerminal(document.querySelector('.terminal'));
-  baslatSahin(document.querySelector('.kus-alan .sahin-kat'));
-  // hareketi azaltınca haritadaki SMIL animasyonları (uçak, pusula) da durur
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.seyir-haritasi svg').forEach((v) => v.pauseAnimations());
-  // 1–4: kutuları klavyeyle aç
+  // kâğıt ve modern ana sayfa: şahin, terminal ve harita animasyonları. Piksel görünümde bu sayfa gizlidir (ana sayfa <piksel-ana>), boşuna çalışmasın:
+  // piksel seçiliyken başlatılmaz, başka görünüme geçilince bir kez başlatılır.
+  let eskiBasladi = false;
+  const eskiBaslat = () => {
+    if (eskiBasladi || document.documentElement.dataset.gorunum === 'piksel') return;
+    eskiBasladi = true;
+    baslatTerminal(document.querySelector('.terminal'));
+    baslatSahin(document.querySelector('.kus-alan .sahin-kat'));
+    // hareketi azaltınca haritadaki SMIL animasyonları (uçak, pusula) da durur
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.seyir-haritasi svg').forEach((v) => v.pauseAnimations());
+  };
+  eskiBaslat();
+  new MutationObserver(eskiBaslat).observe(document.documentElement, { attributes: true, attributeFilter: ['data-gorunum'] });
+  // 1–4: kutuları klavyeyle aç (piksel görünümde bu işi <piksel-ana> yapar; ikisi birden gezinmesin)
   const kareler = [...document.querySelectorAll('.kare')];
   addEventListener('keydown', (e) => {
+    if (document.documentElement.dataset.gorunum === 'piksel') return;
     if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || e.isComposing || e.target.closest('input, textarea, select, [contenteditable]')) return;
     const i = '1234'.indexOf(e.key);
     if (i >= 0) location.href = kareler[i].href;
