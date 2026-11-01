@@ -34,7 +34,7 @@ export function sahneKur() {
   const saatGuncelle = () => { const s = saatYazisi(); saatEl.innerHTML = `<b>${s.tr}</b> ${t('Türkiye', 'Turkey')} · GMT+3 · ${s.yakin}`; };
   saatGuncelle(); const saatZaman = setInterval(saatGuncelle, 20000);
 
-  let imlec = null, ustunde = false, hazir = false, sira = 0, mektup = null, bayrakAcik = 0, balonZaman, durdu = false, goruyor = true, kare = 0, gozKirp = 0;
+  let imlec = null, ustunde = false, sira = 0, mektup = null, bayrakAcik = 0, balonZaman, durdu = false, goruyor = true, kare = 0, gozKirp = 0;
   const takip = (e) => { imlec = { x: e.clientX, y: e.clientY }; };
   addEventListener('pointermove', takip);
   for (const [o, f] of [['pointerenter', true], ['pointerleave', false], ['focus', true], ['blur', false]]) kutu.addEventListener(o, () => { ustunde = f; });
@@ -45,7 +45,6 @@ export function sahneKur() {
     setTimeout(() => { balon.classList.add('goster'); bayrakAcik = performance.now() / 1000; }, AZ ? 0 : 900);
     balonZaman = setTimeout(() => { balon.classList.remove('goster'); bayrakAcik = 0; }, 4800);
   });
-  const hazirDinle = (e) => { hazir = Boolean(e.detail); }; addEventListener('px-mesaj-hazir', hazirDinle);   // mesaj hazırsa bayrak kalkık kalır
   const gozlem = new IntersectionObserver(([e]) => { goruyor = e.isIntersecting; }, { threshold: 0 }); gozlem.observe(kutu);
 
   const posta = (tt) => {
@@ -55,7 +54,7 @@ export function sahneKur() {
     c.fillStyle = '#8db1e3'; c.fillRect(KUTU.x, KUTU.y, KUTU.w, 8); c.fillStyle = '#35507a'; c.fillRect(KUTU.x, KUTU.y + KUTU.h - 6, KUTU.w, 6);
     c.fillStyle = '#161514'; c.fillRect(KUTU.x + 10, KUTU.y + 16, KUTU.w - 20, 6);               // mektup yuvası
     // bayrak: kalkınca yeşil, inikken kutuya yaslı
-    const yukari = Boolean(bayrakAcik) || hazir;
+    const yukari = Boolean(bayrakAcik);
     c.fillStyle = '#d0d0d0'; c.fillRect(KUTU.x + KUTU.w + 2, KUTU.y + (yukari ? -22 : 6), 4, yukari ? 34 : 16);
     c.fillStyle = '#2ecc40'; c.fillRect(KUTU.x + KUTU.w + 6, KUTU.y + (yukari ? -22 : 6), 18, 12);
   };
@@ -89,5 +88,5 @@ export function sahneKur() {
   }
   if (AZ) requestAnimationFrame((n) => { ciz(n); durdu = true; }); else requestAnimationFrame(ciz);
 
-  return () => { durdu = true; removeEventListener('px-mesaj-hazir', hazirDinle); removeEventListener('pointermove', takip); gozlem.disconnect(); clearInterval(saatZaman); clearTimeout(balonZaman); kutu.remove(); };
+  return () => { durdu = true; removeEventListener('pointermove', takip); gozlem.disconnect(); clearInterval(saatZaman); clearTimeout(balonZaman); kutu.remove(); };
 }

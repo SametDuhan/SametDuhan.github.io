@@ -1,11 +1,10 @@
 // Piksel görünüm: İletişim sayfasının etkileşimli katmanı. Sayfanın formu ve mantığı (js/iletisim.js) olduğu gibi çalışır; piksel görünüm
 // seçiliyken üstüne parçalar eklenir, başka görünüme geçilince kaldırılır (js/piksel-hakkimda.js ile aynı kalıp). Yalnız İletişim sayfasında çalışır.
 import { sahneKur } from './piksel-iletisim-sahne.js';
-import { yardimKur } from './piksel-iletisim-yardim.js';
 import { eylemKur } from './piksel-iletisim-eylem.js';
 
 const kok = document.documentElement;
-const PARCALAR = [sahneKur, yardimKur, eylemKur];
+const PARCALAR = [sahneKur, eylemKur];
 let kaldirlar = [];
 
 function guncelle() {

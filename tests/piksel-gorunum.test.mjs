@@ -194,43 +194,6 @@ test('piksel İletişim: katman yalnız İletişim sayfasında; formun mantığ�
   assert.match(oku('js/piksel-iletisim.js'), /getElementById\('yazi-formu'\)/);
 });
 
-import { alanlariBul, hazirMi } from '../js/piksel-iletisim-yardim.js';
-import { KONULAR } from '../js/iletisim.js';
-
-test('piksel İletişim yardımcısı: şablonun boş alanlarını bulur, doldurulunca hazır sayar, isteğe bağlı alan engellemez', () => {
-  const staj = KONULAR.find((k) => k.kod === 'staj').sablon;
-  const a = alanlariBul(staj);
-  assert.deepEqual(a.map((x) => x.etiket), ['Şirket / ekip adı', 'Pozisyon', 'Başlangıç tarihi', 'Süre', 'Çalışma şekli (uzaktan / yerinde)']);
-  assert.ok(a.every((x) => x.bos && x.zorunlu));
-  assert.equal(hazirMi(staj, a), false);
-  // alanlar doldurulunca hazır
-  const dolu = staj.replace('[Şirket / ekip adı]', 'Örnek A.Ş.').replace('Pozisyon: ', 'Pozisyon: Yazılım stajyeri').replace('Başlangıç tarihi: ', 'Başlangıç tarihi: Haziran').replace('Süre: ', 'Süre: 2 ay').replace('yerinde): ', 'yerinde): Uzaktan');
-  const b = alanlariBul(dolu);
-  assert.ok(b.every((x) => !x.bos), JSON.stringify(b));
-  assert.equal(hazirMi(dolu, b), true);
-  // seçilecek aralık değerin üzerinde: [Şirket / ekip adı] köşeli parantezleriyle birlikte
-  assert.equal(staj.slice(a[0].basla, a[0].bitis), '[Şirket / ekip adı]');
-});
-
-test('piksel İletişim yardımcısı: her konu şablonu çözümlenir; "(varsa)" isteğe bağlı; alansız konu içerik ister; İngilizce madde biçimi de çalışır', () => {
-  for (const k of KONULAR) { const a = alanlariBul(k.sablon); assert.ok(Array.isArray(a), k.kod); assert.equal(hazirMi(k.sablon, a), false, `${k.kod}: dokunulmamış şablon hazır sayılmamalı`); }
-  const ortak = alanlariBul(KONULAR.find((k) => k.kod === 'ortak').sablon);
-  const baglanti = ortak.find((x) => /varsa/.test(x.etiket));
-  assert.ok(baglanti && !baglanti.zorunlu, 'Bağlantı (varsa) isteğe bağlı');
-  const diger = 'Merhaba Samet,\n\nProjeni inceledim, güzel olmuş.';
-  assert.equal(hazirMi(diger, alanlariBul(diger)), true);
-  assert.deepEqual(alanlariBul('Hi Samet,\n\n• Role: Intern\n• Duration: ').map((x) => [x.etiket, x.bos]), [['Role', false], ['Duration', true]]);
-});
-
-test('piksel İletişim yardımcısı: mesaj kutusunun metnini değiştirmez (yalnız okur, imleç koyar)', () => {
-  const y = oku('js/piksel-iletisim-yardim.js');
-  assert.doesNotMatch(y, /mesaj\.value\s*=[^=]/);
-  assert.match(y, /setSelectionRange/);
-  assert.match(y, /dispatchEvent\(new CustomEvent\('px-mesaj-hazir'/);
-  assert.match(oku('js/piksel-iletisim-sahne.js'), /addEventListener\('px-mesaj-hazir'/);
-  assert.match(oku('js/piksel-iletisim.js'), /PARCALAR = \[[^\]]*\byardimKur\b[^\]]*\]/);
-});
-
 test('piksel İletişim eylemleri: zarf yalnız görsel geri bildirim (olayı engellemez, ağa gitmez); kısayollar yazarken devre dışı; geri alınır', () => {
   const e = oku('js/piksel-iletisim-eylem.js');
   assert.doesNotMatch(e, /e\.preventDefault\(\);\s*\n?\s*uc\(|dugme\.addEventListener\('click', \(e\) => \{ e\.preventDefault/);   // düğmenin işi engellenmez

@@ -21,30 +21,6 @@ html[data-gorunum="piksel"] {
 @keyframes px-nabiz { 50% { opacity: .35; } }
 @media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-posta-etiket::before { animation: none; } }
 
-/* ---- mesaj yardımcısı ---- */
-html[data-gorunum="piksel"] {
-  & .px-yardim { margin: 12px 0 4px; padding: 12px 14px 12px; border: 1px solid var(--kenar); background: color-mix(in srgb, var(--kart) 80%, #000); }
-  & .px-yardim-ust { display: flex; align-items: center; gap: 8px; margin: 0 0 9px; font: 500 12.5px var(--mono); color: var(--soluk); }
-  & .px-yardim-say { padding: 0 7px; border: 1px solid var(--kenar); color: var(--yazi); }
-  & .px-karakter { margin-left: auto; }
-  & .px-yardim-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-  & .px-yardim-liste:empty::before { content: "—"; color: var(--soluk); font: 500 13px var(--mono); }
-  & .px-alan { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 5px 11px 5px 9px; border: 1px solid var(--kenar); font: 500 12.5px var(--mono); color: var(--yazi); transition: border-color .2s, background .25s, transform .2s cubic-bezier(.16, 1, .3, 1); }
-  & .px-alan:hover, & .px-alan:focus-visible { border-color: var(--vurgu); transform: translateY(-2px); }
-  & .px-alan:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: 2px; }
-  & .px-alan i { flex: none; width: 10px; height: 10px; border: 2px solid #7a4a38; background: transparent; transition: background .25s, border-color .25s; }
-  & .px-alan.dolu i { background: #2ecc40; border-color: #2ecc40; }
-  & .px-alan.dolu { color: var(--soluk); }
-  & .px-alan.bos:not(.istege) i { border-color: var(--vurgu); }
-  & .px-alan em { font-style: normal; color: var(--soluk); }
-  & .px-yardim-durum { margin: 9px 0 0; font: 600 12.5px var(--mono); color: var(--vurgu-koyu); }
-  & .px-yardim-durum.hazir { color: #2ecc40; }
-  & .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  & .eylemler.px-hazir #mail-ac { animation: px-hazir 1.6s ease-in-out infinite; }
-}
-@keyframes px-hazir { 0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 87, .55); } 50% { box-shadow: 0 0 0 8px rgba(217, 119, 87, 0); } }
-@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .eylemler.px-hazir #mail-ac { animation: none; } html[data-gorunum="piksel"] .px-alan { transition: none; } }
-
 /* ---- eylemler: zarf uçuşu, kıvılcım, kısayol ipucu; kanallar ---- */
 .px-zarf { position: fixed; left: 0; top: 0; z-index: 2147482000; width: 26px; height: 17px; image-rendering: pixelated; pointer-events: none; will-change: transform; }
 .px-kivilcim { position: fixed; z-index: 2147482000; width: 6px; height: 6px; margin: -3px 0 0 -3px; background: #d97757; pointer-events: none; animation: px-kivilcim .6s cubic-bezier(.16, 1, .3, 1) forwards; }
