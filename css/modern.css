@@ -461,3 +461,11 @@ html:is([data-gorunum="modern"], [data-gorunum="piksel"]) {
   & .terim { border-left-color: var(--vurgu); border-radius: 0 10px 10px 0; }
   & .panel { border-radius: 12px; }
 }
+
+/* ===================== modern koyu: sunumlardaki sabit renkli iki bileşen ===================== */
+/* hook sunumundaki "claude" penceresi ve ajan sunumundaki "onay" etiketi zemin renklerini jetonlardan (--yazi, --iyi) alır ama yazı renkleri sabit açık tondur:
+   Kâğıt ve Modern açıkta jetonlar koyu/orta, yazı okunur; koyu temada jetonlar açılaşır ve krem-üstüne-krem kalırdı. Koyu temada zemin sabit koyu, yazı koyu. */
+html[data-gorunum="modern"][data-tema="koyu"] { & .pencere { background: #1f1e1d; border-color: var(--kenar); } & .kapi .onay text { fill: #10201a; } }
+@media (prefers-color-scheme: dark) {
+  html[data-gorunum="modern"]:not([data-tema="acik"]) { & .pencere { background: #1f1e1d; border-color: var(--kenar); } & .kapi .onay text { fill: #10201a; } }
+}
