@@ -100,7 +100,7 @@ piksel-ana { display: none; }
 html[data-px-gecis]::after {
   content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
   background: linear-gradient(90deg, rgba(0, 0, 0, .28) 0, transparent 7%, transparent 93%, rgba(0, 0, 0, .28) 100%),
-              repeating-linear-gradient(90deg, #8a3f2a 0 16px, #a24b33 16px 32px, #bd5e3e 32px 48px, #a24b33 48px 64px);
+              #a24b33;
   animation: px-perde-kalk .9s cubic-bezier(.2, .7, .3, 1) 2.4s both;
 }
 @keyframes px-perde-kalk { to { transform: translateY(-112%); } }

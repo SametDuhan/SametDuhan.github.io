@@ -6,7 +6,8 @@ import { asiliKarakter } from './piksel-karakter.js';
 const kok = document.documentElement;
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const P = 12;                                    // kenar karelerinin boyu (px)
-const SERIT = ['#8a3f2a', '#a24b33', '#bd5e3e', '#a24b33'];   // css/piksel.css'teki perde şeritleriyle aynı (16 px'lik şeritler)
+const SERIT = ['#8a3f2a', '#94442e', '#a24b33', '#ad5337', '#bd5e3e'];   // kumaşın pikselleri: şerit yok, her kare rastgele bir tondan
+const HARF = { S: '01111 10000 10000 01110 00001 00001 11110', A: '01110 10001 10001 11111 10001 10001 10001', M: '10001 11011 10101 10101 10001 10001 10001', E: '11111 10000 10000 11110 10000 10000 11111', T: '11111 00100 00100 00100 00100 00100 00100', D: '11110 10001 10001 10001 10001 10001 11110', U: '10001 10001 10001 10001 10001 10001 01110', H: '10001 10001 10001 11111 10001 10001 10001', N: '10001 11001 10101 10101 10011 10001 10001' };
 const TURUNCU = ['#d97757', '#f09a78', '#d97757', '#b45a3e'];
 let aktif = false, perde = null;
 
@@ -25,16 +26,21 @@ export function perdeKur(W, H) {
   const vurgu = derin.map(() => TURUNCU[Math.floor(r() * 4)]);   // her damlanın uç karesi
   const karakterler = [];
   for (let k = 0; k < n; k++) { const sut = Math.min(sutun - 1, Math.max(0, Math.round((k + .5 + (r() - .5) * .5) * sutun / n))); karakterler.push({ sut, kol: Math.floor(r() * (kolSon + 1)), faz: r() * 6 }); }
+  const dokuma = derin.map((d) => Array.from({ length: d }, () => SERIT[Math.floor(r() * 5)]));
+  const kumas = document.createElement('canvas'); kumas.width = W; kumas.height = H; const k2 = kumas.getContext('2d');
+  for (let y = 0; y < H; y += P) for (let x = 0; x < W; x += P) { k2.fillStyle = SERIT[Math.floor(r() * 5)]; k2.fillRect(x, y, P, P); }   // dağınık kare dokusu
+  const hu = Math.max(4, Math.min(14, Math.floor(W * .8 / 65))), yaz = 'SAMET DUHAN', gen = yaz.length * 6 * hu - hu, bx = Math.round((W - gen) / 2), by = Math.round(H * .42 - 3.5 * hu);
+  [[hu * .6, '#3a1a10'], [0, '#fbe9dc']].forEach(([ofs, renk]) => { k2.fillStyle = renk; [...yaz].forEach((ch, j) => { (HARF[ch] || '').split(' ').forEach((sat, y) => [...sat].forEach((v, x) => { if (v === '1') k2.fillRect(Math.round(bx + (j * 6 + x) * hu + ofs), Math.round(by + y * hu + ofs), hu, hu); })); }); });
   const kv = document.createElement('canvas'); kv.width = W; kv.height = H + EK; kv.className = 'pxg'; kv.setAttribute('aria-hidden', 'true');
   kv.style.cssText = `width:${W}px;height:${H + EK}px`;
   const c = kv.getContext('2d');
   const ciz = (t) => {
     c.clearRect(0, 0, W, H + EK);
-    for (let x = 0; x < W; x += 16) { c.fillStyle = SERIT[(x / 16) % 4]; c.fillRect(x, 0, 16, H); }          // kumaş şeritleri
+    c.drawImage(kumas, 0, 0);                                                                                  // sabit kumaş + isim
     const g = c.createLinearGradient(0, 0, W, 0); g.addColorStop(0, 'rgba(0,0,0,.28)'); g.addColorStop(.07, 'rgba(0,0,0,0)'); g.addColorStop(.93, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,.28)');
     c.fillStyle = g; c.fillRect(0, 0, W, H);
     for (let i = 0; i < sutun; i++) {                                                                          // damlalar: kumaş şeridi renginde, ucu turuncu
-      for (let s = 0; s < derin[i]; s++) { c.fillStyle = s === derin[i] - 1 ? vurgu[i] : SERIT[Math.floor((i * P) / 16) % 4]; c.fillRect(i * P, H + s * P, P, P); }
+      for (let s = 0; s < derin[i]; s++) { c.fillStyle = s === derin[i] - 1 ? vurgu[i] : dokuma[i][s]; c.fillRect(i * P, H + s * P, P, P); }
     }
     for (const d of dagin) { c.fillStyle = d.renk; c.fillRect(d.i * P + 2, H + d.sat * P + 2, P - 4, P - 4); }  // dağılmış pikseller (biraz küçük)
     for (const k of karakterler) asiliKarakter(c, t + k.faz, { x: Math.round(k.sut * P + P / 2 - 14 * u), y: H + derin[k.sut] * P, u, kol: k.kol, temizle: false });
