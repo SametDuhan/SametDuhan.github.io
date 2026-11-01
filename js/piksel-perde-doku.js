@@ -1,5 +1,5 @@
 // Piksel perde kumaşı: şeritsiz, her karesi rastgele tonda bir mozaik + üzerine pikselle yazılmış ad ve soyad.
-// Hem sayfa geçişi perdesi (piksel-gecis.js) hem ana sayfadaki sağ panel perdesi (piksel-ana-konsol.js) bunu kullanır.
+// Ana sayfadaki sağ panel perdesi (piksel-ana-konsol.js) bunu kullanır.
 export const TON = ['#8a3f2a', '#94442e', '#a24b33', '#ad5337', '#bd5e3e'];
 export const rastgele = (tohum) => { let s = (tohum >>> 0) || 1; return () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296; };
 

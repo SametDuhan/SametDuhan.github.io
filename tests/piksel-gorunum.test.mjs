@@ -44,13 +44,13 @@ test('piksel ana sayfa: aynı anda en çok iki karakter; fare izi yok; konsol si
   assert.match(oku('js/piksel-ana-konsol.js'), /demo simülasyonu: gerçek bir model çağrılmıyor/);
 });
 
-test('piksel sayfa geçişi: perde iner, yeni sayfa perdeli açılır; erken betik bayrağı koyar; yazdırmada gizli', () => {
+test('piksel sayfa geçişi: ince turuncu çizgi doldurur, yeni sayfa çizgiyle açılır; erken betik bayrağı koyar; yazdırmada gizli', () => {
   const gecis = oku('js/piksel-gecis.js');
   assert.match(gecis, /sessionStorage\.setItem\('pxGecis', '1'\)/);
   assert.match(oku('js/gorunum-erken.js'), /sessionStorage\.getItem\('pxGecis'\)/);
   const css = oku('css/piksel.css');
   assert.match(css, /html\[data-px-gecis\]::after/);
-  assert.match(css, /@media print \{ canvas\.pxg/);
+  assert.match(css, /@media print \{ \.pxg-cizgi/);
   assert.match(oku('js/gorunum.js'), /import '\.\/piksel-gecis\.js'/);
 });
 
