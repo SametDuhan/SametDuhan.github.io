@@ -1,0 +1,33 @@
+/* Piksel görünüm: Slaytlar'a özel parçalar (js/piksel-slaytlar*.js ekler). Yalnız piksel görünümde etkili. */
+html[data-gorunum="piksel"] {
+  /* ---- içindekiler paneli ---- */
+  & .px-ic { position: relative; margin-top: clamp(22px, 3.5vh, 36px); border: 1px solid var(--kenar); background: var(--kart); }
+  & .px-ic::before { content: ""; position: absolute; left: -3px; top: -3px; width: 18px; height: 18px; border: 3px solid var(--vurgu); border-right: 0; border-bottom: 0; }
+  & .px-ic-sek { display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--kenar); }
+  & .px-ic-sek button { all: unset; box-sizing: border-box; cursor: pointer; flex: 1 1 0; min-width: 160px; padding: 13px 18px; font: 600 14px/1.3 var(--mono); color: var(--soluk); border-right: 1px solid var(--kenar); position: relative; transition: color .2s, background .25s; }
+  & .px-ic-sek button:last-child { border-right: 0; }
+  & .px-ic-sek button::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--vurgu); transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.16, 1, .3, 1); }
+  & .px-ic-sek button:hover { color: var(--yazi); background: color-mix(in srgb, var(--vurgu) 7%, transparent); }
+  & .px-ic-sek button[aria-selected="true"] { color: var(--yazi); background: color-mix(in srgb, var(--vurgu) 10%, transparent); }
+  & .px-ic-sek button[aria-selected="true"]::after { transform: scaleX(1); }
+  & .px-ic-sek button:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: -3px; }
+  & .px-ic-govde { padding: 18px 22px 20px; min-height: 250px; }
+  & .px-ic-komut { margin: 0 0 14px; font: 500 13px var(--mono); color: var(--soluk); }
+  & .px-ic-komut b { color: var(--vurgu-koyu); font-weight: 600; }
+  & .px-ic-say { margin-left: 10px; padding: 1px 8px; border: 1px solid var(--kenar); }
+  & .px-ic-yukle { margin: 0; font: 500 13px var(--mono); color: var(--soluk); }
+  & .px-ic-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: column; grid-template-rows: repeat(3, auto); gap: 4px 22px; }
+  & .px-ic-liste a { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; padding: 8px 10px; border: 1px solid transparent; text-decoration: none !important; background: none !important; color: inherit; transition: border-color .2s, background .25s; }
+  & .px-ic-liste a:hover, & .px-ic-liste a:focus-visible { border-color: var(--vurgu); background: color-mix(in srgb, var(--vurgu) 9%, transparent) !important; }
+  & .px-ic-liste .n { font: 700 17px/1.2 var(--baslik); color: var(--vurgu); }
+  & .px-ic-liste .y { display: grid; gap: 2px; min-width: 0; }
+  & .px-ic-liste em { font: 500 11.5px/1.3 var(--mono); font-style: normal; color: var(--soluk); }
+  & .px-ic-liste b { font: 600 15px/1.35 var(--sans); color: var(--yazi); overflow-wrap: anywhere; }
+  & .px-ic-govde.px-ic-hazir .px-ic-liste li { animation: px-ic-gel .5s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(var(--k) * 45ms); }
+  & .px-ic-ac { display: inline-block; margin-top: 14px; padding: 7px 14px; border: 1px solid var(--vurgu); color: var(--yazi); font: 600 13px var(--mono); text-decoration: none !important; background: linear-gradient(var(--vurgu), var(--vurgu)) 0 100% / 0 100% no-repeat; transition: background-size .35s cubic-bezier(.16, 1, .3, 1), color .2s; }
+  & .px-ic-ac:hover, & .px-ic-ac:focus-visible { background-size: 100% 100%; color: #1a1210; }
+  & .deste-karti.px-secili { border-color: var(--vurgu); box-shadow: 0 0 0 1px color-mix(in srgb, var(--vurgu) 40%, transparent); }
+  @media (max-width: 1000px) { & .px-ic-liste { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; } }
+}
+@keyframes px-ic-gel { from { opacity: 0; transform: translateX(-10px); } }
+@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] :is(.px-ic-sek button, .px-ic-sek button::after, .px-ic-liste a, .px-ic-ac) { transition: none; } html[data-gorunum="piksel"] .px-ic-govde.px-ic-hazir .px-ic-liste li { animation: none; } }

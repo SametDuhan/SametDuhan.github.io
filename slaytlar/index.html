@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="../css/tema.css">
   <link rel="stylesheet" href="../css/site.css">
   <link rel="stylesheet" href="../css/atolye.css">
+  <link rel="stylesheet" href="../css/piksel-slaytlar.css">
   <link rel="stylesheet" href="../css/ekran.css">
   <link rel="stylesheet" href="../css/modern.css">
   <link rel="stylesheet" href="../css/piksel.css">
@@ -105,6 +106,7 @@
     const kutu = document.getElementById('desteler');
     kutu.innerHTML = DESTELER.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
     kartHareketi(kutu);
+    import('../js/piksel-slaytlar.js').then((m) => m.baslat());
   </script>
 </body>
 </html>

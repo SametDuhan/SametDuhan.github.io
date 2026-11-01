@@ -129,3 +129,25 @@ test('piksel Projeler: süzgeç, komut kopyalama ve yazılarak gelen maddeler sa
   assert.match(oku('js/piksel-projeler.js'), /PARCALAR = \[[^\]]*\bvitrinKur\b[^\]]*\]/);
   assert.match(oku('css/piksel-projeler.css'), /\.vitrin\.px-gizli \{ display: none; \}/);
 });
+
+test('piksel Slaytlar: etkileşimli katman yalnız Slaytlar listesinde; içindekiler slayt başlıklarını sunum sayfalarından okur ve sunum adresinin #n biçimine bağlanır', () => {
+  for (const yol of ['slaytlar/index.html', 'en/slaytlar/index.html']) {
+    const h = oku(yol);
+    assert.match(h, /piksel-slaytlar\.css/, yol);
+    assert.match(h, /import\('\.\.\/(\.\.\/)?js\/piksel-slaytlar\.js'\)\.then\(\(m\) => m\.baslat\(\)\)/, yol);
+  }
+  for (const yol of ['projeler/index.html', 'slaytlar/ai-ajani-nedir/index.html']) assert.doesNotMatch(oku(yol), /piksel-slaytlar/, yol);
+  const ic = oku('js/piksel-slaytlar-icindekiler.js');
+  assert.match(ic, /querySelectorAll\('\.slayt'\)/);          // başlıklar sunum sayfasının kendisinden
+  assert.match(ic, /\.\/\$\{v\.slug\}\/#\$\{s\.n\}/);          // sunum adresi #n (js/deste.js hashtenKonum ile aynı)
+  assert.match(ic, /ArrowRight/);
+  assert.match(ic, /prefers-reduced-motion: reduce/);
+  assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\bicindekilerKur\b[^\]]*\]/);
+  // gerçek sunumlarda her slayt bölümünün bir başlığı var (içindekiler boş çıkmasın)
+  for (const slug of ['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum']) {
+    const dosya = oku(`slaytlar/${slug}/index.html`);
+    const bolumler = dosya.split('<section class="slayt').slice(1);
+    assert.ok(bolumler.length >= 5, slug);
+    for (const b of bolumler) assert.match(b, /<h[12][\s>]/, `${slug}: başlıksız slayt`);
+  }
+});
