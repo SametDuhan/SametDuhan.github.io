@@ -2,9 +2,10 @@
 // üstüne parçalar eklenir, başka görünüme geçilince kaldırılır (js/piksel-hakkimda.js ile aynı kalıp). Yalnız Slaytlar listesinde çalışır.
 // Kartlar sayfada JS ile çizilir (js/desteler.js); parçalar kartlar gelene dek bekler.
 import { icindekilerKur } from './piksel-slaytlar-icindekiler.js';
+import { yolKur } from './piksel-slaytlar-yol.js';
 
 const kok = document.documentElement;
-const PARCALAR = [icindekilerKur];
+const PARCALAR = [icindekilerKur, yolKur];
 let kaldirlar = [];
 
 function guncelle() {

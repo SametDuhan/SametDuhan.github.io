@@ -151,3 +151,13 @@ test('piksel Slaytlar: etkileşimli katman yalnız Slaytlar listesinde; içindek
     for (const b of bolumler) assert.match(b, /<h[12][\s>]/, `${slug}: başlıksız slayt`);
   }
 });
+
+test('piksel Slaytlar: kaldığın yer yolu sunumların kullandığı gerçek ilerleme kaydını okur, hiçbir yere göndermez', () => {
+  const y = oku('js/piksel-slaytlar-yol.js');
+  assert.match(y, /import \{ ilerlemeOku \} from '\.\/ilerleme\.js'/);
+  assert.match(y, /DESTELER\.find/);
+  assert.match(y, /slaytSayisi/);
+  assert.doesNotMatch(y, /fetch\(|XMLHttpRequest|sendBeacon|setItem/, 'ilerleme yalnız okunur, ağa gitmez');
+  assert.match(y, /prefers-reduced-motion: reduce/);
+  assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\byolKur\b[^\]]*\]/);
+});
