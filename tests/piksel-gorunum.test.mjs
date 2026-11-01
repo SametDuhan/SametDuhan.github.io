@@ -230,3 +230,16 @@ test('piksel İletişim yardımcısı: mesaj kutusunun metnini değiştirmez (ya
   assert.match(oku('js/piksel-iletisim-sahne.js'), /addEventListener\('px-mesaj-hazir'/);
   assert.match(oku('js/piksel-iletisim.js'), /PARCALAR = \[[^\]]*\byardimKur\b[^\]]*\]/);
 });
+
+test('piksel İletişim eylemleri: zarf yalnız görsel geri bildirim (olayı engellemez, ağa gitmez); kısayollar yazarken devre dışı; geri alınır', () => {
+  const e = oku('js/piksel-iletisim-eylem.js');
+  assert.doesNotMatch(e, /e\.preventDefault\(\);\s*\n?\s*uc\(|dugme\.addEventListener\('click', \(e\) => \{ e\.preventDefault/);   // düğmenin işi engellenmez
+  assert.doesNotMatch(e, /fetch\(|sendBeacon|mailto:|XMLHttpRequest/);
+  assert.match(e, /\['mail-ac', 'gmail-ac', 'metin-kopyala', 'kopyala'\]/);
+  assert.match(e, /matches\?\.\('input, textarea, select, \[contenteditable\]'\)/);   // yazarken 1-5 ve "/" çalışmaz
+  assert.match(e, /e\.key === 'Enter' && document\.activeElement === mesaj/);
+  assert.match(e, /prefers-reduced-motion: reduce/);
+  assert.match(e, /return \(\) => geri\.forEach/);
+  assert.match(oku('js/piksel-iletisim.js'), /PARCALAR = \[[^\]]*\beylemKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-iletisim.css'), /@media print \{ \.px-zarf, \.px-kivilcim \{ display: none !important; \} \}/);
+});
