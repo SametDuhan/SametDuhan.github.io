@@ -278,3 +278,18 @@ test('piksel proje detay: katman yalnız proje detay sayfalarında (üç proje, 
   assert.match(oku('js/piksel-proje.js'), /PARCALAR = \[[^\]]*\brayKur\b[^\]]*\bhatKur\b[^\]]*\]/);
   assert.match(oku('css/piksel-proje.css'), /@media print \{ \.px-pray \{ display: none !important; \} \}/);
 });
+
+test('piksel proje akışı: adımlar sayfanın kendi listesinden; paket döngüsü üstüne gelince/odakta/tıklamada durur; klavyeyle gezilir; geri alınır; karakter yok', () => {
+  const a = oku('js/piksel-proje-akis.js');
+  assert.match(a, /querySelector\('\.akis-yol'\)/);
+  assert.match(a, /dur: true/);                                   // etkileşimde otomatik döngü durur
+  assert.match(a, /ArrowRight/);
+  assert.match(a, /aria-current', 'step'/);
+  assert.match(a, /prefers-reduced-motion: reduce/);
+  assert.match(a, /return \(\) => geri\.forEach/);
+  assert.doesNotMatch(a, /pikselKarakter/);
+  assert.match(oku('js/piksel-proje.js'), /PARCALAR = \[[^\]]*\bakisKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-proje.css'), /\.belir\.gorundu \.akis-yol\.px-akis-var li \{ animation: none !important; \}/);   // modern'in kendi vurgu animasyonuyla çakışmaz
+  // akışın gerçek adımları var (paket boş listede dolaşmasın)
+  for (const p of ['skytrack', 'claude-done-pixel', 'chatgpt-done-pixel']) assert.match(oku(`projeler/${p}/index.html`), /<ol class="akis-yol"[^>]*>(\s*<li[^>]*>.+?<\/li>){3,}/s, p);
+});

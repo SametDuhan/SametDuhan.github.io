@@ -2,9 +2,10 @@
 // seçiliyken üstüne parçalar eklenir, başka görünüme geçilince kaldırılır (js/piksel-hakkimda.js ile aynı kalıp). Bu sayfalarda karakter eklenmez.
 import { rayKur } from './piksel-proje-ray.js';
 import { hatKur } from './piksel-proje-hat.js';
+import { akisKur } from './piksel-proje-akis.js';
 
 const kok = document.documentElement;
-const PARCALAR = [rayKur, hatKur];
+const PARCALAR = [rayKur, hatKur, akisKur];
 let kaldirlar = [];
 
 function guncelle() {
