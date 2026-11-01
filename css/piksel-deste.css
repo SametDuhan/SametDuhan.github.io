@@ -17,6 +17,8 @@ html[data-gorunum="piksel"] {
   /* terminal ve kod kutuları koyu zeminde (kâğıt görünümün krem kutusu burada yok) */
   & pre.terminal, & pre.adim-kod, & .dene code, & pre { background: #141312; color: var(--yazi); border: 1px solid var(--kenar); }
   & pre.terminal { border-left: 3px solid var(--vurgu); }
+  /* sunumun kendi kuralı kod yazısını koyu renkle boyar (açık kâğıt kutu varsayımıyla): koyu kutuda okunur kalsın */
+  & .slayt pre code, & pre code, & .dene code, & .laboratuvar .terminal, & pre.terminal, & pre.adim-kod { color: var(--yazi); }
 
   /* ---- slayt geçişi: tarama çizgisi ve sırayla gelen öğeler ---- */
   & .px-tarama { position: fixed; top: 0; bottom: 0; left: -40px; width: 8px; z-index: 6; pointer-events: none; opacity: 0; background: var(--vurgu); box-shadow: -14px 0 0 -2px rgba(217, 119, 87, .55), -28px 0 0 -3px rgba(217, 119, 87, .3), 14px 0 0 -2px rgba(217, 119, 87, .25); }
