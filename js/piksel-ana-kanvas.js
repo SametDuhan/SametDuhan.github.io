@@ -26,7 +26,7 @@ export function baslatKanvas(root, yollar) {
     for (const c of [zemin, hareket]) { c.width = W * dpr; c.height = H * dpr; }
     zc.setTransform(dpr, 0, 0, dpr, 0, 0); hc.setTransform(dpr, 0, 0, dpr, 0, 0);
     U = Math.max(3, Math.round(W / 290));
-    const dar = W <= 760, alan = H - SERIT;
+    const dar = W <= 1100, alan = H - SERIT;  // 1100 pikselden dar ekranda ana sayfa tek sütun (css/piksel-ana.css ile aynı eşik)
     X0 = W * .355;
     const sabit = [[.54, .17], [.60, .38], [.57, .59], [.62, .80]];
     pads = [...root.querySelectorAll('.liman')].map((a, i) => dar ? { x: sabit[i][0] * W, y: SERIT + sabit[i][1] * alan } : { x: a.offsetLeft, y: SERIT + a.offsetTop });
@@ -48,7 +48,7 @@ export function baslatKanvas(root, yollar) {
     const ys = pads.map((p) => p.y);
     dikey(X0, Math.min(...ys) - 70, Math.max(...ys) + 70, C.orta);
     dikey(X0 - iz * 2.4, Math.min(...ys) - 40, Math.max(...ys) + 40, C.soluk);
-    pads.forEach((p) => { yatay(X0, p.x, p.y, C.orta); yatay(X0 - iz * 2.4, X0, p.y - iz * 2, C.soluk); via(X0, p.y); if (W <= 760) via(p.x, p.y); }); // geniş ekranda uç noktayı DOM'daki iskele çizer (iki kare üst üste binmesin)
+    pads.forEach((p) => { yatay(X0, p.x, p.y, C.orta); yatay(X0 - iz * 2.4, X0, p.y - iz * 2, C.soluk); via(X0, p.y); if (W <= 1100) via(p.x, p.y); }); // geniş ekranda uç noktayı DOM'daki iskele çizer (iki kare üst üste binmesin)
     const sag = W - U * 6;
     pads.forEach((p, i) => { const lx = p.x + Math.min(520, W * .33), hh = U * 5 * (i % 2 ? -1 : 1);
       yatay(lx, sag - U * 10 * (i % 3), p.y + hh, C.cip); dikey(lx, p.y + hh, p.y + hh + U * 12, C.cip); yatay(lx, lx + U * 14, p.y + hh + U * 12, C.cip); via(lx, p.y + hh); });
@@ -125,7 +125,7 @@ export function baslatKanvas(root, yollar) {
   const onizleme = root.getElementById('onizleme'), video = onizleme.querySelector('video');
   let onizlemeAcik = false;
   function onizlemeAc(i) {
-    if (i !== 1 || innerWidth <= 760) return;
+    if (i !== 1 || innerWidth <= 1100) return;
     const w = clamp(innerWidth * .22, 260, 340), h = w * 9 / 16 + 32, p = pads[1];
     onizleme.style.width = w + 'px';
     onizleme.style.left = Math.max(X0 + 28, p.x - w - 28) + 'px';
