@@ -199,7 +199,7 @@ ${ARAC_GRUPLARI.map(([grup, liste], g) => `        <div class="alet-grup"><h3>${
 `);
 
 // --- Projeler
-yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/', ekCss: '\n  <link rel="stylesheet" href="../css/vitrin.css">' })}${menu('projeler')}
+yaz('projeler/index.html', `${bas({ baslik: 'Projeler · Samet Duhan', aciklama: 'SkyTrack, claude-done-pixel ve chatgpt-done-pixel: Samet Duhan\'ın AI ile kurduğu projeler, demoları ve kodları.', yol: 'projeler/', ekCss: '\n  <link rel="stylesheet" href="../css/vitrin.css">\n  <link rel="stylesheet" href="../css/piksel-projeler.css">' })}${menu('projeler')}
   <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '02', etiket: 'ÜRETİM HATTI', damga: 'HEPSİ AÇIK KAYNAK', baslik: 'Projeler', poz: 'calisan', sahne: 'projeler', sinif: 'bant', cizim: FABRIKA_SVG,
       tanitim: 'Hepsinin kodu GitHub\'da, nasıl yapıldığı slaytlarda.' })}
@@ -217,7 +217,9 @@ ${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
   </main>${son()}
   <script type="module">
     import { baslat } from '../js/vitrin.js';
+    import { baslat as pikselProjeler } from '../js/piksel-projeler.js';
     baslat();
+    pikselProjeler();
   </script>
 </body>
 </html>

@@ -93,3 +93,17 @@ test('piksel Hakkımda: başlık çözme ve araç yuvaları sayfanın kendi metn
   assert.match(oku('js/piksel-hakkimda.js'), /PARCALAR = \[sahneKur, yolKur, detayKur\]/);
   assert.match(oku('css/piksel-hakkimda.css'), /\.aletler li\.px-kusanildi/);
 });
+
+test('piksel Projeler: etkileşimli katman yalnız proje listesinde; commit hattı gerçek sayıları js/sayilar.js ve projeler listesinden alır', () => {
+  for (const yol of ['projeler/index.html', 'en/projeler/index.html']) {
+    const h = oku(yol);
+    assert.match(h, /piksel-projeler\.css/, yol);
+    assert.match(h, /import \{ baslat as pikselProjeler \} from '\.\.\/(\.\.\/)?js\/piksel-projeler\.js'/, yol);
+  }
+  for (const yol of ['projeler/skytrack/index.html', 'hakkimda/index.html']) assert.doesNotMatch(oku(yol), /piksel-projeler/, yol);
+  const hat = oku('js/piksel-hakkimda.js') && oku('js/piksel-projeler-hat.js');
+  assert.match(hat, /SAYILAR\.repolar\[repoAdi\(p\)\]/);
+  assert.match(hat, /PROJELER\.map/);
+  assert.match(hat, /prefers-reduced-motion: reduce/);
+  assert.match(oku('js/piksel-projeler.js'), /querySelector\('\.vitrinler'\)/);
+});
