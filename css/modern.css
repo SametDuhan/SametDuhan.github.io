@@ -343,6 +343,8 @@ html:is([data-gorunum="modern"], [data-gorunum="piksel"]) {
   & .menu-linkler a[aria-current="page"] { background: var(--kart); color: var(--yazi); box-shadow: inset 0 0 0 1px var(--kenar), var(--golge); }
   & .menu-linkler a[aria-current="page"] svg { stroke: var(--p); }
   & .menu-linkler a[aria-current="page"] i { color: var(--p); }
+  /* kehribar (turuncu) pigmentte aktif menü numarası beyaz üstünde 3,1:1 kalıyordu: koyu turuncu ton */
+  & .menu-linkler a.p-kehribar[aria-current="page"] i { color: var(--vurgu-koyu); }
   & .menu-linkler a[aria-current="page"]::after { content: ""; flex: none; width: 7px; height: 7px; margin-left: auto; border-radius: 50%; background: var(--p); }
   @media (max-width: 900px) {
     & .yan-menu { border-bottom: 1px solid var(--kenar); backdrop-filter: blur(10px); }
@@ -465,7 +467,7 @@ html:is([data-gorunum="modern"], [data-gorunum="piksel"]) {
 /* ===================== modern koyu: sunumlardaki sabit renkli iki bileşen ===================== */
 /* hook sunumundaki "claude" penceresi ve ajan sunumundaki "onay" etiketi zemin renklerini jetonlardan (--yazi, --iyi) alır ama yazı renkleri sabit açık tondur:
    Kâğıt ve Modern açıkta jetonlar koyu/orta, yazı okunur; koyu temada jetonlar açılaşır ve krem-üstüne-krem kalırdı. Koyu temada zemin sabit koyu, yazı koyu. */
-html[data-gorunum="modern"][data-tema="koyu"] { & .pencere { background: #1f1e1d; border-color: var(--kenar); } & .kapi .onay text { fill: #10201a; } }
+html[data-gorunum="modern"][data-tema="koyu"] { & .pencere { background: #1f1e1d; border-color: var(--kenar); } & .kapi .onay text { fill: #10201a; } & .etiket .no { color: var(--p-ust, #1a1916); } }
 @media (prefers-color-scheme: dark) {
-  html[data-gorunum="modern"]:not([data-tema="acik"]) { & .pencere { background: #1f1e1d; border-color: var(--kenar); } & .kapi .onay text { fill: #10201a; } }
+  html[data-gorunum="modern"]:not([data-tema="acik"]) { & .pencere { background: #1f1e1d; border-color: var(--kenar); } & .kapi .onay text { fill: #10201a; } & .etiket .no { color: var(--p-ust, #1a1916); } }
 }
