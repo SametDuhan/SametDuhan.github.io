@@ -243,3 +243,23 @@ test('piksel İletişim eylemleri: zarf yalnız görsel geri bildirim (olayı en
   assert.match(oku('js/piksel-iletisim.js'), /PARCALAR = \[[^\]]*\beylemKur\b[^\]]*\]/);
   assert.match(oku('css/piksel-iletisim.css'), /@media print \{ \.px-zarf, \.px-kivilcim \{ display: none !important; \} \}/);
 });
+
+test('piksel sunumlar: katman js/atolye.js üzerinden yüklenir (sunum HTML\'ine dokunulmaz), stil yalnız piksel görünümde bağlanır, deste motorunun kendi düğmelerini kullanır', () => {
+  assert.match(oku('js/atolye.js'), /import\('\.\/piksel-deste\.js'\)\.then\(\(m\) => m\.baslat\(\)\)/);
+  for (const slug of ['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum']) {
+    for (const yol of [`slaytlar/${slug}/index.html`, `en/slaytlar/${slug}/index.html`]) {
+      assert.doesNotMatch(oku(yol), /piksel-deste/, `${yol}: sunum sayfası değişmemeli`);
+      assert.match(oku(yol), /atolye\.js/, yol);                    // katmanı yükleyen betik her sunumda var
+    }
+  }
+  const d = oku('js/piksel-deste.js');
+  assert.match(d, /css\/piksel-deste\.css/);
+  assert.match(d, /css\?\.remove\(\)/);                             // başka görünümde stil kalkar
+  assert.match(d, /querySelector\('\.deste'\)/);
+  const yol = oku('js/piksel-deste-yol.js');
+  assert.match(yol, /\.deste \.noktalar \.nokta/);                  // motorun noktaları
+  assert.match(yol, /aria-current/);
+  assert.match(yol, /prefers-reduced-motion: reduce/);
+  assert.doesNotMatch(yol, /location\.hash\s*=|history\./);        // gezinmeyi değiştirmez, yalnız izler
+  assert.match(oku('js/piksel-deste.js'), /PARCALAR = \[[^\]]*\byolKur\b[^\]]*\]/);
+});

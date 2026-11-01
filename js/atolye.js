@@ -202,3 +202,6 @@ for (const video of document.querySelectorAll('video')) {
   video.addEventListener('click', () => (video.paused ? video.play().catch(() => {}) : video.pause()));
   slaytaBagla(video, () => { if (!az()) { video.currentTime = 0; video.play().catch(() => {}); } }, () => video.pause());
 }
+
+// Piksel görünümün sunum katmanı (js/piksel-deste.js): yalnız piksel görünüm seçiliyken çalışır.
+import('./piksel-deste.js').then((m) => m.baslat());
