@@ -48,7 +48,7 @@ export function baslatKanvas(root, yollar) {
     const ys = pads.map((p) => p.y);
     dikey(X0, Math.min(...ys) - 70, Math.max(...ys) + 70, C.orta);
     dikey(X0 - iz * 2.4, Math.min(...ys) - 40, Math.max(...ys) + 40, C.soluk);
-    pads.forEach((p) => { yatay(X0, p.x, p.y, C.orta); yatay(X0 - iz * 2.4, X0, p.y - iz * 2, C.soluk); via(X0, p.y); via(p.x, p.y); });
+    pads.forEach((p) => { yatay(X0, p.x, p.y, C.orta); yatay(X0 - iz * 2.4, X0, p.y - iz * 2, C.soluk); via(X0, p.y); if (W <= 760) via(p.x, p.y); }); // geniş ekranda uç noktayı DOM'daki iskele çizer (iki kare üst üste binmesin)
     const sag = W - U * 6;
     pads.forEach((p, i) => { const lx = p.x + Math.min(520, W * .33), hh = U * 5 * (i % 2 ? -1 : 1);
       yatay(lx, sag - U * 10 * (i % 3), p.y + hh, C.cip); dikey(lx, p.y + hh, p.y + hh + U * 12, C.cip); yatay(lx, lx + U * 14, p.y + hh + U * 12, C.cip); via(lx, p.y + hh); });

@@ -90,8 +90,14 @@ class PikselAna extends HTMLElement {
       try { localStorage.setItem('gorunum', b.dataset.g); } catch {}
       kok.dataset.gorunum = b.dataset.g;
     });
-    baslatKanvas(root, { kok: K });
-    baslatKonsol(root, { kok: K });
+    // gölge DOM'un stili <link> ile gelir: yüklenmeden ölçüm yapılırsa limanlar konumlanmamış görünür (devre yolları kayar). Hazır olana dek gizli.
+    const bag = root.querySelector('link[rel="stylesheet"]');
+    this.style.visibility = 'hidden';
+    new Promise((tamam) => { if (bag.sheet) tamam(); else { bag.addEventListener('load', tamam); bag.addEventListener('error', tamam); } }).then(() => {
+      this.style.visibility = '';
+      baslatKanvas(root, { kok: K });
+      baslatKonsol(root, { kok: K });
+    });
   }
 }
 if (!customElements.get('piksel-ana')) customElements.define('piksel-ana', PikselAna);
