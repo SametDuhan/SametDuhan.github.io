@@ -43,6 +43,24 @@ html[data-gorunum="piksel"] {
   & .akis-yol.px-akis-var li.px-aktif .a-no { color: var(--vurgu); }
   & .akis-yol.px-akis-var li:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: 2px; }
   & .px-paket { position: absolute; left: 0; top: 0; z-index: 2; width: 12px; height: 8px; background: var(--vurgu); box-shadow: -14px 0 0 -2px rgba(217, 119, 87, .5), -28px 0 0 -3px rgba(217, 119, 87, .25); pointer-events: none; transition: transform .75s cubic-bezier(.45, 0, .2, 1); }
+
+  /* ---- ekran görüntüsü: pikselli noktalar, nişan çizgileri, açıklama kartları, zaman şeridi ---- */
+  & .p-sahne { position: relative; }
+  & .pin { transition: transform .25s cubic-bezier(.16, 1, .3, 1), background .2s; }
+  & .pin::before { border-radius: 0; }
+  & .px-hedef { position: absolute; z-index: 1; pointer-events: none; background: repeating-linear-gradient(var(--dir, 90deg), var(--vurgu) 0 8px, transparent 8px 14px); opacity: .85; transition: left .45s cubic-bezier(.16, 1, .3, 1), top .45s cubic-bezier(.16, 1, .3, 1); }
+  & .px-hedef-yatay { left: 0; right: 0; height: 2px; margin-top: -1px; top: -10px; }
+  & .px-hedef-dikey { top: 0; bottom: 0; width: 2px; margin-left: -1px; left: -10px; --dir: 180deg; }
+  & .pin-liste li { cursor: pointer; transition: border-color .2s, background .25s, transform .25s cubic-bezier(.16, 1, .3, 1); }
+  & .pin-liste li:hover { transform: translateY(-2px); border-color: var(--vurgu); }
+  & .pin-liste li:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: 2px; }
+  & .px-pin-ipucu { margin: 10px 0 0; font: 500 12px var(--mono); color: var(--soluk); }
+  & .px-pin-ipucu kbd { font: 500 11px var(--mono); padding: 1px 6px; border: 1px solid var(--kenar); color: var(--yazi); background: var(--panel); }
+  & .px-zaman { display: flex; align-items: center; gap: 14px; margin-top: 12px; font: 500 12.5px var(--mono); color: var(--soluk); }
+  & .px-zaman-yazi { min-width: 7.5em; color: var(--yazi); font-variant-numeric: tabular-nums; }
+  & .px-zaman-kareler { display: flex; gap: 4px; }
+  & .px-zaman-kareler i { width: 22px; height: 10px; background: #2c2724; transition: background .2s; }
+  & .px-zaman-kareler i.simdi { background: var(--vurgu); }
 }
-@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] :is(.px-pdurak, .px-pdurak-ad, .px-pray, .px-clone, .px-paket, .akis-yol.px-akis-var li) { transition: none; } html[data-gorunum="piksel"] .px-phat-kareler i { transition: none !important; opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] :is(.px-pdurak, .px-pdurak-ad, .px-pray, .px-clone, .px-paket, .akis-yol.px-akis-var li, .px-hedef, .pin-liste li, .px-zaman-kareler i) { transition: none; } html[data-gorunum="piksel"] .px-phat-kareler i { transition: none !important; opacity: 1; transform: none; } }
 @media print { .px-pray { display: none !important; } }

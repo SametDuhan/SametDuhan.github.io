@@ -293,3 +293,17 @@ test('piksel proje akışı: adımlar sayfanın kendi listesinden; paket döngü
   // akışın gerçek adımları var (paket boş listede dolaşmasın)
   for (const p of ['skytrack', 'claude-done-pixel', 'chatgpt-done-pixel']) assert.match(oku(`projeler/${p}/index.html`), /<ol class="akis-yol"[^>]*>(\s*<li[^>]*>.+?<\/li>){3,}/s, p);
 });
+
+test('piksel proje ekran bölümü: noktaları sayfanın kendi düğmelerine tıklayarak seçer (proje.js yolu), yalnız görünürken ve yazarken değilken; kare şeridi yalnız gösterir; karakter yok', () => {
+  const e = oku('js/piksel-proje-ekran.js');
+  assert.match(e, /pinler\[\+e\.key - 1\]\.click\(\)/);            // motorun kendi tıklama yolu (otomatik gezinti durur)
+  assert.match(e, /if \(!gorunur \|\|/);                           // bölüm görünmüyorsa 1-4 çalışmaz
+  assert.match(e, /input, textarea, select, \[contenteditable\]/);
+  assert.match(e, /e\.key === 'Enter' \|\| e\.key === ' '/);
+  assert.match(e, /--ri/); assert.match(e, /--ci/);                // kare göstergesi projenin kendi değişkenlerinden okur
+  assert.doesNotMatch(e, /style\.setProperty\('--[cr]i'/);         // kareleri kendisi sürmez, yalnız izler
+  assert.doesNotMatch(e, /pikselKarakter/);
+  assert.match(e, /geri\.length \? \(\) => geri\.forEach/);        // kurulacak parça yoksa temizleme işlevi döndürmez
+  assert.match(oku('js/piksel-proje.js'), /PARCALAR = \[[^\]]*\bekranKur\b[^\]]*\]/);
+  assert.match(oku('js/proje.js'), /\.pin-liste li/);               // dokunduğumuz liste gerçekten proje.js'in kullandığı liste
+});

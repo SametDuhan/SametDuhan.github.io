@@ -3,9 +3,10 @@
 import { rayKur } from './piksel-proje-ray.js';
 import { hatKur } from './piksel-proje-hat.js';
 import { akisKur } from './piksel-proje-akis.js';
+import { ekranKur } from './piksel-proje-ekran.js';
 
 const kok = document.documentElement;
-const PARCALAR = [rayKur, hatKur, akisKur];
+const PARCALAR = [rayKur, hatKur, akisKur, ekranKur];
 let kaldirlar = [];
 
 function guncelle() {
