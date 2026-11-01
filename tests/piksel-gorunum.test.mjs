@@ -117,3 +117,15 @@ test('piksel Projeler: ilerleme rayı projelerin gerçek yerlerinden hesaplanır
   assert.match(oku('js/piksel-projeler.js'), /PARCALAR = \[[^\]]*\brayKur\b[^\]]*\]/);
   assert.match(oku('css/piksel-projeler.css'), /@media print \{ \.px-ray \{ display: none !important; \} \}/);
 });
+
+test('piksel Projeler: süzgeç, komut kopyalama ve yazılarak gelen maddeler sayfanın kendi metninden çalışır; klavyeyle kullanılır; geri alınır', () => {
+  const v = oku('js/piksel-projeler-vitrin.js');
+  assert.match(v, /querySelectorAll\('\.v-etiketler span'\)/);   // etiketler sayfadan okunur
+  assert.match(v, /git clone \$\{gh\.href\}\.git/);              // kopyalanan komut projenin GitHub adresinden
+  assert.match(v, /e\.key === 'Enter' \|\| e\.key === ' '/);
+  assert.match(v, /aria-label/);
+  assert.match(v, /prefers-reduced-motion: reduce/);
+  assert.match(v, /return \(\) => geri\.forEach/);
+  assert.match(oku('js/piksel-projeler.js'), /PARCALAR = \[[^\]]*\bvitrinKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-projeler.css'), /\.vitrin\.px-gizli \{ display: none; \}/);
+});
