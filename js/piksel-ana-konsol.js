@@ -2,6 +2,7 @@
 // "git log" paneli (gerçek commit sayıları: proje proje ↔ toplam, 7 saniyede bir perdeyle değişir).
 import { SAYILAR } from './sayilar.js';
 import { PROJELER } from './projeler.js';
+import { DESTELER } from './desteler.js';
 import { t, EN } from './dil.js';
 import { dokuCiz, TON } from './piksel-perde-doku.js';
 import { pikselKarakter } from './piksel.js';
@@ -25,6 +26,18 @@ export function baslatKonsol(root, yollar) {
   const notlar = root.querySelectorAll('.k-not');
   notlar[0].textContent = t(`Her projenin GitHub sayımı, ${tarih}. Commit mesajındaki “Co-Authored-By: Claude” satırından sayılır; her gün otomatik güncellenir.`, `GitHub counts per project, ${tarih}. Counted from the “Co-Authored-By: Claude” line in commit messages; updated automatically every day.`);
   notlar[1].textContent = t(`${PROJELER.length} açık kaynak projenin toplamı, ${tarih}. Her kare bir commit.`, `Total across ${PROJELER.length} open-source projects, ${tarih}. Each square is one commit.`);
+
+  /* ---------- kimlik paneli görünümleri: ne yaptım, slaytlar, son commit ---------- */
+  const NE = { 'SkyTrack': t('Canlı uçak takibi, açık ADS-B verisiyle', 'Live flight tracking from open ADS-B data'), 'claude-done-pixel': t('Claude Code işini bitirince zıplayan piksel karakter', 'A pixel character that jumps when Claude Code finishes'), 'chatgpt-done-pixel': t('Aynı fikir Codex için', 'The same idea for Codex') };
+  const neListe = root.getElementById('k-ne');
+  PROJELER.forEach((pr) => { const li = document.createElement('li'), a = document.createElement('a'); a.href = `${yollar.kok}projeler/#${pr.ad.toLowerCase()}`; a.innerHTML = '<b></b><span></span>'; a.firstChild.textContent = pr.ad; a.lastChild.textContent = NE[pr.ad] || ''; li.append(a); neListe.append(li); });
+  const slListe = root.getElementById('k-sl');
+  DESTELER.forEach((d) => { const li = document.createElement('li'), a = document.createElement('a'), ad = EN && d.en ? d.en.baslik : d.baslik; a.href = `${yollar.kok}slaytlar/${d.slug}/`; a.innerHTML = '<b></b><span></span>'; a.firstChild.textContent = ad; a.lastChild.textContent = `${d.slaytSayisi} ${t('slayt', 'slides')} · ~${d.dakika} ${t('dk', 'min')}`; li.append(a); slListe.append(li); });
+  const sonEl = root.getElementById('k-son');
+  const gunOnce = (iso) => { const gun = Math.round((Date.now() - new Date(iso)) / 864e5); return gun <= 0 ? t('bugün', 'today') : t(`${gun} gün önce`, `${gun} days ago`); };
+  fetch(`https://api.github.com/repos/SametDuhan/${repoAdi(PROJELER[0])}/commits?per_page=1`, { headers: { Accept: 'application/vnd.github+json' } }).then((r) => (r.ok ? r.json() : Promise.reject(r.status))).then(([c]) => {
+    const m = c.commit.message.split('\n')[0]; sonEl.textContent = t('son commit: ', 'latest commit: ') + (m.length > 44 ? m.slice(0, 43) + '…' : m) + ' · ' + gunOnce(c.commit.author.date);
+  }).catch(() => { sonEl.remove(); });
 
   const liste = root.getElementById('k-liste');
   PROJELER.forEach((pr, s) => {
@@ -88,7 +101,15 @@ export function baslatKonsol(root, yollar) {
     const b = ic.animate([{ transform: 'scale(0,.012)', filter: 'brightness(3)' }, { transform: 'scale(1,.012)', filter: 'brightness(2.4)', offset: .4 }, { transform: 'scale(1,1)', filter: 'brightness(1)' }], { duration: 520, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
     await bit(b); a.cancel(); b.cancel();
   };
-  const GECISLER = [perdeGecisi, mozaik, kosucu, tv]; let sira = 0;
+  // 5) bantlar: panel yatay bantlara bölünür, bantlar sırayla sağdan ve soldan kayarak örter, sonra kayıp gider
+  const bantlar = async (goster) => {
+    const c = boyutla(), W = gk.width, H = gk.height, off = document.createElement('canvas'); off.width = W; off.height = H; dokuCiz(off.getContext('2d'), W, H, 91);
+    const n = 8, bh = Math.ceil(H / n), kay = (p, yonA) => { c.clearRect(0, 0, W, H); for (let i = 0; i < n; i++) { const yon = (i % 2 ? 1 : -1) * yonA, d = Math.max(0, Math.min(1, p * 1.5 - i * .07)); c.drawImage(off, 0, i * bh, W, bh, Math.round(yon * W * (yonA > 0 ? 1 - d : d) / 12) * 12, i * bh, W, bh); } };
+    await kare(650, (p) => kay(p, 1)); c.drawImage(off, 0, 0); goster(); await bekle(150);
+    await kare(650, (p) => kay(p, -1));
+    c.clearRect(0, 0, W, H);
+  };
+  const GECISLER = [perdeGecisi, mozaik, kosucu, tv, bantlar]; let sira = 0;
   let gorunum = 0, mesgul = false, durak = false;
   async function degistir(hedef, perdeli = true) {
     if (mesgul || hedef === gorunum) return; mesgul = true;
@@ -105,7 +126,7 @@ export function baslatKonsol(root, yollar) {
   (async function dongu() {
     if (AZ) return;
     await bekle(7500);
-    for (;;) { await bekle(7000); while (durak || document.hidden || mesgul || document.documentElement.dataset.gorunum !== 'piksel') await bekle(500); await degistir(gorunum ? 0 : 1); }
+    for (;;) { await bekle(7000); while (durak || document.hidden || mesgul || document.documentElement.dataset.gorunum !== 'piksel') await bekle(500); await degistir((gorunum + 1) % slaytlar.length); }
   })();
 
   /* ---------- konsol ---------- */

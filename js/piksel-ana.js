@@ -51,11 +51,28 @@ const sablon = () => `
   <aside class="kanit" aria-label="${t('Projelerde Claude ile ortak yazılan commit sayıları', 'Commits co-authored with Claude, per project')}">
     <div class="kanit-ic">
       <div class="kanit-sahne">
-        <section class="kanit-slayt acik" data-s="0">
+        <section class="kanit-slayt acik" data-s="kimlik">
+          <p class="kanit-baslik"><span class="istem">$</span> whoami</p>
+          <p class="kn-ad">Samet Duhan Şahin</p>
+          <dl class="kn-bilgi">
+            <div><dt>${t('Okul', 'School')}</dt><dd>${t('Atatürk Üniversitesi', 'Atatürk University')}</dd></div>
+            <div><dt>${t('Bölüm', 'Major')}</dt><dd>${t('Bilgisayar mühendisliği, 3. sınıf', 'Computer engineering, 3rd year')}</dd></div>
+            <div><dt>${t('Yaptığı', 'Does')}</dt><dd>${t('AI ile sistem kuruyor', 'Builds systems with AI')}</dd></div>
+            <div><dt>${t('Diller', 'Languages')}</dt><dd>${t('Türkçe · İngilizce B1', 'Turkish · English B1')}</dd></div>
+          </dl>
+          <a class="kn-staj" href="${K}iletisim/?konu=staj"><i aria-hidden="true"></i><span>${t('Staj arıyorum, hemen başlayabilirim', 'Looking for an internship, available now')}</span></a>
+        </section>
+        <section class="kanit-slayt" data-s="ne" aria-hidden="true" inert>
+          <p class="kanit-baslik"><span class="istem">$</span> ls projeler/</p>
+          <p class="kn-baslik">${t('Üç açık kaynak proje', 'Three open-source projects')}</p>
+          <ul class="kn-liste" id="k-ne"></ul>
+        </section>
+        <section class="kanit-slayt" data-s="0" aria-hidden="true" inert>
           <p class="kanit-baslik"><span class="istem">$</span> git log --stat</p>
           <p class="kanit-ana"><b class="k-commit">0</b> <span>${t('commit, tüm projelerde', 'commits, all projects')}</span></p>
           <p class="kanit-alt"><b class="k-claude">0</b> ${t('tanesi', '')} <strong>${t('Claude ile ortak yazıldı', 'co-authored with Claude')}</strong> <span class="k-yuzde"></span></p>
           <ul class="kanit-liste" id="k-liste"></ul>
+          <p class="k-son" id="k-son"></p>
           <p class="kanit-not k-not"></p>
         </section>
         <section class="kanit-slayt" data-s="1" aria-hidden="true" inert>
@@ -66,10 +83,20 @@ const sablon = () => `
           <div class="kanit-oz"><button type="button" data-g="claude"><i class="n t"></i>${t('Claude ile', 'with Claude')}</button><button type="button" data-g="el"><i class="n g"></i>${t('tek başıma', 'on my own')}</button></div>
           <p class="kanit-not k-not"></p>
         </section>
+        <section class="kanit-slayt" data-s="sl" aria-hidden="true" inert>
+          <p class="kanit-baslik"><span class="istem">$</span> ls slaytlar/</p>
+          <p class="kn-baslik">${t('AI\'ı sıfırdan öğreten slaytlar', 'Slides that teach AI from scratch')}</p>
+          <ul class="kn-liste" id="k-sl"></ul>
+        </section>
+        <section class="kanit-slayt" data-s="ar" aria-hidden="true" inert>
+          <p class="kanit-baslik"><span class="istem">$</span> which araclar</p>
+          <p class="kn-baslik">${t('Kullandığım araçlar', 'Tools I use')}</p>
+          <ul class="kn-araclar"><li>Claude Code</li><li>Codex</li><li>Hermes Agent</li><li>Abacus AI</li><li>Herdr</li></ul>
+        </section>
       </div>
       <div class="perde" aria-hidden="true"><canvas class="perde-doku"></canvas><canvas class="perde-kar" width="72" height="68"></canvas></div>
     </div>
-    <div class="kanit-nokta" role="group" aria-label="${t('Görünüm', 'View')}"><button type="button" data-g="0" class="on" aria-label="${t('Proje proje', 'Per project')}"></button><button type="button" data-g="1" aria-label="${t('Toplam', 'Total')}"></button></div>
+    <div class="kanit-nokta" role="group" aria-label="${t('Görünüm', 'View')}"><button type="button" data-g="0" class="on" aria-label="${t('Kimlik', 'Identity')}"></button><button type="button" data-g="1" aria-label="${t('Projeler', 'Projects')}"></button><button type="button" data-g="2" aria-label="${t('Proje proje commit', 'Commits per project')}"></button><button type="button" data-g="3" aria-label="${t('Toplam', 'Total')}"></button><button type="button" data-g="4" aria-label="${t('Slaytlar', 'Slides')}"></button><button type="button" data-g="5" aria-label="${t('Araçlar', 'Tools')}"></button></div>
   </aside>
 
   <nav class="limanlar" aria-label="${t('Bölümler', 'Sections')}">
