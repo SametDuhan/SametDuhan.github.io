@@ -2,9 +2,10 @@
 // üstüne parçalar eklenir, başka görünüme geçilince kaldırılır (js/piksel-hakkimda.js ile aynı kalıp). Yalnız 404 sayfasında çalışır.
 import { sahneKur } from './piksel-404-sahne.js';
 import { oneriKur } from './piksel-404-liste.js';
+import { konsolKur } from './piksel-404-konsol.js';
 
 const kok = document.documentElement;
-const PARCALAR = [sahneKur, oneriKur];
+const PARCALAR = [sahneKur, oneriKur, konsolKur];
 let kaldirlar = [];
 
 function guncelle() {

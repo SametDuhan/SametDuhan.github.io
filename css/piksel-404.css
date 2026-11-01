@@ -31,6 +31,18 @@ html[data-gorunum="piksel"] {
   & .px-404-liste b { font: 700 17px/1.25 var(--baslik); color: var(--yazi); }
   & .px-404-liste em { font: 500 12px var(--mono); font-style: normal; color: var(--vurgu-koyu); overflow-wrap: anywhere; text-align: right; }
   @media (max-width: 560px) { & .px-404-liste a { grid-template-columns: 1fr; } & .px-404-liste em { text-align: left; } & .px-404-mod { display: none; } }
+
+  /* ---- mini terminal ---- */
+  & .px-404-konsol { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--kenar); }
+  & .px-404-log { max-height: 150px; overflow-y: auto; font: 500 12.5px/1.6 var(--mono); color: var(--soluk); scrollbar-width: thin; scrollbar-color: #5a2f22 transparent; }
+  & .px-404-log:empty { display: none; }
+  & .px-404-log p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+  & .px-404-log .c { color: var(--yazi); }
+  & .px-404-form { display: flex; align-items: center; gap: 8px; margin-top: 6px; padding: 8px 10px; border: 1px solid var(--kenar); background: #141312; font: 500 13px var(--mono); transition: border-color .2s; }
+  & .px-404-form:focus-within { border-color: var(--vurgu); }
+  & .px-404-form input { all: unset; flex: 1; min-width: 0; color: var(--yazi); caret-color: var(--vurgu); font: 500 13px var(--mono); }
+  & .px-404-form input::placeholder { color: #a39789; }
+  & .gizli { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 }
 @keyframes px-404-yan { 50% { opacity: .2; } }
 @media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] :is(.px-404-etiket::before, .px-404-liste a, .px-404-balon) { animation: none; transition: none; } }
