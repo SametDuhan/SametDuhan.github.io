@@ -275,3 +275,19 @@ test('piksel sunumlar geçiş: deste motorunun goster olayını dinler, kendi an
   assert.match(oku('js/piksel-deste.js'), /PARCALAR = \[[^\]]*\bgecisKur\b[^\]]*\]/);
   assert.match(oku('css/piksel-deste.css'), /\.slayt\.px-giris > \* \{ animation: none; \}/);   // hareketi azalt kuralı
 });
+
+test('piksel sunumlar bitiş: sıradaki sunum listeden, kutlama yalnız kullanıcı varınca, 1-9 motorun hashchange yoluyla; yazarken ve pencere açıkken çalışmaz', () => {
+  const b = oku('js/piksel-deste-bitis.js');
+  assert.match(b, /DESTELER\[\(sira \+ 1\) % DESTELER\.length\]/);
+  assert.match(b, /performance\.now\(\) - t0 < 300/);                 // doğrudan #9 ile açılınca konfeti yok
+  assert.match(b, /location\.hash = `#\$\{e\.key\}`/);                // motorun kendi yolu (hashchange → git)
+  assert.match(b, /input, textarea, select, \[contenteditable\]/);
+  assert.match(b, /dialog\[open\]/);
+  assert.match(b, /prefers-reduced-motion: reduce/);
+  assert.doesNotMatch(b, /ilerlemeKaydet|localStorage\.setItem|setItem/);   // tamamlanma kaydını motor tutar, burada yazılmaz
+  assert.match(oku('js/deste.js'), /addEventListener\('hashchange'/);
+  assert.match(oku('js/piksel-deste.js'), /PARCALAR = \[[^\]]*\bbitisKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-deste.css'), /@media print \{ \.px-tamam, \.px-konfeti \{ display: none !important; \} \}/);
+  // sunum listesindeki her sunumun gerçek bir sayfası var (sıradaki kart ölü bağlantıya gitmesin)
+  for (const slug of ['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum']) assert.ok(existsSync(join(KOK, `slaytlar/${slug}/index.html`)), slug);
+});

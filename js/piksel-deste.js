@@ -3,9 +3,10 @@
 // js/atolye.js (tüm sunumlarda yüklü) bu modülü yükler; sayfa HTML'ine dokunulmaz.
 import { yolKur } from './piksel-deste-yol.js';
 import { gecisKur } from './piksel-deste-gecis.js';
+import { bitisKur } from './piksel-deste-bitis.js';
 
 const kok = document.documentElement;
-const PARCALAR = [yolKur, gecisKur];
+const PARCALAR = [yolKur, gecisKur, bitisKur];
 let kaldirlar = [], css = null;
 
 function guncelle() {
