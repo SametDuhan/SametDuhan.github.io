@@ -132,7 +132,7 @@ export function baslatKanvas(root, yollar) {
   // terminal: kendimle ilgili gerçek bilgiler sırayla yazılır (komut yazılır, çıktısı gelir, silinir, sonrakine geçer)
   const BILGI = [
     ['whoami', t('Samet Duhan Şahin', 'Samet Duhan Şahin')],
-    ['cat okul.txt', t('bilgisayar mühendisliği · 3. sınıf', 'computer engineering · 3rd year')],
+    ['cat okul.txt', t('Atatürk Üniversitesi · bilgisayar mühendisliği · 3. sınıf', 'Atatürk University · computer engineering · 3rd year')],
     ['cat yapiyorum.txt', t('AI ile sistem kuruyorum: ajanlar, açık kaynak araçlar', 'I build systems with AI: agents, open-source tools')],
     ['ls projeler/', 'skytrack  claude-done-pixel  chatgpt-done-pixel'],
     ['cat durum.txt', t('staj arıyorum, hemen başlayabilirim', 'looking for an internship, available now')],
