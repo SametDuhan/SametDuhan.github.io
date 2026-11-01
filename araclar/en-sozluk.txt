@@ -87,9 +87,9 @@ karar ::: decide
 yap ::: do
 kontrol ::: check
 > AI ile sistem kuran geliştirici ::: > Developer who builds systems with AI
-Bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan uygulamalar. Yapay zeka da ilgi alanım. ::: I'm a third-year computer engineering student. I use AI not to chat but to build systems that get work done: agents I write code with, tools that report back on their own, apps that run on open data. Artificial intelligence is also an interest of mine.
+Atatürk Üniversitesi bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI'ı sohbet etmek için değil, iş bitiren sistemler kurmak için kullanıyorum: kodu birlikte yazdığım ajanlar, kendi kendine haber veren araçlar, açık veriyle çalışan uygulamalar. Yapay zeka da ilgi alanım. ::: I'm a third-year computer engineering student at Atatürk University. I use AI not to chat but to build systems that get work done: agents I write code with, tools that report back on their own, apps that run on open data. Artificial intelligence is also an interest of mine.
 Okuyor ::: Studying
-Bilgisayar mühendisliği, 3. sınıf ::: Computer engineering, 3rd year
+Atatürk Üniversitesi, bilgisayar mühendisliği, 3. sınıf ::: Atatürk University, computer engineering, 3rd year
 İlgi alanı ::: Interest
 Yapay zeka ::: Artificial intelligence
 Son işi ::: Latest work
