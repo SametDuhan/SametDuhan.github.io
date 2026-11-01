@@ -240,3 +240,14 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .kn-araclar li{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--cizgi);font-family:var(--baslik);font-weight:600;font-size:16px;color:var(--yazi)}
 .kn-araclar li::before{content:"";flex:none;width:10px;height:10px;background:var(--turuncu)}
 .k-son{margin:10px 0 0;font-family:var(--kod);font-size:11.5px;line-height:1.4;color:var(--yesil);overflow-wrap:anywhere}
+
+/* panel boyu aktif görünüme uyar (boş alan kalmaz); alt köşede ipucu yazısıyla çakışmasın diye en çok görünüm yüksekliği kadar */
+.kanit-slayt:not(.acik){display:none}
+.kanit-slayt{grid-area:auto}
+@media (min-width:1101px){
+  .kanit-ana b{font-size:40px}
+  .kanit-liste{gap:7px}.kanit-liste a{padding:7px 9px 8px}
+  .kanit-slayt{padding:14px 14px 12px}
+  .kanit-not{margin-top:8px;font-size:11.5px;line-height:1.35}
+  .kanit-baslik{margin-bottom:8px}
+}

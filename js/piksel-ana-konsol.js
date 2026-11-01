@@ -35,8 +35,8 @@ export function baslatKonsol(root, yollar) {
   DESTELER.forEach((d) => { const li = document.createElement('li'), a = document.createElement('a'), ad = EN && d.en ? d.en.baslik : d.baslik; a.href = `${yollar.kok}slaytlar/${d.slug}/`; a.innerHTML = '<b></b><span></span>'; a.firstChild.textContent = ad; a.lastChild.textContent = `${d.slaytSayisi} ${t('slayt', 'slides')} · ~${d.dakika} ${t('dk', 'min')}`; li.append(a); slListe.append(li); });
   const sonEl = root.getElementById('k-son');
   const gunOnce = (iso) => { const gun = Math.round((Date.now() - new Date(iso)) / 864e5); return gun <= 0 ? t('bugün', 'today') : t(`${gun} gün önce`, `${gun} days ago`); };
-  fetch(`https://api.github.com/repos/SametDuhan/${repoAdi(PROJELER[0])}/commits?per_page=1`, { headers: { Accept: 'application/vnd.github+json' } }).then((r) => (r.ok ? r.json() : Promise.reject(r.status))).then(([c]) => {
-    const m = c.commit.message.split('\n')[0]; sonEl.textContent = t('son commit: ', 'latest commit: ') + (m.length > 44 ? m.slice(0, 43) + '…' : m) + ' · ' + gunOnce(c.commit.author.date);
+  fetch(`https://api.github.com/repos/SametDuhan/${repoAdi(PROJELER[0])}/commits?per_page=10`, { headers: { Accept: 'application/vnd.github+json' } }).then((r) => (r.ok ? r.json() : Promise.reject(r.status))).then((liste) => {
+    const c = liste.find((x) => !/^Merge /.test(x.commit.message)) || liste[0], m = c.commit.message.split('\n')[0];   // birleştirme commit'i değil, gerçek değişiklik sonEl.textContent = t('son commit: ', 'latest commit: ') + (m.length > 44 ? m.slice(0, 43) + '…' : m) + ' · ' + gunOnce(c.commit.author.date);
   }).catch(() => { sonEl.remove(); });
 
   const liste = root.getElementById('k-liste');
@@ -73,25 +73,29 @@ export function baslatKonsol(root, yollar) {
   const ic = panel.querySelector('.kanit-ic'), gk = document.createElement('canvas'); gk.className = 'gecis-kanvas'; gk.setAttribute('aria-hidden', 'true'); ic.append(gk);
   const kare = (ms, fn) => new Promise((res) => { const b = performance.now(); let bitti = false; const son = () => { if (bitti) return; bitti = true; fn(1); res(); }; const d = (now) => { if (bitti) return; const p = Math.min(1, (now - b) / ms); fn(p); p < 1 ? requestAnimationFrame(d) : son(); }; requestAnimationFrame(d); setTimeout(son, ms + 400); });  // sekme arka plandaysa rAF durur: zaman aşımı geçişi yine bitirir
   const boyutla = () => { gk.width = ic.offsetWidth || 300; gk.height = ic.offsetHeight || 300; return gk.getContext('2d'); };
+  // Görünümler farklı yükseklikte: panel boyu aktif görünüme uyar. Örtü canvas'ı değişimden sonra yeni boya göre yeniden kurulur (örtü o sırada tamamen kapalı).
+  const dokuKur = (W, H) => { const off = document.createElement('canvas'); off.width = W; off.height = H; dokuCiz(off.getContext('2d'), W, H, 91); return off; };
   // 2) mozaik: kareler rastgele sırayla panelin üstünü örter, görünüm değişir, kareler yine rastgele dağılır
   const mozaik = async (goster) => {
-    const c = boyutla(), W = gk.width, H = gk.height, P = 12, sut = Math.ceil(W / P), n = sut * Math.ceil(H / P);
-    const sira2 = Array.from({ length: n }, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [sira2[i], sira2[j]] = [sira2[j], sira2[i]]; }
-    const renk = sira2.map(() => TON[Math.floor(Math.random() * TON.length)]), yer = (i) => [(i % sut) * P, Math.floor(i / sut) * P];
-    let k = 0; await kare(650, (p) => { for (const h = Math.floor(p * n); k < h; k++) { const i = sira2[k]; c.fillStyle = renk[i]; c.fillRect(...yer(i), P, P); } });
+    const P = 12;
+    const kur = () => { const c = boyutla(), W = gk.width, H = gk.height, sut = Math.ceil(W / P), n = sut * Math.ceil(H / P); const o = Array.from({ length: n }, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; } return { c, W, H, sut, n, o, renk: o.map(() => TON[Math.floor(Math.random() * TON.length)]) }; };
+    const yer = (m, i) => [(i % m.sut) * P, Math.floor(i / m.sut) * P];
+    let m = kur(), k = 0; await kare(650, (p) => { for (const h = Math.floor(p * m.n); k < h; k++) { const i = m.o[k]; m.c.fillStyle = m.renk[i]; m.c.fillRect(...yer(m, i), P, P); } });
     goster(); await bekle(150);
-    k = 0; await kare(650, (p) => { for (const h = Math.floor(p * n); k < h; k++) c.clearRect(...yer(sira2[k]), P, P); });
-    c.clearRect(0, 0, W, H);
+    m = kur(); m.o.forEach((i) => { m.c.fillStyle = m.renk[i]; m.c.fillRect(...yer(m, i), P, P); });   // yeni boyda yine tam örtü
+    k = 0; await kare(650, (p) => { for (const h = Math.floor(p * m.n); k < h; k++) m.c.clearRect(...yer(m, m.o[k]), P, P); });
+    m.c.clearRect(0, 0, m.W, m.H);
   };
   // 3) koşucu: Claude pikseli soldan sağa koşarak perdeyi serer, geri dönüp aynı yoldan kaldırır
   const kosucu = async (goster) => {
-    const c = boyutla(), W = gk.width, H = gk.height, u = Math.max(2, Math.round(H / 110)), zemin = H * .5 + 6 * u, off = document.createElement('canvas'); off.width = W; off.height = H; dokuCiz(off.getContext('2d'), W, H, 91);
-    const kos = (kapla) => kare(750, (p) => {
-      const x = -16 * u + (W + 32 * u) * p, e = Math.max(0, Math.min(W, x + 8 * u)); c.clearRect(0, 0, W, H);
+    const kur = () => { const c = boyutla(), W = gk.width, H = gk.height, u = Math.max(2, Math.round(H / 110)); return { c, W, H, u, zemin: H * .5 + 6 * u, off: dokuKur(W, H) }; };
+    const kos = (m, kapla) => kare(750, (p) => {
+      const { c, W, H, u, off } = m, x = -16 * u + (W + 32 * u) * p, e = Math.max(0, Math.min(W, x + 8 * u)); c.clearRect(0, 0, W, H);
       if (kapla) c.drawImage(off, 0, 0, e, H, 0, 0, e, H); else c.drawImage(off, e, 0, W - e, H, e, 0, W - e, H);
-      pikselKarakter(c, { x, yOff: -Math.abs(Math.sin(p * 40)) * 1.2 * u, look: 1, run: true, tilt: 0, armUp: false, air: false, legPhase: Math.floor(p * 26) % 2 }, zemin, u, p * 3);
+      pikselKarakter(c, { x, yOff: -Math.abs(Math.sin(p * 40)) * 1.2 * u, look: 1, run: true, tilt: 0, armUp: false, air: false, legPhase: Math.floor(p * 26) % 2 }, m.zemin, u, p * 3);
     });
-    await kos(true); c.drawImage(off, 0, 0); goster(); await bekle(120); await kos(false); c.clearRect(0, 0, W, H);
+    let m = kur(); await kos(m, true); m.c.drawImage(m.off, 0, 0); goster(); await bekle(120);
+    m = kur(); await kos(m, false); m.c.clearRect(0, 0, m.W, m.H);
   };
   // 4) eski TV: panel ince bir çizgiye çöker, çizgi yatayda söner, yeni görünüm çizgiden açılır
   const tv = async (goster) => {
@@ -103,11 +107,10 @@ export function baslatKonsol(root, yollar) {
   };
   // 5) bantlar: panel yatay bantlara bölünür, bantlar sırayla sağdan ve soldan kayarak örter, sonra kayıp gider
   const bantlar = async (goster) => {
-    const c = boyutla(), W = gk.width, H = gk.height, off = document.createElement('canvas'); off.width = W; off.height = H; dokuCiz(off.getContext('2d'), W, H, 91);
-    const n = 8, bh = Math.ceil(H / n), kay = (p, yonA) => { c.clearRect(0, 0, W, H); for (let i = 0; i < n; i++) { const yon = (i % 2 ? 1 : -1) * yonA, d = Math.max(0, Math.min(1, p * 1.5 - i * .07)); c.drawImage(off, 0, i * bh, W, bh, Math.round(yon * W * (yonA > 0 ? 1 - d : d) / 12) * 12, i * bh, W, bh); } };
-    await kare(650, (p) => kay(p, 1)); c.drawImage(off, 0, 0); goster(); await bekle(150);
-    await kare(650, (p) => kay(p, -1));
-    c.clearRect(0, 0, W, H);
+    const kur = () => { const c = boyutla(), W = gk.width, H = gk.height, n = 8; return { c, W, H, n, bh: Math.ceil(H / n), off: dokuKur(W, H) }; };
+    const kay = (m, p, yonA) => { const { c, W, H, n, bh, off } = m; c.clearRect(0, 0, W, H); for (let i = 0; i < n; i++) { const yon = (i % 2 ? 1 : -1) * yonA, d = Math.max(0, Math.min(1, p * 1.5 - i * .07)); c.drawImage(off, 0, i * bh, W, bh, Math.round(yon * W * (yonA > 0 ? 1 - d : d) / 12) * 12, i * bh, W, bh); } };
+    let m = kur(); await kare(650, (p) => kay(m, p, 1)); m.c.drawImage(m.off, 0, 0); goster(); await bekle(150);
+    m = kur(); await kare(650, (p) => kay(m, p, -1)); m.c.clearRect(0, 0, m.W, m.H);
   };
   const GECISLER = [perdeGecisi, mozaik, kosucu, tv, bantlar]; let sira = 0;
   let gorunum = 0, mesgul = false, durak = false;
