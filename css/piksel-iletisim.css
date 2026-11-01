@@ -1,0 +1,22 @@
+/* Piksel görünüm: İletişim'e özel parçalar (js/piksel-iletisim*.js ekler). Yalnız piksel görünümde etkili. */
+html[data-gorunum="piksel"] {
+  & .sayfa-basi:has(.px-posta) { position: relative; }
+
+  /* ---- postacı sahnesi ---- */
+  & .px-posta { position: absolute; right: 0; top: 6px; width: 320px; height: 242px; padding: 0; border: 1px solid var(--kenar); background: #1c1a18; color: inherit; font: inherit; cursor: pointer; transition: border-color .25s; }
+  & .px-posta::before, & .px-posta::after { content: ""; position: absolute; width: 20px; height: 20px; border: 3px solid var(--vurgu); pointer-events: none; }
+  & .px-posta::before { left: -3px; top: -3px; border-right: 0; border-bottom: 0; }
+  & .px-posta::after { right: -3px; bottom: -3px; border-left: 0; border-top: 0; }
+  & .px-posta:hover, & .px-posta:focus-visible { border-color: var(--vurgu); }
+  & .px-posta canvas { position: absolute; left: 0; top: 0; width: 320px; height: 206px; image-rendering: pixelated; }
+  & .px-posta-etiket { position: absolute; left: 10px; top: 8px; z-index: 1; font: 500 11px var(--mono); color: var(--soluk); }
+  & .px-posta-etiket::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 7px; background: #2ecc40; animation: px-nabiz 1.6s ease-in-out infinite; }
+  & .px-posta-saat { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; display: flex; align-items: center; justify-content: center; gap: 8px; border-top: 1px solid var(--kenar); font: 500 11.5px var(--mono); color: var(--soluk); text-align: center; padding: 0 8px; }
+  & .px-posta-saat b { color: var(--yazi); font: 700 15px var(--baslik); letter-spacing: .04em; }
+  & .px-posta-balon { position: absolute; left: 14px; right: 14px; top: 34px; z-index: 2; padding: 9px 12px; background: var(--vurgu); color: #1a1210; font: 700 14px/1.35 var(--sans); text-align: left; opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .35s cubic-bezier(.16, 1, .3, 1); pointer-events: none; }
+  & .px-posta-balon.goster { opacity: 1; transform: none; }
+  & .px-posta-balon::after { content: ""; position: absolute; left: 70px; bottom: -8px; border: 8px solid transparent; border-top-color: var(--vurgu); border-bottom: 0; }
+  @media (max-width: 1149px) { & .px-posta { display: none; } }
+}
+@keyframes px-nabiz { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-posta-etiket::before { animation: none; } }

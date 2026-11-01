@@ -255,7 +255,7 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
 `);
 
 // --- İletişim
-yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklama: 'Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.', yol: 'iletisim/' })}${menu('iletisim')}
+yaz('iletisim/index.html', `${bas({ baslik: 'İletişim · Samet Duhan', aciklama: 'Samet Duhan ile iletişim: iş teklifi, ortak proje ya da soru için mail, GitHub ve LinkedIn.', yol: 'iletisim/', ekCss: '\n  <link rel="stylesheet" href="../css/piksel-iletisim.css">' })}${menu('iletisim')}
   <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'STAJA AÇIK', baslik: 'İletişim', poz: 'postaci', sahne: 'iletisim',
       tanitim: '<strong>Staj arıyorum, hemen başlayabilirim.</strong> Konuyu seç, mesajını yaz, gönder. Mail uygulaman açılmazsa mesajın kendiliğinden kopyalanır.',
@@ -318,7 +318,9 @@ ${sayfaBasi({ no: '04', etiket: 'POSTA', damga: 'STAJA AÇIK', baslik: 'İletiş
 
   <script type="module">
     import { baslat } from '../js/iletisim.js';
+    import { baslat as pikselIletisim } from '../js/piksel-iletisim.js';
     baslat();
+    pikselIletisim();
   </script>
 </body>
 </html>

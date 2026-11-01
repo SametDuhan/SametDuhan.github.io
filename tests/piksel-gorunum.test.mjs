@@ -174,3 +174,22 @@ test('piksel Slaytlar: arama iki dilde, "/" ve 1-9 kısayolları, Escape; süzü
   assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\baraKur\b[^\]]*\]/);
   assert.match(oku('css/piksel-slaytlar.css'), /\.deste-karti\.px-gizli \{ display: none; \}/);
 });
+
+test('piksel İletişim: katman yalnız İletişim sayfasında; formun mantığına ve mail adresinin gizliliğine dokunmaz; saat Europe/Istanbul', () => {
+  for (const yol of ['iletisim/index.html', 'en/iletisim/index.html']) {
+    const h = oku(yol);
+    assert.match(h, /piksel-iletisim\.css/, yol);
+    assert.match(h, /import \{ baslat as pikselIletisim \} from '\.\.\/(\.\.\/)?js\/piksel-iletisim\.js'/, yol);
+  }
+  for (const yol of ['hakkimda/index.html', 'projeler/index.html']) assert.doesNotMatch(oku(yol), /piksel-iletisim/, yol);
+  for (const js of ['js/piksel-iletisim.js', 'js/piksel-iletisim-sahne.js', 'css/piksel-iletisim.css']) {
+    const s = oku(js);
+    assert.ok(!s.includes('16sametduhan16'), `${js}: mail adresi düz metin olmamalı`);
+    assert.doesNotMatch(s, /mailto:|sendBeacon|fetch\(/, `${js}: gönderme/ağ yok`);
+  }
+  const sahne = oku('js/piksel-iletisim-sahne.js');
+  assert.match(sahne, /Europe\/Istanbul/);
+  assert.match(sahne, /querySelectorAll\('\.iletisim-bilgi li'\)/);   // söylediği bilgiler sayfadan okunur
+  assert.match(sahne, /prefers-reduced-motion: reduce/);
+  assert.match(oku('js/piksel-iletisim.js'), /getElementById\('yazi-formu'\)/);
+});
