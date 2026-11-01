@@ -107,3 +107,13 @@ test('piksel Projeler: etkileşimli katman yalnız proje listesinde; commit hatt
   assert.match(hat, /prefers-reduced-motion: reduce/);
   assert.match(oku('js/piksel-projeler.js'), /querySelector\('\.vitrinler'\)/);
 });
+
+test('piksel Projeler: ilerleme rayı projelerin gerçek yerlerinden hesaplanır, tıklanır, kaydırma kapsayıcısından bağımsızdır', () => {
+  const ray = oku('js/piksel-projeler-ray.js');
+  assert.match(ray, /getBoundingClientRect/);
+  assert.match(ray, /scrollIntoView/);
+  assert.match(ray, /capture: true/);
+  assert.match(ray, /prefers-reduced-motion: reduce/);
+  assert.match(oku('js/piksel-projeler.js'), /PARCALAR = \[[^\]]*\brayKur\b[^\]]*\]/);
+  assert.match(oku('css/piksel-projeler.css'), /@media print \{ \.px-ray \{ display: none !important; \} \}/);
+});

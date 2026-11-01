@@ -1,9 +1,10 @@
 // Piksel görünüm: Projeler sayfasının etkileşimli katmanı. Sayfanın kendi içeriği (HTML) olduğu gibi kalır; piksel görünüm seçiliyken
 // üstüne parçalar eklenir, başka görünüme geçilince kaldırılır (js/piksel-hakkimda.js ile aynı kalıp). Yalnız Projeler listesi sayfasında çalışır.
 import { hatKur } from './piksel-projeler-hat.js';
+import { rayKur } from './piksel-projeler-ray.js';
 
 const kok = document.documentElement;
-const PARCALAR = [hatKur];
+const PARCALAR = [hatKur, rayKur];
 let kaldirlar = [];
 
 function guncelle() {
