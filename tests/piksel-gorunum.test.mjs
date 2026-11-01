@@ -50,7 +50,7 @@ test('piksel sayfa geçişi: perde iner, yeni sayfa perdeli açılır; erken bet
   assert.match(oku('js/gorunum-erken.js'), /sessionStorage\.getItem\('pxGecis'\)/);
   const css = oku('css/piksel.css');
   assert.match(css, /html\[data-px-gecis\]::after/);
-  assert.match(css, /@media print \{ \.pxg/);
+  assert.match(css, /@media print \{ canvas\.pxg/);
   assert.match(oku('js/gorunum.js'), /import '\.\/piksel-gecis\.js'/);
 });
 

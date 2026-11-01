@@ -94,18 +94,15 @@ html[data-gorunum="piksel"] {
 }
 piksel-ana { display: none; }
 
-/* sayfa geçişi perdesi (js/piksel-gecis.js): iner; yeni sayfa perdeli açılır ve perde kalkar */
-.pxg, html[data-px-gecis]::after {
-  position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+/* sayfa geçişi perdesi (js/piksel-gecis.js): perde ve kenarı (rastgele pikselli damlalar, asılı karakterler) canvas'ta çizilir (canvas.pxg).
+   Yeni sayfa perdeli açılırken ilk boyamada aşağıdaki düz perde (aynı şeritler) örter; betik hazır olunca canvas devralır ve kalkar.
+   Betik gelmezse perde 2,4 sn sonra yine kalkar (sayfa perdede kalmasın). */
+html[data-px-gecis]::after {
+  content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
   background: linear-gradient(90deg, rgba(0, 0, 0, .28) 0, transparent 7%, transparent 93%, rgba(0, 0, 0, .28) 100%),
               repeating-linear-gradient(90deg, #8a3f2a 0 16px, #a24b33 16px 32px, #bd5e3e 32px 48px, #a24b33 48px 64px);
-  border-bottom: 10px solid #d97757;
+  animation: px-perde-kalk .9s cubic-bezier(.2, .7, .3, 1) 2.4s both;
 }
-.pxg { transform: translateY(-108%); will-change: transform; }
-.pxg.in { transition: transform .8s cubic-bezier(.5, 0, .85, .55); transform: translateY(0); }
-.pxg::after { content: ""; position: absolute; left: 0; right: 0; bottom: -20px; height: 10px; background: repeating-linear-gradient(90deg, #f09a78 0 10px, transparent 10px 20px); }
-.pxg-kar { position: absolute; right: 14%; bottom: -88px; width: 72px; height: 68px; image-rendering: pixelated; }
-html[data-px-gecis]::after { content: ""; animation: px-perde-kalk .9s cubic-bezier(.2, .7, .3, 1) .12s both; }
 @keyframes px-perde-kalk { to { transform: translateY(-112%); } }
-@media (prefers-reduced-motion: reduce) { .pxg, html[data-px-gecis]::after { display: none; } }
-@media print { .pxg, html[data-px-gecis]::after { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { canvas.pxg, html[data-px-gecis]::after { display: none; } }
+@media print { canvas.pxg, html[data-px-gecis]::after { display: none !important; } }
