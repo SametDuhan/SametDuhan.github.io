@@ -42,6 +42,5 @@ export function baslatGorunum() {
   isaretle();
 }
 
-// Piksel görünümün ortak parçaları: sayfa geçişi perdesi ve alt sayfa başındaki devre yolu (yalnız piksel görünümde çalışırlar).
+// Piksel görünümün ortak parçası: sayfa geçişi perdesi (yalnız piksel görünümde çalışır).
 import './piksel-gecis.js';
-import './piksel-sayfa.js';

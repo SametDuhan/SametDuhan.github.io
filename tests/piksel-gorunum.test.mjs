@@ -33,7 +33,7 @@ test('piksel ana sayfa bileşeni: index.html yalnız piksel seçiliyken yükler;
   assert.match(bilesen, /attachShadow\(\{ mode: 'open' \}\)/);
   assert.match(bilesen, /import \{ t, EN \} from '\.\/dil\.js'/);
   assert.match(bilesen, /Staj arıyorum, hemen başlayabilirim\./);
-  for (const js of ['js/piksel-ana-kanvas.js', 'js/piksel-ana-konsol.js', 'js/piksel-gecis.js', 'js/piksel-sayfa.js']) assert.match(oku(js), /prefers-reduced-motion: reduce/, js);
+  for (const js of ['js/piksel-ana-kanvas.js', 'js/piksel-ana-konsol.js', 'js/piksel-gecis.js']) assert.match(oku(js), /prefers-reduced-motion: reduce/, js);
   assert.ok(existsSync(join(KOK, 'css/piksel-ana.css')));
 });
 
@@ -253,4 +253,10 @@ test('piksel sunumlar bitiş: sıradaki sunum listeden, kutlama yalnız kullanı
   assert.match(oku('css/piksel-deste.css'), /@media print \{ \.px-tamam, \.px-konfeti \{ display: none !important; \} \}/);
   // sunum listesindeki her sunumun gerçek bir sayfası var (sıradaki kart ölü bağlantıya gitmesin)
   for (const slug of ['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum']) assert.ok(existsSync(join(KOK, `slaytlar/${slug}/index.html`)), slug);
+});
+
+test('piksel alt sayfalar: sayfa başındaki koşan karakterli devre şeridi yok (tek sayfada çok fazla karakter olmasın)', () => {
+  assert.ok(!existsSync(join(KOK, 'js/piksel-sayfa.js')));
+  assert.doesNotMatch(oku('js/gorunum.js'), /piksel-sayfa/);
+  assert.doesNotMatch(oku('css/piksel.css'), /px-devre/);
 });
