@@ -94,17 +94,17 @@ test('piksel Hakkımda: başlık çözme ve araç yuvaları sayfanın kendi metn
   assert.match(oku('css/piksel-hakkimda.css'), /\.aletler li\.px-kusanildi/);
 });
 
-test('piksel Projeler: etkileşimli katman yalnız proje listesinde; commit hattı gerçek sayıları js/sayilar.js ve projeler listesinden alır', () => {
+test('piksel Projeler: etkileşimli katman yalnız proje listesinde; mini kartlar sayfanın kendi proje kartlarından okunur, satırda en çok 3', () => {
   for (const yol of ['projeler/index.html', 'en/projeler/index.html']) {
     const h = oku(yol);
     assert.match(h, /piksel-projeler\.css/, yol);
     assert.match(h, /import \{ baslat as pikselProjeler \} from '\.\.\/(\.\.\/)?js\/piksel-projeler\.js'/, yol);
   }
   for (const yol of ['projeler/skytrack/index.html', 'hakkimda/index.html']) assert.doesNotMatch(oku(yol), /piksel-projeler/, yol);
-  const hat = oku('js/piksel-hakkimda.js') && oku('js/piksel-projeler-hat.js');
-  assert.match(hat, /SAYILAR\.repolar\[repoAdi\(p\)\]/);
-  assert.match(hat, /PROJELER\.map/);
-  assert.match(hat, /prefers-reduced-motion: reduce/);
+  const mini = oku('js/piksel-projeler-mini.js');
+  assert.match(mini, /querySelectorAll\('\.vitrin\[id\]'\)/);
+  assert.match(oku('css/piksel-projeler.css'), /\.px-mini-liste \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.doesNotMatch(oku('css/piksel-projeler.css'), /px-hat/);
   assert.match(oku('js/piksel-projeler.js'), /querySelector\('\.vitrinler'\)/);
 });
 
