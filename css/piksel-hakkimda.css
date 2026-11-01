@@ -20,3 +20,33 @@ html[data-gorunum="piksel"] {
 @keyframes px-nabiz { 50% { opacity: .35; } }
 @keyframes px-yan { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-sahne-etiket::before, html[data-gorunum="piksel"] .px-sahne-ipucu { animation: none; } }
+
+/* ---- Rota: tıklanabilir yol haritası ---- */
+html[data-gorunum="piksel"] {
+  & .px-yol-var .rota { display: none; }
+  & .px-yol-hat { position: relative; padding-top: 76px; }
+  & .px-yol-kar { position: absolute; left: 0; top: 22px; width: 84px; height: 72px; image-rendering: pixelated; pointer-events: none; z-index: 2; transition: left .85s cubic-bezier(.45, 0, .2, 1); }
+  & .px-yol-dugumler { position: relative; display: flex; margin: 0; padding: 0; list-style: none; }
+  & .px-yol-cizgi { position: absolute; left: calc(50% / var(--n)); right: calc(50% / var(--n)); top: 7px; height: 4px; background: repeating-linear-gradient(90deg, #4a3128 0 12px, transparent 12px 18px); }
+  & .px-yol-cizgi i { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p) * 100%); background: var(--vurgu); transition: width .85s cubic-bezier(.45, 0, .2, 1); }
+  & .px-yol-dugumler li { flex: 1 1 0; min-width: 0; }
+  & .px-yol-dugumler button { all: unset; box-sizing: border-box; display: grid; justify-items: center; gap: 9px; width: 100%; padding: 0 2px 8px; cursor: pointer; text-align: center; }
+  & .px-yol-dugumler button:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: 2px; }
+  & .px-dugum { display: block; width: 18px; height: 18px; background: var(--zemin); border: 3px solid #7a4a38; transition: transform .3s cubic-bezier(.16, 1, .3, 1), background .25s, border-color .25s; }
+  & .px-yol-dugumler button[data-gecti] .px-dugum { background: #7a4a38; }
+  & .px-yol-dugumler button.secili .px-dugum { background: var(--vurgu); border-color: var(--vurgu-koyu); transform: scale(1.35); }
+  & .px-yol-dugumler button:hover .px-dugum { transform: rotate(45deg) scale(1.2); border-color: var(--vurgu); }
+  & .px-yol-dugumler time { font: 500 12px/1.25 var(--mono); color: var(--soluk); transition: color .2s; }
+  & .px-yol-dugumler button.secili time, & .px-yol-dugumler button:hover time { color: var(--yazi); }
+
+  & .px-yol-detay { position: relative; margin-top: 18px; min-height: 168px; padding: 18px 24px 20px; border: 1px solid var(--kenar); background: var(--kart); }
+  & .px-yol-detay::before { content: ""; position: absolute; left: -3px; top: -3px; width: 18px; height: 18px; border: 3px solid var(--vurgu); border-right: 0; border-bottom: 0; }
+  & .px-detay-komut { margin: 0 0 8px; font: 500 12.5px var(--mono); color: var(--soluk); }
+  & .px-detay-komut b { color: var(--vurgu-koyu); font-weight: 600; }
+  & .px-detay-tarih { margin: 0; font: 600 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--vurgu-koyu); }
+  & .px-yol-detay h3 { margin: 4px 0 8px; font: 700 clamp(24px, 2.6vw, 34px)/1.1 var(--baslik); }
+  & .px-detay-metin { margin: 0; min-height: 3.2em; font-size: 16.5px; line-height: 1.6; color: var(--yazi); max-width: 62ch; }
+  & .px-detay-link { display: inline-block; margin-top: 12px; padding: 7px 14px; border: 1px solid var(--vurgu); color: var(--yazi); font: 600 13px var(--mono); text-decoration: none; background: linear-gradient(var(--vurgu), var(--vurgu)) 0 100% / 0 100% no-repeat; transition: background-size .35s cubic-bezier(.16, 1, .3, 1), color .2s; }
+  & .px-detay-link:hover, & .px-detay-link:focus-visible { background-size: 100% 100%; color: #1a1210; }
+}
+@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-yol-kar, html[data-gorunum="piksel"] .px-yol-cizgi i, html[data-gorunum="piksel"] .px-dugum { transition: none; } }
