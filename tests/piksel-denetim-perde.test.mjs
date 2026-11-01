@@ -10,7 +10,12 @@ const oku = (yol) => readFileSync(join(KOK, yol), 'utf8');
 test('piksel sayfa geçişi perdesi: kenar düz çizgi değil rastgele pikselli damla ve dağılmış piksel; ekran genişliğiyle artan çok karakter; yeni sayfada canvas devralır', () => {
   const g = oku('js/piksel-gecis.js');
   // rastgele damlalar ve dağılmış pikseller; sabit tohum (aynı genişlikte aynı kenar)
-  assert.match(g, /const rastgele = \(tohum\)/);
+  assert.match(g, /import \{ TON, rastgele, dokuCiz \} from '\.\/piksel-perde-doku\.js'/);
+  const doku = oku('js/piksel-perde-doku.js');
+  assert.match(doku, /export const rastgele = \(tohum\)/);
+  assert.match(doku, /SATIRLAR = \['SAMET DUHAN', 'ŞAHİN'\]/);          // ad ve soyad perdede pikselle yazılır
+  assert.doesNotMatch(doku + g, /repeating-linear|x \+= 16/);           // dikey şerit yok, mozaik var
+  assert.match(oku('js/piksel-ana-konsol.js'), /dokuCiz\(dk\.getContext\('2d'\)/);   // ana sayfa paneli aynı kumaş
   assert.match(g, /derin\.push\(v\)/);                     // sütun başına rastgele damla derinliği
   assert.match(g, /v = Math\.max\(1, Math\.min\(5, v\)\)/); // en az 1 kare: düz çizgi hiç kalmaz
   assert.match(g, /const dagin = \[\]/);                   // dağılmış tek pikseller

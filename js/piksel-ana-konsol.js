@@ -3,6 +3,7 @@
 import { SAYILAR } from './sayilar.js';
 import { PROJELER } from './projeler.js';
 import { t, EN } from './dil.js';
+import { dokuCiz } from './piksel-perde-doku.js';
 import { asiliKarakter, ASILI_GENISLIK, ASILI_YUKSEKLIK } from './piksel-karakter.js';
 
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,12 +47,13 @@ export function baslatKonsol(root, yollar) {
 
   // perde: Claude pikseli perdenin ucuna asılıp aşağı çeker; kapanınca görünüm değişir
   const panel = root.querySelector('.kanit'), perde = panel.querySelector('.perde'), slaytlar = [...panel.querySelectorAll('.kanit-slayt')], noktalar = [...panel.querySelectorAll('.kanit-nokta button')];
-  const pc = perde.querySelector('canvas').getContext('2d');
+  const pc = perde.querySelector('.perde-kar').getContext('2d'), dk = perde.querySelector('.perde-doku');
   let gorunum = 0, mesgul = false, durak = false;
   async function degistir(hedef, perdeli = true) {
     if (mesgul || hedef === gorunum) return; mesgul = true;
     const goster = () => { slaytlar.forEach((s, i) => { s.classList.toggle('acik', i === hedef); s.toggleAttribute('inert', i !== hedef); s.setAttribute('aria-hidden', i === hedef ? 'false' : 'true'); }); noktalar.forEach((n, i) => n.classList.toggle('on', i === hedef)); gorunum = hedef; };
     if (AZ || !perdeli) { goster(); mesgul = false; return; }
+    dk.width = perde.offsetWidth || 400; const h = perde.offsetHeight || 400; dk.height = h + 48; dokuCiz(dk.getContext('2d'), dk.width, h, 91, true);
     const cizici = setInterval(() => asiliKarakter(pc, performance.now() / 1000), 90); asiliKarakter(pc, 0);
     perde.className = 'perde in'; await bekle(1200);
     goster(); perde.className = 'perde out'; await bekle(1000);

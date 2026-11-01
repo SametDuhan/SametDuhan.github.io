@@ -2,17 +2,14 @@
 // dağılmış tek tek piksellerdir, ucuna ekran genişliğine göre çok sayıda Claude Code pikseli asılıdır (perde büyük olduğu için). Yeni sayfa perdeli açılır
 // (html[data-px-gecis]: ilk boyamada düz perde, js/ilk açılışta aynı perdenin canvas'ı devralır) ve perde yukarı kalkar. Hareketi azaltınca geçiş yok.
 import { asiliKarakter } from './piksel-karakter.js';
+import { TON, rastgele, dokuCiz } from './piksel-perde-doku.js';
 
 const kok = document.documentElement;
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const P = 12;                                    // kenar karelerinin boyu (px)
-const SERIT = ['#8a3f2a', '#94442e', '#a24b33', '#ad5337', '#bd5e3e'];   // kumaşın pikselleri: şerit yok, her kare rastgele bir tondan
-const HARF = { S: '01111 10000 10000 01110 00001 00001 11110', A: '01110 10001 10001 11111 10001 10001 10001', M: '10001 11011 10101 10101 10001 10001 10001', E: '11111 10000 10000 11110 10000 10000 11111', T: '11111 00100 00100 00100 00100 00100 00100', D: '11110 10001 10001 10001 10001 10001 11110', U: '10001 10001 10001 10001 10001 10001 01110', H: '10001 10001 10001 11111 10001 10001 10001', N: '10001 11001 10101 10101 10011 10001 10001' };
+const SERIT = TON;                                              // kumaşın pikselleri: şerit yok, her kare rastgele bir tondan
 const TURUNCU = ['#d97757', '#f09a78', '#d97757', '#b45a3e'];
 let aktif = false, perde = null;
-
-// sabit tohumlu rastgele: aynı genişlikte iki sayfada aynı kenar çıkar
-const rastgele = (tohum) => { let s = (tohum >>> 0) || 1; return () => (s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 4294967296; };
 
 // W x H'lik perde: üstte düz şeritli kumaş (H yüksekliğine kadar), altında rastgele derinlikte damlalar, dağılmış pikseller ve asılı karakterler.
 export function perdeKur(W, H) {
@@ -27,10 +24,7 @@ export function perdeKur(W, H) {
   const karakterler = [];
   for (let k = 0; k < n; k++) { const sut = Math.min(sutun - 1, Math.max(0, Math.round((k + .5 + (r() - .5) * .5) * sutun / n))); karakterler.push({ sut, kol: Math.floor(r() * (kolSon + 1)), faz: r() * 6 }); }
   const dokuma = derin.map((d) => Array.from({ length: d }, () => SERIT[Math.floor(r() * 5)]));
-  const kumas = document.createElement('canvas'); kumas.width = W; kumas.height = H; const k2 = kumas.getContext('2d');
-  for (let y = 0; y < H; y += P) for (let x = 0; x < W; x += P) { k2.fillStyle = SERIT[Math.floor(r() * 5)]; k2.fillRect(x, y, P, P); }   // dağınık kare dokusu
-  const hu = Math.max(4, Math.min(14, Math.floor(W * .8 / 65))), yaz = 'SAMET DUHAN', gen = yaz.length * 6 * hu - hu, bx = Math.round((W - gen) / 2), by = Math.round(H * .42 - 3.5 * hu);
-  [[hu * .6, '#3a1a10'], [0, '#fbe9dc']].forEach(([ofs, renk]) => { k2.fillStyle = renk; [...yaz].forEach((ch, j) => { (HARF[ch] || '').split(' ').forEach((sat, y) => [...sat].forEach((v, x) => { if (v === '1') k2.fillRect(Math.round(bx + (j * 6 + x) * hu + ofs), Math.round(by + y * hu + ofs), hu, hu); })); }); });
+  const kumas = document.createElement('canvas'); kumas.width = W; kumas.height = H; dokuCiz(kumas.getContext('2d'), W, H, W * 17 + 3);   // sabit kumaş + ad/soyad
   const kv = document.createElement('canvas'); kv.width = W; kv.height = H + EK; kv.className = 'pxg'; kv.setAttribute('aria-hidden', 'true');
   kv.style.cssText = `width:${W}px;height:${H + EK}px`;
   const c = kv.getContext('2d');

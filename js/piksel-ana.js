@@ -22,7 +22,7 @@ const sablon = () => `
 <canvas id="hareket" aria-hidden="true"></canvas>
 
 <header class="serit">
-  <a class="marka" href="${K}" aria-label="${t('Samet Duhan, ana sayfa', 'Samet Duhan, home')}">SAMET DUHAN</a>
+  <a class="marka" href="${K}" aria-label="${t('Samet Duhan Şahin, ana sayfa', 'Samet Duhan Şahin, home')}">SAMET DUHAN <span class="soyad">ŞAHİN</span></a>
   <nav class="hizli" aria-label="${t('Bağlantılar', 'Links')}">
     <a href="https://github.com/SametDuhan" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     <a href="https://www.linkedin.com/in/samet-duhan-%C5%9Fahin-96662131b/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
@@ -67,7 +67,7 @@ const sablon = () => `
           <p class="kanit-not k-not"></p>
         </section>
       </div>
-      <div class="perde" aria-hidden="true"><canvas class="perde-kar" width="72" height="68"></canvas></div>
+      <div class="perde" aria-hidden="true"><canvas class="perde-doku"></canvas><canvas class="perde-kar" width="72" height="68"></canvas></div>
     </div>
     <div class="kanit-nokta" role="group" aria-label="${t('Görünüm', 'View')}"><button type="button" data-g="0" class="on" aria-label="${t('Proje proje', 'Per project')}"></button><button type="button" data-g="1" aria-label="${t('Toplam', 'Total')}"></button></div>
   </aside>

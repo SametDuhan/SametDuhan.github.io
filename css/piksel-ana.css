@@ -15,6 +15,7 @@ button{font:inherit}
 :focus-visible{outline:3px solid var(--turuncu-acik);outline-offset:4px}
 
 .serit{position:fixed;inset:0 0 auto 0;height:56px;z-index:5;display:flex;align-items:center;gap:26px;padding:0 28px;background:rgba(25,24,23,.94);border-bottom:1px solid var(--cizgi)}
+.marka .soyad{color:var(--turuncu)}
 .marka{font-family:var(--baslik);font-weight:700;font-size:19px;letter-spacing:.14em;text-decoration:none;margin-right:auto}
 .hizli{display:flex;gap:22px}
 .hizli a,.dil-sec a{font-family:var(--kod);font-size:14px;color:var(--ikincil);text-decoration:none;padding:6px 2px;transition:color .2s}
@@ -170,10 +171,8 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .kanit-nokta button.on{background:var(--turuncu);border-color:var(--turuncu)}
 .kanit-nokta button:hover,.kanit-nokta button:focus-visible{border-color:var(--yazi)}
 .perde{position:absolute;inset:0;z-index:3;pointer-events:none;transform:translateY(-118%);will-change:transform;
-  background:linear-gradient(90deg,rgba(0,0,0,.28) 0,transparent 9%,transparent 91%,rgba(0,0,0,.28) 100%),
-             repeating-linear-gradient(90deg,#8a3f2a 0 16px,#a24b33 16px 32px,#bd5e3e 32px 48px,#a24b33 48px 64px);
-  border-bottom:8px solid var(--turuncu)}
-.perde::after{content:"";position:absolute;left:0;right:0;bottom:-16px;height:8px;background:repeating-linear-gradient(90deg,var(--turuncu-acik) 0 8px,transparent 8px 16px)}
+  background:linear-gradient(90deg,rgba(0,0,0,.28) 0,transparent 9%,transparent 91%,rgba(0,0,0,.28) 100%),#a24b33}
+.perde-doku{position:absolute;left:0;top:0;width:100%;height:calc(100% + 48px);image-rendering:pixelated}
 .perde.in{transition:transform 1.15s cubic-bezier(.5,0,.85,.55);transform:translateY(0)}
 .perde.out{transition:transform .95s cubic-bezier(.2,.7,.3,1);transform:translateY(104%)}
 .perde-kar{position:absolute;top:auto;left:auto;right:22%;bottom:-86px;width:72px;height:68px;image-rendering:pixelated}
