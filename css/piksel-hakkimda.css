@@ -50,3 +50,25 @@ html[data-gorunum="piksel"] {
   & .px-detay-link:hover, & .px-detay-link:focus-visible { background-size: 100% 100%; color: #1a1210; }
 }
 @media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-yol-kar, html[data-gorunum="piksel"] .px-yol-cizgi i, html[data-gorunum="piksel"] .px-dugum { transition: none; } }
+
+/* ---- araçlar: envanter yuvaları; ilkeler ve kimlik satırları ---- */
+html[data-gorunum="piksel"] {
+  & .aletler li { cursor: pointer; padding: 9px 14px; border: 2px solid #4a3128; background: var(--zemin); font: 500 13.5px var(--mono); color: var(--yazi); user-select: none; transition: transform .2s cubic-bezier(.16, 1, .3, 1), border-color .2s, background .25s, color .2s; }
+  & .aletler li:hover, & .aletler li:focus-visible { transform: translateY(-3px); border-color: var(--vurgu); }
+  & .aletler li.px-kusanildi { background: var(--vurgu); border-color: var(--vurgu-koyu); color: #1a1210; font-weight: 600; }
+  & .aletler li.px-pop { animation: px-pop .45s steps(4); }
+  & .px-envanter-sayac { margin: 14px 0 0; font: 500 12.5px var(--mono); color: var(--soluk); }
+  & .px-envanter-sayac::before { content: "$ "; color: #2ecc40; }
+
+  & .ilke { transition: transform .25s cubic-bezier(.16, 1, .3, 1), border-color .2s, background .2s; }
+  & .ilke:hover { transform: translateX(6px); border-color: var(--vurgu); background: color-mix(in srgb, var(--vurgu) 7%, var(--kart)); }
+  & .ilke:hover .ilke-no { color: var(--vurgu); text-shadow: 3px 3px 0 #4a3128; }
+  & .ilke-no { transition: color .2s, text-shadow .2s; }
+
+  & .kimlik-bilgi > div { position: relative; transition: background .25s; }
+  & .kimlik-bilgi > div::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--vurgu); transition: width .3s cubic-bezier(.16, 1, .3, 1); }
+  & .kimlik-bilgi > div:hover { background: color-mix(in srgb, var(--vurgu) 7%, transparent); }
+  & .kimlik-bilgi > div:hover::before { width: 3px; }
+}
+@keyframes px-pop { 0% { box-shadow: 0 0 0 0 rgba(217, 119, 87, .8); } 100% { box-shadow: 0 0 0 12px rgba(217, 119, 87, 0); } }
+@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] :is(.aletler li, .ilke, .kimlik-bilgi > div, .kimlik-bilgi > div::before) { transition: none; } html[data-gorunum="piksel"] .aletler li.px-pop { animation: none; } }

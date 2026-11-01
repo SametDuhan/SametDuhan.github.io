@@ -83,3 +83,13 @@ test('piksel Hakkımda: Rota yol haritası içeriği .rota listesinden okur (tek
   assert.match(oku('css/piksel-hakkimda.css'), /\.px-yol-var \.rota \{ display: none; \}/);
   assert.match(oku('hakkimda/index.html'), /<ol class="rota belir">/); // kaynak liste sayfada duruyor
 });
+
+test('piksel Hakkımda: başlık çözme ve araç yuvaları sayfanın kendi metninden çalışır, görünüm değişince geri alınır, klavyeyle kullanılır', () => {
+  const d = oku('js/piksel-hakkimda-detay.js');
+  assert.match(d, /aria-label/);                       // çözülürken ekran okuyucu asıl metni okur
+  assert.match(d, /e\.key === 'Enter' \|\| e\.key === ' '/); // yuvalar klavyeyle
+  assert.match(d, /prefers-reduced-motion: reduce/);
+  assert.match(d, /return \(\) => temizle\.forEach/);   // kaldırma işlevi
+  assert.match(oku('js/piksel-hakkimda.js'), /PARCALAR = \[sahneKur, yolKur, detayKur\]/);
+  assert.match(oku('css/piksel-hakkimda.css'), /\.aletler li\.px-kusanildi/);
+});
