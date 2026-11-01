@@ -37,6 +37,29 @@ npm test                       # bağımlılık yok, Node 20+ yeter
 | `js/sayilar.js`, `araclar/sayac_guncelle.mjs` | Projeler sayaçlarının commit sayıları; `.github/workflows/sayaclar.yml` her gün GitHub'dan sayar, değiştiyse sayfaları üretip commit'ler (elle: Actions → sayaclar → Run workflow) |
 | `tests/` | `node:test`; sayfaların üreticiyle güncel olduğunu da denetler |
 
+## Görünümler
+
+Sitenin üç tasarımı var; seçici her sayfada (ana sayfada üst şeritte, alt sayfalarda sol menüde) ve seçim tarayıcıda saklanır. `<html data-gorunum="retro|modern|piksel">`: ilk değeri `js/gorunum-erken.js` koyar (ilk açılışta **piksel**), seçici `araclar/gorunum-secici.mjs` + `js/gorunum.js`. Adreste `?gorunum=retro|modern|piksel` varsa o seçilir.
+
+- **Kâğıt** (`css/tema.css`) ve **Modern** (`css/modern.css`): ilk iki tasarım, olduğu gibi duruyor.
+- **Piksel** (1 Kasım 2026): koyu devre kartı, Claude turuncusu, koşan Claude Code pikseli. Modern'in yerleşim bloklarını paylaşır (`html:is([data-gorunum="modern"], [data-gorunum="piksel"])`), renk/yazı tipi/köşe `css/piksel.css`'te değişir. Her sayfada en son yüklenir.
+
+Piksel katmanı **ek parçalardır**: sayfanın kendi içeriği (HTML) ve mantığı olduğu gibi kalır; piksel seçiliyken parçalar eklenir, başka görünüme geçilince kaldırılır (her parça bir `kur()` işlevi, kaldırma işlevi döndürür). Hareketi azaltınca animasyonlar kapanır. Tek sayfada az karakter: yeni parçada karakter eklemeden önce sayfadakilere bak.
+
+| Yol | Ne |
+|---|---|
+| `css/piksel.css` | Piksel temanın jetonları, yazı tipleri, kartlar, düğmeler, sayfa geçişi perdesi |
+| `js/piksel-ana.js`, `-ana-kanvas.js`, `-ana-konsol.js`, `css/piksel-ana.css` | Ana sayfa: `<piksel-ana>` bileşeni (gölge DOM): devre kartı, koşan karakterler (en çok 2), konsol, proje proje commit paneli |
+| `js/piksel-gecis.js`, `js/piksel-karakter.js` | Sayfa geçişi perdesi (ucuna Claude pikseli asılı), asılı karakter çizimi |
+| `js/piksel-hakkimda*.js`, `css/piksel-hakkimda.css` | Hakkımda: karakter sahnesi, Rota yol haritası, başlık çözme, araç yuvaları |
+| `js/piksel-projeler*.js`, `css/piksel-projeler.css` | Projeler: commit hattı, ilerleme rayı, etiket süzgeci, git clone kopyalama |
+| `js/piksel-slaytlar*.js`, `css/piksel-slaytlar.css` | Slaytlar: içindekiler (sunum sayfalarından), kaldığın yer yolu, arama |
+| `js/piksel-iletisim*.js`, `css/piksel-iletisim.css` | İletişim: postacı sahnesi ve Türkiye saati, zarf uçuşu, kısayollar |
+| `js/piksel-deste*.js`, `css/piksel-deste.css` | Sunumlar: slayt yolu, geçiş efekti, bitiş kutlaması ve sıradaki sunum (`js/atolye.js` yükler) |
+| `js/piksel-proje*.js`, `css/piksel-proje.css` | Proje detay: bölüm rayı, commit hattı, akış paketi, ekran görüntüsü nişanı (karakter yok) |
+
+Piksel parçalarının testleri `tests/piksel-*.test.mjs`; `tests/piksel-denetim-*.test.mjs` denetimde bulunan hataların tekrarını engeller (kontrast taraması dahil).
+
 ## İngilizce sürüm
 
 Türkçe sayfalar kaynaktır; `en/` altındaki İngilizce sayfalar **elle düzenlenmez**, `node araclar/ingilizce.mjs` üretir. Metinler `araclar/en-sozluk.txt` sözlüğünden gelir (`TR ::: EN` satırları; `= metin` çevrilmeden kalır; `H:` satır içi işaretli cümle; `J:` satır içi betik metni). Türkçe sayfaya yeni bir metin eklenip sözlüğe girilmezse üretim durur ve eksikleri listeler, testler de başarısız olur. Betik dosyalarındaki metinler `js/dil.js`'teki `t(tr, en)` ile seçilir. Her sayfada TR | EN seçici ve `hreflang` bağlantıları var. 404 sayfası tek dilli (Türkçe) kalır.
