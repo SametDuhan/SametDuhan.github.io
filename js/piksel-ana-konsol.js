@@ -3,7 +3,8 @@
 import { SAYILAR } from './sayilar.js';
 import { PROJELER } from './projeler.js';
 import { t, EN } from './dil.js';
-import { dokuCiz } from './piksel-perde-doku.js';
+import { dokuCiz, TON } from './piksel-perde-doku.js';
+import { pikselKarakter } from './piksel.js';
 import { asiliKarakter, ASILI_GENISLIK, ASILI_YUKSEKLIK } from './piksel-karakter.js';
 
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -48,16 +49,55 @@ export function baslatKonsol(root, yollar) {
   // perde: Claude pikseli perdenin ucuna asılıp aşağı çeker; kapanınca görünüm değişir
   const panel = root.querySelector('.kanit'), perde = panel.querySelector('.perde'), slaytlar = [...panel.querySelectorAll('.kanit-slayt')], noktalar = [...panel.querySelectorAll('.kanit-nokta button')];
   const pc = perde.querySelector('.perde-kar').getContext('2d'), dk = perde.querySelector('.perde-doku');
+  // 1) perde: Claude pikseli perdenin ucuna asılıp aşağı çeker
+  const perdeGecisi = async (goster) => {
+    dk.width = perde.offsetWidth || 400; const h = perde.offsetHeight || 400; dk.height = h + 48; dokuCiz(dk.getContext('2d'), dk.width, h, 91, true);
+    const cizici = setInterval(() => asiliKarakter(pc, performance.now() / 1000), 90); asiliKarakter(pc, 0);
+    perde.className = 'perde in'; await bekle(1200);
+    goster(); perde.className = 'perde out'; await bekle(1000);
+    perde.className = 'perde'; clearInterval(cizici);
+  };
+  const ic = panel.querySelector('.kanit-ic'), gk = document.createElement('canvas'); gk.className = 'gecis-kanvas'; gk.setAttribute('aria-hidden', 'true'); ic.append(gk);
+  const kare = (ms, fn) => new Promise((res) => { const b = performance.now(); let bitti = false; const son = () => { if (bitti) return; bitti = true; fn(1); res(); }; const d = (now) => { if (bitti) return; const p = Math.min(1, (now - b) / ms); fn(p); p < 1 ? requestAnimationFrame(d) : son(); }; requestAnimationFrame(d); setTimeout(son, ms + 400); });  // sekme arka plandaysa rAF durur: zaman aşımı geçişi yine bitirir
+  const boyutla = () => { gk.width = ic.offsetWidth || 300; gk.height = ic.offsetHeight || 300; return gk.getContext('2d'); };
+  // 2) mozaik: kareler rastgele sırayla panelin üstünü örter, görünüm değişir, kareler yine rastgele dağılır
+  const mozaik = async (goster) => {
+    const c = boyutla(), W = gk.width, H = gk.height, P = 12, sut = Math.ceil(W / P), n = sut * Math.ceil(H / P);
+    const sira2 = Array.from({ length: n }, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [sira2[i], sira2[j]] = [sira2[j], sira2[i]]; }
+    const renk = sira2.map(() => TON[Math.floor(Math.random() * TON.length)]), yer = (i) => [(i % sut) * P, Math.floor(i / sut) * P];
+    let k = 0; await kare(650, (p) => { for (const h = Math.floor(p * n); k < h; k++) { const i = sira2[k]; c.fillStyle = renk[i]; c.fillRect(...yer(i), P, P); } });
+    goster(); await bekle(150);
+    k = 0; await kare(650, (p) => { for (const h = Math.floor(p * n); k < h; k++) c.clearRect(...yer(sira2[k]), P, P); });
+    c.clearRect(0, 0, W, H);
+  };
+  // 3) koşucu: Claude pikseli soldan sağa koşarak perdeyi serer, geri dönüp aynı yoldan kaldırır
+  const kosucu = async (goster) => {
+    const c = boyutla(), W = gk.width, H = gk.height, u = Math.max(2, Math.round(H / 110)), zemin = H * .5 + 6 * u, off = document.createElement('canvas'); off.width = W; off.height = H; dokuCiz(off.getContext('2d'), W, H, 91);
+    const kos = (kapla) => kare(750, (p) => {
+      const x = -16 * u + (W + 32 * u) * p, e = Math.max(0, Math.min(W, x + 8 * u)); c.clearRect(0, 0, W, H);
+      if (kapla) c.drawImage(off, 0, 0, e, H, 0, 0, e, H); else c.drawImage(off, e, 0, W - e, H, e, 0, W - e, H);
+      pikselKarakter(c, { x, yOff: -Math.abs(Math.sin(p * 40)) * 1.2 * u, look: 1, run: true, tilt: 0, armUp: false, air: false, legPhase: Math.floor(p * 26) % 2 }, zemin, u, p * 3);
+    });
+    await kos(true); c.drawImage(off, 0, 0); goster(); await bekle(120); await kos(false); c.clearRect(0, 0, W, H);
+  };
+  // 4) eski TV: panel ince bir çizgiye çöker, çizgi yatayda söner, yeni görünüm çizgiden açılır
+  const tv = async (goster) => {
+    const bit = (a) => Promise.race([a.finished.catch(() => {}), new Promise((r) => setTimeout(r, a.effect.getTiming().duration + 400))]);
+    const a = ic.animate([{ transform: 'scaleY(1)', filter: 'brightness(1)' }, { transform: 'scaleY(.012)', filter: 'brightness(2.4)', offset: .8 }, { transform: 'scale(0,.012)', filter: 'brightness(3)' }], { duration: 480, easing: 'cubic-bezier(.6,0,.9,.4)', fill: 'forwards' });
+    await bit(a); goster();
+    const b = ic.animate([{ transform: 'scale(0,.012)', filter: 'brightness(3)' }, { transform: 'scale(1,.012)', filter: 'brightness(2.4)', offset: .4 }, { transform: 'scale(1,1)', filter: 'brightness(1)' }], { duration: 520, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'forwards' });
+    await bit(b); a.cancel(); b.cancel();
+  };
+  const GECISLER = [perdeGecisi, mozaik, kosucu, tv]; let sira = 0;
   let gorunum = 0, mesgul = false, durak = false;
   async function degistir(hedef, perdeli = true) {
     if (mesgul || hedef === gorunum) return; mesgul = true;
     const goster = () => { slaytlar.forEach((s, i) => { s.classList.toggle('acik', i === hedef); s.toggleAttribute('inert', i !== hedef); s.setAttribute('aria-hidden', i === hedef ? 'false' : 'true'); }); noktalar.forEach((n, i) => n.classList.toggle('on', i === hedef)); gorunum = hedef; };
     if (AZ || !perdeli) { goster(); mesgul = false; return; }
     dk.width = perde.offsetWidth || 400; const h = perde.offsetHeight || 400; dk.height = h + 48; dokuCiz(dk.getContext('2d'), dk.width, h, 91, true);
-    const cizici = setInterval(() => asiliKarakter(pc, performance.now() / 1000), 90); asiliKarakter(pc, 0);
-    perde.className = 'perde in'; await bekle(1200);
-    goster(); perde.className = 'perde out'; await bekle(1000);
-    perde.className = 'perde'; clearInterval(cizici); mesgul = false;
+    const g = GECISLER[sira++ % GECISLER.length];
+    await g(goster);
+    mesgul = false;
   }
   noktalar.forEach((n, i) => n.addEventListener('click', () => degistir(i)));
   panel.addEventListener('pointerenter', () => { durak = true; }); panel.addEventListener('pointerleave', () => { durak = false; });

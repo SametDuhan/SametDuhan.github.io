@@ -19,3 +19,12 @@ test('piksel ana sayfa: 1100 pikselden dar ekranda (tablet dahil) tek sütun; CS
   assert.match(ana, /<a class="durum" href="\$\{K\}iletisim\/\?konu=staj">/);   // staj durumu iletişimdeki staj konusuna götürür
   assert.match(js, /\['whoami'/);                                          // terminal gerçek bilgileri sırayla yazar
 });
+
+test('piksel ana sayfa sağ panel: dört geçiş animasyonu sırayla döner (perde, mozaik, koşucu, eski TV); sekme arka plandayken takılmaz', () => {
+  const k = oku('js/piksel-ana-konsol.js');
+  assert.match(k, /const GECISLER = \[perdeGecisi, mozaik, kosucu, tv\]/);
+  assert.match(k, /GECISLER\[sira\+\+ % GECISLER\.length\]/);
+  assert.match(k, /setTimeout\(son, ms \+ 400\)/);                       // rAF durursa geçiş zaman aşımıyla biter
+  assert.match(k, /if \(AZ \|\| !perdeli\)/);                            // hareketi azaltınca geçiş yok
+  assert.match(oku('css/piksel-ana.css'), /\.gecis-kanvas\{/);
+});
