@@ -98,8 +98,18 @@ export function baslatKanvas(root, yollar) {
     });
     sahin.ciz(hc, tt, U, W <= 1100);
     const n = performance.now();
-    dalgalar = dalgalar.filter((q) => n - q.t < 800);
-    for (const q of dalgalar) { const p = (n - q.t) / 800, r = Math.round(p * U * 30 / (U * 2)) * U * 2; hc.strokeStyle = `rgba(217,119,87,${1 - p})`; hc.lineWidth = 3; hc.strokeRect(q.x - r, q.y - r, r * 2, r * 2); }
+    dalgalar = dalgalar.filter((q) => n - q.t < 900);
+    for (const q of dalgalar) {   // tıklama kıvılcımı: ortada küçülen kare, çevrede yerçekimiyle düşen piksel parçacıklar
+      const p = (n - q.t) / 900, sn = (n - q.t) / 1000;
+      const c = Math.round(U * 2 * (1 - ease(Math.min(1, p * 3))) + U);
+      hc.globalAlpha = Math.max(0, 1 - p * 3); hc.strokeStyle = '#f09a78'; hc.lineWidth = 3; hc.strokeRect(q.x - c, q.y - c, c * 2, c * 2);
+      for (const k of q.parca) {
+        const x = q.x + k.vx * ease(Math.min(1, p * 1.6)) * U, y = q.y + k.vy * ease(Math.min(1, p * 1.6)) * U + 30 * U * sn * sn;
+        hc.globalAlpha = Math.max(0, 1 - p * p); hc.fillStyle = k.r;
+        hc.fillRect(Math.round(x / U) * U, Math.round(y / U) * U, k.b * U, k.b * U);   // her parça ızgaraya oturur
+      }
+    }
+    hc.globalAlpha = 1;
     requestAnimationFrame(ciz);
   }
 
@@ -185,7 +195,7 @@ export function baslatKanvas(root, yollar) {
     if (e.composedPath().some((n) => n.matches?.('a,button,input,.konsol,.kanit'))) return;
     if (sahin.icinde(e.clientX, e.clientY)) { sahinKonus(); return; }
     const i = karakterde(e.clientX, e.clientY);
-    if (i >= 0) konus(i); else if (!AZ) dalgalar.push({ x: Math.round(e.clientX / (U * 2)) * U * 2, y: Math.round(e.clientY / (U * 2)) * U * 2, t: performance.now() });
+    if (i >= 0) konus(i); else if (!AZ) dalgalar.push({ x: Math.round(e.clientX / U) * U, y: Math.round(e.clientY / U) * U, t: performance.now(), parca: Array.from({ length: 14 }, (_, k) => { const a = (k / 14) * Math.PI * 2 + Math.random() * .4, v = 8 + Math.random() * 14; return { vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, b: Math.random() < .3 ? 2 : 1, r: ['#d97757', '#f09a78', '#f4efe8', '#a24b33'][k % 4] }; }) });
   });
   root.addEventListener('pointermove', (e) => {
     const ustu = e.composedPath().some((n) => n.matches?.('a,button,input'));
