@@ -8,6 +8,7 @@ import { sahinKur } from './piksel-ana-sahin.js';
 const kok = document.documentElement;
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SERIT = 56, ENFAZLA = 1;
+const SARI = '255,216,74';   // ışın kutuya varınca yanan sarı
 const C = { zemin: '#211f1c', nokta: '#2f2c28', soluk: '#4a3128', orta: '#7a4a38', turuncu: '#d97757', cip: '#322e2a' };
 const ease = (p) => 1 - Math.pow(1 - p, 3);
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -86,9 +87,15 @@ export function baslatKanvas(root, yollar) {
     const tt = (now - baslangic) / 1000, intro = AZ ? 1 : clamp(tt / 1.6, 0, 1), iz = U * 1.2;
     hc.clearRect(0, 0, W, H);
     pads.forEach((p, i) => {
-      const L = p.x - X0;
-      for (let k = 0; k < 3; k++) { const q = ((tt * .12 * (1 + i * .1) + k / 3 + i * .17) % 1), x = X0 + L * q;
-        if (x < X0 + L * intro) { hc.fillStyle = 'rgba(240,154,120,.95)'; hc.fillRect(Math.round(x), Math.round(p.y - iz / 2), U * 2.2, iz); hc.fillStyle = 'rgba(240,154,120,.35)'; hc.fillRect(Math.round(x - U * 2.2), Math.round(p.y - iz / 2), U * 2.2, iz); } }
+      const L = p.x - X0, sp = .12 * (1 + i * .1), bw = W <= 1100 ? U * 4 : 22, xmax = p.x - bw / 2, qv = (xmax - U * 2.2 - X0) / L;   // xmax: kutunun sol kenarı, ışın burada biter
+      const parca = (x1, x2, r) => { const a = Math.max(x1, X0), b = Math.min(x2, xmax); if (b > a) { hc.fillStyle = r; hc.fillRect(Math.round(a), Math.round(p.y - iz / 2), Math.round(b) - Math.round(a), iz); } };
+      let yan = 0;
+      for (let k = 0; k < 3; k++) { const q = ((tt * sp + k / 3 + i * .17) % 1), x = X0 + L * q;
+        if (x < X0 + L * intro) { parca(x, x + U * 2.2, 'rgba(240,154,120,.95)'); parca(x - U * 2.2, x, 'rgba(240,154,120,.35)'); }
+        if (intro >= 1 && tt > 2.4) { const s = ((q - qv) % 1 + 1) % 1 / sp; if (s < .6) yan = Math.max(yan, Math.min(1, s / .05) * (1 - s / .6)); } }   // ışının ucu kutuya değince kutu sarı yanar, sönerek biter
+      if (yan > 0.02) {   // üzerine gelinen kutu döner, yanmaz
+        hc.fillStyle = `rgba(${SARI},${(yan * .92).toFixed(2)})`; hc.fillRect(Math.round(p.x - bw / 2), Math.round(p.y - bw / 2), bw, bw);
+        const g = Math.round(2 + (1 - yan) * 8); hc.strokeStyle = `rgba(${SARI},${(yan * .55).toFixed(2)})`; hc.lineWidth = 3; hc.strokeRect(Math.round(p.x - bw / 2) - g, Math.round(p.y - bw / 2) - g, bw + g * 2, bw + g * 2); }
       const k = kar[i]; if (!k) return;
       const d = Object.assign({ x: k.x, yOff: 0, look: 1, run: false, tilt: 0, armUp: false, air: false, legPhase: Math.floor(tt * 9) % 2 }, adim(k, tt, i));
       if (d.kapali) return; d.x = k.x;
