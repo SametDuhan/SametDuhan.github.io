@@ -20,7 +20,8 @@ export function baslatKonsol(root, yollar) {
   const tarih = new Date(SAYILAR.tarih + 'T00:00').toLocaleDateString(EN ? 'en-US' : 'tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
   root.querySelector('.k-not').textContent = t(`${PROJELER.length} açık kaynak projenin toplamı, ${tarih}. Her kare bir commit; turuncular Claude ile ortak yazıldı. Her gün otomatik güncellenir.`, `Total across ${PROJELER.length} open-source projects, ${tarih}. Each square is a commit; orange ones were co-authored with Claude. Updated daily.`);
   const izgara = root.getElementById('k-izgara');
-  for (let i = 0; i < toplam; i++) { const q = document.createElement('i'); q.title = i < claude ? t('Claude ile ortak yazıldı', 'Co-authored with Claude') : t('tek başıma', 'on my own'); q.className = i < claude ? 'on' : 'el'; if (!AZ) q.style.setProperty('--n', i); izgara.append(q); }
+  for (let i = 0; i < toplam; i++) { const q = document.createElement('i'); q.title = i < claude ? t('Claude ile ortak yazıldı', 'Co-authored with Claude') : t('tek başıma', 'on my own'); q.className = i < claude ? 'on' : 'el'; izgara.append(q); }
+  if (!AZ) { const sut = 16; [...izgara.children].forEach((q, i) => q.style.setProperty('--d', (i % sut) + Math.floor(i / sut))); }   // köşegen dalga
   root.querySelectorAll('.kanit-oz button').forEach((b) => {
     const ac = () => izgara.classList.add('sec-' + b.dataset.g), kapat = () => izgara.classList.remove('sec-' + b.dataset.g);
     b.addEventListener('pointerenter', ac); b.addEventListener('pointerleave', kapat); b.addEventListener('focus', ac); b.addEventListener('blur', kapat);

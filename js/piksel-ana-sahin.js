@@ -22,7 +22,7 @@ const GOVDE = [
 const KANAT_YUKARI = ['.........d......', '........dd......', '.......ddd......', '......dddd......', '.....ddddd......'];
 const KANAT_ASAGI = ['.......ddddd.....', '......dddddd.....', '.....ddddd.......'];
 const AA = 1.0;        // uçuş süresi (sn)
-const ease = (p) => 1 - Math.pow(1 - p, 3);
+const ease = (p) => (p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);   // yavaş kalkar, hızlanır, yavaş konar
 
 export function sahinKur(root) {
   const konsol = root.querySelector('.konsol');
@@ -43,11 +43,12 @@ export function sahinKur(root) {
       if (!s.hedef) { s.x = ev.x; s.y = ev.y; s.hedef = ev; s.ev = true; }
       if (s.ev && !s.ucuyor) { if (tt > s.bekle) git(ev, tt); if (!s.ucuyor) { s.x = ev.x; s.y = ev.y; s.hedef = ev; } }
       let yOff = 0, kanat = -1;
+      if (!s.ucuyor && s.indi && tt - s.indi < .3) yOff = -Math.sin((tt - s.indi) / .3 * Math.PI) * 5;   // konunca küçük sıçrama
       if (s.ucuyor) {
         const p = Math.min(1, (tt - s.t0) / AA);
         s.x = s.bx + (s.hedef.x - s.bx) * ease(p); s.y = s.by + (s.hedef.y - s.by) * ease(p);
-        yOff = -Math.sin(p * Math.PI) * 46; kanat = Math.floor(tt * 14) % 2;
-        if (p >= 1) { s.ucuyor = false; s.x = s.hedef.x; s.y = s.hedef.y; }
+        yOff = -Math.sin(p * Math.PI) * 46; kanat = Math.floor(tt * (p < .3 || p > .8 ? 18 : 9)) % 2;   // kalkış ve konuşta hızlı çırpar, süzülürken yavaş
+        if (p >= 1) { s.ucuyor = false; s.x = s.hedef.x; s.y = s.hedef.y; s.indi = tt; }
       }
       const u = Math.max(3, Math.round(U * 1.1));
       const ox = Math.round(s.x - 9 * u), oy = Math.round(s.y + yOff - GOVDE.length * u);
