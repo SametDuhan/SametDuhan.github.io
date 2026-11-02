@@ -46,7 +46,7 @@ html[data-gorunum="piksel"] {
 
   /* sol menü: koyu panel, turuncu şerit; logo piksel Claude Code karakteri */
   & .yan-menu { background: color-mix(in srgb, var(--panel) 70%, var(--zemin)); border-right: 1px solid var(--kenar); }
-  & .yan-menu .logo img { content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Crect width='32' height='32' fill='%23191817'/%3E%3Cpath fill='%23d97757' d='M8 8h16v12H8z M4 14h4v4H4z M24 14h4v4h-4z M10 20h2v4h-2z M14 20h2v4h-2z M18 20h2v4h-2z M22 20h2v4h-2z'/%3E%3Cpath fill='%23201816' d='M12 12h2v4h-2z M18 12h2v4h-2z'/%3E%3Cpath fill='%232ecc40' d='M26 6h2v10h-2z M28 6h3v3h-3z'/%3E%3C/svg%3E"); image-rendering: pixelated; border-color: var(--vurgu); }
+  & .yan-menu .logo img { content: url("../img/profil.webp"); object-fit: cover; border: 3px solid #f5c542; border-radius: 50% !important; }
 
   /* kartlar: düz, ince çerçeve; üstüne gelince turuncu çerçeve ve hafif kalkış */
   & .kutu, & .deste-karti, & .sayac, & .ilke, & .yol, & .ozellikler li, & .p-nota, & .akis-yol li, & .pin-liste li, & .kanal-kart, & .yaz-kart, & .kanallar li.kanal { box-shadow: none; background: var(--kart); }
@@ -111,7 +111,7 @@ html[data-px-gecis] body { animation: px-sayfa-gel .35s ease-out both; }
 @media (min-width: 901px) {
   html[data-gorunum="piksel"] {
     & .yan-menu .logo { gap: 14px; margin-bottom: 26px; padding-bottom: 22px; border-bottom: 1px solid var(--kenar); }
-    & .yan-menu .logo img { width: 46px; height: 46px; }
+    & .yan-menu .logo img { width: 68px; height: 68px; }
     & .yan-menu .logo b { font: 700 18px/1.1 var(--baslik); letter-spacing: .08em; }
     & .yan-menu .logo b::after { content: "ŞAHİN"; display: block; margin-top: 3px; color: var(--vurgu); }
     & .menu-linkler { position: relative; gap: 4px; border: 0; padding: 4px 0; }
