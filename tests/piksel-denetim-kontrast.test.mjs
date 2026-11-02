@@ -12,7 +12,7 @@ const parlaklik = (hex) => {
 const kontrast = (a, b) => { const [x, y] = [parlaklik(a), parlaklik(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
 
 // Piksel görünümün koyu zeminleri; koyu renkli yazılar (turuncu/yeşil dolgu üstünde) ayrıca doğrulanır.
-const ZEMINLER = ['#191817', '#201e1c', '#141312', '#1c1a18'];
+const ZEMINLER = ['#211f1c', '#2a2724', '#141312', '#1c1a18'];
 const DOLGULAR = { '#1a1210': ['#d97757', '#f09a78', '#e8916f'], '#0d2a12': ['#2ecc40'] };
 
 test('piksel css dosyalarında elle yazılan her yazı rengi okunur (koyu zeminde ≥4,5:1; koyu yazı dolgusunun üstünde ≥4,5:1)', () => {

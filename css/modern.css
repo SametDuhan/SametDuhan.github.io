@@ -27,14 +27,14 @@
 [data-gorunum-sec="modern"] .gs-onizleme::before { content: "✻"; left: 7px; top: 4px; font: 700 13px/1 system-ui, sans-serif; color: #d97757; }
 [data-gorunum-sec="modern"] .gs-onizleme::after { left: 7px; right: 7px; bottom: 6px; height: 9px; background: linear-gradient(#ede9df, #ede9df) 0 0 / 100% 3px no-repeat, linear-gradient(#6b675e, #6b675e) 0 6px / 55% 3px no-repeat; border-radius: 2px; }
 
-[data-gorunum-sec="piksel"] .gs-onizleme { background: #191817; border: 1px solid #5a2f22; border-radius: 0; box-shadow: 0 0 0 1px #191817, 0 6px 14px -8px rgb(0 0 0 / .6); }
+[data-gorunum-sec="piksel"] .gs-onizleme { background: #211f1c; border: 1px solid #5a2f22; border-radius: 0; box-shadow: 0 0 0 1px #211f1c, 0 6px 14px -8px rgb(0 0 0 / .6); }
 [data-gorunum-sec="piksel"] .gs-onizleme::before { left: 13px; top: 5px; width: 3px; height: 3px; background: #d97757; box-shadow: 3px 0px #d97757, 6px 0px #d97757, 9px 0px #d97757, 12px 0px #d97757, -3px 3px #d97757, 0px 3px #d97757, 3px 3px #201816, 6px 3px #d97757, 9px 3px #201816, 12px 3px #d97757, 15px 3px #d97757, 0px 6px #d97757, 3px 6px #d97757, 6px 6px #d97757, 9px 6px #d97757, 12px 6px #d97757, 0px 9px #d97757, 6px 9px #d97757, 12px 9px #d97757; }
 [data-gorunum-sec="piksel"] .gs-onizleme::after { left: 7px; right: 7px; bottom: 6px; height: 9px; background: linear-gradient(#2ecc40, #2ecc40) 0 0 / 40% 3px no-repeat, linear-gradient(#5a4a42, #5a4a42) 0 6px / 80% 3px no-repeat; }
 html[data-gorunum="piksel"] [data-gorunum-sec="piksel"]::before { background: var(--vurgu); border-color: var(--vurgu); box-shadow: 0 0 0 4px color-mix(in srgb, var(--vurgu) 28%, transparent); }
 html[data-gorunum="piksel"] [data-gorunum-sec="piksel"] .gs-onizleme { opacity: 1; transform: none; outline: 2px solid var(--vurgu); outline-offset: 3px; }
 html[data-gorunum="piksel"] [data-gorunum-sec="piksel"] { cursor: default; }
 html[data-gorunum="piksel"] [data-gorunum-sec="piksel"] b { color: var(--yazi); }
-html[data-gorunum="piksel"] .gs-ac .gs-onizleme { background: #191817; border: 1px solid #5a2f22; border-radius: 0; }
+html[data-gorunum="piksel"] .gs-ac .gs-onizleme { background: #211f1c; border: 1px solid #5a2f22; border-radius: 0; }
 html[data-gorunum="piksel"] .gs-ac .gs-onizleme::before { left: 9px; top: 4px; width: 2px; height: 2px; background: #d97757; box-shadow: 2px 0px #d97757, 4px 0px #d97757, 6px 0px #d97757, 8px 0px #d97757, -2px 2px #d97757, 0px 2px #d97757, 2px 2px #201816, 4px 2px #d97757, 6px 2px #201816, 8px 2px #d97757, 15px 2px #d97757, 0px 4px #d97757, 2px 4px #d97757, 4px 4px #d97757, 6px 4px #d97757, 8px 4px #d97757, 0px 6px #d97757, 4px 6px #d97757, 8px 6px #d97757; }
 .gs-akis button:hover .gs-onizleme { opacity: 1; transform: translateY(-2px) rotate(-3deg); }
 .gs-akis button:hover b { color: var(--vurgu-koyu); }

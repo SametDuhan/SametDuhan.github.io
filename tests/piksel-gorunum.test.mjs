@@ -59,65 +59,36 @@ test('piksel görünüm modern düzeniyle ortak: yerleşim blokları ikisine bir
   assert.ok((modern.match(/html:is\(\[data-gorunum="modern"\], \[data-gorunum="piksel"\]\) \{/g) ?? []).length >= 3);
 });
 
-test('piksel Hakkımda: etkileşimli katman yalnız Hakkımda sayfasında yüklenir; karakter sahnesi imleci izler, tıklayınca gerçek bilgi söyler', () => {
+test('piksel Hakkımda: etkileşimli katman yalnız Hakkımda sayfasında yüklenir; karakter sahnesi ve Rota çizimi yok (sade)', () => {
   for (const yol of ['hakkimda/index.html', 'en/hakkimda/index.html']) {
     const h = oku(yol);
     assert.match(h, /piksel-hakkimda\.css/, yol);
     assert.match(h, /import \{ baslat as pikselHakkimda \} from '\.\.\/(\.\.\/)?js\/piksel-hakkimda\.js'/, yol);
   }
   assert.doesNotMatch(oku('projeler/index.html'), /piksel-hakkimda/);
-  const sahne = oku('js/piksel-hakkimda-sahne.js');
-  assert.match(sahne, /imlec/);
-  assert.match(sahne, /SAYILAR\.repolar\.airock/);
-  assert.match(sahne, /prefers-reduced-motion: reduce/);
   assert.match(oku('js/piksel-hakkimda.js'), /getElementById\('rota-baslik'\)/);
+  for (const dosya of ['sahne', 'yol']) assert.ok(!existsSync(join(KOK, `js/piksel-hakkimda-${dosya}.js`)), dosya);
 });
-
-test('piksel Hakkımda: Rota yol haritası içeriği .rota listesinden okur (tek kaynak), listeyi silmez, klavyeyle gezilir', () => {
-  const yol = oku('js/piksel-hakkimda-yol.js');
-  assert.match(yol, /querySelector\('\.rota'\)/);
-  assert.match(yol, /li\.querySelector\('time'\)/);
-  assert.match(yol, /ArrowRight/);
-  assert.match(yol, /prefers-reduced-motion: reduce/);
-  assert.match(oku('js/piksel-hakkimda.js'), /const PARCALAR = \[[^\]]*\byolKur\b[^\]]*\]/);
-  assert.match(oku('css/piksel-hakkimda.css'), /\.px-yol-var \.rota \{ display: none; \}/);
-  assert.match(oku('hakkimda/index.html'), /<ol class="rota belir">/); // kaynak liste sayfada duruyor
-});
-
-test('piksel Hakkımda: başlık çözme ve araç yuvaları sayfanın kendi metninden çalışır, görünüm değişince geri alınır, klavyeyle kullanılır', () => {
+test('piksel Hakkımda: araç yuvaları sayfanın kendi metninden çalışır, görünüm değişince geri alınır, klavyeyle kullanılır; başlık çözme yok', () => {
   const d = oku('js/piksel-hakkimda-detay.js');
-  assert.match(d, /aria-label/);                       // çözülürken ekran okuyucu asıl metni okur
   assert.match(d, /e\.key === 'Enter' \|\| e\.key === ' '/); // yuvalar klavyeyle
   assert.match(d, /prefers-reduced-motion: reduce/);
   assert.match(d, /return \(\) => temizle\.forEach/);   // kaldırma işlevi
-  assert.match(oku('js/piksel-hakkimda.js'), /PARCALAR = \[sahneKur, yolKur, detayKur\]/);
+  assert.doesNotMatch(d, /HARF|function coz/);
+  assert.match(oku('js/piksel-hakkimda.js'), /PARCALAR = \[detayKur\]/);
   assert.match(oku('css/piksel-hakkimda.css'), /\.aletler li\.px-kusanildi/);
 });
-
-test('piksel Projeler: etkileşimli katman yalnız proje listesinde; mini kartlar sayfanın kendi proje kartlarından okunur, satırda en çok 3', () => {
+test('piksel Projeler: etkileşimli katman yalnız proje listesinde; mini kartlar ve ilerleme rayı yok (sade)', () => {
   for (const yol of ['projeler/index.html', 'en/projeler/index.html']) {
     const h = oku(yol);
     assert.match(h, /piksel-projeler\.css/, yol);
     assert.match(h, /import \{ baslat as pikselProjeler \} from '\.\.\/(\.\.\/)?js\/piksel-projeler\.js'/, yol);
   }
   for (const yol of ['projeler/skytrack/index.html', 'hakkimda/index.html']) assert.doesNotMatch(oku(yol), /piksel-projeler/, yol);
-  const mini = oku('js/piksel-projeler-mini.js');
-  assert.match(mini, /querySelectorAll\('\.vitrin\[id\]'\)/);
-  assert.match(oku('css/piksel-projeler.css'), /\.px-mini-liste \{[^}]*repeat\(3, minmax\(0, 1fr\)\)/);
-  assert.doesNotMatch(oku('css/piksel-projeler.css'), /px-hat/);
+  assert.match(oku('js/piksel-projeler.js'), /PARCALAR = \[vitrinKur\]/);
   assert.match(oku('js/piksel-projeler.js'), /querySelector\('\.vitrinler'\)/);
+  for (const dosya of ['mini', 'ray']) assert.ok(!existsSync(join(KOK, `js/piksel-projeler-${dosya}.js`)), dosya);
 });
-
-test('piksel Projeler: ilerleme rayı projelerin gerçek yerlerinden hesaplanır, tıklanır, kaydırma kapsayıcısından bağımsızdır', () => {
-  const ray = oku('js/piksel-projeler-ray.js');
-  assert.match(ray, /getBoundingClientRect/);
-  assert.match(ray, /scrollIntoView/);
-  assert.match(ray, /capture: true/);
-  assert.match(ray, /prefers-reduced-motion: reduce/);
-  assert.match(oku('js/piksel-projeler.js'), /PARCALAR = \[[^\]]*\brayKur\b[^\]]*\]/);
-  assert.match(oku('css/piksel-projeler.css'), /@media print \{ \.px-ray \{ display: none !important; \} \}/);
-});
-
 test('piksel Projeler: süzgeç, komut kopyalama ve yazılarak gelen maddeler sayfanın kendi metninden çalışır; klavyeyle kullanılır; geri alınır', () => {
   const v = oku('js/piksel-projeler-vitrin.js');
   assert.match(v, /querySelectorAll\('\.v-etiketler span'\)/);   // etiketler sayfadan okunur
@@ -130,70 +101,21 @@ test('piksel Projeler: süzgeç, komut kopyalama ve yazılarak gelen maddeler sa
   assert.match(oku('css/piksel-projeler.css'), /\.vitrin\.px-gizli \{ display: none; \}/);
 });
 
-test('piksel Slaytlar: etkileşimli katman yalnız Slaytlar listesinde; içindekiler slayt başlıklarını sunum sayfalarından okur ve sunum adresinin #n biçimine bağlanır', () => {
-  for (const yol of ['slaytlar/index.html', 'en/slaytlar/index.html']) {
-    const h = oku(yol);
-    assert.match(h, /piksel-slaytlar\.css/, yol);
-    assert.match(h, /import\('\.\.\/(\.\.\/)?js\/piksel-slaytlar\.js'\)\.then\(\(m\) => m\.baslat\(\)\)/, yol);
-  }
-  for (const yol of ['projeler/index.html', 'slaytlar/ai-ajani-nedir/index.html']) assert.doesNotMatch(oku(yol), /piksel-slaytlar/, yol);
-  const ic = oku('js/piksel-slaytlar-icindekiler.js');
-  assert.match(ic, /querySelectorAll\('\.slayt'\)/);          // başlıklar sunum sayfasının kendisinden
-  assert.match(ic, /\.\/\$\{v\.slug\}\/#\$\{s\.n\}/);          // sunum adresi #n (js/deste.js hashtenKonum ile aynı)
-  assert.match(ic, /ArrowRight/);
-  assert.match(ic, /prefers-reduced-motion: reduce/);
-  assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\bicindekilerKur\b[^\]]*\]/);
-  // gerçek sunumlarda her slayt bölümünün bir başlığı var (içindekiler boş çıkmasın)
-  for (const slug of ['ai-ajani-nedir', 'claude-code-hook', 'skytrack-nasil-kurdum']) {
-    const dosya = oku(`slaytlar/${slug}/index.html`);
-    const bolumler = dosya.split('<section class="slayt').slice(1);
-    assert.ok(bolumler.length >= 5, slug);
-    for (const b of bolumler) assert.match(b, /<h[12][\s>]/, `${slug}: başlıksız slayt`);
-  }
-});
-
-test('piksel Slaytlar: kaldığın yer yolu sunumların kullandığı gerçek ilerleme kaydını okur, hiçbir yere göndermez', () => {
-  const y = oku('js/piksel-slaytlar-yol.js');
-  assert.match(y, /import \{ ilerlemeOku \} from '\.\/ilerleme\.js'/);
-  assert.match(y, /DESTELER\.find/);
-  assert.match(y, /slaytSayisi/);
-  assert.doesNotMatch(y, /fetch\(|XMLHttpRequest|sendBeacon|setItem/, 'ilerleme yalnız okunur, ağa gitmez');
-  assert.match(y, /prefers-reduced-motion: reduce/);
-  assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\byolKur\b[^\]]*\]/);
-});
-
-test('piksel Slaytlar: arama iki dilde, "/" ve 1-9 kısayolları, Escape; süzülen kart gizlenir ama silinmez; geri alınır', () => {
-  const a = oku('js/piksel-slaytlar-ara.js');
-  assert.match(a, /d\.en\?\.baslik/);                      // İngilizce alanlar da aranır
-  assert.match(a, /e\.key === '\/'/);
-  assert.match(a, /e\.key >= '1' && e\.key <= '9'/);
-  assert.match(a, /e\.key === 'Escape'/);
-  assert.match(a, /classList\.toggle\('px-gizli', !gor\)/);
-  assert.doesNotMatch(a, /\.remove\(\)[^;]*deste-karti|k\.remove\(\)/); // kartlar silinmez
-  assert.match(a, /return \(\) => \{ removeEventListener\('keydown', tus\)/);
-  assert.match(oku('js/piksel-slaytlar.js'), /PARCALAR = \[[^\]]*\baraKur\b[^\]]*\]/);
-  assert.match(oku('css/piksel-slaytlar.css'), /\.deste-karti\.px-gizli \{ display: none; \}/);
-});
-
-test('piksel İletişim: katman yalnız İletişim sayfasında; formun mantığına ve mail adresinin gizliliğine dokunmaz; saat Europe/Istanbul', () => {
+test('piksel İletişim: katman yalnız İletişim sayfasında; formun mantığına ve mail adresinin gizliliğine dokunmaz; postacı sahnesi yok (sade)', () => {
   for (const yol of ['iletisim/index.html', 'en/iletisim/index.html']) {
     const h = oku(yol);
     assert.match(h, /piksel-iletisim\.css/, yol);
     assert.match(h, /import \{ baslat as pikselIletisim \} from '\.\.\/(\.\.\/)?js\/piksel-iletisim\.js'/, yol);
   }
   for (const yol of ['hakkimda/index.html', 'projeler/index.html']) assert.doesNotMatch(oku(yol), /piksel-iletisim/, yol);
-  for (const js of ['js/piksel-iletisim.js', 'js/piksel-iletisim-sahne.js', 'css/piksel-iletisim.css']) {
+  for (const js of ['js/piksel-iletisim.js', 'js/piksel-iletisim-eylem.js', 'css/piksel-iletisim.css']) {
     const s = oku(js);
     assert.ok(!s.includes('16sametduhan16'), `${js}: mail adresi düz metin olmamalı`);
     assert.doesNotMatch(s, /mailto:|sendBeacon|fetch\(/, `${js}: gönderme/ağ yok`);
   }
-  const sahne = oku('js/piksel-iletisim-sahne.js');
-  assert.match(sahne, /Europe\/Istanbul/);
-  assert.match(sahne, /querySelectorAll\('\.iletisim-bilgi li'\)/);   // söylediği bilgiler sayfadan okunur
-  assert.match(sahne, /prefers-reduced-motion: reduce/);
+  assert.ok(!existsSync(join(KOK, 'js/piksel-iletisim-sahne.js')));
   assert.match(oku('js/piksel-iletisim.js'), /getElementById\('yazi-formu'\)/);
 });
-
 test('piksel İletişim eylemleri: zarf yalnız görsel geri bildirim (olayı engellemez, ağa gitmez); kısayollar yazarken devre dışı; geri alınır', () => {
   const e = oku('js/piksel-iletisim-eylem.js');
   assert.doesNotMatch(e, /e\.preventDefault\(\);\s*\n?\s*uc\(|dugme\.addEventListener\('click', \(e\) => \{ e\.preventDefault/);   // düğmenin işi engellenmez
@@ -261,7 +183,7 @@ test('piksel alt sayfalar: sayfa başındaki koşan karakterli devre şeridi yok
   assert.doesNotMatch(oku('css/piksel.css'), /px-devre/);
 });
 
-test('piksel proje detay: katman yalnız proje detay sayfalarında (üç proje, iki dil); karakter yok; commit hattı ve clone komutu gerçek veriden', () => {
+test('piksel proje detay: katman yalnız proje detay sayfalarında (üç proje, iki dil); karakter yok; sol ray ve commit hattı yok (sade)', () => {
   for (const proje of ['skytrack', 'claude-done-pixel', 'chatgpt-done-pixel']) {
     for (const yol of [`projeler/${proje}/index.html`, `en/projeler/${proje}/index.html`]) {
       const h = oku(yol);
@@ -270,15 +192,10 @@ test('piksel proje detay: katman yalnız proje detay sayfalarında (üç proje, 
     }
   }
   assert.doesNotMatch(oku('projeler/index.html'), /piksel-proje\.css/);
-  for (const js of ['js/piksel-proje.js', 'js/piksel-proje-ray.js', 'js/piksel-proje-hat.js']) assert.doesNotMatch(oku(js), /pikselKarakter|from '\.\/piksel\.js'/, `${js}: bu sayfalarda karakter yok`);
-  const hat = oku('js/piksel-proje-hat.js');
-  assert.match(hat, /SAYILAR\.repolar\[repo\]/);
-  assert.match(hat, /git clone \$\{gh\.href/);
-  assert.match(oku('js/piksel-proje-ray.js'), /querySelectorAll\('main section\.bolum\[aria-labelledby\]'\)/);
-  assert.match(oku('js/piksel-proje.js'), /PARCALAR = \[[^\]]*\brayKur\b[^\]]*\bhatKur\b[^\]]*\]/);
-  assert.match(oku('css/piksel-proje.css'), /@media print \{ \.px-pray \{ display: none !important; \} \}/);
+  assert.doesNotMatch(oku('js/piksel-proje.js'), /pikselKarakter|from '\.\/piksel\.js'/);
+  assert.match(oku('js/piksel-proje.js'), /PARCALAR = \[akisKur, ekranKur\]/);
+  for (const dosya of ['ray', 'hat']) assert.ok(!existsSync(join(KOK, `js/piksel-proje-${dosya}.js`)), dosya);
 });
-
 test('piksel proje akışı: adımlar sayfanın kendi listesinden; paket döngüsü üstüne gelince/odakta/tıklamada durur; klavyeyle gezilir; geri alınır; karakter yok', () => {
   const a = oku('js/piksel-proje-akis.js');
   assert.match(a, /querySelector\('\.akis-yol'\)/);

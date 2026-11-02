@@ -4,15 +4,15 @@
    başlıklar Chakra Petch (köşeli, teknolojik), kod JetBrains Mono, gövde Atkinson Hyperlegible. Ana sayfa js/piksel-ana.js bileşenidir. */
 
 html[data-gorunum="piksel"] {
-  --zemin: #191817; --panel: #201e1c; --panel-cam: rgba(32, 30, 28, 0.9); --kart: #201e1c; --kenar: #3a332e;
+  --zemin: #211f1c; --panel: #2a2724; --panel-cam: rgba(42, 39, 36, 0.9); --kart: #2a2724; --kenar: #4a423b;
   --yazi: #f4efe8; --soluk: #c4b8ad; --vurgu: #d97757; --vurgu-koyu: #f09a78; --ceviz: #f0a98d;
-  --civit: #8db1e3; --bakir: #7cc1a8; --bakir-koyu: #7cc1a8; --kiremit: #ec8a72; --muhur: #ec8a72; --iyi: #7cc1a8; --kotu: #ec8a72; --kagit2: #201e1c;
+  --civit: #8db1e3; --bakir: #7cc1a8; --bakir-koyu: #7cc1a8; --kiremit: #ec8a72; --muhur: #ec8a72; --iyi: #7cc1a8; --kotu: #ec8a72; --kagit2: #2a2724;
   --golge: none; --golge-buyuk: 0 0 0 1px rgb(217 119 87 / .25);
   --baslik: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
   --serif: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --sans: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
-  --izgara: #262321;
+  --izgara: #2f2c28;
   --r: 0px;
   color-scheme: dark;
   background: var(--zemin);
@@ -78,6 +78,8 @@ html[data-gorunum="piksel"] {
   & .kapi .onay text { fill: #10201a; }
   /* sayfa numarası rozeti: turuncu zeminde açık yazı 2,7:1 kalıyordu (--p-ust tanımsızken --yazi'ye düşer) */
   & .etiket .no { color: var(--p-ust, #1a1916); }
+  /* sayfa başlığının üstündeki etiket satırı (no · KİMLİK KARTI · damga) gereksiz: başlık kendini taşır */
+  & .sayfa-basi > .etiket, & .sayfa-basi .etiket:has(.no) { display: none; }
   /* SkyTrack sunumundaki yorum/yut kod kutusu: zemin --yazi, satır renkleri sabit açık: kutu içinde jetonlar yerel olarak döndürülür (koyu zemin, açık yazı) */
   & .yorum-yut { --yazi: #1f1e1d; --zemin: #f2e8d5; }
 

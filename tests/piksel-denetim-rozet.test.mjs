@@ -14,5 +14,5 @@ test('piksel: sayfa numarası rozeti koyu yazılı; aktif menü numarası (--vur
   assert.match(piksel, /& \.etiket \.no \{ color: var\(--p-ust, #1a1916\); \}/);
   assert.ok(kontrast('#1a1916', '#d97757') >= 4.5);
   assert.match(piksel, /--vurgu-koyu: #f09a78/);
-  assert.ok(kontrast('#f09a78', '#201e1c') >= 4.5);
+  assert.ok(kontrast('#f09a78', '#2a2724') >= 4.5);
 });

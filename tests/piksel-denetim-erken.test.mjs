@@ -8,7 +8,7 @@ const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
 const oku = (yol) => readFileSync(join(KOK, yol), 'utf8');
 
 test('erken betik: tarayıcı çubuğu rengi piksel zeminle uyumlu', () => {
-  assert.match(oku('js/gorunum-erken.js'), /theme-color[\s\S]{0,60}#191817/);
+  assert.match(oku('js/gorunum-erken.js'), /theme-color[\s\S]{0,60}#211f1c/);
 });
 
 test('erken betik: depo engelliyken de adresteki ?gorunum= uygulanır; sessionStorage engelliyken favicon/tema rengi yine ayarlanır', async () => {
@@ -23,5 +23,5 @@ test('erken betik: depo engelliyken de adresteki ?gorunum= uygulanır; sessionSt
   vm.runInNewContext(oku('js/gorunum-erken.js'), baglam(''));
   assert.equal(oz['data-gorunum'], 'piksel');
   assert.match(ikon.href ?? '', /^data:image\/svg\+xml/);
-  assert.equal(renk.content, '#191817');
+  assert.equal(renk.content, '#211f1c');
 });

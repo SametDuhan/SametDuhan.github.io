@@ -8,7 +8,7 @@ import { sahinKur } from './piksel-ana-sahin.js';
 const kok = document.documentElement;
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SERIT = 56, ENFAZLA = 1;
-const C = { zemin: '#191817', nokta: '#262321', soluk: '#4a3128', orta: '#7a4a38', turuncu: '#d97757', cip: '#2a2623' };
+const C = { zemin: '#211f1c', nokta: '#2f2c28', soluk: '#4a3128', orta: '#7a4a38', turuncu: '#d97757', cip: '#322e2a' };
 const ease = (p) => 1 - Math.pow(1 - p, 3);
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const piksel = () => kok.dataset.gorunum === 'piksel';

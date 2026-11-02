@@ -226,7 +226,7 @@ ${PROJELER.map((p) => projeVitrinHTML(p, '../')).join('\n')}
 `);
 
 // --- Slaytlar
-yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/', ekCss: '\n  <link rel="stylesheet" href="../css/atolye.css">\n  <link rel="stylesheet" href="../css/piksel-slaytlar.css">' })}${menu('slaytlar')}
+yaz('slaytlar/index.html', `${bas({ baslik: 'Slaytlar · Samet Duhan', aciklama: 'AI\'ı sıfırdan öğreten, Samet Duhan\'ın projelerinden örnek veren interaktif sunumlar. Tarayıcıda açılır, kurulum istemez.', yol: 'slaytlar/', ekCss: '\n  <link rel="stylesheet" href="../css/atolye.css">' })}${menu('slaytlar')}
   <main id="icerik" data-sayfalama="kendi">
 ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'Slaytlar', poz: 'ogretmen', sahne: 'slaytlar',
       tanitim: 'Merak ettiğin konuyu seç. Her sunum tarayıcıda açılır, kurulum istemez ve örneklerini benim projelerimden verir. AI\'a yeni başlıyorsan <a href="./ai-ajani-nedir/">AI ajanı nedir?</a> ile başla.' })}
@@ -248,7 +248,6 @@ ${sayfaBasi({ no: '03', etiket: 'DERS NOTLARI', damga: 'KURULUM YOK', baslik: 'S
     const kutu = document.getElementById('desteler');
     kutu.innerHTML = DESTELER.map((d) => kartHTML(d, ilerlemeOku(depo, d.slug))).join('');
     kartHareketi(kutu);
-    import('../js/piksel-slaytlar.js').then((m) => m.baslat());
   </script>
 </body>
 </html>

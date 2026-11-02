@@ -1,42 +1,7 @@
 /* Piksel görünüm: Projeler'e özel parçalar (js/piksel-projeler*.js ekler). Yalnız piksel görünümde etkili. */
 html[data-gorunum="piksel"] {
   /* ---- mini kartlar: satırda en çok 3 ---- */
-  & .px-mini { margin: 6px 0 clamp(26px, 4vh, 42px); }
-  & .px-mini-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-  & .px-mini-kart { position: relative; display: flex; flex-direction: column; gap: 8px; height: 100%; box-sizing: border-box; padding: 14px 16px 12px; border: 1px solid var(--kenar); border-top: 3px solid var(--c); background: var(--kart); text-decoration: none !important; color: inherit; transition: transform .25s cubic-bezier(.16, 1, .3, 1), border-color .2s, background .25s; }
-  & .px-mini-kart:hover, & .px-mini-kart:focus-visible { transform: translateY(-3px); border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, var(--kart)); }
-  & .px-mini-kart:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: 2px; }
-  & .px-mini-ad { font: 700 17px/1.2 var(--baslik); color: var(--c); overflow-wrap: anywhere; }
-  & .px-mini-et { display: flex; flex-wrap: wrap; gap: 5px; }
-  & .px-mini-et i { font: 500 11.5px var(--mono); font-style: normal; color: var(--soluk); padding: 1px 7px; border: 1px solid var(--kenar); }
-  & .px-mini-oz { font-size: 13.5px; line-height: 1.5; color: var(--yazi); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  & .px-mini-ok { margin-top: auto; align-self: flex-end; font: 600 14px var(--mono); color: var(--c); }
-  @media (max-width: 900px) { & .px-mini-liste { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { & .px-mini-liste { grid-template-columns: 1fr; } }
 }
-@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] .px-mini-kart { transition: none; } }
-
-/* ---- ilerleme rayı ---- */
-.px-ray { display: none; }
-html[data-gorunum="piksel"] {
-  & .px-ray { display: block; position: fixed; z-index: 4; width: 0; opacity: 0; pointer-events: none; transition: opacity .35s; }
-  & .px-ray.acik { opacity: 1; }
-  & .px-ray-cizgi { position: absolute; left: -2px; top: 0; bottom: 0; width: 4px; background: repeating-linear-gradient(180deg, #4a3128 0 10px, transparent 10px 16px); }
-  & .px-ray-cizgi i { position: absolute; left: 0; top: 0; width: 100%; background: var(--vurgu); }
-  & .px-ray-kar { position: absolute; left: 0; top: 0; width: 48px; height: 40px; image-rendering: pixelated; z-index: 2; will-change: transform; }
-  & .px-ray ol { list-style: none; margin: 0; padding: 0; }
-  & .px-ray li { position: absolute; left: 0; }
-  & .px-ray button { all: unset; box-sizing: border-box; pointer-events: auto; cursor: pointer; position: absolute; left: -12px; top: -12px; width: 24px; height: 24px; display: grid; place-items: center; }
-  & .px-durak { display: block; width: 14px; height: 14px; background: var(--zemin); border: 3px solid #7a4a38; transition: transform .25s cubic-bezier(.16, 1, .3, 1), background .2s, border-color .2s; }
-  & .px-ray button[data-aktif] .px-durak { background: var(--vurgu); border-color: var(--vurgu-koyu); transform: scale(1.25); }
-  & .px-ray button:hover .px-durak { transform: rotate(45deg) scale(1.2); border-color: var(--vurgu); }
-  & .px-ray button:focus-visible { outline: 3px solid var(--vurgu-koyu); outline-offset: 2px; }
-  & .px-durak-ad { position: absolute; left: 30px; top: 50%; transform: translateY(-50%) translateX(-6px); padding: 3px 9px; background: var(--vurgu); color: #1a1210; font: 600 12px var(--mono); white-space: nowrap; opacity: 0; transition: opacity .2s, transform .3s cubic-bezier(.16, 1, .3, 1); pointer-events: none; }
-  & .px-ray button:hover .px-durak-ad, & .px-ray button:focus-visible .px-durak-ad { opacity: 1; transform: translateY(-50%); }
-  @media (max-width: 999px) { & .px-ray { display: none; } }
-}
-@media (prefers-reduced-motion: reduce) { html[data-gorunum="piksel"] :is(.px-ray, .px-durak, .px-durak-ad) { transition: none; } }
-@media print { .px-ray { display: none !important; } }
 
 /* ---- vitrin: süzgeç çubuğu, komut kopyalama ---- */
 html[data-gorunum="piksel"] {

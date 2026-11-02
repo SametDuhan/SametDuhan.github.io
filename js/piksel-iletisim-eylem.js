@@ -54,11 +54,8 @@ export function eylemKur() {
     const f = () => uc(kaynak, dugme);
     dugme.addEventListener('click', f); geri.push(() => dugme.removeEventListener('click', f));
   }
-  // 2) klavye kısayolları + ipucu
+  // 2) klavye kısayolları (1–5 konu, / mesaj, Ctrl+Enter); ekranda ipucu yazısı yok
   const konular = document.querySelector('#konular');
-  const ipucu = document.createElement('p'); ipucu.className = 'px-ipucu'; ipucu.setAttribute('aria-hidden', 'true');
-  ipucu.innerHTML = `<kbd>1</kbd>–<kbd>5</kbd> ${t('konu', 'topic')} · <kbd>/</kbd> ${t('mesaj', 'message')} · <kbd>Ctrl</kbd>+<kbd>Enter</kbd> ${t('mail uygulamasında aç', 'open in mail app')}`;
-  konular?.after(ipucu); geri.push(() => ipucu.remove());
   const tus = (e) => {
     if (document.documentElement.dataset.gorunum !== 'piksel' || e.altKey || e.metaKey) return;
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && document.activeElement === mesaj) { e.preventDefault(); document.getElementById('mail-ac')?.click(); return; }

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const KOK = join(dirname(fileURLToPath(import.meta.url)), '..');
 const oku = (yol) => readFileSync(join(KOK, yol), 'utf8');
 
-test('piksel İletişim: klavye kısayolu ipucu dokunmatik telefonda gizli', () => {
-  assert.match(oku('css/piksel-iletisim.css'), /@media \(max-width: 760px\) \{ & \.px-ipucu \{ display: none; \} \}/);
+test('piksel İletişim: ekranda klavye ipucu satırı yok (sade); kısayollar çalışır', () => {
+  assert.doesNotMatch(oku('css/piksel-iletisim.css'), /px-ipucu/);
+  assert.doesNotMatch(oku('js/piksel-iletisim-eylem.js'), /px-ipucu/);
 });

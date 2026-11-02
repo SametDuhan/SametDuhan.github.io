@@ -1,5 +1,5 @@
 :host{
-  --zemin:#191817; --levha:#201e1c; --cizgi:#3a332e; --soluk:#4a3128;
+  --zemin:#211f1c; --levha:#2a2724; --cizgi:#4a423b; --soluk:#4a3128;
   --turuncu:#d97757; --turuncu-acik:#f09a78; --yesil:#2ecc40;
   --yazi:#f4efe8; --ikincil:#c4b8ad;
   --baslik:'Chakra Petch','Segoe UI',system-ui,sans-serif; --kod:'JetBrains Mono',ui-monospace,Consolas,monospace; --govde:'Atkinson Hyperlegible',system-ui,sans-serif;
@@ -14,7 +14,7 @@ a{color:inherit}
 button{font:inherit}
 :focus-visible{outline:3px solid var(--turuncu-acik);outline-offset:4px}
 
-.serit{position:fixed;inset:0 0 auto 0;height:56px;z-index:5;display:flex;align-items:center;gap:26px;padding:0 28px;background:rgba(25,24,23,.94);border-bottom:1px solid var(--cizgi)}
+.serit{position:fixed;inset:0 0 auto 0;height:56px;z-index:5;display:flex;align-items:center;gap:26px;padding:0 28px;background:rgba(33,31,28,.94);border-bottom:1px solid var(--cizgi)}
 .marka .soyad{color:var(--turuncu)}
 .marka{font-family:var(--baslik);font-weight:700;font-size:19px;letter-spacing:.14em;text-decoration:none;margin-right:auto}
 .hizli{display:flex;gap:22px}
@@ -95,7 +95,7 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .kanit-alt b{font-family:var(--baslik);font-size:22px;color:var(--turuncu-acik);font-variant-numeric:tabular-nums}
 .kanit-alt strong{color:var(--yazi);font-weight:700}
 .kanit-izgara{display:grid;grid-template-columns:repeat(16,1fr);gap:2px}
-.kanit-izgara i{aspect-ratio:1;background:#2c2724;transition:background .25s,transform .25s var(--cikis),opacity .25s}
+.kanit-izgara i{aspect-ratio:1;background:#38332e;transition:background .25s,transform .25s var(--cikis),opacity .25s}
 .kanit-izgara i.on{background:var(--turuncu)}
 .kanit-izgara i.el{background:#5a514a}
 .kanit-izgara.sec-claude i:not(.on){opacity:.25}
