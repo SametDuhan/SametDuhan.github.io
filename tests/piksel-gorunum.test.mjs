@@ -37,9 +37,9 @@ test('piksel ana sayfa bileşeni: index.html yalnız piksel seçiliyken yükler;
   assert.ok(existsSync(join(KOK, 'css/piksel-ana.css')));
 });
 
-test('piksel ana sayfa: aynı anda en çok iki karakter; fare izi yok; konsol simülasyonu açıkça yazılı', () => {
+test('piksel ana sayfa: aynı anda en çok bir koşan karakter (şahin ayrıca); fare izi yok; konsol simülasyonu açıkça yazılı', () => {
   const kanvas = oku('js/piksel-ana-kanvas.js');
-  assert.match(kanvas, /ENFAZLA = 2/);
+  assert.match(kanvas, /ENFAZLA = 1/);
   assert.doesNotMatch(kanvas, /izler\.push/);
   assert.match(oku('js/piksel-ana-konsol.js'), /demo simülasyonu: gerçek bir model çağrılmıyor/);
 });

@@ -3,10 +3,11 @@
 import { pikselKarakter } from './piksel.js';
 import { SAYILAR } from './sayilar.js';
 import { t, EN } from './dil.js';
+import { sahinKur } from './piksel-ana-sahin.js';
 
 const kok = document.documentElement;
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const SERIT = 56, ENFAZLA = 2;
+const SERIT = 56, ENFAZLA = 1;
 const C = { zemin: '#191817', nokta: '#262321', soluk: '#4a3128', orta: '#7a4a38', turuncu: '#d97757', cip: '#2a2623' };
 const ease = (p) => 1 - Math.pow(1 - p, 3);
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -16,6 +17,7 @@ export function baslatKanvas(root, yollar) {
   const zemin = root.getElementById('zemin'), hareket = root.getElementById('hareket');
   const zc = zemin.getContext('2d'), hc = hareket.getContext('2d');
   const baslangic = performance.now();
+  const sahin = sahinKur(root);
   let W, H, U, X0, pads = [], kar = [], dalgalar = [], son = 0;
 
   /* ---------- ölçü ve statik devre kartı ---------- */
@@ -49,12 +51,9 @@ export function baslatKanvas(root, yollar) {
     dikey(X0, Math.min(...ys) - 70, Math.max(...ys) + 70, C.orta);
     dikey(X0 - iz * 2.4, Math.min(...ys) - 40, Math.max(...ys) + 40, C.soluk);
     pads.forEach((p) => { yatay(X0, p.x, p.y, C.orta); yatay(X0 - iz * 2.4, X0, p.y - iz * 2, C.soluk); via(X0, p.y); if (W <= 1100) via(p.x, p.y); }); // geniş ekranda uç noktayı DOM'daki iskele çizer (iki kare üst üste binmesin)
-    const sag = W - U * 6;
-    pads.forEach((p, i) => { const lx = p.x + Math.min(520, W * .33), hh = U * 5 * (i % 2 ? -1 : 1);
-      yatay(lx, sag - U * 10 * (i % 3), p.y + hh, C.cip); dikey(lx, p.y + hh, p.y + hh + U * 12, C.cip); yatay(lx, lx + U * 14, p.y + hh + U * 12, C.cip); via(lx, p.y + hh); });
   }
 
-  /* ---------- koşan karakterler: en çok iki tanesi aynı anda görünür ---------- */
+  /* ---------- koşan karakterler: en çok biri aynı anda görünür ---------- */
   const D_IN = 2.0, D_OUT = 1.8, T_JUMP = .55, T_WAVE = 1.5;
   const aktifSay = () => kar.filter((k) => k.phase !== 'rest0').length;
   const basla = (k, faz, tt) => { k.phase = faz; k.t0 = tt; k.xs = k.x; };
@@ -97,6 +96,7 @@ export function baslatKanvas(root, yollar) {
       if (alfa <= 0 || tt < .6 + i * .15) return;
       hc.globalAlpha = alfa; pikselKarakter(hc, d, p.y - iz / 2 - 1, U, tt); hc.globalAlpha = 1;
     });
+    sahin.ciz(hc, tt, U, W <= 1100);
     const n = performance.now();
     dalgalar = dalgalar.filter((q) => n - q.t < 800);
     for (const q of dalgalar) { const p = (n - q.t) / 800, r = Math.round(p * U * 30 / (U * 2)) * U * 2; hc.strokeStyle = `rgba(217,119,87,${1 - p})`; hc.lineWidth = 3; hc.strokeRect(q.x - r, q.y - r, r * 2, r * 2); }
@@ -123,12 +123,10 @@ export function baslatKanvas(root, yollar) {
 
   root.querySelectorAll('.liman').forEach((a, i) => {
     const b = a.querySelector('.baslik');
-    const gir = () => { sev(i); coz(b, 520); };
-    a.addEventListener('pointerenter', gir); a.addEventListener('focus', gir);
+    const gir = () => { sev(i); coz(b, 520); if (W > 1100) sahin.iskele(pads[i], simdi()); };
+    const cik = () => sahin.iskele(null, simdi());
+    a.addEventListener('pointerenter', gir); a.addEventListener('focus', gir); a.addEventListener('pointerleave', cik); a.addEventListener('blur', cik);
   });
-  const h1 = root.querySelector('h1'); h1.addEventListener('pointerenter', () => coz(h1, 700));
-  setTimeout(() => coz(h1, 1100), 150);
-  root.querySelectorAll('.baslik').forEach((b, i) => setTimeout(() => coz(b, 700), 600 + i * 200));
   // terminal: kendimle ilgili gerçek bilgiler sırayla yazılır (komut yazılır, çıktısı gelir, silinir, sonrakine geçer)
   const BILGI = [
     ['whoami', t('Samet Duhan Şahin', 'Samet Duhan Şahin')],
@@ -176,14 +174,23 @@ export function baslatKanvas(root, yollar) {
     balon.style.top = Math.max(64, b.y1 - balon.offsetHeight - 10) + 'px';
     balon.classList.add('goster'); clearTimeout(balonZaman); balonZaman = setTimeout(() => balon.classList.remove('goster'), 3600);
   }
+  function sahinKonus() {
+    const k = sahin.kutu(); if (!k) return;
+    balon.textContent = t('Soyadım Şahin: kimlikte tünerim, bölümlere uçarım.', 'My surname means falcon: I perch on the card and fly to the sections.');
+    const w = Math.min(260, innerWidth - 24);
+    balon.style.left = Math.max(12, Math.min(innerWidth - w - 12, k.x1 - 6)) + 'px';
+    balon.style.top = Math.max(64, k.y1 - balon.offsetHeight - 10) + 'px';
+    balon.classList.add('goster'); clearTimeout(balonZaman); balonZaman = setTimeout(() => balon.classList.remove('goster'), 3600);
+  }
   root.addEventListener('pointerdown', (e) => {
     if (e.composedPath().some((n) => n.matches?.('a,button,input,.konsol,.kanit'))) return;
+    if (sahin.icinde(e.clientX, e.clientY)) { sahinKonus(); return; }
     const i = karakterde(e.clientX, e.clientY);
     if (i >= 0) konus(i); else if (!AZ) dalgalar.push({ x: Math.round(e.clientX / (U * 2)) * U * 2, y: Math.round(e.clientY / (U * 2)) * U * 2, t: performance.now() });
   });
   root.addEventListener('pointermove', (e) => {
     const ustu = e.composedPath().some((n) => n.matches?.('a,button,input'));
-    zemin.style.cursor = (!ustu && karakterde(e.clientX, e.clientY) >= 0) ? 'pointer' : '';
+    zemin.style.cursor = (!ustu && (sahin.icinde(e.clientX, e.clientY) || karakterde(e.clientX, e.clientY) >= 0)) ? 'pointer' : '';
   });
   addEventListener('kutla', () => {
     const tt = simdi();

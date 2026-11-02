@@ -20,21 +20,22 @@ test('piksel ana sayfa: 1100 pikselden dar ekranda (tablet dahil) tek sütun; CS
   assert.match(js, /\['whoami'/);                                          // terminal gerçek bilgileri sırayla yazar
 });
 
-test('piksel ana sayfa sağ panel: beş geçiş animasyonu sırayla döner (perde, mozaik, koşucu, eski TV, bantlar); altı görünüm: kimlik, projeler, git log, toplam, slaytlar, araçlar; sekme arka plandayken takılmaz', () => {
-  const k = oku('js/piksel-ana-konsol.js');
-  assert.match(k, /const GECISLER = \[perdeGecisi, mozaik, kosucu, tv, bantlar\]/);
-  assert.match(k, /GECISLER\[sira\+\+ % GECISLER\.length\]/);
-  assert.match(k, /setTimeout\(son, ms \+ 400\)/);                       // rAF durursa geçiş zaman aşımıyla biter
-  assert.match(k, /if \(AZ \|\| !perdeli\)/);                            // hareketi azaltınca geçiş yok
-  assert.match(oku('css/piksel-ana.css'), /\.gecis-kanvas\{/);
+test('piksel ana sayfa sağ panel: yalnız commit ızgarası (dönen görünüm, geçiş animasyonu ve perde yok); sayılar GitHub sayımından', () => {
+  const ana = oku('js/piksel-ana.js'), k = oku('js/piksel-ana-konsol.js'), css = oku('css/piksel-ana.css');
+  assert.equal((ana.match(/class="kanit-slayt/g) || []).length, 0);
+  assert.doesNotMatch(ana, /kanit-nokta|class="perde"|class="kicker"|class="tanit"|class="ipucu"|k-adim/);
+  assert.doesNotMatch(k, /GECISLER|perdeGecisi|degistir\(/);
+  assert.doesNotMatch(css, /\.perde|\.gecis-kanvas|\.kanit-nokta|\.kicker|\.tanit/);
+  assert.match(ana, /id="k-izgara"/);
+  assert.match(k, /SAYILAR\.repolar/);                                   // kare sayısı gerçek commit sayısı
 });
 
-test('piksel ana sayfa sağ panel: kimlik, projeler, slaytlar ve araçlar görünümleri gerçek veriden; araçlar kullanıcının söylediği beş araç', () => {
-  const ana = oku('js/piksel-ana.js'), k = oku('js/piksel-ana-konsol.js');
-  for (const a of ['Claude Code', 'Codex', 'Hermes Agent', 'Abacus AI', 'Herdr']) assert.match(ana, new RegExp(`<li>${a}</li>`));
-  assert.match(ana, /Atatürk Üniversitesi/);
-  assert.equal((ana.match(/<button type="button" data-g="\d"/g) || []).length >= 6, true);
-  assert.match(k, /DESTELER\.forEach/);                                   // slaytlar listesi desteler.js'ten
-  assert.match(k, /\(gorunum \+ 1\) % slaytlar\.length/);                 // altı görünüm sırayla
-  assert.match(k, /\.catch\(\(\) => \{ sonEl\.remove\(\); \}\)/);           // GitHub'a ulaşılamazsa son commit satırı kalkar
+test('piksel ana sayfa şahin: tek piksel şahin tüner, bölüm bağlantısına gelince iskeleye uçar, ayrılınca döner; dar ekranda ve hareketi azaltınca uçmaz', () => {
+  const s = oku('js/piksel-ana-sahin.js'), kanvas = oku('js/piksel-ana-kanvas.js');
+  assert.match(s, /prefers-reduced-motion/);
+  assert.match(s, /if \(dar\)/);
+  assert.match(kanvas, /sahin\.iskele\(pads\[i\]/);
+  assert.match(kanvas, /pointerleave', cik/);
+  assert.match(kanvas, /addEventListener\('blur', cik\)/);              // klavyeyle de çalışır
+  assert.match(kanvas, /sahin\.icinde\(e\.clientX/);                    // tıklayınca balon
 });
