@@ -34,7 +34,8 @@ test('piksel ana sayfa şahin: tek piksel şahin tüner, bölüm bağlantısına
   const s = oku('js/piksel-ana-sahin.js'), kanvas = oku('js/piksel-ana-kanvas.js');
   assert.match(s, /prefers-reduced-motion/);
   assert.match(s, /if \(dar\)/);
-  assert.match(kanvas, /sahin\.iskele\(pads\[i\]/);
+  assert.match(kanvas, /gel\(i, sol\(i\), Infinity\)/);                 // bölüm bağlantısı: Claude gelir, şahin yanına
+  assert.match(kanvas, /sahin\.iskele\(\{ x: hx/);
   assert.match(kanvas, /pointerleave', cik/);
   assert.match(kanvas, /addEventListener\('blur', cik\)/);              // klavyeyle de çalışır
   assert.match(kanvas, /sahin\.icinde\(e\.clientX/);                    // tıklayınca balon

@@ -224,3 +224,13 @@ test('piksel proje ekran bölümü: noktaları sayfanın kendi düğmelerine tı
   assert.match(oku('js/piksel-proje.js'), /PARCALAR = \[[^\]]*\bekranKur\b[^\]]*\]/);
   assert.match(oku('js/proje.js'), /\.pin-liste li/);               // dokunduğumuz liste gerçekten proje.js'in kullandığı liste
 });
+
+test('piksel ana sayfa: Claude kendiliğinden gelmez, dokunulan çubuğa gelir ve şahinle yan yana durur; ışın kutuya varınca kutu sarı yanıp söner', () => {
+  const kanvas = oku('js/piksel-ana-kanvas.js');
+  assert.doesNotMatch(kanvas, /\.bekle|loop:/);                       // zamanlayıcıyla kendiliğinden başlama yok
+  assert.match(kanvas, /const barda = /);                             // yatay çubuğa dokunma
+  assert.match(kanvas, /gel\(b, /);
+  assert.match(kanvas, /sahin\.iskele\(null, tt\)/);                  // Claude giderken şahin de döner
+  assert.match(kanvas, /const SARI = '255,216,74'/);
+  assert.match(kanvas, /yan = Math\.max\(yan/);                       // ışının ucu kutuya değince
+});

@@ -1,9 +1,9 @@
-// Piksel ana sayfa: devre kartı zemini, raylarda koşan Claude Code karakterleri (en çok iki tanesi), bölüm başlığı çözme animasyonu,
+// Piksel ana sayfa: devre kartı zemini, ışınlar (kutuya varınca sarı yanar), dokunulan yere koşup şahinle yan yana duran Claude Code (kendiliğinden gelmez), bölüm başlığı çözme animasyonu,
 // karakter balonları, Projeler önizlemesi ve klavye kısayolları. js/piksel-ana.js bileşeninin içinden çalışır (root = gölge DOM).
 import { pikselKarakter } from './piksel.js';
 import { SAYILAR } from './sayilar.js';
 import { t, EN } from './dil.js';
-import { sahinKur } from './piksel-ana-sahin.js';
+import { sahinKur, sahinBoyu } from './piksel-ana-sahin.js';
 
 const kok = document.documentElement;
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -33,12 +33,12 @@ export function baslatKanvas(root, yollar) {
     X0 = W * .355;
     const sabit = [[.54, .17], [.60, .38], [.57, .59], [.62, .80]];
     pads = [...root.querySelectorAll('.liman')].map((a, i) => dar ? { x: sabit[i][0] * W, y: SERIT + sabit[i][1] * alan } : { x: a.offsetLeft, y: SERIT + a.offsetTop });
-    const yeni = (p, i) => AZ
-      ? (i % 2 === 0 ? { phase: 'dur', t0: 0, x: p.x - 25 * U, xs: p.x - 25 * U, dur: 1e9, loop: false } : { phase: 'rest0', t0: 0, x: X0, xs: X0, bekle: 1e9, loop: false })
-      : { phase: 'rest0', t0: 0, x: X0, xs: X0, bekle: [1.2, 2.6, 10, 16][i] ?? 12, loop: true };
-    kar = pads.map((p, i) => Object.assign(kar[i] ?? yeni(p, i), { hedef: p.x - 25 * U }));
+    const yeni = () => ({ phase: 'rest0', t0: 0, x: X0, xs: X0, kalUntil: 0 });   // Claude kendiliğinden gelmez: yalnız dokunulunca
+    kar = pads.map((p, i) => Object.assign(kar[i] ?? yeni(), { hedef: sol(i, p) }));
     boya();
   }
+  // Claude'un duracağı sol kenar: dar ekranda iskelenin hemen önü; geniş ekranda şahine de yer kalacak kadar geri (Claude 24U + boşluk 2U + şahin 16 piksel)
+  const sol = (i, p = pads[i]) => W <= 1100 ? p.x - 25 * U : Math.max(X0 + 2 * U, p.x - 48 * U);
   const kare = (x, y, w, h, renk) => { zc.fillStyle = renk; zc.fillRect(Math.round(x), Math.round(y), w, h); };
   function via(x, y) { const r = U * 2; kare(x - r, y - r, r * 2, r * 2, C.zemin); zc.strokeStyle = C.turuncu; zc.lineWidth = 3; zc.strokeRect(Math.round(x - r) + 1.5, Math.round(y - r) + 1.5, r * 2 - 3, r * 2 - 3); }
   function boya() {
@@ -56,28 +56,30 @@ export function baslatKanvas(root, yollar) {
 
   /* ---------- koşan karakterler: en çok biri aynı anda görünür ---------- */
   const D_IN = 2.0, D_OUT = 1.8, T_JUMP = .55, T_WAVE = 1.5;
-  const aktifSay = () => kar.filter((k) => k.phase !== 'rest0').length;
   const basla = (k, faz, tt) => { k.phase = faz; k.t0 = tt; k.xs = k.x; };
   function adim(k, tt, i) {
     const gecen = tt - k.t0;
-    if (k.phase === 'rest0') { k.x = X0; if (tt > k.bekle && aktifSay() < ENFAZLA) basla(k, 'in', tt); return { kapali: true }; }
-    if (k.phase === 'sol') { const p = clamp(gecen / .35, 0, 1); if (p >= 1) { k.bekle = tt + 6 + (i % 3) * 2; basla(k, 'rest0', tt); } return { sol: p, look: 1 }; }
-    if (k.phase === 'in') { const p = clamp(gecen / D_IN, 0, 1); k.x = k.xs + (k.hedef - k.xs) * ease(p); if (p >= 1) basla(k, 'jump', tt); return { run: p < 1, look: 1 }; }
+    if (k.phase === 'rest0') { k.x = X0; return { kapali: true }; }
+    if (k.phase === 'sol') { const p = clamp(gecen / .35, 0, 1); if (p >= 1) basla(k, 'rest0', tt); return { sol: p, look: 1 }; }
+    if (k.phase === 'in') { const p = clamp(gecen / clamp(Math.abs(k.hedef - k.xs) / (30 * U), .4, D_IN), 0, 1); k.x = k.xs + (k.hedef - k.xs) * ease(p); if (p >= 1) basla(k, 'jump', tt); return { run: p < 1, look: k.hedef >= k.xs ? 1 : -1 }; }
     if (k.phase === 'jump') { const p = (gecen % T_JUMP) / T_JUMP; if (gecen > 2 * T_JUMP) basla(k, 'wave', tt); return { yOff: -Math.sin(p * Math.PI) * 5 * U, air: true, look: 1 }; }
-    if (k.phase === 'wave') { const p = (gecen % .7) / .7; if (gecen > T_WAVE) { basla(k, 'dur', tt); k.dur = 2 + (i % 3) * .8; } return { armUp: true, tilt: Math.sin(p * Math.PI * 2) * 3.2, look: 1 }; }
-    if (k.phase === 'dur') { if (gecen > k.dur && k.loop && !AZ) basla(k, 'out', tt); return { look: 1 }; }
-    if (k.phase === 'out') { const p = clamp(gecen / D_OUT, 0, 1); k.x = k.xs + (X0 - k.xs) * ease(p); if (p >= 1) { k.bekle = tt + 6 + (i % 3) * 3; basla(k, 'rest0', tt); } return { run: true, look: -1 }; }
+    if (k.phase === 'wave') { const p = (gecen % .7) / .7; if (gecen > T_WAVE) basla(k, 'dur', tt); return { armUp: true, tilt: Math.sin(p * Math.PI * 2) * 3.2, look: 1 }; }
+    if (k.phase === 'dur') { if (tt > k.kalUntil) { basla(k, 'out', tt); if (W > 1100) sahin.iskele(null, tt); } return { look: 1 }; }   // Claude giderken şahin de eve döner
+    if (k.phase === 'out') { const p = clamp(gecen / D_OUT, 0, 1); k.x = k.xs + (X0 - k.xs) * ease(p); if (p >= 1) basla(k, 'rest0', tt); return { run: true, look: -1 }; }
     return {};
   }
   const simdi = () => (performance.now() - baslangic) / 1000;
   function yerAc(i, tt) {
     const baskalari = kar.map((k, n) => [k, n]).filter(([k, n]) => n !== i && k.phase !== 'rest0' && k.phase !== 'sol');
-    while (kar.filter((k, n) => n !== i && k.phase !== 'rest0').length >= ENFAZLA && baskalari.length) { const [k] = baskalari.shift(); basla(k, 'sol', tt); k.bekle = tt + 8; }
+    while (kar.filter((k, n) => n !== i && k.phase !== 'rest0').length >= ENFAZLA && baskalari.length) { const [k] = baskalari.shift(); basla(k, 'sol', tt); }
   }
-  function sev(i) {
+  // i. hatta, hx noktasına gel ve tut sn saniye (Infinity: bırakılana dek); geniş ekranda şahin hemen sağında durur
+  function gel(i, hx, tut) {
     const k = kar[i], tt = simdi(); if (!k) return;
-    if (k.phase === 'dur') { basla(k, 'jump', tt); return; }
-    if (k.phase === 'out' || k.phase === 'rest0') { yerAc(i, tt); basla(k, 'in', tt); }
+    k.hedef = hx; k.kalUntil = tt + tut;
+    if (['dur', 'wave', 'jump'].includes(k.phase) && Math.abs(k.x - hx) < 2 * U) { if (k.phase === 'dur') basla(k, 'jump', tt); }
+    else { yerAc(i, tt); basla(k, 'in', tt); }
+    if (W > 1100) { const u = sahinBoyu(U); sahin.iskele({ x: hx + 26 * U + 9 * u, y: pads[i].y - U * .6 - 1 }, tt); }
   }
 
   function ciz(now) {
@@ -93,7 +95,7 @@ export function baslatKanvas(root, yollar) {
       for (let k = 0; k < 3; k++) { const q = ((tt * sp + k / 3 + i * .17) % 1), x = X0 + L * q;
         if (x < X0 + L * intro) { parca(x, x + U * 2.2, 'rgba(240,154,120,.95)'); parca(x - U * 2.2, x, 'rgba(240,154,120,.35)'); }
         if (intro >= 1 && tt > 2.4) { const s = ((q - qv) % 1 + 1) % 1 / sp; if (s < .6) yan = Math.max(yan, Math.min(1, s / .05) * (1 - s / .6)); } }   // ışının ucu kutuya değince kutu sarı yanar, sönerek biter
-      if (yan > 0.02) {   // üzerine gelinen kutu döner, yanmaz
+      if (yan > 0.02 && kar[i]?.kalUntil !== Infinity) {   // üzerine gelinen kutu döner, yanmaz
         hc.fillStyle = `rgba(${SARI},${(yan * .92).toFixed(2)})`; hc.fillRect(Math.round(p.x - bw / 2), Math.round(p.y - bw / 2), bw, bw);
         const g = Math.round(2 + (1 - yan) * 8); hc.strokeStyle = `rgba(${SARI},${(yan * .55).toFixed(2)})`; hc.lineWidth = 3; hc.strokeRect(Math.round(p.x - bw / 2) - g, Math.round(p.y - bw / 2) - g, bw + g * 2, bw + g * 2); }
       const k = kar[i]; if (!k) return;
@@ -140,8 +142,8 @@ export function baslatKanvas(root, yollar) {
 
   root.querySelectorAll('.liman').forEach((a, i) => {
     const b = a.querySelector('.baslik');
-    const gir = () => { sev(i); coz(b, 520); if (W > 1100) sahin.iskele(pads[i], simdi()); };
-    const cik = () => sahin.iskele(null, simdi());
+    const gir = () => { gel(i, sol(i), Infinity); coz(b, 520); };
+    const cik = () => { const k = kar[i]; if (k && k.kalUntil === Infinity) k.kalUntil = simdi() + 1.2; };   // bırakınca kısa süre kalır, sonra Claude ve şahin birlikte gider
     a.addEventListener('pointerenter', gir); a.addEventListener('focus', gir); a.addEventListener('pointerleave', cik); a.addEventListener('blur', cik);
   });
   // terminal: "cat hakkimda.txt" yazılır, hakkımda üç satır sırayla gelir ve kalır (döngü yok)
@@ -180,10 +182,11 @@ export function baslatKanvas(root, yollar) {
   ];
   const KUTU = (i) => { const k = kar[i], p = pads[i], yer = p.y - U * .6 - 1; return { x1: k.x, x2: k.x + 24 * U, y1: yer - 15 * U, y2: yer + 6 }; };
   const karakterde = (x, y) => { for (let i = 0; i < kar.length; i++) { if (kar[i].phase === 'rest0') continue; const b = KUTU(i); if (x >= b.x1 && x <= b.x2 && y >= b.y1 && y <= b.y2) return i; } return -1; };
+  const barda = (x, y) => { for (let i = 0; i < pads.length; i++) { const p = pads[i]; if (y >= p.y - 4 * U && y <= p.y + 4 * U && x >= X0 && x <= p.x) return i; } return -1; };   // yatay çubuğun yakını
   let balonZaman;
   function konus(i) {
     const k = kar[i], tt = simdi(), b = KUTU(i);
-    if (k.phase === 'dur' || k.phase === 'wave') basla(k, 'jump', tt); else if (k.phase === 'out' || k.phase === 'rest0') { yerAc(i, tt); basla(k, 'in', tt); }
+    if (k.phase === 'dur' || k.phase === 'wave') { basla(k, 'jump', tt); k.kalUntil = Math.max(k.kalUntil, tt + 6); } else if (k.phase === 'out' || k.phase === 'sol') gel(i, k.hedef, 7);
     balon.textContent = SOZLER[i];
     const w = Math.min(260, innerWidth - 24);
     balon.style.left = Math.max(12, Math.min(innerWidth - w - 12, b.x1 - 6)) + 'px';
@@ -202,16 +205,17 @@ export function baslatKanvas(root, yollar) {
     if (e.composedPath().some((n) => n.matches?.('a,button,input,.konsol,.kanit'))) return;
     if (sahin.icinde(e.clientX, e.clientY)) { sahinKonus(); return; }
     const i = karakterde(e.clientX, e.clientY);
-    if (i >= 0) konus(i); else if (!AZ) dalgalar.push({ x: Math.round(e.clientX / U) * U, y: Math.round(e.clientY / U) * U, t: performance.now(), parca: Array.from({ length: 14 }, (_, k) => { const a = (k / 14) * Math.PI * 2 + Math.random() * .4, v = 8 + Math.random() * 14; return { vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, b: Math.random() < .3 ? 2 : 1, r: ['#d97757', '#f09a78', '#f4efe8', '#a24b33'][k % 4] }; }) });
+    if (i >= 0) { konus(i); return; }
+    const b = barda(e.clientX, e.clientY);
+    if (b >= 0) gel(b, clamp(e.clientX - 12 * U, X0 + 2 * U, Math.max(X0 + 2 * U, sol(b))), 7);   // dokunulan yere gel, şahin yanında durur
+    if (!AZ) dalgalar.push({ x: Math.round(e.clientX / U) * U, y: Math.round(e.clientY / U) * U, t: performance.now(), parca: Array.from({ length: 14 }, (_, k) => { const a = (k / 14) * Math.PI * 2 + Math.random() * .4, v = 8 + Math.random() * 14; return { vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, b: Math.random() < .3 ? 2 : 1, r: ['#d97757', '#f09a78', '#f4efe8', '#a24b33'][k % 4] }; }) });
   });
   root.addEventListener('pointermove', (e) => {
     const ustu = e.composedPath().some((n) => n.matches?.('a,button,input'));
-    zemin.style.cursor = (!ustu && (sahin.icinde(e.clientX, e.clientY) || karakterde(e.clientX, e.clientY) >= 0)) ? 'pointer' : '';
+    zemin.style.cursor = (!ustu && (sahin.icinde(e.clientX, e.clientY) || karakterde(e.clientX, e.clientY) >= 0 || barda(e.clientX, e.clientY) >= 0)) ? 'pointer' : '';
   });
   addEventListener('kutla', () => {
-    const tt = simdi();
-    kar.forEach((k) => { if (k.phase === 'dur') basla(k, 'jump', tt); });
-    for (let i = 0; i < kar.length && aktifSay() < ENFAZLA; i++) if (kar[i].phase === 'rest0') basla(kar[i], 'in', tt);
+    gel(0, sol(0), 7);   // konsolda kutlama komutu: kullanıcı istedi, ilk hatta gelir
   });
   addEventListener('keydown', (e) => {
     if (!piksel() || e.composedPath()[0]?.matches?.('input,textarea') || e.ctrlKey || e.metaKey || e.altKey) return;

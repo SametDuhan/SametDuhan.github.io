@@ -1,5 +1,5 @@
 // Piksel ana sayfa: tek bir piksel şahin (soyadım). Konsolun üst kenarında, kimlik kutusuyla arasında tüner; bir bölüm bağlantısının üstüne
-// gelince (fare ya da klavye) o bölümün iskelesine uçar, ayrılınca eve döner. Karakter sayısı: bu şahin + en çok 1 koşan Claude.
+// gelince ya da boş devre hattına dokunulunca oraya, koşan Claude'un yanına uçar; Claude ayrılırken eve döner. Karakter sayısı: bu şahin + en çok 1 koşan Claude.
 const AZ = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const P = { o: '#d97757', d: '#a24b33', w: '#f4efe8', k: '#1a1210', y: '#f09a78' };
 // 16 sütun x 13 satır, sağa bakar: koyu başlık, krem yanak ve göğüs, turuncu sırt, kancalı sarı gaga, koyu kuyruk
@@ -22,6 +22,7 @@ const GOVDE = [
 const KANAT_YUKARI = ['.........d......', '........dd......', '.......ddd......', '......dddd......', '.....ddddd......'];
 const KANAT_ASAGI = ['.......ddddd.....', '......dddddd.....', '.....ddddd.......'];
 const AA = 1.0;        // uçuş süresi (sn)
+export const sahinBoyu = (U) => Math.max(3, Math.round(U * 1.1));   // şahinin piksel boyu; Claude'un yanına yerleşirken kanvas da kullanır
 const ease = (p) => (p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);   // yavaş kalkar, hızlanır, yavaş konar
 
 export function sahinKur(root) {
@@ -35,8 +36,8 @@ export function sahinKur(root) {
     s.bx = s.x; s.by = s.y; s.hedef = hedef; s.t0 = tt; s.ucuyor = true;
   }
   return {
-    // bir iskeleye geç (p) ya da bırakınca eve dön (p yok); dar ekranda iskele yoktur, şahin yerinde kalır
-    iskele(p, tt) { if (p) { s.ev = false; git({ x: p.x, y: p.y - 11 }, tt); } else { s.ev = true; s.bekle = tt + 1.6; } },
+    // verilen ayak noktasına geç (p: {x, y}; Claude'un yanı ya da bir iskele) ya da bırakınca eve dön (p yok); dar ekranda şahin yerinde kalır
+    iskele(p, tt) { if (p) { s.ev = false; git({ x: p.x, y: p.y }, tt); } else { s.ev = true; s.bekle = tt + 1.6; } },
     ciz(hc, tt, U, dar) {
       if (dar) { s.kutu = null; return; }   // tek sütun düzende tuval sabit, sayfa kayar: şahin yok
       const ev = eve(U);
@@ -50,7 +51,7 @@ export function sahinKur(root) {
         yOff = -Math.sin(p * Math.PI) * 46; kanat = Math.floor(tt * (p < .3 || p > .8 ? 18 : 9)) % 2;   // kalkış ve konuşta hızlı çırpar, süzülürken yavaş
         if (p >= 1) { s.ucuyor = false; s.x = s.hedef.x; s.y = s.hedef.y; s.indi = tt; }
       }
-      const u = Math.max(3, Math.round(U * 1.1));
+      const u = sahinBoyu(U);
       const ox = Math.round(s.x - 9 * u), oy = Math.round(s.y + yOff - GOVDE.length * u);
       const bak = s.ucuyor ? 0 : (Math.floor(tt * .6) % 7 === 0 ? 1 : 0);   // yerdeyken ara sıra başını çevirir (göz kısılır)
       const kare = (satir, ex, ey) => satir.split('').forEach((c, i) => { if (c === '.' || !P[c]) return; hc.fillStyle = P[c]; hc.fillRect(ox + (ex + i) * u, oy + ey * u, u, u); });
