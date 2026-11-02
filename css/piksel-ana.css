@@ -9,7 +9,7 @@
 :host{background:var(--zemin);color:var(--yazi);font-family:var(--govde);overflow:hidden}
 ::selection{background:var(--turuncu);color:#1a1210}
 canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;image-rendering:pixelated}
-#hareket{pointer-events:none}
+#hareket{pointer-events:none;z-index:3}
 a{color:inherit}
 button{font:inherit}
 :focus-visible{outline:3px solid var(--turuncu-acik);outline-offset:4px}
@@ -32,7 +32,6 @@ main{position:fixed;inset:56px 0 0 0;z-index:2;pointer-events:none}
 .levha::before,.levha::after{content:"";position:absolute;width:22px;height:22px;border:3px solid var(--turuncu)}
 .levha::before{left:-3px;top:-3px;border-right:0;border-bottom:0}
 .levha::after{right:-3px;bottom:-3px;border-left:0;border-top:0}
-.kicker{display:block;font-family:var(--kod);font-weight:600;font-size:clamp(11px,.9vw,13px);letter-spacing:.2em;color:var(--turuncu-acik);margin-bottom:14px;animation:ac 1.2s var(--cikis) .2s both}
 h1{margin:0;font-family:var(--baslik);font-weight:700;font-size:clamp(54px,6.6vw,100px);line-height:.92;letter-spacing:.005em}
 h1 .satir{display:block;white-space:nowrap}
 h1 .satir:nth-child(2){color:var(--turuncu)}
@@ -41,9 +40,7 @@ h1 .satir:nth-child(2){color:var(--turuncu)}
 .terminal .cikti{display:block;min-height:1.5em;margin-top:4px;color:var(--yazi)}
 .imlec{display:inline-block;width:.6em;height:1.05em;background:var(--turuncu);vertical-align:-.2em;margin-left:3px;animation:yan 1.05s steps(1) infinite}
 @keyframes yan{50%{opacity:0}}
-.tanit{margin:0;font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--yazi);max-width:44ch;animation:yuksel .9s var(--cikis) 1.5s both}
 @keyframes gir{from{opacity:0;transform:translateY(18px)}}
-@keyframes ac{from{opacity:0;letter-spacing:.6em}}
 @keyframes yuksel{from{opacity:0;transform:translateY(12px)}}
 
 .limanlar{position:absolute;inset:0}
@@ -113,10 +110,6 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .konsol::after{content:"";position:absolute;left:-3px;bottom:-3px;width:18px;height:18px;border:3px solid var(--turuncu);border-right:0;border-top:0}
 .k-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;border-bottom:1px solid var(--cizgi);flex-wrap:wrap}
 .k-baslik{font-family:var(--kod);font-size:12px;color:var(--ikincil)}
-.k-adim{display:flex;gap:4px;margin:0;padding:0;list-style:none}
-.k-adim li{font-family:var(--kod);font-size:11px;padding:2px 8px;border:1px solid var(--cizgi);color:var(--ikincil);transition:background .2s,color .2s,border-color .2s}
-.k-adim li.aktif{background:var(--turuncu);border-color:var(--turuncu);color:#1a1210;font-weight:600}
-.k-adim li.bitti{border-color:var(--yesil);color:var(--yesil)}
 .k-log{flex:1;overflow-y:auto;padding:10px 14px;font-family:var(--kod);font-size:clamp(12px,.95vw,13.5px);line-height:1.55;color:var(--ikincil);scrollbar-width:thin;scrollbar-color:var(--soluk) transparent}
 .k-log::-webkit-scrollbar{width:8px}.k-log::-webkit-scrollbar-thumb{background:var(--soluk)}
 .k-log p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
@@ -126,7 +119,6 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .k-form input{all:unset;flex:1;min-width:0;color:var(--yazi);caret-color:var(--turuncu)}
 .k-form input::placeholder{color:#a39789}
 .k-form:focus-within{box-shadow:inset 0 -2px 0 var(--turuncu)}
-.ipucu{pointer-events:none;position:absolute;right:clamp(16px,2.8vw,40px);bottom:clamp(14px,3vh,30px);margin:0;font-family:var(--kod);font-size:12px;color:var(--ikincil)}
 
 /* konuşma balonu */
 .balon{position:fixed;z-index:8;max-width:260px;padding:10px 14px;background:var(--turuncu);color:#1a1210;font-size:14px;font-weight:700;line-height:1.35;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .35s var(--cikis);pointer-events:none}
@@ -136,7 +128,6 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 @media (max-width:1300px){.kanit{display:none}}
 @media (max-width:1100px){
   .kanit{display:block;position:relative;right:auto;top:auto;width:auto;animation:none}
-  .ipucu{display:none}
   .kolon{display:contents}
   .levha{order:1}.limanlar{order:2}.kanit{order:3}.konsol{order:4;flex:none;height:300px;max-height:none}
   .kanit-izgara{grid-template-columns:repeat(32,1fr)}
@@ -144,43 +135,11 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 }
 
 .kanit{width:250px}
-.kanit-liste{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.kanit-liste a{display:block;text-decoration:none;padding:9px 10px 10px;border:1px solid var(--cizgi);transition:border-color .2s,background .3s}
-.kanit-liste a:hover,.kanit-liste a:focus-visible{border-color:var(--turuncu);background:rgba(217,119,87,.12)}
-.p-ust{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.p-ad{font-family:var(--baslik);font-weight:700;font-size:17px;color:var(--yazi)}
-.p-say{font-family:var(--kod);font-size:12px;color:var(--ikincil);font-variant-numeric:tabular-nums}
-.p-say b{color:var(--turuncu-acik);font-weight:600}
-.p-cubuk{display:grid;grid-template-columns:repeat(20,1fr);gap:2px;margin-top:8px}
-.p-cubuk i{height:9px;background:#3a332e;transform-origin:left;transition:transform .35s var(--cikis),background .2s}
-.p-cubuk i.on{background:var(--turuncu)}
-.kanit-liste a:hover .p-cubuk i.on{background:var(--turuncu-acik);transform:scaleY(1.6)}
-.kanit-liste a:hover .p-cubuk i{transition-delay:calc(var(--n)*12ms)}
 .kanit{width:clamp(210px,17vw,270px)}
-.p-ust{display:block}
-.p-ad{display:block;font-size:16px;overflow-wrap:anywhere}
-.p-say{display:block;margin-top:2px;white-space:nowrap}
 
-/* sağ panel: iki görünüm + perde */
-.kanit{padding:0}
-.kanit-ic{position:relative;overflow:hidden}
-.kanit-sahne{display:grid}
-.kanit-slayt{grid-area:1/1;padding:16px 16px 14px;visibility:hidden;opacity:0}
-.kanit-slayt.acik{visibility:visible;opacity:1}
-.kanit-nokta{position:absolute;top:14px;right:14px;z-index:1;display:flex;gap:6px}
-.kanit-nokta button{all:unset;cursor:pointer;width:12px;height:12px;border:2px solid var(--ikincil);transition:background .2s,border-color .2s}
-.kanit-nokta button.on{background:var(--turuncu);border-color:var(--turuncu)}
-.kanit-nokta button:hover,.kanit-nokta button:focus-visible{border-color:var(--yazi)}
-.perde{position:absolute;inset:0;z-index:3;pointer-events:none;transform:translateY(-118%);will-change:transform;
-  background:linear-gradient(90deg,rgba(0,0,0,.28) 0,transparent 9%,transparent 91%,rgba(0,0,0,.28) 100%),#a24b33}
-.perde-doku{position:absolute;left:0;top:0;width:100%;height:calc(100% + 48px);image-rendering:pixelated}
-.perde.in{transition:transform 1.15s cubic-bezier(.5,0,.85,.55);transform:translateY(0)}
-.perde.out{transition:transform .95s cubic-bezier(.2,.7,.3,1);transform:translateY(104%)}
-.perde-kar{position:absolute;top:auto;left:auto;right:22%;bottom:-86px;width:72px;height:68px;image-rendering:pixelated}
-@media (max-width:1100px){.kanit-nokta{top:12px}}
 
-.perde:not(.in):not(.out) .perde-kar{visibility:hidden}
-.perde.out{transform:translateY(125%)}
+.kanit{padding:16px 16px 14px}
+
 
 /* görünüm seçici (Kâğıt · Modern · Piksel) ve durum etiketi */
 .gorunum{display:flex;border:1px solid var(--cizgi)}
@@ -193,9 +152,6 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 @keyframes nabiz{50%{box-shadow:0 0 0 6px rgba(46,204,64,0)} 0%{box-shadow:0 0 0 0 rgba(46,204,64,.5)}}
 
 /* Projeler üstüne gelince canlı önizleme penceresi */
-.o-bar{display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-bottom:1px solid var(--cizgi);font-family:var(--kod);font-size:11.5px;color:var(--ikincil)}
-.o-bar i{width:9px;height:9px;background:#5a514a}.o-bar i:nth-child(1){background:#ff5f57}.o-bar i:nth-child(2){background:#febc2e}.o-bar i:nth-child(3){background:#28c840}
-.o-bar span{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:760px){.gorunum button{padding:5px 8px;font-size:12px}.durum{margin-top:12px}}
 @media (max-width:1100px){.serit .hizli{display:none}}
 @media (max-width:520px){.marka{display:none}.serit{justify-content:space-between}}
@@ -205,49 +161,26 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .durum:hover span,.durum:focus-visible span{text-decoration:underline;text-underline-offset:4px}
 .durum:hover b,.durum:focus-visible b{transform:translateX(4px)}
 
-.gecis-kanvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;image-rendering:pixelated}
-.kanit-ic{transform-origin:50% 50%}
 /* kimlik kutusu sıkılaştı, konsola daha çok yer kaldı (geniş ekran) */
 @media (min-width:1101px){
   .kolon{gap:clamp(14px,2.4vh,24px)}
   .levha{padding:clamp(14px,1.6vw,22px)}
   h1{font-size:clamp(44px,5.2vw,78px)}
-  .kicker{margin-bottom:10px}
   .terminal{margin:12px 0 8px}
   .konsol{min-height:170px;max-height:480px}
 }
 @media (min-width:1101px) and (min-height:780px){.konsol{min-height:230px}}
-@media (min-width:1101px) and (max-height:760px){h1{font-size:clamp(38px,4.3vw,62px)}.tanit{font-size:14px;line-height:1.45}.levha{padding:14px 18px}}
+@media (min-width:1101px) and (max-height:760px){h1{font-size:clamp(38px,4.3vw,62px)}.levha{padding:14px 18px}}
 
-/* sağ panel: noktalar altta, yeni görünümler (kimlik, projeler, slaytlar, araçlar) */
-.kanit-nokta{position:static;justify-content:center;gap:8px;padding:10px 0 12px;border-top:1px solid var(--cizgi)}
-.kanit-nokta button{width:14px;height:14px}
-.kn-ad{margin:0 0 12px;font-family:var(--baslik);font-weight:700;font-size:clamp(20px,1.7vw,26px);line-height:1.1;color:var(--yazi)}
-.kn-baslik{margin:0 0 12px;font-family:var(--baslik);font-weight:700;font-size:clamp(17px,1.4vw,21px);line-height:1.2;color:var(--yazi)}
-.kn-bilgi{margin:0;display:grid;gap:9px}
-.kn-bilgi div{display:grid;gap:1px;padding-left:10px;border-left:3px solid var(--turuncu)}
-.kn-bilgi dt{font-family:var(--kod);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ikincil)}
-.kn-bilgi dd{margin:0;font-size:14px;line-height:1.3;color:var(--yazi)}
-.kn-staj{display:flex;align-items:flex-start;gap:8px;margin-top:14px;padding:9px 10px;border:1px solid var(--yesil);font-family:var(--kod);font-size:12px;line-height:1.35;color:var(--yazi);text-decoration:none;transition:background .2s}
-.kn-staj i{flex:none;width:9px;height:9px;margin-top:3px;background:var(--yesil)}
-.kn-staj:hover,.kn-staj:focus-visible{background:rgba(46,204,64,.12)}
-.kn-liste{list-style:none;margin:0;padding:0;display:grid;gap:9px}
-.kn-liste a{display:grid;gap:3px;padding:9px 10px;border:1px solid var(--cizgi);text-decoration:none;transition:border-color .2s,background .3s}
-.kn-liste a:hover,.kn-liste a:focus-visible{border-color:var(--turuncu);background:rgba(217,119,87,.12)}
-.kn-liste b{font-family:var(--baslik);font-size:15px;color:var(--turuncu-acik)}
-.kn-liste span{font-size:13px;line-height:1.35;color:var(--yazi)}
-.kn-araclar{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.kn-araclar li{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--cizgi);font-family:var(--baslik);font-weight:600;font-size:16px;color:var(--yazi)}
-.kn-araclar li::before{content:"";flex:none;width:10px;height:10px;background:var(--turuncu)}
-.k-son{margin:10px 0 0;font-family:var(--kod);font-size:11.5px;line-height:1.4;color:var(--yesil);overflow-wrap:anywhere}
 
-/* panel boyu aktif görünüme uyar (boş alan kalmaz); alt köşede ipucu yazısıyla çakışmasın diye en çok görünüm yüksekliği kadar */
-.kanit-slayt:not(.acik){display:none}
-.kanit-slayt{grid-area:auto}
 @media (min-width:1101px){
   .kanit-ana b{font-size:40px}
-  .kanit-liste{gap:7px}.kanit-liste a{padding:7px 9px 8px}
-  .kanit-slayt{padding:14px 14px 12px}
   .kanit-not{margin-top:8px;font-size:11.5px;line-height:1.35}
   .kanit-baslik{margin-bottom:8px}
 }
+
+/* sadeleşme: sağda tek panel (commit ızgarası), karelerde sırayla beliren açılış */
+.kanit-izgara i{animation:kare .5s var(--cikis) calc(var(--n,0)*6ms + .6s) both}
+@keyframes kare{from{opacity:0;transform:scale(.2)}}
+.kanit-baslik{margin:0 0 10px}
+@media (min-width:1101px){.kanit{top:clamp(16px,4vh,44px)}h1{font-size:clamp(52px,6vw,92px)}.terminal{margin:18px 0 6px}}

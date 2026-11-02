@@ -49,8 +49,8 @@ Piksel katmanı **ek parçalardır**: sayfanın kendi içeriği (HTML) ve mantı
 | Yol | Ne |
 |---|---|
 | `css/piksel.css` | Piksel temanın jetonları, yazı tipleri, kartlar, düğmeler, sayfa geçişi perdesi |
-| `js/piksel-ana.js`, `-ana-kanvas.js`, `-ana-konsol.js`, `css/piksel-ana.css` | Ana sayfa: `<piksel-ana>` bileşeni (gölge DOM): devre kartı, koşan karakterler (en çok 2), konsol, proje proje commit paneli |
-| `js/piksel-gecis.js`, `js/piksel-karakter.js` | Sayfa geçişi perdesi (ucuna Claude pikseli asılı), asılı karakter çizimi |
+| `js/piksel-ana.js`, `-ana-kanvas.js`, `-ana-konsol.js`, `-ana-sahin.js`, `css/piksel-ana.css` | Ana sayfa: `<piksel-ana>` bileşeni (gölge DOM): devre kartı, en çok 1 koşan karakter, tünemiş şahin, konsol, commit ızgarası |
+| `js/piksel-gecis.js` | Sayfa geçişi: ince turuncu çizgi ve hafif solma |
 | `js/piksel-hakkimda*.js`, `css/piksel-hakkimda.css` | Hakkımda: karakter sahnesi, Rota yol haritası, başlık çözme, araç yuvaları |
 | `js/piksel-projeler*.js`, `css/piksel-projeler.css` | Projeler: commit hattı, ilerleme rayı, etiket süzgeci, git clone kopyalama |
 | `js/piksel-slaytlar*.js`, `css/piksel-slaytlar.css` | Slaytlar: içindekiler (sunum sayfalarından), kaldığın yer yolu, arama |

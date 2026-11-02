@@ -34,75 +34,29 @@ const sablon = () => `
 <main id="icerik">
   <div class="kolon">
     <section class="levha">
-      <small class="kicker">${t('AI İLE SİSTEM KURAN GELİŞTİRİCİ', 'DEVELOPER WHO BUILDS SYSTEMS WITH AI')}</small>
       <h1 aria-label="SAMET DUHAN"><span class="satir" aria-hidden="true">SAMET</span><span class="satir" aria-hidden="true">DUHAN</span></h1>
       <p class="terminal" role="img" aria-label="${t('Samet Duhan Şahin, Atatürk Üniversitesi bilgisayar mühendisliği 3. sınıf, AI ile sistem kuran geliştirici', 'Samet Duhan Şahin, 3rd-year computer engineering student at Atatürk University, developer who builds systems with AI')}"><span class="istem">samet@sahin:~$</span> <span class="komut" data-yaz></span><i class="imlec"></i><span class="cikti" data-cikti></span></p>
-      <p class="tanit">${t('Ben Samet Duhan Şahin, Atatürk Üniversitesi bilgisayar mühendisliği 3. sınıf öğrencisiyim. AI ile sistem kuran bir geliştiriciyim: ajanlar, açık kaynak araçlar ve SkyTrack gibi günlük hayatta işe yarayan uygulamalar yazıyorum.', 'I am Samet Duhan Şahin, a 3rd-year computer engineering student at Atatürk University. I am a developer who builds systems with AI: agents, open-source tools and everyday apps like SkyTrack.')}</p>
       <a class="durum" href="${K}iletisim/?konu=staj"><i aria-hidden="true"></i><span>${t('Staj arıyorum, hemen başlayabilirim.', 'Looking for an internship, available now.')}</span><b aria-hidden="true">→</b></a>
     </section>
     <section class="konsol" aria-label="${t('Etkileşimli konsol', 'Interactive console')}">
-      <div class="k-bar"><span class="k-baslik">claude-code · demo</span>
-        <ol class="k-adim" aria-label="${t('Ajan döngüsü', 'Agent loop')}"><li data-a="bak">bak</li><li data-a="karar">karar</li><li data-a="yap">yap</li><li data-a="kontrol">kontrol</li></ol></div>
+      <div class="k-bar"><span class="k-baslik">claude-code · demo</span></div>
       <div class="k-log" id="k-log" role="log" aria-live="polite"></div>
       <form class="k-form" id="k-form"><label for="k-in" class="gizli">${t('Komut', 'Command')}</label><span class="istem">samet@sahin:~$</span><input id="k-in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${kacis(t('help yaz, ya da claude "bir görev"', 'type help, or claude "a task"'))}"></form>
     </section>
   </div>
 
   <aside class="kanit" aria-label="${t('Projelerde Claude ile ortak yazılan commit sayıları', 'Commits co-authored with Claude, per project')}">
-    <div class="kanit-ic">
-      <div class="kanit-sahne">
-        <section class="kanit-slayt acik" data-s="kimlik">
-          <p class="kanit-baslik"><span class="istem">$</span> whoami</p>
-          <p class="kn-ad">Samet Duhan Şahin</p>
-          <dl class="kn-bilgi">
-            <div><dt>${t('Okul', 'School')}</dt><dd>${t('Atatürk Üniversitesi', 'Atatürk University')}</dd></div>
-            <div><dt>${t('Bölüm', 'Major')}</dt><dd>${t('Bilgisayar mühendisliği, 3. sınıf', 'Computer engineering, 3rd year')}</dd></div>
-            <div><dt>${t('Yaptığı', 'Does')}</dt><dd>${t('AI ile sistem kuruyor', 'Builds systems with AI')}</dd></div>
-            <div><dt>${t('Diller', 'Languages')}</dt><dd>${t('Türkçe · İngilizce B1', 'Turkish · English B1')}</dd></div>
-          </dl>
-          <a class="kn-staj" href="${K}iletisim/?konu=staj"><i aria-hidden="true"></i><span>${t('Staj arıyorum, hemen başlayabilirim', 'Looking for an internship, available now')}</span></a>
-        </section>
-        <section class="kanit-slayt" data-s="ne" aria-hidden="true" inert>
-          <p class="kanit-baslik"><span class="istem">$</span> ls projeler/</p>
-          <p class="kn-baslik">${t('Üç açık kaynak proje', 'Three open-source projects')}</p>
-          <ul class="kn-liste" id="k-ne"></ul>
-        </section>
-        <section class="kanit-slayt" data-s="0" aria-hidden="true" inert>
-          <p class="kanit-baslik"><span class="istem">$</span> git log --stat</p>
-          <p class="kanit-ana"><b class="k-commit">0</b> <span>${t('commit, tüm projelerde', 'commits, all projects')}</span></p>
-          <p class="kanit-alt"><b class="k-claude">0</b> ${t('tanesi', '')} <strong>${t('Claude ile ortak yazıldı', 'co-authored with Claude')}</strong> <span class="k-yuzde"></span></p>
-          <ul class="kanit-liste" id="k-liste"></ul>
-          <p class="k-son" id="k-son"></p>
-          <p class="kanit-not k-not"></p>
-        </section>
-        <section class="kanit-slayt" data-s="1" aria-hidden="true" inert>
-          <p class="kanit-baslik"><span class="istem">$</span> git log --stat</p>
-          <p class="kanit-ana"><b class="k-commit">0</b> <span>commit</span></p>
-          <p class="kanit-alt"><b class="k-claude">0</b> ${t('tanesi', '')} <strong>${t('Claude ile ortak yazıldı', 'co-authored with Claude')}</strong> <span class="k-yuzde"></span></p>
-          <div class="kanit-izgara" id="k-izgara" role="img" aria-label="${t('Her kare bir commit; turuncu olanlar Claude ile ortak yazılanlar', 'Each square is a commit; orange ones were co-authored with Claude')}"></div>
-          <div class="kanit-oz"><button type="button" data-g="claude"><i class="n t"></i>${t('Claude ile', 'with Claude')}</button><button type="button" data-g="el"><i class="n g"></i>${t('tek başıma', 'on my own')}</button></div>
-          <p class="kanit-not k-not"></p>
-        </section>
-        <section class="kanit-slayt" data-s="sl" aria-hidden="true" inert>
-          <p class="kanit-baslik"><span class="istem">$</span> ls slaytlar/</p>
-          <p class="kn-baslik">${t('AI\'ı sıfırdan öğreten slaytlar', 'Slides that teach AI from scratch')}</p>
-          <ul class="kn-liste" id="k-sl"></ul>
-        </section>
-        <section class="kanit-slayt" data-s="ar" aria-hidden="true" inert>
-          <p class="kanit-baslik"><span class="istem">$</span> which araclar</p>
-          <p class="kn-baslik">${t('Kullandığım araçlar', 'Tools I use')}</p>
-          <ul class="kn-araclar"><li>Claude Code</li><li>Codex</li><li>Hermes Agent</li><li>Abacus AI</li><li>Herdr</li></ul>
-        </section>
-      </div>
-      <div class="perde" aria-hidden="true"><canvas class="perde-doku"></canvas><canvas class="perde-kar" width="72" height="68"></canvas></div>
-    </div>
-    <div class="kanit-nokta" role="group" aria-label="${t('Görünüm', 'View')}"><button type="button" data-g="0" class="on" aria-label="${t('Kimlik', 'Identity')}"></button><button type="button" data-g="1" aria-label="${t('Projeler', 'Projects')}"></button><button type="button" data-g="2" aria-label="${t('Proje proje commit', 'Commits per project')}"></button><button type="button" data-g="3" aria-label="${t('Toplam', 'Total')}"></button><button type="button" data-g="4" aria-label="${t('Slaytlar', 'Slides')}"></button><button type="button" data-g="5" aria-label="${t('Araçlar', 'Tools')}"></button></div>
+    <p class="kanit-baslik"><span class="istem">$</span> git log --stat</p>
+    <p class="kanit-ana"><b class="k-commit">0</b> <span>commit</span></p>
+    <p class="kanit-alt"><b class="k-claude">0</b> ${t('tanesi', '')} <strong>${t('Claude ile ortak yazıldı', 'co-authored with Claude')}</strong> <span class="k-yuzde"></span></p>
+    <div class="kanit-izgara" id="k-izgara" role="img" aria-label="${t('Her kare bir commit; turuncu olanlar Claude ile ortak yazılanlar', 'Each square is a commit; orange ones were co-authored with Claude')}"></div>
+    <div class="kanit-oz"><button type="button" data-g="claude"><i class="n t"></i>${t('Claude ile', 'with Claude')}</button><button type="button" data-g="el"><i class="n g"></i>${t('tek başıma', 'on my own')}</button></div>
+    <p class="kanit-not k-not"></p>
   </aside>
 
   <nav class="limanlar" aria-label="${t('Bölümler', 'Sections')}">
 ${LIMANLAR.map(([yol, ad, aciklama, x, y, d], i) => `    <a class="liman" href="${K}${yol}/" style="--x:${x};--y:${y};--d:${d}" data-i="${i}"><span class="iskele" aria-hidden="true"></span><span class="etiket"><span class="yol">~/${yol}</span><b class="baslik">${ad}</b><span class="acik">${aciklama}</span><i class="ok" aria-hidden="true">→</i></span></a>`).join('\n')}
   </nav>
-  <p class="ipucu" aria-hidden="true"><kbd>1</kbd>–<kbd>4</kbd> ${t('bölümler', 'sections')} · <kbd>/</kbd> ${t('konsol', 'console')} · ${t('karakterlere tıkla', 'click the characters')}</p>
 </main>
 <div class="balon" id="balon" role="status" aria-live="polite"></div>
 `;
