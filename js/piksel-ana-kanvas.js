@@ -1,4 +1,4 @@
-// Piksel ana sayfa: devre kartı zemini, raylarda koşan Claude Code karakterleri (en çok iki tanesi), yazı çözme animasyonu,
+// Piksel ana sayfa: devre kartı zemini, raylarda koşan Claude Code karakterleri (en çok iki tanesi), bölüm başlığı çözme animasyonu,
 // karakter balonları, Projeler önizlemesi ve klavye kısayolları. js/piksel-ana.js bileşeninin içinden çalışır (root = gölge DOM).
 import { pikselKarakter } from './piksel.js';
 import { SAYILAR } from './sayilar.js';
@@ -127,27 +127,26 @@ export function baslatKanvas(root, yollar) {
     const cik = () => sahin.iskele(null, simdi());
     a.addEventListener('pointerenter', gir); a.addEventListener('focus', gir); a.addEventListener('pointerleave', cik); a.addEventListener('blur', cik);
   });
-  // terminal: kendimle ilgili gerçek bilgiler sırayla yazılır (komut yazılır, çıktısı gelir, silinir, sonrakine geçer)
-  const BILGI = [
-    ['whoami', t('Samet Duhan Şahin', 'Samet Duhan Şahin')],
-    ['cat okul.txt', t('Atatürk Üniversitesi · bilgisayar mühendisliği · 3. sınıf', 'Atatürk University · computer engineering · 3rd year')],
-    ['cat yapiyorum.txt', t('AI ile sistem kuruyorum: ajanlar, açık kaynak araçlar', 'I build systems with AI: agents, open-source tools')],
-    ['ls projeler/', 'skytrack  claude-done-pixel  chatgpt-done-pixel'],
-    ['cat durum.txt', t('staj arıyorum, hemen başlayabilirim', 'looking for an internship, available now')],
+  // terminal: "cat hakkimda.txt" yazılır, hakkımda üç satır sırayla gelir ve kalır (döngü yok)
+  const KOMUT = 'cat hakkimda.txt';
+  const SATIRLAR = [
+    t('Atatürk Üniversitesi · Bilgisayar Müh. 3. sınıf', 'Atatürk University · Comp. Eng. · 3rd year'),
+    t('AI ile sistem kuruyorum: ajanlar, açık kaynak araçlar', 'I build systems with AI: agents, open-source tools'),
+    'skytrack  claude-done-pixel  chatgpt-done-pixel',
   ];
-  const komutEl = root.querySelector('[data-yaz]'), ciktiEl = root.querySelector('[data-cikti]');
-  if (komutEl && ciktiEl) {
-    if (AZ) { komutEl.textContent = BILGI[0][0]; ciktiEl.textContent = BILGI[0][1]; }
+  const komutEl = root.querySelector('[data-yaz]'), satirEl = [...root.querySelectorAll('[data-cikti] > span')];
+  if (komutEl && satirEl.length) {
+    if (AZ) { komutEl.textContent = KOMUT; satirEl.forEach((el, i) => { el.textContent = SATIRLAR[i]; }); }
     else (async () => {
       const dur = (ms) => new Promise((r) => setTimeout(r, ms));
-      await dur(900);
-      for (let i = 0; ; i = (i + 1) % BILGI.length) {
-        const [k, c] = BILGI[i];
-        for (let j = 1; j <= k.length; j++) { komutEl.textContent = k.slice(0, j); await dur(45); }
-        await dur(280); ciktiEl.textContent = c; await dur(3200);
-        ciktiEl.textContent = ''; for (let j = k.length; j >= 0; j--) { komutEl.textContent = k.slice(0, j); await dur(18); }
-        await dur(250);
-        while (document.hidden) await dur(500);
+      await dur(700);
+      for (let j = 1; j <= KOMUT.length; j++) { komutEl.textContent = KOMUT.slice(0, j); await dur(34 + Math.random() * 46); }   // insan gibi: aralıklar değişir
+      await dur(320);
+      for (let i = 0; i < satirEl.length; i++) {
+        const el = satirEl[i], m = SATIRLAR[i];
+        el.style.opacity = '1';
+        for (let j = 1; j <= m.length; j++) { el.textContent = m.slice(0, j); await dur(9); }
+        await dur(180);
       }
     })();
   }

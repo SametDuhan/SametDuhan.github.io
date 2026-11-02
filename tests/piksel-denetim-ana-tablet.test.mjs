@@ -17,7 +17,7 @@ test('piksel ana sayfa: 1100 pikselden dar ekranda (tablet dahil) tek sütun; CS
   const ana = readFileSync(join(KOK, 'js/piksel-ana.js'), 'utf8');
   assert.doesNotMatch(ana, /onizleme/);
   assert.match(ana, /<a class="durum" href="\$\{K\}iletisim\/\?konu=staj">/);   // staj durumu iletişimdeki staj konusuna götürür
-  assert.match(js, /\['whoami'/);                                          // terminal gerçek bilgileri sırayla yazar
+  assert.match(js, /KOMUT = 'cat hakkimda.txt'/);                          // terminal hakkımda üç satırı yazar ve kalır
 });
 
 test('piksel ana sayfa sağ panel: yalnız commit ızgarası (dönen görünüm, geçiş animasyonu ve perde yok); sayılar GitHub sayımından', () => {

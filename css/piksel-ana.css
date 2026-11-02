@@ -37,7 +37,9 @@ h1 .satir{display:block;white-space:nowrap}
 h1 .satir:nth-child(2){color:var(--turuncu)}
 .terminal{margin:18px 0 12px;font-family:var(--kod);font-size:clamp(12px,1vw,14px);color:var(--ikincil);overflow-wrap:anywhere;min-height:1.4em}
 .terminal .istem{color:var(--yesil)}
-.terminal .cikti{display:block;min-height:1.5em;margin-top:4px;color:var(--yazi)}
+.terminal .cikti{display:grid;gap:3px;margin-top:6px;color:var(--yazi)}
+.terminal .cikti span{display:block;min-height:1.4em;overflow-wrap:anywhere}
+.terminal .cikti span:not(:empty)::before{content:'› ';color:var(--turuncu)}
 .imlec{display:inline-block;width:.6em;height:1.05em;background:var(--turuncu);vertical-align:-.2em;margin-left:3px;animation:yan 1.05s steps(1) infinite}
 @keyframes yan{50%{opacity:0}}
 @keyframes gir{from{opacity:0;transform:translateY(18px)}}
@@ -106,7 +108,7 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 .kanit-not{margin:10px 0 0;font-size:12px;line-height:1.4;color:var(--ikincil)}
 
 /* konsol */
-.konsol{pointer-events:auto;position:relative;flex:1 1 auto;min-height:150px;max-height:340px;width:100%;display:flex;flex-direction:column;background:var(--levha);border:1px solid var(--cizgi);animation:gir .9s var(--cikis) 1.4s both}
+.konsol{pointer-events:auto;position:relative;flex:1 1 auto;min-height:120px;max-height:240px;width:100%;display:flex;flex-direction:column;background:var(--levha);border:1px solid var(--cizgi);animation:gir .9s var(--cikis) 1.4s both}
 .konsol::after{content:"";position:absolute;left:-3px;bottom:-3px;width:18px;height:18px;border:3px solid var(--turuncu);border-right:0;border-top:0}
 .k-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;border-bottom:1px solid var(--cizgi);flex-wrap:wrap}
 .k-baslik{font-family:var(--kod);font-size:12px;color:var(--ikincil)}
@@ -167,9 +169,9 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
   .levha{padding:clamp(14px,1.6vw,22px)}
   h1{font-size:clamp(44px,5.2vw,78px)}
   .terminal{margin:12px 0 8px}
-  .konsol{min-height:170px;max-height:480px}
+  .konsol{min-height:120px;max-height:250px}
 }
-@media (min-width:1101px) and (min-height:780px){.konsol{min-height:230px}}
+@media (min-width:1101px) and (min-height:780px){.konsol{min-height:160px}}
 @media (min-width:1101px) and (max-height:760px){h1{font-size:clamp(38px,4.3vw,62px)}.levha{padding:14px 18px}}
 
 
@@ -184,3 +186,12 @@ kbd{font-family:var(--kod);font-size:11px;padding:1px 6px;border:1px solid var(-
 @keyframes kare{from{opacity:0;transform:scale(.2)}}
 .kanit-baslik{margin:0 0 10px}
 @media (min-width:1101px){.kanit{top:clamp(16px,4vh,44px)}h1{font-size:clamp(52px,6vw,92px)}.terminal{margin:18px 0 6px}}
+
+/* animasyon cilası: bölümler yumuşak girer, iskele nabız atar, konsol aşağıdan ve kısa gelir */
+.liman{animation-name:gir-soft}
+@keyframes gir-soft{from{opacity:0;transform:translateX(-14px)}}
+.liman:hover .iskele,.liman:focus-visible .iskele{animation:iskele-nabiz 1.2s ease-out infinite}
+@keyframes iskele-nabiz{0%{box-shadow:0 0 0 0 rgba(217,119,87,.5)}100%{box-shadow:0 0 0 12px rgba(217,119,87,0)}}
+.kanit-izgara i{animation-delay:calc(var(--d,0)*22ms + .7s)}
+.durum{transition:transform .3s var(--cikis)}
+.durum:hover{transform:translateX(4px)}

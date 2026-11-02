@@ -35,7 +35,7 @@ const sablon = () => `
   <div class="kolon">
     <section class="levha">
       <h1 aria-label="SAMET DUHAN"><span class="satir" aria-hidden="true">SAMET</span><span class="satir" aria-hidden="true">DUHAN</span></h1>
-      <p class="terminal" role="img" aria-label="${t('Samet Duhan Şahin, Atatürk Üniversitesi bilgisayar mühendisliği 3. sınıf, AI ile sistem kuran geliştirici', 'Samet Duhan Şahin, 3rd-year computer engineering student at Atatürk University, developer who builds systems with AI')}"><span class="istem">samet@sahin:~$</span> <span class="komut" data-yaz></span><i class="imlec"></i><span class="cikti" data-cikti></span></p>
+      <p class="terminal" role="img" aria-label="${t('Samet Duhan Şahin, Atatürk Üniversitesi bilgisayar mühendisliği 3. sınıf, AI ile sistem kuran geliştirici', 'Samet Duhan Şahin, 3rd-year computer engineering student at Atatürk University, developer who builds systems with AI')}"><span class="istem">samet@sahin:~$</span> <span class="komut" data-yaz></span><i class="imlec"></i><span class="cikti" data-cikti><span></span><span></span><span></span></span></p>
       <a class="durum" href="${K}iletisim/?konu=staj"><i aria-hidden="true"></i><span>${t('Staj arıyorum, hemen başlayabilirim.', 'Looking for an internship, available now.')}</span><b aria-hidden="true">→</b></a>
     </section>
     <section class="konsol" aria-label="${t('Etkileşimli konsol', 'Interactive console')}">
