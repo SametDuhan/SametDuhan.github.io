@@ -107,3 +107,7 @@ claude-done-pixel ve chatgpt-done-pixel resmî olmayan hayran projeleridir; Anth
 ## Tek ekran gezinme
 
 `css/ekran.css` görünümü pencereye sığdırır; `js/ekrana-sigdir.js` uzun içeriği yatay sayfalara böler. İçerik silinmez; önceki/sonraki düğmeleriyle tamamına ulaşılır. Sunumda sayaçtaki ikinci sayı aynı slaydın devam sayfasıdır. Kaydırma yerine ok tuşları da kullanılabilir. JavaScript kapalıyken ve yazdırırken doğal belge akışı korunur.
+
+## Git dışı yerel dosyalar
+
+`.gitignore` şunları dışarıda tutar: `node_modules/`, `ekran/` (önizleme görüntüleri), `.superpowers/`, `.impeccable/` ve `PRODUCT.md` (yerel tasarım notları). Bunlar depoda yoktur; klonlayınca çıkmaz, siteyi çalıştırmak için gerekmez.
